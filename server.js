@@ -35,8 +35,21 @@ app.use(express.static(__dirname + '/public'));
 // ====================================
 
 // API ROUTES ------------------------
-var apiRoutes = require('./app/routes/api')(app, express);
-app.use('/api', apiRoutes);
+var apiRoutesAuth = require('./app/routes/api_auth')(app, express);
+var apiRoutesUser = require('./app/routes/api_user')(app, express);
+var apiRoutesMovement = require('./app/routes/api_movement')(app, express);
+var apiRoutesSet = require('./app/routes/api_set')(app, express);
+var apiRoutesExercise = require('./app/routes/api_exercise')(app, express);
+
+
+app.use('/api', apiRoutesAuth);
+app.use('/api', apiRoutesUser);
+app.use('/api', apiRoutesMovement);
+app.use('/api', apiRoutesSet);
+app.use('/api', apiRoutesExercise);
+
+
+
 
 // MAIN CATCHALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
