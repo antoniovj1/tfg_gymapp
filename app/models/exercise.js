@@ -3,8 +3,8 @@ var Schema       = mongoose.Schema;
 
 
 var ExerciseSchema   = new Schema({
-	movement: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movement'}],
-  sets : [[{type: mongoose.Schema.Types.ObjectId, ref: 'Set'}]],
+	sesion: {type: mongoose.Schema.Types.ObjectId, ref: 'Sesion'},
+	movement: {type: mongoose.Schema.Types.ObjectId, ref: 'Movement'},
   timestamp: {
         type: Date,
         default: Date.now
@@ -12,4 +12,4 @@ var ExerciseSchema   = new Schema({
 });
 
 
-module.exports = mongoose.model('Movement', MovementSchema);
+module.exports = mongoose.model('Exercise', ExerciseSchema);

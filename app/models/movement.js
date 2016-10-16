@@ -3,11 +3,11 @@ var Schema       = mongoose.Schema;
 
 
 var MovementSchema   = new Schema({
-	name: { type: String, required: true},
-  material: String,
+	name:  { type: String, required: true, index: { unique: true }},
+  material:{ type: String, required: true},
   muscles : [{
-    name : String,
-    percentage : Number
+    name : { type: String, required: true},
+    percentage : { type: Number, required: true}
      }]
 });
 

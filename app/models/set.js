@@ -9,7 +9,9 @@ var SetSchema   = new Schema({
   timestamp: {
         type: Date,
         default: Date.now
-      }
+      },
+	exercise : {type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'}
+
 });
 
 
