@@ -8,13 +8,13 @@ module.exports = function(app, express) {
 
   var apiRouter = express.Router();
 
-  apiRouter.route('/training/exercise/:id_sesion')
+  apiRouter.route('/training/exercise/:id_session')
 
   .post(function(req, res){
 
     var exercise = new Exercise();
 
-    exercise.sesion = req.params.id_sesion;
+    exercise.session = req.params.id_session;
 
     Movement.findOne({name: req.body.movement}, '_id', function(err, movement) {
       getMovement(movement);

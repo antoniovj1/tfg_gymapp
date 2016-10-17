@@ -1,5 +1,5 @@
 var bodyParser = require('body-parser');
-var Sesion	   = require('../models/training_sesion');
+var Session	   = require('../models/training_session');
 var User  	   = require('../models/user');
 var jwt        = require('jsonwebtoken');
 var config     = require('../../config');
@@ -9,25 +9,25 @@ module.exports = function(app, express) {
 
   var apiRouter = express.Router();
 
-  apiRouter.route('/training/sesion/')
+  apiRouter.route('/training/session/')
 
   .post(function(req, res){
 
-    var sesion = new Sesion();
+    var session = new Session();
 
-    sesion.time = req.body.time;
+    session.time = req.body.time;
 
     User.findOne({username: req.decoded.username}, '_id', function(err, user) {
       getUser(user);
     });
 
     function getUser(user_id){
-      sesion.user = user_id._id;
+      session.user = user_id._id;
 
-      sesion.save(function(err) {
+      session.save(function(err) {
         if (err) return res.send(err);
 
-        res.json({ message: 'sesion created!' });
+        res.json({ message: 'session created!' });
       });
     }
   })
@@ -39,25 +39,25 @@ module.exports = function(app, express) {
     });
 
     function getUser(user_id){
-      Sesion.find({user:user_id._id}, function(err, sesion) {
+      Session.find({user:user_id._id}, function(err, session) {
         if (err) res.send(err);
-        res.json(sesion);
+        res.json(session);
       });
     }
   })
 
-  apiRouter.route('/training/sesion/byId/:id_sesion')
+  apiRouter.route('/training/session/byId/:id_session')
 
   .get(function(req, res) {
-    Sesion.findById(req.params.id_sesion, function(err, sesion) {
+    Session.findById(req.params.id_session, function(err, session) {
       if (err) res.send(err);
-      res.json(sesion);
+      res.json(session);
     });
   })
 
 
   .delete(function(req, res) {
-    Sesion.remove({_id:req.params.id_sesion }, function(err, sesion) {
+    Session.remove({_id:req.params.id_session }, function(err, session) {
       if (err) res.send(err);
       res.json({ message: 'Successfully deleted' });
     });

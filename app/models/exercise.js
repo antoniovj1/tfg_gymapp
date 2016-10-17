@@ -3,7 +3,7 @@ var Schema       = mongoose.Schema;
 
 
 var ExerciseSchema   = new Schema({
-	sesion: {type: mongoose.Schema.Types.ObjectId, ref: 'Sesion'},
+	session: {type: mongoose.Schema.Types.ObjectId, ref: 'Session'},
 	movement: {type: mongoose.Schema.Types.ObjectId, ref: 'Movement'},
   timestamp: {
         type: Date,

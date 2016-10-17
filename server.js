@@ -25,8 +25,11 @@ app.use(function(req, res, next) {
 app.use(morgan('dev'));
 
 // connect to our database
+mongoose.Promise = global.Promise
 mongoose.connect(config.database);
-
+mongoose.connection.on('error', function() {
+  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
+});
 // set static files location
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
@@ -40,6 +43,7 @@ var apiRoutesUser = require('./app/routes/api_user')(app, express);
 var apiRoutesMovement = require('./app/routes/api_movement')(app, express);
 var apiRoutesSet = require('./app/routes/api_set')(app, express);
 var apiRoutesExercise = require('./app/routes/api_exercise')(app, express);
+var apiRoutesSession = require('./app/routes/api_session')(app, express);
 
 
 app.use('/api', apiRoutesAuth);
@@ -47,8 +51,7 @@ app.use('/api', apiRoutesUser);
 app.use('/api', apiRoutesMovement);
 app.use('/api', apiRoutesSet);
 app.use('/api', apiRoutesExercise);
-
-
+app.use('/api', apiRoutesSession);
 
 
 // MAIN CATCHALL ROUTE ---------------
