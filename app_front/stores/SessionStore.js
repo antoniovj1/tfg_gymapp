@@ -8,7 +8,7 @@ class SessionStore {
   }
 
   onGetSessionsSuccess(data) {
-    this.sessions = data.slice(0, 5);
+    this.sessions = data.slice(0, 5); 
   }
 
   onGetSessionsFail(jqXhr) {
