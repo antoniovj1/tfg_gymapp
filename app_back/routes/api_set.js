@@ -23,7 +23,7 @@ module.exports = function(app, express) {
     set.save(function(err) {
       if (err) return res.send(err);
 
-      res.json({ message: 'Set created!' });
+      res.json({ message: 'ok' });
     });
   })
 
@@ -55,7 +55,7 @@ module.exports = function(app, express) {
 
       set.save(function(err) {
         if (err) res.send(err);
-        res.json({ message: 'Set updated!' });
+        res.json({ message: 'ok' });
       });
 
     });
@@ -64,7 +64,7 @@ module.exports = function(app, express) {
   .delete(function(req, res) {
     Set.remove({_id:req.params.id_set }, function(err, set) {
       if (err) res.send(err);
-      res.json({ message: 'Successfully deleted' });
+      res.json({ message: 'ok' });
     });
   });
 

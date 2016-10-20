@@ -27,7 +27,7 @@ module.exports = function(app, express) {
       session.save(function(err) {
         if (err) return res.send(err);
 
-        res.json({ message: 'session created!' });
+        res.json({ message: 'ok' });
       });
     }
   })
@@ -59,7 +59,7 @@ module.exports = function(app, express) {
   .delete(function(req, res) {
     Session.remove({_id:req.params.id_session }, function(err, session) {
       if (err) res.send(err);
-      res.json({ message: 'Successfully deleted' });
+      res.json({ message: 'ok' });
     });
   });
 

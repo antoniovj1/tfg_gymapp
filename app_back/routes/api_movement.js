@@ -35,7 +35,7 @@ module.exports = function(app, express) {
       return res.send(err);
     }
 
-    res.json({ message: 'Movement created!' });
+    res.json({ message: 'ok' });
   });
 
 })
@@ -64,9 +64,9 @@ apiRouter.route('/training/movements/:name')
   Movement.findOne({name:req.params.name}, function(err, movement) {
 
     if (movement.length == 0)
-    return res.json({ success: false, message: 'No movement.'});
+      return res.json({ success: false, message: 'fail'});
     if (err)
-    return res.send(err);
+      return res.send(err);
 
     if (req.body.name) movement.name = req.body.name;
     if (req.body.material) movement.material = req.body.material;
@@ -74,7 +74,7 @@ apiRouter.route('/training/movements/:name')
 
     movement.save(function(err) {
       if (err) res.send(err);
-      res.json({ message: 'Movement updated!' });
+      res.json({ message: 'ok' });
     });
 
   });
@@ -83,7 +83,7 @@ apiRouter.route('/training/movements/:name')
 .delete(function(req, res) {
   Movement.remove({	name:req.params.name }, function(err, user) {
     if (err) res.send(err);
-    res.json({ message: 'Successfully deleted' });
+    res.json({ message: 'ok' });
   });
 });
 /**********************************/
