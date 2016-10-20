@@ -70,10 +70,10 @@ module.exports = function(app, express) {
       if (req.body.height) user.height = req.body.height;
 
 
-      user.save(function(err) {
+      user.save(function(err, user) {
         if (err) res.send(err);
 
-        res.json({ message: 'ok' });
+        res.json({ message: 'ok', user });
       });
 
     });
