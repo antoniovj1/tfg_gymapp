@@ -10,7 +10,6 @@ module.exports = function(app, express) {
   apiRouter.route('/training/set/:id_exercise')
 
   .post(function(req, res){
-    console.log(req.body);
 
     var set = new Set();
 
@@ -53,9 +52,9 @@ module.exports = function(app, express) {
       if (req.body.rest) set.rest = req.body.rest;
       if (req.body.repetitions) set.repetitions = req.body.repetitions;
 
-      set.save(function(err) {
+      set.save(function(err, set) {
         if (err) res.send(err);
-        res.json({ message: 'ok' });
+        res.json({ message: 'ok', set });
       });
 
     });
