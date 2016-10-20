@@ -26,7 +26,7 @@ module.exports = function(app, express) {
       exercise.save(function(err) {
         if (err) return res.send(err);
 
-        res.json({ message: 'exercise created!' });
+        res.json({ message: 'ok' });
       });
     }
   })
@@ -51,7 +51,7 @@ module.exports = function(app, express) {
   .delete(function(req, res) {
     Exercise.remove({_id:req.params.id_exercise }, function(err, exercise) {
       if (err) res.send(err);
-      res.json({ message: 'Successfully deleted' });
+      res.json({ message: 'ok' });
     });
   });
 
