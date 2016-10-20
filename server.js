@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
 });
 
 // log all requests to the console
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 // connect to our database
 mongoose.Promise = global.Promise
@@ -113,3 +113,6 @@ io.sockets.on('connection', function(socket) {
 server.listen(8080, function() {
   console.log('Express server listening on port ' + '8080');
 });
+
+
+module.exports = server; // for testing
