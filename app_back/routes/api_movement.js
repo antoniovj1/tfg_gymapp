@@ -17,25 +17,23 @@ module.exports = function(app, express) {
     "name":"Dominadas",
     "material": "Barra",
     "muscles":[{"name":"bicep","percentage":20},
-    {"name":"pecho","percentage":10},
-    {"name":"dorsal","percentage":60},
-    {"name":"abdominales","percentage":10}]
+               {"name":"pecho","percentage":10},
+               {"name":"dorsal","percentage":60},
+               {"name":"abdominales","percentage":10}]
   }
   */
 
-  console.log(req.body.muscles);
-
   var movement = new Movement(req.body);
 
-  movement.save(function(err) {
+  movement.save(function(err, movement) {
     if (err) {
-      if (err.code == 11000)
-      return res.json({ success: false, message: 'A movement with that name already exists. '});
+     if (err.code == 11000)
+       return res.json({ success: false, message: 'A movement with that name already exists. '});
       else
-      return res.send(err);
+        return res.send(err);
     }
 
-    res.json({ message: 'ok' });
+    res.json({ message: 'ok' ,movement });
   });
 
 })
@@ -72,9 +70,9 @@ apiRouter.route('/training/movements/:name')
     if (req.body.material) movement.material = req.body.material;
     if (req.body.muscles) movement.muscles = req.body.muscles;
 
-    movement.save(function(err) {
+    movement.save(function(err, movement) {
       if (err) res.send(err);
-      res.json({ message: 'ok' });
+      res.json({ message: 'ok', movement});
     });
 
   });
