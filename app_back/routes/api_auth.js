@@ -43,7 +43,7 @@ module.exports = function(app, express) {
 
 					res.json({
 						success: true,
-						message: 'Enjoy your token!',
+						message: 'ok',
 						token: token
 					});
 				}
