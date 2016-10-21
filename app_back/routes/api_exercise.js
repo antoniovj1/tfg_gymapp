@@ -1,5 +1,6 @@
 var bodyParser = require('body-parser');
 var Exercise	 = require('../models/exercise');
+var Session	 = require('../models/training_session');
 var Movement	 = require('../models/movement');
 var config     = require('../../config');
 
@@ -8,37 +9,32 @@ module.exports = function(app, express) {
 
   var apiRouter = express.Router();
 
-  apiRouter.route('/training/exercise/:id_session')
+  apiRouter.route('/training/exercise/')
 
   .post(function(req, res){
 
     var exercise = new Exercise();
 
-    exercise.session = req.params.id_session;
+    Movement.find({_id: req.body.movement._id}, function (err, movement){
+      if(movement){
+       Session.find({_id: req.body.session._id}, function (err, session){
+          if(session){
+            exercise.session = session._id;
+            exercise.movement = movement._id;
 
-    Movement.findOne({name: req.body.movement}, '_id', function(err, movement) {
-      getMovement(movement);
-    });
+            exercise.save(function(err) {
+              if (err) return res.send(err);
 
-    function getMovement(movement_id){
-      exercise.movement = movement_id._id;
-
-      exercise.save(function(err) {
-        if (err) return res.send(err);
-
-        res.json({ message: 'ok' });
-      });
-    }
-  })
-
-  .get(function(req, res) {
-    Exercise.find({exercise:req.params.id_exercise}, function(err, exercise) {
-      if (err) res.send(err);
-      res.json(exercise);
+              res.json({ message: 'ok' });
+            });
+          }
+        })
+      }
     });
   })
 
-  apiRouter.route('/training/exercise/byId/:id_exercise')
+
+  apiRouter.route('/training/exercise/:id_exercise')
 
   .get(function(req, res) {
     Exercise.findById(req.params.id_exercise, function(err, exercise) {
