@@ -8,7 +8,7 @@
     "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 10000"
   },
   "author": "Antonio de la Vega",
   "license": "",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "alt": "^0.18.6",
-    "async": "^1.5.0", 
+    "async": "^1.5.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "bootstrap": "^3.3.7",

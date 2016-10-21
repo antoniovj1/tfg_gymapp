@@ -19,7 +19,7 @@ user.save();
 // Primero autenticación
 chai.request(server)
 .post('/api/authenticate')
-.send({username: 'mov', password: 'mov'})
+.send({username: 'ex', password: 'ex'})
 .end((err, res) => {
   var token = res.body.token
 
@@ -53,7 +53,7 @@ chai.request(server)
     describe('/POST ', () => {
       it('should POST an exercise ', (done) => {
 
-       movement = new Movement({
+       let movement = new Movement({
           name : "Dominadas",
           material : "Barra",
           muscles :[{name:"bicep",percentage:20},
@@ -62,7 +62,7 @@ chai.request(server)
                     {name:"abdominales",percentage:10}]
         });
 
-        session = new Session();
+        let session = new Session();
 
         movement.save();
         session.save();
