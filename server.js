@@ -110,7 +110,7 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-server.listen(8080, function() {
+server.listen(config.port, function() {
   console.log('Express server listening on port ' + '8080');
 });
 
