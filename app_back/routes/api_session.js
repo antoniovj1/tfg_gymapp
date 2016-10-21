@@ -51,7 +51,7 @@ module.exports = function(app, express) {
   .get(function(req, res) {
     Session.findById(req.params.id_session, function(err, session) {
       if (err) res.send(err);
-      res.json(session);
+      res.json({ message: 'ok' ,session});
     });
   })
 

@@ -4,7 +4,7 @@ var Schema       = mongoose.Schema;
 var SessionSchema   = new Schema({
   date: {type: Date, default: Date.now },
   time: Number, //Time in seconds
-  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  user: {required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 
 });
 

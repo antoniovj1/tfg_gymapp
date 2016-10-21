@@ -62,7 +62,7 @@ chai.request(server)
                     {name:"abdominales",percentage:10}]
         });
 
-        let session = new Session();
+        let session = new Session({user: user._id});
 
         movement.save();
         session.save();
