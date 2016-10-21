@@ -11,6 +11,7 @@ module.exports = function(app, express) {
 	var apiRouter = express.Router();
 
 	apiRouter.post('/authenticate', function(req, res) {
+
 		User.findOne({
 			username: req.body.username
 		}).select('name username password').exec(function(err, user) {
@@ -52,7 +53,7 @@ module.exports = function(app, express) {
 		});
 	});
 
-/*	apiRouter.use(function(req, res, next) {
+	apiRouter.use(function(req, res, next) {
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
 		if (token) {
@@ -78,7 +79,7 @@ module.exports = function(app, express) {
 			});
 
 		}
-	});*/
+	});
 
 
 	apiRouter.get('/', function(req, res) {
