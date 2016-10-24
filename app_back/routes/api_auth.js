@@ -11,6 +11,12 @@ module.exports = function(app, express) {
 	var apiRouter = express.Router();
 
 	apiRouter.post('/authenticate', function(req, res) {
+		if (!req.body.password || !req.body.username) {
+			res.json({
+				success: false,
+				message: 'fail'
+			});
+		}
 
 		User.findOne({
 			username: req.body.username
@@ -21,7 +27,7 @@ module.exports = function(app, express) {
 			if (!user) {
 				res.json({
 					success: false,
-					message: 'Authentication failed. User not found.'
+					message: 'fail'
 				});
 			} else if (user) {
 
@@ -29,7 +35,7 @@ module.exports = function(app, express) {
 				if (!validPassword) {
 					res.json({
 						success: false,
-						message: 'Authentication failed. Wrong password.'
+						message: 'fail'
 					});
 				} else {
 

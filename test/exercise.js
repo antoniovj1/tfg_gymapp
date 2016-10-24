@@ -9,6 +9,8 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../server');
 let should = chai.should();
+let expect = chai.expect();
+
 
 chai.use(chaiHttp);
 
@@ -33,17 +35,32 @@ chai.request(server)
     });
 
     describe('/GET/:id_exercise', () => {
-      it('should GET the sets given the exercise id', (done) => {
+      it('should GET the exercise given the exercise id', (done) => {
         let exercise = new Exercise();
 
         exercise.save((err, exercise) => {
           chai.request(server)
-          .get('/api/training/movements/' + exercise._id)
+          .get('/api/training/exercise/' + exercise._id)
           .set('x-access-token',token)
           .end((err, res) => {
             res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body.length.should.be.eql(0);
+            res.body.should.be.a('object');
+            chai.expect(res.body).to.contain.keys('_id': exercise._id);
+            done();
+          });
+        });
+      })
+
+      it('should fail with incorrect id', (done) => {
+        let exercise = new Exercise();
+
+        exercise.save((err, exercise) => {
+          chai.request(server)
+          .get('/api/training/exercise/'+'ididididid')
+          .set('x-access-token',token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property('message').eql('fail');
             done();
           });
         });
@@ -51,22 +68,21 @@ chai.request(server)
     });
 
     describe('/POST ', () => {
+      let movement = new Movement({
+        name : "Dominadas",
+        material : "Barra",
+        muscles :[{name:"bicep",percentage:20},
+        {name:"pecho",percentage:10},
+        {name:"dorsal",percentage:60},
+        {name:"abdominales",percentage:10}]
+      });
+
+      let session = new Session({user: user._id});
+
+      movement.save();
+      session.save();
+
       it('should POST an exercise ', (done) => {
-
-       let movement = new Movement({
-          name : "Dominadas",
-          material : "Barra",
-          muscles :[{name:"bicep",percentage:20},
-                    {name:"pecho",percentage:10},
-                    {name:"dorsal",percentage:60},
-                    {name:"abdominales",percentage:10}]
-        });
-
-        let session = new Session({user: user._id});
-
-        movement.save();
-        session.save();
-
         chai.request(server)
         .post('/api/training/exercise/')
         .set('x-access-token',token)
@@ -79,7 +95,45 @@ chai.request(server)
           done();
         });
       });
+      it('should no POST an exercise without movement', (done) => {
+        chai.request(server)
+        .post('/api/training/exercise/')
+        .set('x-access-token',token)
+        .send({session: session })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('fail');
 
+          done();
+        });
+      });
+      it('should no POST an exercise without session', (done) => {
+        chai.request(server)
+        .post('/api/training/exercise/')
+        .set('x-access-token',token)
+        .send({movement: movement})
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('fail');
+
+          done();
+        });
+      });
+      it('should no POST an exercise without movement/session', (done) => {
+        chai.request(server)
+        .post('/api/training/exercise/')
+        .set('x-access-token',token)
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('fail');
+
+          done();
+        });
+      });
     });
 
 
@@ -99,6 +153,22 @@ chai.request(server)
           });
         });
       });
+      it('should fail with incorrect id', (done) => {
+        let exercise = new Exercise();
+
+        exercise.save((err, exercise) => {
+          chai.request(server)
+          .delete('/api/training/exercise/' + 'ididididid')
+          .set('x-access-token',token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('fail');
+            done();
+          });
+        });
+      });
+
     });
   });
 });
