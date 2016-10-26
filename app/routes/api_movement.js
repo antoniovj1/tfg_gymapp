@@ -10,6 +10,7 @@ module.exports = function(app, express) {
   // Movement
   // ----------------------------------------------------
   apiRouter.route('/training/movements')
+  // ===== POST =======
   .post(function(req, res) {
 
     /*
@@ -17,27 +18,28 @@ module.exports = function(app, express) {
     "name":"Dominadas",
     "material": "Barra",
     "muscles":[{"name":"bicep","percentage":20},
-               {"name":"pecho","percentage":10},
-               {"name":"dorsal","percentage":60},
-               {"name":"abdominales","percentage":10}]
+    {"name":"pecho","percentage":10},
+    {"name":"dorsal","percentage":60},
+    {"name":"abdominales","percentage":10}]
   }
   */
 
-  var movement = new Movement(req.body);
+    var movement = new Movement(req.body);
 
-  movement.save(function(err, movement) {
-    if (err) {
-     if (err.code == 11000)
-       return res.json({ success: false, message: 'A movement with that name already exists. '});
-      else
-        return res.send(err);
-    }
+    movement.save(function(err, movement) {
+      if (err) {
+        if (err.code == 11000)
+          return res.json({ success: false, message: 'A movement with that name already exists. '});
+        else
+          return res.send(err);
+        }
 
-    res.json({ message: 'ok' ,movement });
-  });
+        res.json({ message: 'ok' ,movement });
+      });
 
-})
+  })
 
+  // ===== GET =======
 .get(function(req, res) {
 
   Movement.find({}, function(err, movements) {
@@ -49,7 +51,7 @@ module.exports = function(app, express) {
 
 
 apiRouter.route('/training/movements/:name')
-
+// ===== GET =======
 .get(function(req, res) {
   Movement.find({name:req.params.name}, function(err, movement) {
     if (err) res.send(err);
@@ -58,13 +60,14 @@ apiRouter.route('/training/movements/:name')
   });
 })
 
+// ===== PUT =======
 .put(function(req, res) {
   Movement.findOne({name:req.params.name}, function(err, movement) {
 
     if (movement.length == 0)
-      return res.json({ success: false, message: 'fail'});
+    return res.json({ success: false, message: 'fail'});
     if (err)
-      return res.send(err);
+    return res.send(err);
 
     if (req.body.name) movement.name = req.body.name;
     if (req.body.material) movement.material = req.body.material;
@@ -78,6 +81,7 @@ apiRouter.route('/training/movements/:name')
   });
 })
 
+// ===== DELETE =======
 .delete(function(req, res) {
   Movement.remove({	name:req.params.name }, function(err, user) {
     if (err) res.send(err);

@@ -1,8 +1,8 @@
 let mongoose = require("mongoose");
 
-let Set = require('../app_back/models/set');
-let Exercise = require('../app_back/models/exercise');
-let User = require('../app_back/models/user');
+let Set = require('../app/models/set');
+let Exercise = require('../app/models/exercise');
+let User = require('../app/models/user');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -27,6 +27,11 @@ chai.request(server)
     beforeEach((done) => {
       Set.remove({});
       Exercise.remove({});
+      done();
+    });
+
+    after((done) => {
+      User.remove({_id: user._id});
       done();
     });
 

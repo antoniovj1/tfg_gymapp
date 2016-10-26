@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 
-let Movement = require('../app_back/models/movement');
-let User = require('../app_back/models/user');
+let Movement = require('../app/models/movement');
+let User = require('../app/models/user');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -27,6 +27,11 @@ chai.request(server)
       Movement.remove({}, (err) => {
         done();
       });
+    });
+
+    after((done) => {
+      User.remove({_id: user._id});
+      done();
     });
 
     describe('/GET movement', () => {

@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 
-let User = require('../app_back/models/user');
+let User = require('../app/models/user');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -26,6 +26,11 @@ chai.request(server)
       User.remove({}, (err) => {
         done();
       });
+    });
+
+    after((done) => {
+      User.remove({_id: user._id});
+      done();
     });
 
     describe('/GET', () => {

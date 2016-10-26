@@ -1,9 +1,9 @@
 let mongoose = require("mongoose");
 
-let Session = require('../app_back/models/training_session');
-let Movement = require('../app_back/models/movement');
-let Exercise = require('../app_back/models/exercise');
-let User = require('../app_back/models/user');
+let Session = require('../app/models/training_session');
+let Movement = require('../app/models/movement');
+let Exercise = require('../app/models/exercise');
+let User = require('../app/models/user');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -25,12 +25,17 @@ chai.request(server)
 .end((err, res) => {
   var token = res.body.token
 
-
   describe('Exercise (/api/training/exercise/)', () => {
-    beforeEach((done) => {
+
+    before((done) => {
       Exercise.remove({});
       Session.remove({});
       Movement.remove({});
+      done();
+    });
+
+    after((done) => {
+      User.remove({_id: user._id});
       done();
     });
 
@@ -45,7 +50,7 @@ chai.request(server)
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            chai.expect(res.body).to.contain.keys('_id': exercise._id);
+            chai.expect(res.body).to.contain.keys("_id");
             done();
           });
         });

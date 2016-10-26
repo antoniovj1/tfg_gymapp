@@ -10,7 +10,7 @@ module.exports = function(app, express) {
   var apiRouter = express.Router();
 
   apiRouter.route('/training/session/')
-
+  // ===== POST =======
   .post(function(req, res){
 
     var session = new Session();
@@ -32,6 +32,7 @@ module.exports = function(app, express) {
     }
   })
 
+  // ===== GET =======
   .get(function(req, res) {
 
     User.findOne({username: req.decoded.username}, '_id', function(err, user) {
@@ -47,7 +48,7 @@ module.exports = function(app, express) {
   })
 
   apiRouter.route('/training/session/byId/:id_session')
-
+  // ===== GET =======
   .get(function(req, res) {
     Session.findById(req.params.id_session, function(err, session) {
       if (err) res.send(err);
@@ -55,7 +56,7 @@ module.exports = function(app, express) {
     });
   })
 
-
+  // ===== DELETE =======
   .delete(function(req, res) {
     Session.remove({_id:req.params.id_session }, function(err, session) {
       if (err) res.send(err);

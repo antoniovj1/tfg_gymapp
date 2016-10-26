@@ -11,6 +11,7 @@ module.exports = function(app, express) {
 
   apiRouter.route('/training/exercise/')
 
+  // ===== POST =======
   .post(function(req, res){
 
     if(!req.body.movement || !req.body.session){
@@ -42,7 +43,7 @@ module.exports = function(app, express) {
 
 
   apiRouter.route('/training/exercise/:id_exercise')
-
+  // ===== GET =======
   .get(function(req, res) {
     Exercise.findById(req.params.id_exercise, function(err, exercise) {
       if (err) {
@@ -52,7 +53,7 @@ module.exports = function(app, express) {
     });
   })
 
-
+  // ===== DELETE =======
   .delete(function(req, res) {
       Exercise.remove({_id:req.params.id_exercise }, function(err, exercise) {
         if (err) {

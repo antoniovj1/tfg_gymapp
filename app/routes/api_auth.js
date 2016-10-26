@@ -10,6 +10,7 @@ module.exports = function(app, express) {
 
 	var apiRouter = express.Router();
 
+	// ===== POST =======
 	apiRouter.post('/authenticate', function(req, res) {
 		if (!req.body.password || !req.body.username) {
 			res.json({
@@ -59,6 +60,7 @@ module.exports = function(app, express) {
 		});
 	});
 
+	// ===== MIDDLEWARE =======
 	apiRouter.use(function(req, res, next) {
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 

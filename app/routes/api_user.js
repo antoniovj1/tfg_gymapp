@@ -11,7 +11,7 @@ module.exports = function(app, express) {
   // /users
   // ----------------------------------------------------
   apiRouter.route('/users')
-
+  // ===== POST =======
   .post(function(req, res) {
 
     var user = new User();
@@ -35,6 +35,7 @@ module.exports = function(app, express) {
 
   })
 
+  // ===== GET =======
   .get(function(req, res) {
 
     User.find({}, function(err, users) {
@@ -48,7 +49,7 @@ module.exports = function(app, express) {
   //  /users/:user_id
   // ----------------------------------------------------
   apiRouter.route('/users/:user_id')
-
+  // ===== GET =======
   .get(function(req, res) {
     User.findById(req.params.user_id, function(err, user) {
       if (err) res.send(err);
@@ -57,6 +58,7 @@ module.exports = function(app, express) {
     });
   })
 
+  // ===== PUT =======
   .put(function(req, res) {
     User.findById(req.params.user_id, function(err, user) {
 
@@ -79,6 +81,7 @@ module.exports = function(app, express) {
     });
   })
 
+  // ===== DELETE =======
   .delete(function(req, res) {
     User.remove({
       _id: req.params.user_id

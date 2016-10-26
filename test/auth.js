@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 
-let User = require('../app_back/models/user');
+let User = require('../app/models/user');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -10,6 +10,7 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 describe('Auth (/api/authenticate)', () => {
+
   before((done) => {
     User.remove({});
     var user = new User({username: 'auth',password: 'auth'});
@@ -18,21 +19,6 @@ describe('Auth (/api/authenticate)', () => {
   });
 
   describe('/POST ', () => {
-    it('should POST an user to get the token ', (done) => {
-
-      chai.request(server)
-      .post('/api/authenticate')
-      .send({username: 'auth', password: 'auth'})
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('object');
-        res.body.should.have.property('message').eql('ok');
-        res.body.should.have.property('token');
-
-        done();
-      });
-    });
-
     it('should fail with incorrect user', (done) => {
       chai.request(server)
       .post('/api/authenticate')

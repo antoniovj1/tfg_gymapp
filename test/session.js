@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 
-let Session = require('../app_back/models/training_session');
-let User = require('../app_back/models/user');
+let Session = require('../app/models/training_session');
+let User = require('../app/models/user');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -21,10 +21,15 @@ chai.request(server)
 .end((err, res) => {
   var token = res.body.token
 
-
   describe('Session (/api/training/session/)', () => {
-    beforeEach((done) => {
+
+    before((done) => {
       Session.remove({});
+      done();
+    });
+
+    after((done) => {
+      User.remove({_id: user._id});
       done();
     });
 

@@ -8,7 +8,7 @@ module.exports = function(app, express) {
   var apiRouter = express.Router();
 
   apiRouter.route('/training/set/:id_exercise')
-
+  // ===== POST =======
   .post(function(req, res){
 
     var set = new Set();
@@ -26,6 +26,7 @@ module.exports = function(app, express) {
     });
   })
 
+  // ===== GET =======
   .get(function(req, res) {
     Set.find({exercise:req.params.id_exercise}, function(err, set) {
       if (err) res.send(err);
@@ -34,7 +35,7 @@ module.exports = function(app, express) {
   })
 
   apiRouter.route('/training/set/byId/:id_set')
-
+  // ===== GET =======
   .get(function(req, res) {
     Set.findById(req.params.id_set, function(err, set) {
       if (err) res.send(err);
@@ -42,6 +43,7 @@ module.exports = function(app, express) {
     });
   })
 
+  // ===== PUT =======
   .put(function(req, res) {
     Set.findById(req.params.id_set, function(err, set) {
 
@@ -60,6 +62,7 @@ module.exports = function(app, express) {
     });
   })
 
+  // ===== DELETE =======
   .delete(function(req, res) {
     Set.remove({_id:req.params.id_set }, function(err, set) {
       if (err) res.send(err);
