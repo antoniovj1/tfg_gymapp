@@ -2,7 +2,14 @@
 
 https://antoniovj1.github.io/infraestructura_virtual_ugr/
 
-El proyecto consiste en realizar una aplicación web para gestionar los entrenamientos de un club deportivo. En esta aplicación se daría la posibilidad a los entrenadores de crear entrenamientos y asignarles una fecha, además los deportistas podrán apuntarse para entrenamientos en grupo, realizar comentarios sobre los entrenamientos e indicar si lo han realizado. Además de la parte básica ( la anterior ) en caso de que tenga tiempo suficiente se añadirá a la parte de los deportistas la posibilidad de registrar los datos de sus entrenamientos y si fuera posible un bot de telegram que informe cuando se ha añadido un nuevo entrenamiento y al que se le pueda consultar cual es el entrenamiento del dia.
+El proyecto consiste en realizar una aplicación web para gestionar los entrenamientos de un club deportivo. La aplicación permite a los usuarios llevar
+un seguimiento de sus entrenamientos con pesas. Para poder llevar este
+seguimiento se permite a los usuarios crear sesiones de entrenamiento,
+dichas sesiones se componen por varios ejercicios. Un ejercicio consiste en
+un movimiento y un conjunto de series, en las cuales se indica el número
+de repeticiones y peso usado en cada una de ellas.
+
+Los usuarios tienen la posibilidad de consultar antiguas sesiones de entrenamiento para poder ver la evolución que han tenido.
 
 Para la realización de este proyecto se usará la pila MEAN.
 ___
