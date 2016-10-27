@@ -9,8 +9,9 @@ module.exports = function(app, express) {
   var apiRouter = express.Router();
 
   // /users
-  // ----------------------------------------------------
+  // ------
   apiRouter.route('/users')
+
   // ===== POST =======
   .post(function(req, res) {
 
@@ -47,8 +48,9 @@ module.exports = function(app, express) {
 
 
   //  /users/:user_id
-  // ----------------------------------------------------
+  // -----------------
   apiRouter.route('/users/:user_id')
+  
   // ===== GET =======
   .get(function(req, res) {
     User.findById(req.params.user_id, function(err, user) {

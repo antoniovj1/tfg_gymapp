@@ -6,8 +6,10 @@ var config     = require('../../config');
 module.exports = function(app, express) {
 
   var apiRouter = express.Router();
-
+  // /training/set/:id_exercise
+  // -------------------
   apiRouter.route('/training/set/:id_exercise')
+
   // ===== POST =======
   .post(function(req, res){
 
@@ -34,7 +36,10 @@ module.exports = function(app, express) {
     });
   })
 
+  // /training/set/byId/:id_set
+  // -------------------
   apiRouter.route('/training/set/byId/:id_set')
+
   // ===== GET =======
   .get(function(req, res) {
     Set.findById(req.params.id_set, function(err, set) {

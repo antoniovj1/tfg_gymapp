@@ -10,7 +10,8 @@ module.exports = function(app, express) {
 
 	var apiRouter = express.Router();
 
-	// ===== POST =======
+	// POST
+	//-----
 	apiRouter.post('/authenticate', function(req, res) {
 		if (!req.body.password || !req.body.username) {
 			res.json({
@@ -60,7 +61,8 @@ module.exports = function(app, express) {
 		});
 	});
 
-	// ===== MIDDLEWARE =======
+	//MIDDLEWARE
+	//----------
 	apiRouter.use(function(req, res, next) {
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -89,7 +91,8 @@ module.exports = function(app, express) {
 		}
 	});
 
-
+	// GET
+	//-----
 	apiRouter.get('/', function(req, res) {
 		res.json({ message: 'api test' });
 	});

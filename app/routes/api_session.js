@@ -8,8 +8,10 @@ var config     = require('../../config');
 module.exports = function(app, express) {
 
   var apiRouter = express.Router();
-
+  // /training/session/
+  // -------------------
   apiRouter.route('/training/session/')
+
   // ===== POST =======
   .post(function(req, res){
 
@@ -47,7 +49,10 @@ module.exports = function(app, express) {
     }
   })
 
+  // /training/session/byId/:id_session
+  // -------------------
   apiRouter.route('/training/session/byId/:id_session')
+
   // ===== GET =======
   .get(function(req, res) {
     Session.findById(req.params.id_session, function(err, session) {

@@ -6,22 +6,22 @@ var config     = require('../../config');
 module.exports = function(app, express) {
 
   var apiRouter = express.Router();
-  /***********************************/
-  // Movement
-  // ----------------------------------------------------
+
+  // /training/movements
+  // -------------------
   apiRouter.route('/training/movements')
   // ===== POST =======
   .post(function(req, res) {
 
-    /*
+  /*
     {
     "name":"Dominadas",
     "material": "Barra",
     "muscles":[{"name":"bicep","percentage":20},
-    {"name":"pecho","percentage":10},
-    {"name":"dorsal","percentage":60},
-    {"name":"abdominales","percentage":10}]
-  }
+               {"name":"pecho","percentage":10},
+               {"name":"dorsal","percentage":60},
+               {"name":"abdominales","percentage":10}]
+      }
   */
 
     var movement = new Movement(req.body);
@@ -49,7 +49,8 @@ module.exports = function(app, express) {
   });
 });
 
-
+// /training/movements/:name
+// -------------------
 apiRouter.route('/training/movements/:name')
 // ===== GET =======
 .get(function(req, res) {
@@ -88,6 +89,6 @@ apiRouter.route('/training/movements/:name')
     res.json({ message: 'ok' });
   });
 });
-/**********************************/
+
 return apiRouter;
 };

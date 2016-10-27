@@ -1,6 +1,3 @@
-// BASE SETUP
-// ======================================
-
 var express    = require('express');
 var app        = express();
 var bodyParser = require('body-parser');
@@ -10,11 +7,12 @@ var config 	   = require('./config');
 var path 	     = require('path');
 
 
-// APP CONFIGURATION ==================
+// APP CONFIGURATION
+//-------------------
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// configure our app to handle CORS requests
+// configure app to handle CORS requests
 app.use(function(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
@@ -36,10 +34,9 @@ mongoose.connection.on('error', function() {
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
 
-// ROUTES FOR OUR API =================
-// ====================================
 
-// API ROUTES ------------------------
+// API ROUTES
+//------------------------
 var apiRoutesAuth = require('./app/routes/api_auth')(app, express);
 var apiRoutesUser = require('./app/routes/api_user')(app, express);
 var apiRoutesMovement = require('./app/routes/api_movement')(app, express);
@@ -56,14 +53,14 @@ app.use('/api', apiRoutesExercise);
 app.use('/api', apiRoutesSession);
 
 
-// MAIN CATCHALL ROUTE ---------------
-// SEND USERS TO FRONTEND ------------
+// MAIN CATCHALL ROUTE (SEND USERS TO FRONTEND)
+//-------------------------------------------
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
 // START THE SERVER
-// ====================================
+//------------------
 
 app.listen(config.port, function() {
   console.log('Express server listening on port ' + '8080');

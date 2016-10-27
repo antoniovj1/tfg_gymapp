@@ -9,6 +9,8 @@ module.exports = function(app, express) {
 
   var apiRouter = express.Router();
 
+  // /training/exercise/
+  //----------
   apiRouter.route('/training/exercise/')
 
   // ===== POST =======
@@ -42,6 +44,8 @@ module.exports = function(app, express) {
   })
 
 
+  // /training/exercise/:id_exercise
+  //----------
   apiRouter.route('/training/exercise/:id_exercise')
   // ===== GET =======
   .get(function(req, res) {
