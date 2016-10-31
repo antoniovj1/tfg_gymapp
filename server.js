@@ -10,6 +10,7 @@ var config 	   = require('./config');
 var path 	     = require('path');
 
 
+
 // APP CONFIGURATION ==================
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -58,9 +59,11 @@ app.use('/api', apiRoutesSession);
 
 // MAIN CATCHALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
-app.get('*', function(req, res) {
-	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
-});
+app.use(express.static(__dirname + '/public'));
+
+/*app.get('*', function(req, res) {
+	res.sendFile(path.join(__dirname + '/public/index.html'));
+});*/
 
 // START THE SERVER
 // ====================================
