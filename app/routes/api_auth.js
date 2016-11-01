@@ -42,6 +42,7 @@ module.exports = function(app, express) {
 
 
 					var token = jwt.sign({
+						_id: user._id,
 						name: user.name,
 						username: user.username
 					}, superSecret, {

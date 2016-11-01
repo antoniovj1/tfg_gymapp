@@ -92,5 +92,24 @@ module.exports = function(app, express) {
     });
   });
 
+  //  /users/me
+  // ----------------------------------------------------
+  apiRouter.route('/users_me')
+  // ===== GET =======
+  .get(function(req, res) {
+    console.log(req.decoded);
+    //Valido
+    /*  User.findById(req.decoded._id, function(err, user) {
+      if (err) res.send(err);
+
+      res.json(user);
+    });*/
+    User.find(req.decoded.username, function(err, user) {
+        if (err) res.send(err);
+
+        res.json(user);
+      });
+  });
+
   return apiRouter;
 };
