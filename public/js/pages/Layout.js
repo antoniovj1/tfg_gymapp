@@ -10,7 +10,7 @@ export default class Layout extends React.Component {
     const containerStyle = {
       marginTop: "60px"
     };
-    console.log("layout");
+
     return (
       <div>
 
@@ -24,8 +24,8 @@ export default class Layout extends React.Component {
 
             </div>
           </div>
-          <Footer/>
         </div>
+        <Footer/>
       </div>
 
     );

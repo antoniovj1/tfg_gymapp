@@ -3,11 +3,12 @@ import React from "react";
 
 export default class Session extends React.Component {
   render() {
+    console.log(this.props);
 
     return (
       <div>
         <div>
-          <img src="https://pixabay.com/static/uploads/photo/2016/10/15/12/01/dog-1742295_960_720.jpg" class="img-responsive img-circle" alt=""></img>
+          <img src="http://www.freeimageslive.com/galleries/space/planets/pics/vg1_p22830.gif" class="img-responsive img-circle" alt=""></img>
         </div>
 
         <div class="profile-usermenu">
