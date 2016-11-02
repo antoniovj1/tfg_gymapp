@@ -61,10 +61,10 @@ module.exports = function(app, express) {
         exercise.forEach(function (ex,index) {
           Movement.findById(ex.movement,function(err,movement){
             if(movement)
-            movements.push(movement);
+              movements.push(movement);
             Set.find({exercise: ex}, function (err, set) {
               if(set.length)
-              sets.push(set);
+                sets.push(set);
               if(index == i){
                 res.json({ message: 'ok' ,session,exercise,movements,sets});
               }
