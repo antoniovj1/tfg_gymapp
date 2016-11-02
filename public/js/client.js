@@ -7,6 +7,7 @@ import { Provider } from "react-redux"
 import store from "./store"
 
 
+import Login from "./pages/Login";
 import SessionList from "./pages/SessionList";
 import Layout from "./pages/Layout";
 import Profile from "./pages/Profile";
@@ -23,15 +24,25 @@ export default class Foo extends React.Component {
   }
 }
 
+function requireAuth(nextState, replace) {
+  if (!store.getState().login.isAuthenticated) {
+    replace({
+      pathname: '/login',
+    })
+  }
+}
+
+
 const app = document.getElementById('app');
 
 ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={SessionList}></IndexRoute>
-      <Route path="/profile" component={Profile}></Route>
-      <Route path="/session/:id" component={SessionDetail}></Route>
+      <Route path="/login" component={Login}></Route>
+      <IndexRoute component={SessionList} onEnter={requireAuth}></IndexRoute>
+      <Route path="/profile" component={Profile} onEnter={requireAuth}></Route>
+      <Route path="/session/:id" component={SessionDetail} onEnter={requireAuth} ></Route>
     </Route>
   </Router>
   </Provider>,

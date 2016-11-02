@@ -18,7 +18,6 @@ module.exports = function(app, express) {
 				message: 'fail'
 			});
 		}
-
 		User.findOne({
 			username: req.body.username
 		}).select('name username password').exec(function(err, user) {
@@ -31,7 +30,6 @@ module.exports = function(app, express) {
 					message: 'fail'
 				});
 			} else if (user) {
-
 				var validPassword = user.comparePassword(req.body.password);
 				if (!validPassword) {
 					res.json({
@@ -63,12 +61,7 @@ module.exports = function(app, express) {
 
 	// ===== MIDDLEWARE =======
 	apiRouter.use(function(req, res, next) {
-		var token =  jwt.sign({
-			name: "antonio",
-			username: "antonio"
-		}, superSecret, {
-			expiresIn: '24h'
-		}); //req.body.token || req.query.token || req.headers['x-access-token'];
+		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
 		if (token) {
 
