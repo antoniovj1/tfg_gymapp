@@ -1,13 +1,13 @@
 export default function reducer(state={
   sessions: [],
-  completeSession: "A",
+  completeSession: null,
   fetching: false,
   fetched: false,
   error: null,
 }, action) {
 
   switch (action.type) {
-    case "FETCH_SESSION": {
+    case "FETCH_SESSION_PENDING": {
       return {...state, fetching: true}
     }
     case "FETCH_SESSION_REJECTED": {
@@ -18,24 +18,23 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        sessions: action.payload, completeSession: "BBBB"
+        sessions: action.payload
       }
     }
-    case "FETCH_COMPELTESESSION": {
+    case "FETCH_COMPELTESESSION_PENDING": {
       return {...state, fetching: true}
     }
     case "FETCH_COMPELTESESSION_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
-    case "FETCH_SESSIONCOMPLETE_FULFILLED": {
+    case "FETCH_COMPLETESESSION_FULFILLED": {
       return {
         ...state,
         fetching: false,
         fetched: true,
-        completeSession: "BBBB"
+        completeSession: action.payload
       }
     }
   }
-  console.log("AQUI -->" + action.type );
   return state
 }

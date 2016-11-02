@@ -2,6 +2,7 @@ import axios from "axios";
 
 export function fetchActualUser() {
   return function(dispatch) {
+    dispatch({type: "FETCH_ACTUALUSER_PENDING"});
     axios.get("http://127.0.0.1:8080/api/users_me")
       .then((response) => {
         dispatch({type: "FETCH_ACTUALUSER_FULFILLED", payload: response.data})

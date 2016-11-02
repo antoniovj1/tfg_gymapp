@@ -6,7 +6,7 @@ export default function reducer(state={
 }, action) {
 
   switch (action.type) {
-    case "FETCH_ACTUALUSER": {
+    case "FETCH_ACTUALUSER_PENDING": {
       return {...state, fetching: true}
     }
     case "FETCH_ACTUALUSER_REJECTED": {

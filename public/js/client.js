@@ -7,7 +7,7 @@ import { Provider } from "react-redux"
 import store from "./store"
 
 
-import Session from "./components/Session";
+import SessionList from "./pages/SessionList";
 import Layout from "./pages/Layout";
 import Profile from "./pages/Profile";
 import SessionDetail from "./pages/SessionDetail";
@@ -29,7 +29,7 @@ ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Session}></IndexRoute>
+      <IndexRoute component={SessionList}></IndexRoute>
       <Route path="/profile" component={Profile}></Route>
       <Route path="/session/:id" component={SessionDetail}></Route>
     </Route>
