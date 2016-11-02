@@ -14,12 +14,11 @@ import { fetchCompleteSession } from "../actions/sessionsActions"
 
 export default class SessionDetail extends React.Component {
 
-  componentWillMount() {
-    var url = this.props.location.pathname
+  componentDidMount(){
+    var url = this.props.location.pathname;
     var id = url.substring(url.lastIndexOf("/")+1);
-    this.props.dispatch(fetchCompleteSession(id))
+    this.props.dispatch(fetchCompleteSession(id));
   }
-
 
   render() {
 

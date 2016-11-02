@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import SessionItem from "../components/SessionItem"
 import { fetchSessions } from "../actions/sessionsActions"
 
+
 @connect((store) => {
   return {
     sessions: store.sessions.sessions,
@@ -13,8 +14,9 @@ import { fetchSessions } from "../actions/sessionsActions"
 
 export default class Session extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchSessions())
+    this.props.dispatch(fetchSessions());
   }
+
 
   render() {
 
