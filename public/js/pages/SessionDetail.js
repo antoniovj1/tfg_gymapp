@@ -77,7 +77,7 @@ export default class SessionDetail extends React.Component {
         </div>
         <div class="row">
         <div class = "col-md-3 well"> TEST </div>
-        <div class = "col-md-9 well">
+        <div class = "col-md-9">
         {groups.map(function(group) {
           return <Exercise key={group.exercise._id} group={group}/>;
         })}
