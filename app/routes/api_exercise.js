@@ -15,7 +15,6 @@ module.exports = function(app, express) {
 
   // ===== POST =======
   .post(function(req, res){
-
     if(!req.body.movement || !req.body.session){
       res.json({
         success: false,
@@ -23,18 +22,18 @@ module.exports = function(app, express) {
       });
     } else {
       var exercise = new Exercise();
-
-      Movement.find({_id: req.body.movement._id}, function (err, movement){
+//TODO
+      Movement.find({_id: req.body.movement}, function (err, movement){
         if(movement){
-          Session.find({_id: req.body.session._id}, function (err, session){
+          Session.find({_id: req.body.session}, function (err, session){
             if(session){
-              exercise.session = session._id;
-              exercise.movement = movement._id;
+              exercise.session = req.body.session;
+              exercise.movement = req.body.movement;
 
               exercise.save(function(err) {
                 if (err) return res.send(err);
 
-                res.json({ message: 'ok' });
+                res.json({ message: 'ok' , exercise});
               });
             }
           })

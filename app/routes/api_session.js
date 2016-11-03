@@ -1,5 +1,8 @@
 var bodyParser = require('body-parser');
 var Session	   = require('../models/training_session');
+var Exercise	 = require('../models/exercise');
+var Set	 = require('../models/set');
+var Movement   = require('../models/movement');
 var User  	   = require('../models/user');
 var jwt        = require('jsonwebtoken');
 var config     = require('../../config');
@@ -56,8 +59,24 @@ module.exports = function(app, express) {
   // ===== GET =======
   .get(function(req, res) {
     Session.findById(req.params.id_session, function(err, session) {
-      if (err) res.send(err);
-      res.json({ message: 'ok' ,session});
+      Exercise.find({session: session._id}, function(err, exercise) {
+        let movements = [];
+        let sets = [];
+        let i = exercise.length-1;
+        exercise.forEach(function (ex,index) {
+          Movement.findById(ex.movement,function(err,movement){
+            if(movement)
+              movements.push(movement);
+            Set.find({exercise: ex}, function (err, set) {
+              if(set.length)
+                sets.push(set);
+              if(index == i){
+                res.json({ message: 'ok' ,session,exercise,movements,sets});
+              }
+            })
+          })
+        })
+      });
     });
   })
 

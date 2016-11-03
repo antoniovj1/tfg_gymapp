@@ -19,7 +19,6 @@ module.exports = function(app, express) {
 				message: 'fail'
 			});
 		}
-
 		User.findOne({
 			username: req.body.username
 		}).select('name username password').exec(function(err, user) {
@@ -32,7 +31,6 @@ module.exports = function(app, express) {
 					message: 'fail'
 				});
 			} else if (user) {
-
 				var validPassword = user.comparePassword(req.body.password);
 				if (!validPassword) {
 					res.json({
@@ -43,6 +41,7 @@ module.exports = function(app, express) {
 
 
 					var token = jwt.sign({
+						_id: user._id,
 						name: user.name,
 						username: user.username
 					}, superSecret, {

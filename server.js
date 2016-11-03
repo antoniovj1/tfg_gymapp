@@ -5,6 +5,7 @@ var morgan     = require('morgan');
 var mongoose   = require('mongoose');
 var config 	   = require('./config');
 var path 	     = require('path');
+var cors       = require('cors')
 
 
 // APP CONFIGURATION
@@ -12,13 +13,8 @@ var path 	     = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// configure app to handle CORS requests
-app.use(function(req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
-	next();
-});
+// configure our app to handle CORS requests
+app.use(cors());
 
 // log all requests to the console
 //app.use(morgan('dev'));
@@ -53,11 +49,13 @@ app.use('/api', apiRoutesExercise);
 app.use('/api', apiRoutesSession);
 
 
-// MAIN CATCHALL ROUTE (SEND USERS TO FRONTEND)
-//-------------------------------------------
-app.get('*', function(req, res) {
-	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
-});
+// MAIN CATCHALL ROUTE ---------------
+// SEND USERS TO FRONTEND ------------
+app.use(express.static(__dirname + '/public'));
+
+/*app.get('*', function(req, res) {
+	res.sendFile(path.join(__dirname + '/public/index.html'));
+});*/
 
 // START THE SERVER
 //------------------

@@ -40,8 +40,6 @@ chai.request(server)
         .set('x-access-token',token)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('array');
-          res.body.length.should.be.eql(0);
           done();
         });
       });
@@ -63,25 +61,6 @@ chai.request(server)
         });
       });
 
-    });
-
-    describe('/GET/:id_session', () => {
-      it('should GET a session given the id', (done) => {
-        let session = new Session({
-          user: user._id
-        });
-        session.save();
-        chai.request(server)
-        .get('/api/training/session/byId/' + session._id )
-        .set('x-access-token',token)
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('ok');
-          res.body.session.should.have.property('user').eql(String(session.user));
-          done();
-        });
-      });
     });
 
     describe('/DELETE/:id_session', () => {

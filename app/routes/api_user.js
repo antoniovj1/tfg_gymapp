@@ -50,7 +50,7 @@ module.exports = function(app, express) {
   //  /users/:user_id
   // -----------------
   apiRouter.route('/users/:user_id')
-  
+
   // ===== GET =======
   .get(function(req, res) {
     User.findById(req.params.user_id, function(err, user) {
@@ -92,6 +92,24 @@ module.exports = function(app, express) {
 
       res.json({ message: 'ok' });
     });
+  });
+
+  //  /users/me
+  // ----------------------------------------------------
+  apiRouter.route('/users_me')
+  // ===== GET =======
+  .get(function(req, res) {
+    //Valido
+    /*  User.findById(req.decoded._id, function(err, user) {
+      if (err) res.send(err);
+
+      res.json(user);
+    });*/
+    User.find(req.decoded.username, function(err, user) {
+        if (err) res.send(err);
+
+        res.json(user);
+      });
   });
 
   return apiRouter;
