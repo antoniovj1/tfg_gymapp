@@ -10,6 +10,7 @@ var UserSchema   = new Schema({
   weight: Number,
 	username: { type: String, required: true, index: { unique: true }},
 	password: { type: String, required: true, select: false },
+	sessions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Session'}],
 	role: {
     type: String,
     enum: ['Admin', 'Basic'],

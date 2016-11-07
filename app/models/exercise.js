@@ -9,6 +9,11 @@ var ExerciseSchema   = new Schema({
         type: Date,
         default: Date.now
       }
+	sets: [	{repetitions: Number,
+  				 weight: Number,
+  			   rest: Number,
+  				 timestamp: { type: Date, default: Date.now	}
+				} ]
 });
 
 
