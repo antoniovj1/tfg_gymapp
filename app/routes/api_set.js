@@ -1,79 +1,108 @@
 var bodyParser = require('body-parser');
-var Set	 = require('../models/set');
-var config     = require('../../config');
+var Exercise = require('../models/exercise');
+var Session = require('../models/training_session');
+var Movement = require('../models/movement');
+var config = require('../../config');
 
 
-module.exports = function(app, express) {
 
-  var apiRouter = express.Router();
-  // /training/set/:id_exercise
-  // -------------------
-  apiRouter.route('/training/set/:id_exercise')
+module.exports = function (app, express) {
 
-  // ===== POST =======
-  .post(function(req, res){
+    var apiRouter = express.Router();
+    // /training/set/:id_exercise
+    // -------------------
+    apiRouter.route('/training/set/:id_exercise')
 
-    var set = new Set();
+        // ===== POST =======
+        .post(function (req, res) {
+            Exercise.findById(req.params.id_exercise).exec()
+                .then(function (exercise) {
+                    var s = { 'repetitions': req.body.repetitions, 'weight': req.body.weight, 'rest': req.body.rest };
+                    exercise.sets.push(s);
+                    
+                    return exercise.save();
+                })
+                .then(function () {
+                    res.json({ message: 'ok' });
+                })
+                .catch(function (err) {
+                    res.send(err);
+                })
+        })
 
-    set.repetitions = req.body.repetitions;
-    set.weight = req.body.weight;
-    set.rest = req.body.rest;
-    set.exercise = req.params.id_exercise;
+        // ===== GET =======
+        .get(function (req, res) {
+            Exercise.findById(req.params.id_exercise).select('sets').exec()
+                .then(function (sets) {
+                    res.json({ message: 'ok', sets });
+                })
+                .catch(function (err) {
+                    res.send(err);
+                })
+        })
+
+    // /training/set/byId/:id_set
+    // -------------------
+    apiRouter.route('/training/set/:id_exercise/:num')
+
+        // ===== GET =======
+        .get(function (req, res) {
+            Exercise.findById(req.params.id_exercise)
+                .slice('sets', [parseInt(req.params.num), 1])
+                .exec()
+                .then(function (set) {
+                    set = set['sets'][0] ;
+                    
+                    res.json({ message: 'ok', set });
+                })
+                .catch(function (err) {
+                    res.send(err);
+                })
+        })
+
+        // ===== PUT =======
+        .put(function (req, res) {
+            var rep = "sets." + req.params.num + ".repetitions";
+            var weight = "sets." + req.params.num + ".weight";
+            var rest = "sets." + req.params.num + ".rest";
+
+            var query = {};
+
+            if (req.body.weight)
+                query[weight] = parseFloat(req.body.weight);
+            if (req.body.rest)
+                query[rest] = parseFloat(req.body.rest);
+            if (req.body.repetitions)
+                query[rep] = parseFloat(req.body.repetitions);
 
 
-    set.save(function(err) {
-      if (err) return res.send(err);
+            Exercise.update({ _id: req.params.id_exercise }, { $set: query }).exec()
+                .then(function () {
+                    res.json({ message: 'ok' });
+                })
+                .catch(function (err) {
+                    res.send(err);
+                })
+        })
 
-      res.json({ message: 'ok' });
-    });
-  })
+        // ===== DELETE =======
+        .delete(function (req, res) {
+            var set = 'sets.' + req.params.num;
 
-  // ===== GET =======
-  .get(function(req, res) {
-    Set.find({exercise:req.params.id_exercise}, function(err, set) {
-      if (err) res.send(err);
-      res.json(set);
-    });
-  })
+            var query = {};
+            query[set] = 1;
 
-  // /training/set/byId/:id_set
-  // -------------------
-  apiRouter.route('/training/set/byId/:id_set')
+            Exercise.update({ _id: req.params.id_exercise }, { $unset: query }).exec()
+                .then(function () {
+                    return Exercise.update({ _id: req.params.id_exercise }, { $pull: { sets: null } }).exec();
+                })
+                .then(function () {
+                    res.json({ message: 'ok' });
+                })
+                .catch(function (err) {
+                    res.send(err);
+                })
+        });
 
-  // ===== GET =======
-  .get(function(req, res) {
-    Set.findById(req.params.id_set, function(err, set) {
-      if (err) res.send(err);
-      res.json(set);
-    });
-  })
-
-  // ===== PUT =======
-  .put(function(req, res) {
-    Set.findById(req.params.id_set, function(err, set) {
-
-      if (err)
-        return res.send(err);
-
-      if (req.body.weight) set.weight = req.body.weight;
-      if (req.body.rest) set.rest = req.body.rest;
-      if (req.body.repetitions) set.repetitions = req.body.repetitions;
-
-      set.save(function(err, set) {
-        if (err) res.send(err);
-        res.json({ message: 'ok', set });
-      });
-
-    });
-  })
-
-  // ===== DELETE =======
-  .delete(function(req, res) {
-    Set.remove({_id:req.params.id_set }, function(err, set) {
-      if (err) res.send(err);
-      res.json({ message: 'ok' });
-    });
-  });
-
-  return apiRouter;
+    return apiRouter;
 };
