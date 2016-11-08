@@ -50,7 +50,7 @@ chai.request(server)
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            chai.expect(res.body).to.contain.keys("_id");
+            
             done();
           });
         });
@@ -96,7 +96,7 @@ chai.request(server)
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('ok');
-
+          
           done();
         });
       });
