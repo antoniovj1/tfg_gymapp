@@ -53,9 +53,9 @@ app.use('/api', apiRoutesSession);
 // SEND USERS TO FRONTEND ------------
 app.use(express.static(__dirname + '/public'));
 
-/*app.get('*', function(req, res) {
+app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/public/index.html'));
-});*/
+});
 
 // START THE SERVER
 //------------------

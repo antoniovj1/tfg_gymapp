@@ -11,7 +11,9 @@
     "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
   },
   "scripts": {
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+    "start": "node server.js",
+    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"
   },
   "author": "Antonio de la Vega",
   "license": "",
@@ -66,7 +68,5 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.1"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
