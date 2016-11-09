@@ -60,8 +60,8 @@ app.use(express.static(__dirname + '/public'));
 // START THE SERVER
 //------------------
 
-app.listen(config.port, function() {
-  console.log('Express server listening on port ' + '8080');
+app.listen(process.env.PORT || config.port, function() {
+  console.log('Express server listening on port ' + process.env.PORT);
 });
 
 module.exports = app; // for testing

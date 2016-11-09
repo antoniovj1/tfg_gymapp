@@ -2,6 +2,6 @@
 //-------
 module.exports = {
 'port': process.env.PORT || 8080,
-'database': 'mongodb://localhost:27017/database',
+'database': process.env.MONGODB_URI,
 'secret': 'clave_secreta'
 };
