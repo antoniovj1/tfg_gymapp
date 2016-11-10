@@ -41,15 +41,16 @@ module.exports = function (app, express) {
             exercise.movement = result[0]._id;
             exercise.session = result[1]._id;
 
-            req.body.sets.forEach(function (set) {
-              set = set.replace('[', '');
-              set = set.replace(']', '');
-              var array = set.split(",").map(Number);
+            if (req.body.sets) {
+              req.body.sets.forEach(function (set) {
+                set = set.replace('[', '');
+                set = set.replace(']', '');
+                var array = set.split(",").map(Number);
 
-              var s = { 'repetitions': array[0], 'weight': array[1], 'rest': array[2] };
-              exercise.sets.push(s);
-            })
-
+                var s = { 'repetitions': array[0], 'weight': array[1], 'rest': array[2] };
+                exercise.sets.push(s);
+              })
+            }
             return exercise.save();
           })
           .then(function (exercise) {

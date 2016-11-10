@@ -25,8 +25,8 @@ ExerciseSchema.pre('remove', function (next) {
 	var Session = require('./training_session');
 	Session.findOneAndUpdate({ _id: exercise.session }, { $pull: { exercises: exercise._id }}).exec()
 	.then(function(session){
-		console.log(session);
 		
+	
 	});
 
 	next();

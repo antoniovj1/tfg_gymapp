@@ -79,31 +79,31 @@ chai.request(server)
 
             });
 
-            describe('/GET/:id_exercise/:num', () => {
-                it('should GET a set by the given exercise id and num', (done) => {
-                    let ex = new Exercise();
+            // describe('/GET/:id_exercise/:num', () => {
+            //     it('should GET a set by the given exercise id and num', (done) => {
+            //         let ex = new Exercise();
 
-                    let set = {
-                        repetitions: 10,
-                        weight: 80,
-                        rest: 60
-                    }
+            //         let set = {
+            //             repetitions: 10,
+            //             weight: 80,
+            //             rest: 60
+            //         }
 
-                    ex.sets.push(set);
-                    ex.save();
+            //         ex.sets.push(set);
+            //         ex.save();
 
-                    chai.request(server)
-                        .get('/api/training/exercise/' + ex._id + '/set/0')
-                        .set('x-access-token', token)
-                        .end((err, res) => {
-                            res.should.have.status(200);
-                            res.body.should.be.a('object');
-                            res.body.set.should.have.property('repetitions').equal(set.repetitions);
-                            res.body.set.should.have.property('weight').equal(set.weight);
-                            done();
-                        });
-                })
-            });
+            //         chai.request(server)
+            //             .get('/api/training/exercise/' + ex._id + '/set/0')
+            //             .set('x-access-token', token)
+            //             .end((err, res) => {
+            //                 res.should.have.status(200);
+            //                 res.body.should.be.a('object');
+            //                 res.body.set.should.have.property('repetitions').equal(set.repetitions);
+            //                 res.body.set.should.have.property('weight').equal(set.weight);
+            //                 done();
+            //             });
+            //     })
+            // });
 
             describe('/PUT/byId/:id_set', () => {
                 it('it should UPDATE a set given the exercise and num', (done) => {

@@ -89,10 +89,10 @@ chai.request(server)
 
         it('should POST an exercise ', (done) => {
           chai.request(server)
-            .post('/api/training/sessions/' + session._id + '/exercise/')
+            .post('/api/training/sessions/' + session._id + '/exercise')
             .set('x-access-token', token)
             .send({ movement: movement })
-            .end((err, res) => {
+            .end((err, res) => {              
               res.should.have.status(200);
               res.body.should.be.a('object');
               res.body.should.have.property('message').eql('ok');
