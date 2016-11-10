@@ -9,9 +9,9 @@ var config = require('../../config');
 module.exports = function (app, express) {
 
     var apiRouter = express.Router();
-    // /training/set/:id_exercise
+    // /training/exercise/:id_exercise/set
     // -------------------
-    apiRouter.route('/training/set/:id_exercise')
+    apiRouter.route('/training/exercise/:id_exercise/set')
 
         // ===== POST =======
         .post(function (req, res) {
@@ -19,7 +19,7 @@ module.exports = function (app, express) {
                 .then(function (exercise) {
                     var s = { 'repetitions': req.body.repetitions, 'weight': req.body.weight, 'rest': req.body.rest };
                     exercise.sets.push(s);
-                    
+
                     return exercise.save();
                 })
                 .then(function () {
@@ -41,9 +41,9 @@ module.exports = function (app, express) {
                 })
         })
 
-    // /training/set/byId/:id_set
+    // /training/exercise/:id_exercise/set/:num
     // -------------------
-    apiRouter.route('/training/set/:id_exercise/:num')
+    apiRouter.route('/training/exercise/:id_exercise/set/:num')
 
         // ===== GET =======
         .get(function (req, res) {
@@ -51,8 +51,8 @@ module.exports = function (app, express) {
                 .slice('sets', [parseInt(req.params.num), 1])
                 .exec()
                 .then(function (set) {
-                    set = set['sets'][0] ;
-                    
+                    set = set['sets'][0];
+
                     res.json({ message: 'ok', set });
                 })
                 .catch(function (err) {

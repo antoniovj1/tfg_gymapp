@@ -40,7 +40,7 @@ chai.request(server)
 
                     exercise.save((err, exercise) => {
                         chai.request(server)
-                            .get('/api/training/set/' + exercise._id)
+                            .get('/api/training/exercise/' + exercise._id + '/set')
                             .set('x-access-token', token)
                             .end((err, res) => {
 
@@ -53,60 +53,60 @@ chai.request(server)
                 })
             });
 
-            // describe('/POST/:id_exercise', () => {
-            //     it('should POST a set given the exercise id', (done) => {
-            //         let set = {
-            //             repetitions: 10,
-            //             weight: 80,
-            //             rest: 60
-            //         }
+            describe('/POST/:id_exercise', () => {
+                it('should POST a set given the exercise id', (done) => {
+                    let set = {
+                        repetitions: 10,
+                        weight: 80,
+                        rest: 60
+                    }
 
-            //         let exercise = new Exercise();
-            //         exercise.save();
+                    let exercise = new Exercise();
+                    exercise.save();
 
-            //         chai.request(server)
-            //             .post('/api/training/set/' + exercise._id)
-            //             .set('x-access-token', token)
-            //             .send(set)
-            //             .end((err, res) => {
-            //                 res.should.have.status(200);
-            //                 res.body.should.be.a('object');
-            //                 res.body.should.have.property('message').eql('ok');
+                    chai.request(server)
+                        .post('/api/training/exercise/' + exercise._id + '/set')
+                        .set('x-access-token', token)
+                        .send(set)
+                        .end((err, res) => {
+                            res.should.have.status(200);
+                            res.body.should.be.a('object');
+                            res.body.should.have.property('message').eql('ok');
 
-            //                 done();
-            //             });
-            //     });
+                            done();
+                        });
+                });
 
-            // });
+            });
 
-            // describe('/GET/:id_exercise/:num', () => {
-            //     it('should GET a set by the given exercise id and num', (done) => {
-            //         let ex = new Exercise();
+            describe('/GET/:id_exercise/:num', () => {
+                it('should GET a set by the given exercise id and num', (done) => {
+                    let ex = new Exercise();
 
-            //         let set = {
-            //             repetitions: 10,
-            //             weight: 80,
-            //             rest: 60
-            //         }
+                    let set = {
+                        repetitions: 10,
+                        weight: 80,
+                        rest: 60
+                    }
 
-            //         ex.sets.push(set);
-            //         ex.save();
+                    ex.sets.push(set);
+                    ex.save();
 
-            //         chai.request(server)
-            //             .get('/api/training/set/' + ex._id + "/0")
-            //             .set('x-access-token', token)
-            //             .end((err, res) => {
-            //                 res.should.have.status(200);
-            //                 res.body.should.be.a('object');
-            //                 res.body.set.should.have.property('repetitions').equal(set.repetitions);
-            //                 res.body.set.should.have.property('weight').equal(set.weight);
-            //                 done();
-            //             });
-            //     })
-            // });
+                    chai.request(server)
+                        .get('/api/training/exercise/' + ex._id + '/set/0')
+                        .set('x-access-token', token)
+                        .end((err, res) => {
+                            res.should.have.status(200);
+                            res.body.should.be.a('object');
+                            res.body.set.should.have.property('repetitions').equal(set.repetitions);
+                            res.body.set.should.have.property('weight').equal(set.weight);
+                            done();
+                        });
+                })
+            });
 
             describe('/PUT/byId/:id_set', () => {
-                it('it should UPDATE a set given the id', (done) => {
+                it('it should UPDATE a set given the exercise and num', (done) => {
                     let ex = new Exercise();
 
                     let set = {
@@ -125,7 +125,7 @@ chai.request(server)
                     ex.save();
 
                     chai.request(server)
-                        .put('/api/training/set/' + ex._id + "/0")
+                        .put('/api/training/exercise/' + ex._id + '/set/0')
                         .set('x-access-token', token)
                         .set(set2)
                         .end((err, res) => {
@@ -138,7 +138,7 @@ chai.request(server)
 
 
             describe('/DELETE/byId/:id_set', () => {
-                it('should DELETE a set given the id', (done) => {
+                it('should DELETE a set given the exercise and num', (done) => {
                     let ex = new Exercise();
 
                     let set = {
@@ -151,7 +151,7 @@ chai.request(server)
                     ex.save();
 
                     chai.request(server)
-                        .delete('/api/training/set/' + ex._id + "/0")
+                        .delete('/api/training/exercise/' + ex._id + '/set/0')
                         .set('x-access-token', token)
                         .end((err, res) => {
                             res.should.have.status(200);

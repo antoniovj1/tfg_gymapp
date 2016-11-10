@@ -11,11 +11,11 @@ module.exports = function (app, express) {
 
   // /training/exercise/
   //----------
-  apiRouter.route('/training/exercise/')
+  apiRouter.route('/training/sessions/:id_session/exercise/')
 
     // ===== POST =======
     .post(function (req, res) {
-      if (!req.body.movement || !req.body.session) {
+      if (!req.body.movement || !req.params.id_session) {
         res.json({
           success: false,
           message: 'fail'
@@ -29,7 +29,8 @@ module.exports = function (app, express) {
 
             if (!movement)
               throw { message: 'fail', detail: 'no movement' };
-            return Session.findById(req.body.session).exec()
+
+            return Session.findById(req.params.id_session).exec()
               .then(function (session) {
                 if (!session)
                   throw { message: 'fail', detail: 'no session' };
@@ -37,13 +38,26 @@ module.exports = function (app, express) {
               })
           })
           .then(function (result) {
-            exercise.session = result[0]._id;
-            exercise.movement = result[1]._id;
+            exercise.movement = result[0]._id;
+            exercise.session = result[1]._id;
+
+            req.body.sets.forEach(function (set) {
+              set = set.replace('[', '');
+              set = set.replace(']', '');
+              var array = set.split(",").map(Number);
+
+              var s = { 'repetitions': array[0], 'weight': array[1], 'rest': array[2] };
+              exercise.sets.push(s);
+            })
 
             return exercise.save();
           })
           .then(function (exercise) {
-            res.json({ message: 'ok', exercise });
+            return Session.findOneAndUpdate({ _id: req.params.id_session },
+              { $push: { exercises: exercise._id } });
+          })
+          .then(function (session) {
+            res.json({ message: 'ok' });
           })
           .catch(function (err) {
             res.send(err);
@@ -72,7 +86,7 @@ module.exports = function (app, express) {
         .then(function (exercise) {
           return exercise.remove();
         })
-        .then(function(){
+        .then(function () {
           res.json({ message: 'ok' });
         })
         .catch(function (err) {
