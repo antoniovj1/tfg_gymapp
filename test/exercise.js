@@ -89,7 +89,7 @@ chai.request(server)
 
         it('should POST an exercise ', (done) => {
           chai.request(server)
-            .post('/api/training/session/' + session._id + '/exercise/')
+            .post('/api/training/sessions/' + session._id + '/exercise/')
             .set('x-access-token', token)
             .send({ movement: movement })
             .end((err, res) => {
@@ -102,7 +102,7 @@ chai.request(server)
         });
         it('should no POST an exercise without movement', (done) => {
           chai.request(server)
-            .post('/api/training/session/' + session._id + '/exercise/')
+            .post('/api/training/sessions/' + session._id + '/exercise/')
             .set('x-access-token', token)
             .end((err, res) => {
               res.should.have.status(200);
