@@ -62,8 +62,11 @@ module.exports = function(app, express) {
 
  // ===== DELETE =======
   .delete(function(req, res) {
-    User.findByIdAndRemove(req.params.user_id).exec()
+    User.findById(req.params.user_id).exec()
         .then(function(user){
+            user.remove();
+        })
+        .then(function(){
             res.json({ message: 'ok' });
         })
         .catch(function(err){
