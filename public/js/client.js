@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
 import thunk from 'redux-thunk'
 
 import { Provider } from "react-redux"
@@ -17,9 +17,9 @@ import SessionDetail from "./pages/SessionDetail";
 export default class Foo extends React.Component {
   render() {
     return (
-        <div>
-          <img src="http://www.freeimageslive.com/galleries/workplace/tools/pics/engineering_design.jpg" alt="..." class="img-responsive img-rounded center-block" />
-        </div>
+      <div>
+        <img src="http://www.freeimageslive.com/galleries/workplace/tools/pics/engineering_design.jpg" alt="..." class="img-responsive img-rounded center-block" />
+      </div>
     );
   }
 }
@@ -37,13 +37,13 @@ const app = document.getElementById('app');
 
 ReactDOM.render(
   <Provider store={store}>
-  <Router history={hashHistory}>
-    <Route path="/" component={Layout}>
-      <Route path="/login" component={Login}></Route>
-      <IndexRoute component={SessionList} onEnter={requireAuth}></IndexRoute>
-      <Route path="/profile" component={Profile} onEnter={requireAuth}></Route>
-      <Route path="/session/:id" component={SessionDetail} onEnter={requireAuth} ></Route>
-    </Route>
-  </Router>
+    <Router history={browserHistory}>
+      <Route path="/" component={Layout}>
+        <Route path="/login" component={Login}></Route>
+        <IndexRoute component={SessionList} onEnter={requireAuth}></IndexRoute>
+        <Route path="/profile" component={Profile} onEnter={requireAuth}></Route>
+        <Route path="/session/:id" component={SessionDetail} onEnter={requireAuth} ></Route>
+      </Route>
+    </Router>
   </Provider>,
-app);
+  app);
