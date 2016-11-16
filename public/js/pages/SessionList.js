@@ -23,9 +23,13 @@ export default class Session extends React.Component {
     const {sessions} = this.props;
 
     return (
-      <div> {sessions.map(function(session) {
-           return <SessionItem key={session._id} session={session}/>;
+      <div>
+        <Link to={`/session/new`}><button type="button" class="btn btn-default"> Nueva Sesión</button> </Link>
+
+        <div> {sessions.map(function (session) {
+          return <SessionItem key={session._id} session={session} />;
         })}
+        </div>
       </div>
     );
   }
