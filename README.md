@@ -23,7 +23,7 @@
 
 https://infraestructuravirtual.herokuapp.com/
 
->> Es necesario tener intalado Heroku Toolbelt
+>> Es necesario tener instalado Heroku Toolbelt
 
 ```
 git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git 
