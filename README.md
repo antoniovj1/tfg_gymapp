@@ -5,6 +5,7 @@
 # Proyecto Infraestrucutra Virtual
 
 [Descripción del proyecto](https://antoniovj1.github.io/infraestructura_virtual_ugr/)
+[Documentación API RESTful](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/API)
 
 
 ## Requisitos
@@ -18,6 +19,10 @@
  2. Ejecutar mongodb
  3. node server.js
  ```
+ 
+ > [Más información sobre la ejecución](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-2)
+
+ 
 ## Despliegue
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr)
 
@@ -38,6 +43,11 @@ heroku config:set NODE_ENV=production
 git push heroku master
 heroku open
 ```
+
+> [Más información sobre el despliege](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-3)
+
+
+
 ___
 ###### Universidad de Granada (UGR)
 ___
