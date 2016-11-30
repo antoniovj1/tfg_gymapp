@@ -43,14 +43,10 @@ module.exports = function (app, express) {
 
             if (req.body.sets) {
               req.body.sets.forEach(function (set) {
-                set = set.replace('[', '');
-                set = set.replace(']', '');
-                var array = set.split(",").map(Number);
-
-                var s = { 'repetitions': array[0], 'weight': array[1], 'rest': array[2] };
-                exercise.sets.push(s);
+                exercise.sets.push(set);
               })
             }
+            
             return exercise.save();
           })
           .then(function (exercise) {

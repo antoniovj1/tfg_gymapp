@@ -18,18 +18,20 @@ module.exports = function (app, express) {
         .post(function (req, res) {
             User.findOne({ username: req.decoded.username }, '_id').exec()
                 .then(function (user) {
+                    
                     var session = new Session();
-                    session.time = req.body.time;
+                    session.time = 1230;// req.body.time;
                     session.user = user._id;
+                    
                     return session.save();
                 })
                 .then(function (session) {
-                    return User
+                    return [ User
                         .findOneAndUpdate({ username: req.decoded.username },
-                        { $push: { sessions: session._id } });
+                        { $push: { sessions: session._id } }) , session];
                 })
-                .then(function () {
-                    res.json({ message: 'ok' });
+                .then(function (values) {
+                    res.json({ message: 'ok', session: values[1]._id});
                 })
                 .catch(function (err) {
                     res.send(err);
@@ -55,8 +57,7 @@ module.exports = function (app, express) {
     // -------------------
     apiRouter.route('/training/sessions/:id_session')
         // ===== GET =======
-        .get(function (req, res) {
-
+        .get(function (req, res) {            
             Session.findById(req.params.id_session)
                 .populate('exercises')
                 .exec()
