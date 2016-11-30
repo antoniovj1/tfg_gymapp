@@ -38,7 +38,7 @@ export default class Session extends React.Component {
     return (
       <div class="container">
           <div class="row  text-center">
-            <div class="col-md-3 well">
+            <div class="col-md-3">
               <UserLeft/>
               {datos}
       		  </div>

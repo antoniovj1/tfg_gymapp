@@ -23,7 +23,7 @@ export function loginUser(user) {
   }
 }
 
-export function logoutUser(user) {
+export function logoutUser() {  
   return function (dispatch) {
     localStorage.removeItem('id_token');
     dispatch({ type: "LOGOUT_SUCCESS" });

@@ -5,13 +5,14 @@ export default class Exercise extends React.Component {
 
   render() {
 
-    const {group} = this.props;
-    const {movement,set} = group;
+    const {exercise} = this.props;
+
+    const {movement, sets} = exercise;
 
     var i = 1;
-    if(set){
-      const mappedSets = set.map(set =>
-        <tr key= {set._id}>
+    if (sets) {
+      const mappedSets = sets.map(set =>
+        <tr key={set._id}>
           <th scope="row">{i++}</th>
           <td>{set.repetitions}</td>
           <td>{set.weight}</td>
@@ -20,10 +21,10 @@ export default class Exercise extends React.Component {
       )
 
       return (
-        <div class="row well text-center" key = {movement._id}>
+        <div class="row well text-center" key={movement._id}>
           <div>
             <h4> <strong> {movement.name} </strong> </h4>
-              <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th>#</th>
@@ -33,9 +34,9 @@ export default class Exercise extends React.Component {
                 </tr>
               </thead>
               <tbody>
-              {mappedSets}
+                {mappedSets}
               </tbody>
-              </table>
+            </table>
           </div>
         </div>
       );
