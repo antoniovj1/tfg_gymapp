@@ -1,0 +1,15 @@
+{
+  "name": "Infraestructura virtual UGR",
+  "description": "Hito 3",
+  "website": "https://github.com/heroku/node-articles-nlp",
+  "repository": "https://github.com/antoniovj1/infraestructura_virtual_ugr",
+  "logo": "https://node-js-sample.herokuapp.com/node.svg",
+  "success_url": "/",
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "addons": [
+    "mongolab"
+  ]
+}
