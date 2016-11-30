@@ -1,11 +1,11 @@
-var express    = require('express');
-var app        = express();
+var express = require('express');
+var app = express();
 var bodyParser = require('body-parser');
-var morgan     = require('morgan');
-var mongoose   = require('mongoose');
-var config 	   = require('./config');
-var path 	     = require('path');
-var cors       = require('cors')
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var config = require('./config');
+var path = require('path');
+var cors = require('cors')
 
 
 // APP CONFIGURATION
@@ -16,13 +16,46 @@ app.use(bodyParser.json());
 // configure our app to handle CORS requests
 app.use(cors());
 
-// log all requests to the console
-//app.use(morgan('dev'));
+
+//log API PaperTrail - Console
+var winston = require('winston');
+
+require('winston-papertrail').Papertrail;
+
+var winstonPapertrail = new winston.transports.Papertrail({
+  host: 'logs4.papertrailapp.com',
+  port: 31389
+})
+
+winstonPapertrail.on('error', function (err) {});
+
+var logger = new winston.Logger({
+  transports: [
+    winstonPapertrail,
+    new winston.transports.Console({
+      level: 'debug',
+      handleExceptions: true,
+      json: false,
+      colorize: true
+    })
+  ],
+  exitOnError: false
+});
+
+logger.stream = {
+  write: function (message, encoding) {
+    if (message.includes('api'))
+      logger.info(message);
+  }
+};
+
+app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
+
 
 // connect to our database
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database);
-mongoose.connection.on('error', function() {
+mongoose.connection.on('error', function () {
   console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
 });
 
@@ -53,14 +86,14 @@ app.use('/api', apiRoutesSession);
 // SEND USERS TO FRONTEND ------------
 app.use(express.static(__dirname + '/public'));
 
-app.get('*', function(req, res) {
-	res.sendFile(path.join(__dirname + '/public/index.html'));
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 // START THE SERVER
 //------------------
 
-app.listen(process.env.PORT || config.port, function() {
+app.listen(process.env.PORT || config.port, function () {
   console.log('Express server listening on port ' + process.env.PORT);
 });
 
