@@ -23,8 +23,9 @@ module.exports = function (app, express) {
       } else {
         var exercise = new Exercise();
 
-        Movement.findById(req.body.movement).exec()
+        Movement.findOne({ name: 'Peso Muerto' }).exec()
           .then(function (movement) {
+            
             var result = [];
 
             if (!movement)
