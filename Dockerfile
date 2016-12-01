@@ -14,7 +14,7 @@ RUN webpack
 
 
 #expose a port to allow external access
-EXPOSE 80
+EXPOSE 8080
 
 # Start application
 CMD ["nodemon", "server.js"] 
