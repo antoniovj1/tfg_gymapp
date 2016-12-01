@@ -119,8 +119,24 @@ En este archivo encontramos la configuración de docker
 
 ##### [Dockerfile](https://github.com/antoniovj1/infraestructura_virtual_ugr/blob/master/Dockerfile)
 
-En el archivo se indica que se usa node oficial, y se instalan
+En el archivo se indica que se usa node oficial y que se instalan
 los paquetes indicados en `package.json` haciendo uso de NPM
+```
+FROM node
+
+ADD . /app
+
+WORKDIR /app
+
+RUN npm install
+RUN npm install -g nodemon
+RUN npm install -g webpack
+RUN webpack
+
+EXPOSE 8080
+
+CMD ["nodemon", "server.js"] 
+```
 
 ___
 ###### Universidad de Granada (UGR)
