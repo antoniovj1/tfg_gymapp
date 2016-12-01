@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var config = require('./config');
 var path = require('path');
 var cors = require('cors')
+var ip = require('ip');
 
 
 // APP CONFIGURATION
@@ -27,7 +28,7 @@ var winstonPapertrail = new winston.transports.Papertrail({
   port: 31389
 })
 
-winstonPapertrail.on('error', function (err) {});
+winstonPapertrail.on('error', function (err) { });
 
 var logger = new winston.Logger({
   transports: [
@@ -54,10 +55,18 @@ app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": 
 
 // connect to our database
 mongoose.Promise = require('bluebird');
-mongoose.connect(config.database);
-mongoose.connection.on('error', function () {
-  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
-});
+
+var connectWithRetry = function () {
+  return mongoose.connect(config.database)
+    .then(function () {
+      console.log("DB CONNECTED")
+    })
+    .catch(function (err) {
+      console.log("RETRY DB CONNECT in 5 seg")
+      setTimeout(connectWithRetry, 5000);
+    });
+};
+connectWithRetry();
 
 // set static files location
 // used for requests that our frontend will make
@@ -92,9 +101,8 @@ app.get('*', function (req, res) {
 
 // START THE SERVER
 //------------------
-
 app.listen(process.env.PORT || config.port, function () {
-  console.log('Express server listening on port ' + process.env.PORT);
+  console.log('Express server ' + ip.address() + ' listening on port 80');
 });
 
 module.exports = app; // for testing

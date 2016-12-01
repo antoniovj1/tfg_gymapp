@@ -46,6 +46,7 @@
     "compression": "^1.6.0",
     "cors": "^2.8.1",
     "express": "^4.13.3",
+    "ip": "^1.1.4",
     "jsonwebtoken": "^7.1.9",
     "keymirror": "^0.1.1",
     "material-ui": "^0.16.4",
