@@ -24,30 +24,30 @@ var winston = require('winston');
 require('winston-papertrail').Papertrail;
 
 var winstonPapertrail = new winston.transports.Papertrail({
-  host: 'logs4.papertrailapp.com',
-  port: 31389
+    host: 'logs4.papertrailapp.com',
+    port: 31389
 })
 
 winstonPapertrail.on('error', function (err) { });
 
 var logger = new winston.Logger({
-  transports: [
-    winstonPapertrail,
-    new winston.transports.Console({
-      level: 'debug',
-      handleExceptions: true,
-      json: false,
-      colorize: true
-    })
-  ],
-  exitOnError: false
+    transports: [
+        winstonPapertrail,
+        new winston.transports.Console({
+            level: 'debug',
+            handleExceptions: true,
+            json: false,
+            colorize: true
+        })
+    ],
+    exitOnError: false
 });
 
 logger.stream = {
-  write: function (message, encoding) {
-    if (message.includes('api'))
-      logger.info(message);
-  }
+    write: function (message, encoding) {
+        if (message.includes('api'))
+            logger.info(message);
+    }
 };
 
 app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
@@ -56,16 +56,32 @@ app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": 
 // connect to our database
 mongoose.Promise = require('bluebird');
 
+
 var connectWithRetry = function () {
-  return mongoose.connect(config.database)
-    .then(function () {
-      console.log("DB CONNECTED")
-    })
-    .catch(function (err) {
-      console.log("RETRY DB CONNECT in 5 seg")
-      setTimeout(connectWithRetry, 5000);
-    });
+    return mongoose.connect(config.database)
+        .then(function () {
+            console.log("DB CONNECTED (LOCAL)")
+        })
+        .catch(function (err) {
+            console.log("RETRY DB CONNECT in 5 seg")
+            setTimeout(connectWithRetry, 5000);
+        });
 };
+
+var connectRemote = function () {
+    mongoose.connect(config.database2)
+        .then(function () {
+            console.log("DB CONNECTED (REMOTE)")
+        })
+        .catch(function (err) {
+            console.log("RETRY DB CONNECT in 5 seg")
+            setTimeout(connectRemote, 5000);
+        });
+}
+
+if (config.database2)
+    connectRemote();
+
 connectWithRetry();
 
 // set static files location
@@ -96,13 +112,13 @@ app.use('/api', apiRoutesSession);
 app.use(express.static(__dirname + '/public'));
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 // START THE SERVER
 //------------------
 app.listen(process.env.PORT || config.port, function () {
-  console.log('Express server ' + ip.address() + ' listening on port 80');
+    console.log('Express server ' + ip.address() + ' listening on port 80');
 });
 
 module.exports = app; // for testing
