@@ -79,11 +79,11 @@ var connectRemote = function () {
         });
 }
 
-if (config.database2)
+if (config.database2) {
     connectRemote();
-
-connectWithRetry();
-
+} else {
+    connectWithRetry();
+}
 // set static files location
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
