@@ -118,7 +118,7 @@ app.get('*', function (req, res) {
 // START THE SERVER
 //------------------
 app.listen(process.env.PORT || config.port, function () {
-    console.log('Express server ' + ip.address() + ' listening on port 80');
+    console.log('Express server ' + ip.address() + ' listening on port 8080');
 });
 
 module.exports = app; // for testing
