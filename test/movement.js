@@ -114,10 +114,10 @@ chai.request(server)
           .send(movement)
           .end((err, res) => {
             res.should.have.status(200);
-            // res.body[0].should.be.a('object');
-            // res.body[0].should.have.property('name').eql(movement.name);;
-            // res.body[0].should.have.property('material');
-            // res.body[0].should.have.property('muscles');
+            res.body.should.be.a('object');
+            res.body.movement.should.have.property('name').eql(movement.name);;
+            res.body.movement.should.have.property('material');
+            res.body.movement.should.have.property('muscles');
             done();
           });
         });

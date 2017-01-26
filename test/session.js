@@ -51,12 +51,11 @@ chai.request(server)
           chai.request(server)
             .post('/api/training/sessions/')
             .set('x-access-token', token)
-            .send({ time: 3600 })
+            .send({ time: 3600, date:"12/12/1995" })
             .end((err, res) => {
               res.should.have.status(200);
               res.body.should.be.a('object');
               res.body.should.have.property('message').eql('ok');
-
               done();
             });
         });

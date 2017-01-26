@@ -87,19 +87,19 @@ chai.request(server)
         movement.save();
         session.save();
 
-        // it('should POST an exercise ', (done) => {
-        //   chai.request(server)
-        //     .post('/api/training/sessions/' + session._id + '/exercise')
-        //     .set('x-access-token', token)
-        //     .send({ movement: movement })
-        //     .end((err, res) => {              
-        //       res.should.have.status(200);
-        //       res.body.should.be.a('object');
-        //       res.body.should.have.property('message').eql('ok');
+        it('should POST an exercise ', (done) => {
+          chai.request(server)
+            .post('/api/training/sessions/' + session._id + '/exercise')
+            .set('x-access-token', token)
+            .send({ movement: movement.name })
+            .end((err, res) => {              
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+              res.body.should.have.property('message').eql('ok');
+              done();
+            });
+        });
 
-        //       done();
-        //     });
-        // });
         it('should no POST an exercise without movement', (done) => {
           chai.request(server)
             .post('/api/training/sessions/' + session._id + '/exercise/')

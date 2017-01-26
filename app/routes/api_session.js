@@ -20,8 +20,13 @@ module.exports = function (app, express) {
                 .then(function (user) {
                     
                     var session = new Session();
-                    session.time = req.body.time;                    
-                    session.date = new Date(req.body.date);
+
+                    if(req.body.time)
+                        session.time = req.body.time; 
+                    
+                    if(req.body.date)                   
+                        session.date = new Date(req.body.date);
+                    
                     session.user = user._id;
 
                     return session.save();
