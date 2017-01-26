@@ -32,7 +32,11 @@ export function fetchCompleteSession(id) {
 export function pushSession(session) {
   return function (dispatch) {
     var config = { headers: { 'x-access-token': localStorage.getItem("id_token") } };
-    var dataSession = { time: session.time, date: session.date };
+
+    var regex = session.time.match(/([01]\d|2[0-3]):([0-5]\d)/);
+    var seconds = regex[1]*3600 + regex[2]*60;
+
+    var dataSession = { time: seconds, date: session.date };
     var dataExerises = session.exercises;
     dispatch({ type: "PUSH_SESSION_PENDING" });
 

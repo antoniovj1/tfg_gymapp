@@ -23,7 +23,7 @@ module.exports = function (app, express) {
       } else {
         var exercise = new Exercise();
 
-        Movement.findOne({ name: 'Peso Muerto' }).exec()
+        Movement.findOne({ name: req.body.movement }).exec()
           .then(function (movement) {
             
             var result = [];

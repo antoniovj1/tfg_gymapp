@@ -3,6 +3,11 @@ const validate = values => {
 
     if (!values.date) {
         errors.date = 'Required'
+    } else {
+        var regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+
+        if (!regex.test(values.date))
+            errors.date = 'DD-MM-YYYY'
     }
 
     if (!values.time) {
@@ -19,6 +24,7 @@ const validate = values => {
         errors.exercises = { _error: 'At least one exercise must be entered' }
     } else {
         const exercisesArrayErrors = []
+        
         values.exercises.forEach((exercise, exerciseIndex) => {
 
             const exerciseErrors = {}
@@ -28,17 +34,20 @@ const validate = values => {
                 exerciseErrors.exerciseName = 'Required'
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
                 //Si no se han añadido series
-            } else if (!exercise.set) {
+            } 
+            if (!exercise.set) {
                 if (!exerciseErrors.set) {
                     exerciseErrors.set = []
                 }
                 exerciseErrors.set._error = 'At least one set must be entered'
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
                 //Si hay ejercicio y series
-            } //else {
+            } 
+                
             const setArrayErrors = []
-            if (exercise.set) {
-                exercise.set.forEach((s, sIndex) => {
+            
+            if (exercise.sets) {
+                exercise.sets.forEach((s, sIndex) => {
                     setArrayErrors[sIndex] = {}
 
                     if (!s.repetitions) {
@@ -66,13 +75,12 @@ const validate = values => {
                     }
                 })
             }
-
+            
             if (setArrayErrors.length) {
-                exerciseErrors.set = setArrayErrors
+                exerciseErrors.sets = setArrayErrors
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
             }
 
-            //  }
         })
         if (exercisesArrayErrors.length) {
             errors.exercises = exercisesArrayErrors

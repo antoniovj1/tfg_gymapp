@@ -47,6 +47,19 @@ module.exports = function (app, express) {
                 })
         });
 
+    // /training/movementsname
+    // -------------------
+    apiRouter.route('/training/movementsname')
+        // ===== GET =======
+        .get(function (req, res) {
+            Movement.find({}).select('name -_id').exec()
+                .then(function (movements) {
+                    res.json(movements);
+                })
+                .catch(function (err) {
+                    res.send(err);
+                })
+        });
 
     // /training/movements/:name
     // -------------------

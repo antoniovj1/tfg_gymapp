@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 
 import { pushSession } from "../actions/sessionsActions"
 
+import { browserHistory } from 'react-router';
 
 @connect((store) => {
   return {
@@ -15,11 +16,15 @@ import { pushSession } from "../actions/sessionsActions"
 export default class SessionNew extends React.Component {
   handleSubmit = (values) => {
     this.props.dispatch(pushSession(values));
-
   }
+
   render() {
-    return (
-      <SessionNewForm onSubmit={this.handleSubmit} />
-    );
+    if (this.props.sessions.pushed) {
+      window.location.replace('/')
+    } else {
+      return (
+        <SessionNewForm onSubmit={this.handleSubmit} />
+      );
+    }
   }
 }
