@@ -12,9 +12,10 @@ import { logoutUser } from "../../actions/loginActions"
 
 
 export default class Nav extends React.Component {
+
   constructor(props, context) {
     super(props, context);
-    this.state = {collapsed: true};
+    this.state = { collapsed: true };
     this.logOut = this.logOut.bind(this);
   }
 
@@ -33,6 +34,14 @@ export default class Nav extends React.Component {
 
     const navClass = collapsed ? "collapse" : "";
 
+    const {login} = this.props;
+
+    let loginout = null;
+
+    if (login.isAuthenticated){
+      loginout = <IndexLink to="/login" onClick={this.logOut}>LogOut</IndexLink>
+    }
+    
     return (
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -53,7 +62,7 @@ export default class Nav extends React.Component {
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <IndexLink to="/login" onClick={this.logOut}>LogOut</IndexLink>
+                {loginout}
               </li>
               <li>
                 <IndexLink to="/profile" onClick={this.toggleCollapse.bind(this)}>Perfil</IndexLink>
