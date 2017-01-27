@@ -53,7 +53,7 @@ export default class Login extends React.Component {
 
               <br></br>
 
-              <input type="text"
+              <input type="password"
                 ref="userPassword"
                 class="form-control input-sm chat-input"
                 placeholder="password"

@@ -4,12 +4,17 @@ import { connect } from "react-redux"
 
 import { logoutUser } from "../../actions/loginActions"
 
+const styles = {
+ backgroundColor: '#00BCD4',
+ borderColor: '#00BCD4',
+}
+
+
 @connect((store) => {
   return {
     login: store.login,
   };
 })
-
 
 export default class Nav extends React.Component {
 
@@ -43,7 +48,7 @@ export default class Nav extends React.Component {
     }
     
     return (
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style={styles} >
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="/">IV UGR</a>
