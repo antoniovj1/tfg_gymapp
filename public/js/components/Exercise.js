@@ -1,42 +1,114 @@
 import React from "react";
 import { Link } from 'react-router'
+import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
+  from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+
+const styles = {
+  propContainer: {
+    width: 200,
+    overflow: 'hidden',
+    margin: '20px auto 0',
+  },
+  propToggleHeader: {
+    margin: '20px auto 10px',
+  },
+};
+
 
 export default class Exercise extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fixedHeader: true,
+      stripedRows: true,
+      showRowHover: false,
+      selectable: true,
+      multiSelectable: false,
+      enableSelectAll: false,
+      deselectOnClickaway: true,
+      showCheckboxes: false,
+    };
+
+    this.constructor.childContextTypes = {
+      muiTheme: React.PropTypes.object.isRequired,
+    };
+  }
+
+  getChildContext() {
+    return { muiTheme: getMuiTheme(baseTheme) };
+  }
+
+  handleToggle = (event, toggled) => {
+    this.setState({
+      [event.target.name]: toggled,
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({ height: event.target.value });
+  };
+
+
 
   render() {
-
     const {exercise} = this.props;
-
     const {movement, sets} = exercise;
 
-    var i = 1;
     if (sets) {
-      const mappedSets = sets.map(set =>
-        <tr key={set._id}>
-          <th scope="row">{i++}</th>
-          <td>{set.repetitions}</td>
-          <td>{set.weight}</td>
-          <td>{set.rest}</td>
-        </tr>
-      )
-
       return (
-        <div class="row well text-center" key={movement._id}>
+        <div class="row text-center" key={movement._id} style={{ marginBottom: 3+'em' }}>
           <div>
-            <h4> <strong> {movement.name} </strong> </h4>
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Reps</th>
-                  <th>Peso</th>
-                  <th>Rest</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mappedSets}
-              </tbody>
-            </table>
+            <Table
+              height={this.state.height}
+              fixedHeader={this.state.fixedHeader}
+              fixedFooter={this.state.fixedFooter}
+              selectable={this.state.selectable}
+              multiSelectable={this.state.multiSelectable}
+              >
+              <TableHeader
+                displaySelectAll={this.state.showCheckboxes}
+                adjustForCheckbox={this.state.showCheckboxes}
+                enableSelectAll={this.state.enableSelectAll}
+                >
+
+                <TableRow>
+                  <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: 'center' }}>
+                    <h4> <strong> {movement.name} </strong> </h4>
+                  </TableHeaderColumn>
+                </TableRow>
+
+                <TableRow>
+                  <TableHeaderColumn tooltip="Set number">#</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Number of repetitions">Reps</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Peso">Peso</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Descanso">Rest</TableHeaderColumn>
+                </TableRow>
+
+              </TableHeader>
+
+              <TableBody
+                displayRowCheckbox={false}
+                deselectOnClickaway={this.state.deselectOnClickaway}
+                showRowHover={this.state.showRowHover}
+                stripedRows={this.state.stripedRows}
+                >
+                {sets.map((set, index) => (
+                  <TableRow key={index}>
+                    <TableRowColumn>{index + 1}</TableRowColumn>
+                    <TableRowColumn>{set.repetitions}</TableRowColumn>
+                    <TableRowColumn>{set.weight}</TableRowColumn>
+                    <TableRowColumn>{set.rest}</TableRowColumn>
+                  </TableRow>
+                ))}
+              </TableBody>
+
+            </Table>
+
           </div>
         </div>
       );
