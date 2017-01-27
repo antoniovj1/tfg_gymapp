@@ -76,5 +76,8 @@
     "winston": "^2.3.0",
     "winston-papertrail": "^1.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
 }
