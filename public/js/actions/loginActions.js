@@ -4,7 +4,8 @@ var querystring = require('querystring');
 export function loginUser(user) {
   return function (dispatch) {
     dispatch({ type: "LOGIN_REQUEST" });
-    axios.post("http://127.0.0.1:8080/api/authenticate",
+    
+    axios.post(_API_HOST+"/api/authenticate",
       querystring.stringify({
         username: user.username,
         password: user.password

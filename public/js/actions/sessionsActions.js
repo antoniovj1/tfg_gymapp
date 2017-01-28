@@ -4,7 +4,7 @@ export function fetchSessions() {
   return function (dispatch) {
     var config = { headers: { 'x-access-token': localStorage.getItem("id_token") } };
     dispatch({ type: "FETCH_SESSION_PENDING" });
-    axios.get("http://127.0.0.1:8080/api/training/sessions", config)
+    axios.get(_API_HOST+"/api/training/sessions", config)
       .then((response) => {
         dispatch({ type: "FETCH_SESSION_FULFILLED", payload: response.data })
       })
@@ -18,7 +18,7 @@ export function fetchCompleteSession(id) {
   return function (dispatch) {
     var config = { headers: { 'x-access-token': localStorage.getItem("id_token") } };
     dispatch({ type: "FETCH_COMPLETESESSION_PENDING" });
-    var url = "http://127.0.0.1:8080/api/training/sessions/" + id;
+    var url = _API_HOST+"/api/training/sessions/" + id;
     axios.get(url, config)
       .then((response) => {
         dispatch({ type: "FETCH_COMPLETESESSION_FULFILLED", payload: response.data })
@@ -40,9 +40,9 @@ export function pushSession(session) {
     var dataExerises = session.exercises;
     dispatch({ type: "PUSH_SESSION_PENDING" });
 
-    axios.post("http://127.0.0.1:8080/api/training/sessions", dataSession, config)
+    axios.post(_API_HOST+"/api/training/sessions", dataSession, config)
       .then((responseSession) => {
-        var url = "http://127.0.0.1:8080/api/training/sessions/" + responseSession.data.session + "/exercise";
+        var url = _API_HOST+"/api/training/sessions/" + responseSession.data.session + "/exercise";
 
         var promises = [];
         var responsesExercise = {};

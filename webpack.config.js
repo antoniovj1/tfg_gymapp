@@ -1,6 +1,43 @@
-var debug = process.env.NODE_ENV !== "production";
+var debug = process.env.NODE_ENV ==! "production";
 var webpack = require('webpack');
 var path = require('path');
+
+
+function getPlugins() {
+  var plugins = [];
+
+
+  if (true) {
+    plugins.push(new webpack.optimize.DedupePlugin());
+    plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+    plugins.push(new webpack.optimize.UglifyJsPlugin());
+    plugins.push(new webpack.DefinePlugin({
+      _API_HOST: JSON.stringify("https://infraestructuravirtual.herokuapp.com"),
+    }));
+
+    plugins.push(new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      }
+    }));
+  }
+
+  else {
+    plugins.push(
+      new webpack.DefinePlugin({
+        _API_HOST: JSON.stringify("http://localhost:8080"),
+      }));
+
+    plugins.push(new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development'),
+      }
+    }));
+  }
+
+  return plugins;
+}
+
 
 module.exports = {
   context: path.join(__dirname, "src"),
@@ -27,9 +64,5 @@ module.exports = {
     path: __dirname + "/public/",
     filename: "client.min.js"
   },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
+  plugins: getPlugins(),
 };
