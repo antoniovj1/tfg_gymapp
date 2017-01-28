@@ -27,3 +27,5 @@ public/client.min.js
 *.swp
 logs/
 build/
+
+public/client\.min\.js\.map
