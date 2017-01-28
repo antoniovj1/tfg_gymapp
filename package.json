@@ -56,11 +56,9 @@
     "redux-thunk": "^2.1.0",
     "webpack": "^1.13.3",
     "winston": "^2.3.0",
-    "winston-papertrail": "^1.0.4"
-  },
-  "devDependencies": {
+    "winston-papertrail": "^1.0.4",
     "babel-plugin-react-html-attrs": "^2.0.0",
-    "babel-plugin-transform-class-properties": "^6.22.0",
-    "react-dom": "^15.4.2"
-  }
+    "babel-plugin-transform-class-properties": "^6.22.0"
+  },
+  "devDependencies": {}
 }
