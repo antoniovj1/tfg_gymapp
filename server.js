@@ -50,7 +50,7 @@ logger.stream = {
     }
 };
 
-app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
+//app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
 
 
 // connect to our database
@@ -58,7 +58,7 @@ mongoose.Promise = require('bluebird');
 
 
 var connectWithRetry = function () {
-    return mongoose.connect(config.database)
+    return mongoose.connect(config.database3)
         .then(function () {
             console.log("DB CONNECTED (LOCAL)")
         })
