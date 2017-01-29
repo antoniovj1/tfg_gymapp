@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from fabric.api import *
 import os
 import time
 
 def info_servidor():
-    """Muestra informacion del servidor"""
+    """Muestra información del servidor"""
     run ('cat /proc/cpuinfo')
 
 def install_app():
@@ -13,18 +15,18 @@ def install_app():
     run ('cd infraestructura_virtual_ugr && npm install')
 
 def start_app():
-    """Inicia la aplicacion (node,mongo y nginx)"""
+    """Inicia la aplicación (node,mongo y nginx)"""
     run ('sudo service mongod start')
     run ('sleep 7 && cd infraestructura_virtual_ugr && sudo pm2 start server.js')
     run ('sudo service nginx restart')
 
 def restart_app():
-    """Reinicia la aplicacion"""
+    """Reinicia la aplicación"""
     run ('sudo service nginx restart')
     run ('sudo pm2 restart server')
 
 def logs_app():
-    """Muestra los logs de la aplicacion"""
+    """Muestra los logs de la aplicación"""
     run ('sudo pm2 logs server')
     
 def stop_app():
