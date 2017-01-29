@@ -41,7 +41,7 @@ def kill_app():
     # run ('sudo service nginx stop')
 
 def update_app():
-    installApp()
+    install_app()
 
 def monitoring_pm2():
     """Monitorización app"""

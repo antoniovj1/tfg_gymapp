@@ -80,8 +80,10 @@ module.exports = function(app, express) {
 
   // ===== GET =======
   .get(function(req, res) {
-    User.find(req.decoded.username).exec()
+    User.find({username: req.decoded.username}).exec()
         .then(function(user){
+            console.log(user);
+            
             res.json(user);
         })
         .catch(function(err){
