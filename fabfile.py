@@ -11,9 +11,9 @@ def install_app():
     run ('cd infraestructura_virtual_ugr && npm install')
 
 def start_app():
-    run ('sudo service nginx start')
     run ('sudo service mongod start')
     run ('sleep 7 && cd infraestructura_virtual_ugr && sudo pm2 start server.js')
+    run ('sudo service nginx restart')
 
 def restart_app():
     run ('sudo service nginx restart')
