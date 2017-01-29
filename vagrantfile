@@ -3,22 +3,27 @@ Vagrant.configure("2") do |config|
   config.vm.box = "google/gce"
 
   config.vm.provider :google do |google, override|
+    #Credenciales
     google.google_project_id = ENV['PROJECT_ID']
     google.google_client_email = ENV['CLIENT_EMAIL']
     google.google_json_key_location = ENV['KEY_LOCATION']
 
+    #Configuración tipo MV
+    google.machine_type = "g1-small"
+    google.zone = "europe-west1-b"
     google.name = "infraestructuravirtual"
     google.image = "ubuntu-1604-xenial-v20160721"
 
+    # SSH
     override.ssh.username = "antonio"
     override.ssh.private_key_path = "/home/antonio/.ssh/id_rsa"
   end
 
-  #RSYNC
+  #rsync (desactivado)
    config.vm.synced_folder ".", "/projectsrc", type: "rsync",
     rsync__exclude: ".git/", :disabled => true
 
-  #Ansible - Provision
+  #Ansible - Provisionamiento
   config.vm.provision "ansible" do |ansible|
         ansible.sudo = true
         ansible.playbook = "ansible.yml"
