@@ -35,3 +35,5 @@ public/client\.min\.js\.map
 #vagrant
 .vagrant/
 
+
+\.vscode/
