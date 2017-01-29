@@ -50,7 +50,7 @@ logger.stream = {
     }
 };
 
-//app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
+app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
 
 
 // connect to our database
@@ -117,8 +117,8 @@ app.get('*', function (req, res) {
 
 // START THE SERVER
 //------------------
-app.listen(process.env.PORT || config.port, function () {
-    console.log('Express server ' + ip.address() + ' listening on port 8080');
+app.listen(config.port, function () {
+    console.log('Express server ' + ip.address() + ' listening on port ' + config.port);
 });
 
 module.exports = app; // for testing
