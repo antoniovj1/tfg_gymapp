@@ -25,7 +25,13 @@ public/client.min.js
 *.tmp
 *.bak
 *.swp
+*.pyc
+*.retry
 logs/
 build/
 
 public/client\.min\.js\.map
+
+#vagrant
+.vagrant/
+

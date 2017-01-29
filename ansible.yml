@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: true
+  remote_user: antonio
+
+  vars:
+    - homeDir: /home/ubuntu
+    - appDir : infraestructura_virtual_ugr
+    - default: server {  listen 80; server_name YOUR_SERVERS_IP_ADDRESS;  location / { proxy_pass "http://127.0.0.1:8080"; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_cache_bypass $http_upgrade; }}
+
+  tasks:
+
+  - name: Node.js + NPM
+    shell: "curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -"
+
+  - name: Add Mongo Key
+    apt_key: id=EA312927  keyserver=keyserver.ubuntu.com
+
+  - name: Add Mongo Repo
+    apt_repository: repo='deb http://repo.mongodb.org/apt/ubuntu {{ansible_distribution_release}}/mongodb-org/3.2 multiverse'                                     
+
+  - name: Update
+    shell: "sudo apt-get update"
+
+  - name: Install Packages
+    apt: name={{ item }}  state=latest
+    with_items:
+      - build-essential
+      - git
+      - mcrypt
+      - curl
+      - mongodb-org
+      - nginx  
+      - nodejs   
+
+  - name: PM2 (para mantener Node funcionando)
+    npm: name=pm2 global=yes 
+
+  - name: Node.js ln -s
+    become: true
+    shell: 'ln -sf /usr/bin/nodejs /usr/bin/node'
+
+  - name: Nginx reverse proxy
+    copy: content="{{ default }}" dest=/etc/nginx/sites-available/default
+
+# La descarga del proyecto y la instalación de las dependencias se ha hecho con Fabric aunque se podria haber hecho aqui
+    #Realmente no es necesario, ya que vagrant ha copiado el repositorio
+    # pero lo he realizado para ver como funcionaba. (Desactivado rsync)
+ # - name: Git Clone Repo
+ #   git: repo=https://github.com/antoniovj1/infraestructura_virtual_ugr.git dest={{homeDir}}/{{appDir}} 
+ #   register: git_finished
+
+ # - name: NPM install
+ #   npm: path={{homeDir}}/{{appDir}}/
+ #   when: git_finished.changed
+ 
