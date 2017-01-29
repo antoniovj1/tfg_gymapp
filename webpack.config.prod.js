@@ -8,8 +8,9 @@ function getPlugins() {
   plugins.push(new webpack.optimize.DedupePlugin());
   plugins.push(new webpack.optimize.OccurenceOrderPlugin());
   plugins.push(new webpack.optimize.UglifyJsPlugin());
+
   plugins.push(new webpack.DefinePlugin({
-    _API_HOST: JSON.stringify("https://infraestructuravirtual.herokuapp.com"),
+    _API_HOST: JSON.stringify("http://146.148.24.77"),
   }));
 
   plugins.push(new webpack.DefinePlugin({
