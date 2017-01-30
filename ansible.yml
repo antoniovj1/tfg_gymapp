@@ -29,8 +29,6 @@
     with_items:
       - build-essential
       - git
-      - mcrypt
-      - curl
       - mongodb-org
       - nginx  
       - nodejs   
