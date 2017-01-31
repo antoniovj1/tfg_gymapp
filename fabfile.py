@@ -10,9 +10,10 @@ def info_servidor():
 
 def install_app():
     """Clona el repositorio e instala las dependencias"""
-    run ('rm -rf infraestructura_virtual_ugr')
-    run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
-    run ('cd infraestructura_virtual_ugr && npm install')
+    with shell_env(NODE_ENV='production'):
+        run ('rm -rf infraestructura_virtual_ugr')
+        run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
+        run ('cd infraestructura_virtual_ugr && npm install')
 
 def start_app():
     """Inicia la aplicación (node,mongo y nginx)"""

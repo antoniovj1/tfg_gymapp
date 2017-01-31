@@ -51,7 +51,7 @@ heroku open
 #### package.json
 En este archivo se indica la versión de node que queremos usar en el despliegue ( en el partado engines) y como se 
 debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se inicia haciendo uso de ` "start": "node server.js"`,
- y que debe ejecutar después de la instalación `"postinstall": "webpack --config ./webpack.config.prod.js --display-error-details --progress --colors"`
+ y que debe ejecutar después de la instalación `"postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"`
 
 ```
 {
@@ -69,7 +69,7 @@ debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se
   "scripts": {
     "test": "mocha --timeout 10000",
     "start": "node server.js",
-    "postinstall": "webpack --config ./webpack.config.prod.js --display-error-details --progress --colors"
+    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"
   },
   ```
 #### app.json
@@ -325,11 +325,15 @@ def info_servidor():
     run ('cat /proc/cpuinfo')
 
 def install_app():
-    run ('rm -rf infraestructura_virtual_ugr')
-    run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
-    run ('cd infraestructura_virtual_ugr && npm install')
+    """Clona el repositorio e instala las dependencias"""
+    with shell_env(NODE_ENV='production'):
+        run ('rm -rf infraestructura_virtual_ugr')
+        run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
+        run ('cd infraestructura_virtual_ugr && npm install')
+
 
 def start_app():
+    """Inicia la aplicación (node,mongo y nginx)"""
     run ('sudo service mongod start')
     run ('sleep 7 && cd infraestructura_virtual_ugr && sudo pm2 start server.js')
     run ('sudo service nginx restart')
