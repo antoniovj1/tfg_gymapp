@@ -51,7 +51,7 @@ heroku open
 #### package.json
 En este archivo se indica la versión de node que queremos usar en el despliegue ( en el partado engines) y como se 
 debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se inicia haciendo uso de ` "start": "node server.js"`,
- y que debe ejecutar después de la instalación `"postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"`
+ y que debe ejecutar después de la instalación `"postinstall": "webpack --config ./webpack.config.prod.js --display-error-details --progress --colors"`
 
 ```
 {
@@ -60,7 +60,7 @@ debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se
   "description": "Proyecto infraestructura virtual",
   "main": "server.js",
   "engines": {
-    "node": "7.0.0"
+    "node": "7.4.0"
   },
   "repository": {
     "type": "git",
@@ -69,7 +69,7 @@ debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se
   "scripts": {
     "test": "mocha --timeout 10000",
     "start": "node server.js",
-    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"
+    "postinstall": "webpack --config ./webpack.config.prod.js --display-error-details --progress --colors"
   },
   ```
 #### app.json
