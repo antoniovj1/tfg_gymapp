@@ -38,18 +38,28 @@ export default class Session extends React.Component {
   }
 
   render() {
-
     const {sessions} = this.props;
 
-    return (
-      <div>
-        <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
+    if (sessions.length > 0) {
+      return (
+        <div>
+          <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
 
-        <div> {sessions.map(function (session) {
-          return <SessionItem key={session._id} session={session} />;
-        })}
-        </div>
-      </div >
-    );
+          <div> {sessions.map(function (session) {
+            return <SessionItem key={session._id} session={session} />;
+          })}
+          </div>
+        </div >
+      );
+    }
+    else {
+      return (
+        <div>
+          <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
+          <div> <h1>Añade una nueva sesión</h1> </div>
+        </div >
+      );
+    }
   }
+
 }
