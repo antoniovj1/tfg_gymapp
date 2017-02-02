@@ -43,62 +43,51 @@ module.exports = function (app, express) {
 		});
 
 
-	// POST
-	//-----
-	apiRouter.post('/authenticate', function (req, res) {
-		User.findOne({ username: req.body.username })
-			.select('name username password').exec()
-			.then(function (user) {
-				if (!req.body.password || !req.body.username) {
-					throw { success: false, message: 'fail', detail: "No password or username" };
-				}
-
-				if (!user)
-					throw { success: false, message: 'fail', detail: "Password or username error" };
-
-				var validPassword = user.comparePassword(req.body.password);
-				if (!validPassword)
-					throw { success: false, message: 'fail', detail: "Password or username error" };
-
-				var token = jwt.sign({
-					_id: user._id,
-					name: user.name,
-					username: user.username,
-					rol: user.role
-				},
-					superSecret,
-					{ expiresIn: '24h' });
-
-				res.json({ success: true, message: 'ok', token: token });
-			})
-			.catch(function (err) {
-				res.send(err);
-			})
-	});
-
 	//MIDDLEWARE
 	//----------
 	apiRouter.use(function (req, res, next) {
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-		if (token) {
-			jwt.verify(token, superSecret, function (err, decoded) {
+		var profile = req.body.profile || req.query.profile || req.headers['profile'];
+
+		if (token && profile) {
+			profile = JSON.parse(profile)
+
+			jwt.verify(token, 'NhcRW9jzcj2O2aKk66NXKHqD_ef5l5z5kDIQJ5zJBXU2d4TY6FN7B7xH52vBOsdj', function (err, decoded) {
 				if (err) {
-					res.status(403).send({
+					return res.status(403).send({
 						success: false,
 						message: 'Failed to authenticate token.'
 					});
 				} else {
-					req.decoded = decoded;
+					if (profile != null) {
+						User.find({ auth0id: profile.user_id }).exec()
+							.then(function (user) {
+								if (user.length == 0) {
+									var userNew = new User();
+									userNew.auth0id = profile.user_id;
+									userNew.save().then(function () {
+									})
+										.catch(function (err) {
+											console.log(err);
+										})
+								}
+							})
+							.catch(function (err) {
+								console.log(err);
+							})
+					}
 					next();
 				}
 			});
+
 		} else {
-			res.status(403).send({
+			return res.status(403).send({
 				success: false,
 				message: 'No token provided.'
 			});
 		}
+
 	});
 
 	return apiRouter;
