@@ -50,8 +50,8 @@ logger.stream = {
     }
 };
 
+//LOG
 app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
-
 
 // connect to our database
 mongoose.Promise = require('bluebird');
@@ -84,10 +84,6 @@ if (config.database2) {
 } else {
     connectWithRetry();
 }
-// set static files location
-// used for requests that our frontend will make
-app.use(express.static(__dirname + '/public'));
-
 
 // API ROUTES
 //------------------------
