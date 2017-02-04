@@ -20,11 +20,9 @@ module.exports = function (app, express) {
 	//----------
 	apiRouter.use(function (req, res, next) {
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
 		var profile = req.body.profile || req.query.profile || req.headers['profile'];
 
-		if (token && profile) {
-			profile = JSON.parse(profile)
+		if (token) {
 
 			jwt.verify(token, config.secret, function (err, decoded) {
 				if (err) {
@@ -33,7 +31,9 @@ module.exports = function (app, express) {
 						message: 'Failed to authenticate token.'
 					});
 				} else {
-					if (profile != null) {
+					if (profile) {
+						profile = JSON.parse(profile)
+						
 						User.find({ auth0id: profile.user_id }).exec()
 							.then(function (user) {
 								if (user.length == 0) {

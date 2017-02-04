@@ -64,8 +64,9 @@ module.exports = function (app, express) {
                     .catch(function (err) {
                         res.send(err);
                     });
+            } else {
+                res.json({});
             }
-            res.json({});
         })
 
     // /training/sessions/:id_session
