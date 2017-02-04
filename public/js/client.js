@@ -16,11 +16,11 @@ import SessionNew from "./pages/SessionNew";
 
 import AuthService from './utils/AuthService'
 
-const auth = new AuthService(_CLIENT_ID, _DOMAIN);
+const auth = new AuthService('2h46y4JQDnuS6FvfTlQpa0NRP61hxL9Y', 'antoniovj1.eu.auth0.com');
 
 
-const requireAuth = (nextState, replace) => {
-  if (!auth.loggedIn()) {
+const requireAuth = (nextState, replace) => {  
+  if (!AuthService.loggedIn()) {
     replace({ pathname: '/login' })
   }
 }

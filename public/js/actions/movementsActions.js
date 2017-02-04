@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function fetchMovements() {
   return function (dispatch) {
-    var config = { headers: { 'x-access-token': localStorage.getItem("id_token"), 'profile': localStorage.getItem("profile") } };
+    var config = { headers: { 'x-access-token': localStorage.getItem("id_token") } };
     dispatch({ type: "FETCH_MOVEMENTS_PENDING" });
     
     axios.get(_API_HOST+"/api/training/movementsname", config)

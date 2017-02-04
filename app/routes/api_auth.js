@@ -15,33 +15,6 @@ module.exports = function (app, express) {
 			res.send({ message: 'TEST API - Ok' });
 		})
 
-	apiRouter.route('/users')
-
-		// ===== POST =======
-		.post(function (req, res) {
-			var user = new User();
-			user.name = req.body.name;
-			user.username = req.body.username;
-			user.password = req.body.password;
-			user.birthday = req.body.birthday;
-			user.weigth = req.body.weigth;
-			user.height = req.body.height;
-
-			user.save()
-				.then(function () {
-					res.json({ message: 'ok' });
-				})
-				.catch(function (err) {
-					if (err) {
-						if (err.code == 11000)
-							res.json({ success: false, message: 'A user with that username already exists. ' });
-						else
-							res.send(err);
-					}
-				})
-
-		});
-
 
 	//MIDDLEWARE
 	//----------
@@ -53,7 +26,7 @@ module.exports = function (app, express) {
 		if (token && profile) {
 			profile = JSON.parse(profile)
 
-			jwt.verify(token, 'NhcRW9jzcj2O2aKk66NXKHqD_ef5l5z5kDIQJ5zJBXU2d4TY6FN7B7xH52vBOsdj', function (err, decoded) {
+			jwt.verify(token, config.secret, function (err, decoded) {
 				if (err) {
 					return res.status(403).send({
 						success: false,

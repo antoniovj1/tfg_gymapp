@@ -29,7 +29,7 @@ export default class AuthService {
         this.lock.show()
     }
 
-    loggedIn() {
+    static loggedIn() {
         return !!this.getToken()
     }
 
@@ -48,15 +48,15 @@ export default class AuthService {
         });
     }
 
-    getToken() {
+    static getToken() {
         return localStorage.getItem('id_token')
     }
 
-    getProfile() {
+    static getProfile() {
         return localStorage.getItem('profile')
     }
 
-    logout() {
+    static logout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
     }

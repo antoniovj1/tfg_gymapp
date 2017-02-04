@@ -65,6 +65,7 @@ module.exports = function (app, express) {
                         res.send(err);
                     });
             }
+            res.json({});
         })
 
     // /training/sessions/:id_session
