@@ -19,28 +19,12 @@ export default class Session extends React.Component {
 
   render() {
     const {user} = this.props;
-    var datos;
-
-    if(this.props.user.length){
-      const {username,name,birthday,height,weight} = user[0];
-      datos = (   <div class = "row text-left">
-                      <h4> Nombre usuario: {username} </h4>
-                      <h4> Nombre: {name} </h4>
-                      <h4> Peso: {weight} </h4>
-                      <h4> Altura: {height} </h4>
-                      <h4> Nacimiento: {birthday} </h4>
-                  </div>
-              );
-    } else {
-      <h4> Cargando </h4>
-    }
 
     return (
       <div class="container">
           <div class="row  text-center">
             <div class="col-md-3">
-              <UserLeft/>
-              {datos}
+              <UserLeft user={this.props.user}/>
       		  </div>
       		  <div class="col-md-9">
       		  </div>

@@ -6,13 +6,20 @@ import { loginUser, logoutUser } from "../actions/loginActions"
 import store from "../store";
 
 export default class AuthService {
-    constructor(clientId, domain) {        
+    constructor(clientId, domain) {
         this.lock = new Auth0Lock(clientId, domain, {
             auth: {
                 redirectUrl: _API_HOST + '/login',
                 responseType: 'token'
-
-            }
+            },
+            theme: {
+                logo: 'http://www.freeiconspng.com/uploads/fitness-fitness-room-gym-gymnastic-health-healthcare-healthy--13.png',
+                primaryColor: '#00BCD4',
+            },
+            languageDictionary: {
+                title: "IV - UGR"
+            },
+            avatar: null
         })
         this.lock.on('authenticated', this._doAuthentication.bind(this))
         this.login = this.login.bind(this)

@@ -60,10 +60,6 @@ function getPlugins() {
 
   }
 
-  console.log(client_id);
-  console.log(domain);
-  
-
   plugins.push(new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(env),
     'process.env.CLIENT_ID': "'"+client_id+"'",
