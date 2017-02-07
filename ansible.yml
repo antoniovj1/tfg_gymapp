@@ -39,7 +39,7 @@
   - name: Node.js ln -s
     file:
       src: /usr/bin/nodejs
-      dest: /usr/bin/nod
+      dest: /usr/bin/node
       force: yes
       state: link
 

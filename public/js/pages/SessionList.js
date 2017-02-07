@@ -58,8 +58,10 @@ export default class Session extends React.Component {
         <div>
           <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
           <div> <h1>Añade una nueva session</h1> </div>
+
         </div >
       );
     }
   }
+
 }

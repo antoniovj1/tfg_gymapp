@@ -60,7 +60,7 @@ debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se
   "description": "Proyecto infraestructura virtual",
   "main": "server.js",
   "engines": {
-    "node": "7.0.0"
+    "node": "7.4.0"
   },
   "repository": {
     "type": "git",
@@ -325,11 +325,15 @@ def info_servidor():
     run ('cat /proc/cpuinfo')
 
 def install_app():
-    run ('rm -rf infraestructura_virtual_ugr')
-    run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
-    run ('cd infraestructura_virtual_ugr && npm install')
+    """Clona el repositorio e instala las dependencias"""
+    with shell_env(NODE_ENV='production'):
+        run ('rm -rf infraestructura_virtual_ugr')
+        run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
+        run ('cd infraestructura_virtual_ugr && npm install')
+
 
 def start_app():
+    """Inicia la aplicación (node,mongo y nginx)"""
     run ('sudo service mongod start')
     run ('sleep 7 && cd infraestructura_virtual_ugr && sudo pm2 start server.js')
     run ('sudo service nginx restart')

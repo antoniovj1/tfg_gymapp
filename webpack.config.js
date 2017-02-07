@@ -64,6 +64,7 @@ function getPlugins() {
     'process.env.NODE_ENV': JSON.stringify(env),
     'process.env.CLIENT_ID': "'"+client_id+"'",
     'process.env.DOMAIN': "'"+domain+"'",
+
   }));
 
   return plugins;
