@@ -23,7 +23,6 @@ module.exports = function (app, express) {
 		var profile = req.body.profile || req.query.profile || req.headers['profile'];
 
 		if (token) {
-
 			jwt.verify(token, config.secret, function (err, decoded) {
 				if (err) {
 					return res.status(403).send({
@@ -31,24 +30,28 @@ module.exports = function (app, express) {
 						message: 'Failed to authenticate token.'
 					});
 				} else {
-					if (profile) {
-						profile = JSON.parse(profile)
-						
-						User.find({ auth0id: profile.user_id }).exec()
-							.then(function (user) {
-								if (user.length == 0) {
-									var userNew = new User();
-									userNew.auth0id = profile.user_id;
-									userNew.save().then(function () {
-									})
-										.catch(function (err) {
-											console.log(err);
+					if (profile != 'null') {
+
+						try { profile = JSON.parse(profile)}
+						catch (err) {console.log('Null profile\n');}
+
+						if (profile != null && "user_id" in profile) {
+							User.find({ auth0id: profile.user_id }).exec()
+								.then(function (user) {
+									if (user.length == 0) {
+										var userNew = new User();
+										userNew.auth0id = profile.user_id;
+										userNew.save().then(function () {
 										})
-								}
-							})
-							.catch(function (err) {
-								console.log(err);
-							})
+											.catch(function (err) {
+												console.log(err);
+											})
+									}
+								})
+								.catch(function (err) {
+									console.log(err);
+								})
+						}
 					}
 					next();
 				}
