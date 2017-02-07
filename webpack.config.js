@@ -2,6 +2,9 @@ var webpack = require('webpack');
 var path = require('path');
 
 var env = process.env.NODE_ENV
+var client_id = process.env.CLIENT_ID
+var domain = process.env.DOMAIN
+
 
 
 module.exports = {
@@ -46,7 +49,7 @@ function getPlugins() {
     plugins.push(new webpack.DefinePlugin({
       _API_HOST: JSON.stringify("http://146.148.24.77"),
     }));
-    
+
   } else {
     console.log('WebPack for DEVELOPMENT');
 
@@ -58,7 +61,10 @@ function getPlugins() {
   }
 
   plugins.push(new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(env)
+    'process.env.NODE_ENV': JSON.stringify(env),
+    'process.env.CLIENT_ID': "'"+client_id+"'",
+    'process.env.DOMAIN': "'"+domain+"'",
+
   }));
 
   return plugins;

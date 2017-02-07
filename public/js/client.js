@@ -14,27 +14,16 @@ import Profile from "./pages/Profile";
 import SessionDetail from "./pages/SessionDetail";
 import SessionNew from "./pages/SessionNew";
 
+import AuthService from './utils/AuthService'
+
+const auth = new AuthService('2h46y4JQDnuS6FvfTlQpa0NRP61hxL9Y', 'antoniovj1.eu.auth0.com');
 
 
-export default class Foo extends React.Component {
-  render() {
-    return (
-      <div>
-        <img src="http://www.freeimageslive.com/galleries/workplace/tools/pics/engineering_design.jpg" alt="..." class="img-responsive img-rounded center-block" />
-      </div>
-    );
+const requireAuth = (nextState, replace) => {  
+  if (!AuthService.loggedIn()) {
+    replace({ pathname: '/login' })
   }
 }
-
-function requireAuth(nextState, replace) {  
-  if (!store.getState().login.isAuthenticated) {
-    replace({
-      pathname: '/login',
-      state: {nextPathname: nextState.location.pathname}
-    })
-  }
-}
-
 
 const app = document.getElementById('app');
 

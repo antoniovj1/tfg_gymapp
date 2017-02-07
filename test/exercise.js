@@ -1,3 +1,5 @@
+var config = require('../config');
+
 let mongoose = require("mongoose");
 
 let Session = require('../app/models/training_session');
@@ -18,136 +20,130 @@ var user = new User({ username: 'ex', password: 'ex' });
 User.remove({ _id: user._id });
 user.save();
 
-// Primero autenticación
-chai.request(server)
-  .post('/api/authenticate')
-  .send({ username: 'ex', password: 'ex' })
-  .end((err, res) => {
-    var token = res.body.token
+var token = config.token;
 
-    describe('Exercise (/api/training/exercise/)', () => {
+describe('Exercise (/api/training/exercise/)', () => {
 
-      before((done) => {
-        Exercise.remove({});
-        Session.remove({});
-        Movement.remove({});
-        done();
-      });
+  before((done) => {
+    Exercise.remove({});
+    Session.remove({});
+    Movement.remove({});
+    done();
+  });
 
-      after((done) => {
-        User.remove({ _id: user._id });
-        done();
-      });
+  after((done) => {
+    User.remove({ _id: user._id });
+    done();
+  });
 
-      describe('/GET/:id_exercise', () => {
-        it('should GET the exercise given the exercise id', (done) => {
-          let exercise = new Exercise();
+  describe('/GET/:id_exercise', () => {
+    it('should GET the exercise given the exercise id', (done) => {
+      let exercise = new Exercise();
+      
+      exercise.save((err, exercise) => {
+        chai.request(server)
+          .get('/api/training/exercise/' + exercise._id)
+          .set('x-access-token', token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
 
-          exercise.save((err, exercise) => {
-            chai.request(server)
-              .get('/api/training/exercise/' + exercise._id)
-              .set('x-access-token', token)
-              .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-
-                done();
-              });
+            done();
           });
-        })
-
-        it('should fail with incorrect id', (done) => {
-          let exercise = new Exercise();
-
-          exercise.save((err, exercise) => {
-            chai.request(server)
-              .get('/api/training/exercise/' + 'ididididid')
-              .set('x-access-token', token)
-              .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.have.property('message').eql('fail');
-                done();
-              });
-          });
-        })
       });
+    })
 
-      describe('/POST ', () => {
-        let movement = new Movement({
-          name: "Dominadas",
-          material: "Barra",
-          muscles: [{ name: "bicep", percentage: 20 },
-          { name: "pecho", percentage: 10 },
-          { name: "dorsal", percentage: 60 },
-          { name: "abdominales", percentage: 10 }]
-        });
+    it('should fail with incorrect id', (done) => {
+      let exercise = new Exercise();
 
-        let session = new Session({ user: user._id });
-
-        movement.save();
-        session.save();
-
-        it('should POST an exercise ', (done) => {
-          chai.request(server)
-            .post('/api/training/sessions/' + session._id + '/exercise')
-            .set('x-access-token', token)
-            .send({ movement: movement.name })
-            .end((err, res) => {              
-              res.should.have.status(200);
-              res.body.should.be.a('object');
-              res.body.should.have.property('message').eql('ok');
-              done();
-            });
-        });
-
-        it('should no POST an exercise without movement', (done) => {
-          chai.request(server)
-            .post('/api/training/sessions/' + session._id + '/exercise/')
-            .set('x-access-token', token)
-            .end((err, res) => {
-              res.should.have.status(200);
-              res.body.should.be.a('object');
-              res.body.should.have.property('message').eql('fail');
-
-              done();
-            });
-        });
-
+      exercise.save((err, exercise) => {
+        chai.request(server)
+          .get('/api/training/exercise/' + 'ididididid')
+          .set('x-access-token', token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property('message').eql('fail');
+            done();
+          });
       });
+    })
+  });
 
+  describe('/POST ', () => {
+    let movement = new Movement({
+      name: "Dominadas",
+      material: "Barra",
+      muscles: [{ name: "bicep", percentage: 20 },
+      { name: "pecho", percentage: 10 },
+      { name: "dorsal", percentage: 60 },
+      { name: "abdominales", percentage: 10 }]
+    });
 
-      describe('/DELETE/:id_exercise', () => {
-        it('should DELETE a exercise given the id', (done) => {
-          let exercise = new Exercise();
+    let session = new Session({ user: user._id });
 
-          exercise.save((err, exercise) => {
-            chai.request(server)
-              .delete('/api/training/exercise/' + exercise._id)
-              .set('x-access-token', token)
-              .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('message').eql('ok');
-                done();
-              });
-          });
+    movement.save();
+    session.save();
+
+    it('should POST an exercise ', (done) => {
+      chai.request(server)
+        .post('/api/training/sessions/' + session._id + '/exercise')
+        .set('x-access-token', token)
+        .send({ movement: movement.name })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('ok');
+          done();
         });
-        it('should fail with incorrect id', (done) => {
-          let exercise = new Exercise();
+    });
 
-          exercise.save((err, exercise) => {
-            chai.request(server)
-              .delete('/api/training/exercise/' + 'ididididid')
-              .set('x-access-token', token)
-              .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('message').eql('fail');
-                done();
-              });
-          });
+    it('should no POST an exercise without movement', (done) => {
+      chai.request(server)
+        .post('/api/training/sessions/' + session._id + '/exercise/')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('fail');
+
+          done();
         });
+    });
 
+  });
+
+
+  describe('/DELETE/:id_exercise', () => {
+    it('should DELETE a exercise given the id', (done) => {
+      let exercise = new Exercise();
+
+      exercise.save((err, exercise) => {
+        chai.request(server)
+          .delete('/api/training/exercise/' + exercise._id)
+          .set('x-access-token', token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('ok');
+            done();
+          });
       });
     });
+    it('should fail with incorrect id', (done) => {
+      let exercise = new Exercise();
+
+      exercise.save((err, exercise) => {
+        chai.request(server)
+          .delete('/api/training/exercise/' + 'ididididid')
+          .set('x-access-token', token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('fail');
+            done();
+          });
+      });
+    });
+
   });
+});

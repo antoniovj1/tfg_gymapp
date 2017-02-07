@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux"
 import Exercise from "../components/Exercise"
-import { secondsToHms, dateFormat } from "../utils"
+import { secondsToHms, dateFormat } from "../utils/time"
 import { fetchCompleteSession } from "../actions/sessionsActions"
 import { Tabs, Tab } from 'material-ui/Tabs';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

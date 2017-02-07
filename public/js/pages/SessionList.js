@@ -38,7 +38,8 @@ export default class Session extends React.Component {
   }
 
   render() {
-    const {sessions} = this.props;
+
+    const {sessions} = this.props;    
 
     if (sessions.length > 0) {
       return (
@@ -56,7 +57,8 @@ export default class Session extends React.Component {
       return (
         <div>
           <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
-          <div> <h1>Añade una nueva sesión</h1> </div>
+          <div> <h1>Añade una nueva session</h1> </div>
+
         </div >
       );
     }

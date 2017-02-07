@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router'
-import {secondsToHms, dateFormat} from "../utils"
+import {secondsToHms, dateFormat} from "../utils/time"
 
 export default class SessionItem extends React.Component {
 

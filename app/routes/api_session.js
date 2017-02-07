@@ -13,31 +13,34 @@ module.exports = function (app, express) {
     // /training/sessions/
     // -------------------
     apiRouter.route('/training/sessions/')
-
         // ===== POST =======
         .post(function (req, res) {
-            User.findOne({ username: req.decoded.username }, '_id').exec()
+            var profile = req.body.profile || req.query.profile || req.headers['profile'];
+            profile = JSON.parse(profile);
+            var id = profile.user_id;
+
+            User.findOne({ auth0id: id }, '_id').exec()
                 .then(function (user) {
-                    
+
                     var session = new Session();
 
-                    if(req.body.time)
-                        session.time = req.body.time; 
-                    
-                    if(req.body.date)                   
+                    if (req.body.time)
+                        session.time = req.body.time;
+
+                    if (req.body.date)
                         session.date = new Date(req.body.date);
-                    
+
                     session.user = user._id;
 
                     return session.save();
                 })
                 .then(function (session) {
-                    return [ User
-                        .findOneAndUpdate({ username: req.decoded.username },
-                        { $push: { sessions: session._id } }) , session];
+                    return [User
+                        .findOneAndUpdate({ auth0id: id },
+                        { $push: { sessions: session._id } }), session];
                 })
                 .then(function (values) {
-                    res.json({ message: 'ok', session: values[1]._id});
+                    res.json({ message: 'ok', session: values[1]._id });
                 })
                 .catch(function (err) {
                     res.send(err);
@@ -46,24 +49,31 @@ module.exports = function (app, express) {
 
         // ===== GET =======
         .get(function (req, res) {
+            var profile = req.body.profile || req.query.profile || req.headers['profile'];
+            profile = JSON.parse(profile)
 
-            User.findOne({ username: req.decoded.username }, '_id').exec()
-                .then(function (user) {
-                    return Session.find({ user: user._id });
-                })
-                .then(function (sessions) {
-                    res.json(sessions);
-                })
-                .catch(function (err) {
-                    res.send(err);
-                });
+            if (profile != null) {
+                var id = profile.user_id;
+                User.findOne({ auth0id: id }, '_id').exec()
+                    .then(function (user) {
+                        return Session.find({ user: user._id });
+                    })
+                    .then(function (sessions) {
+                        res.json(sessions);
+                    })
+                    .catch(function (err) {
+                        res.send(err);
+                    });
+            } else {
+                res.json({});
+            }
         })
 
     // /training/sessions/:id_session
     // -------------------
     apiRouter.route('/training/sessions/:id_session')
         // ===== GET =======
-        .get(function (req, res) {            
+        .get(function (req, res) {
             Session.findById(req.params.id_session)
                 .populate('exercises')
                 .exec()

@@ -1,32 +1,27 @@
-import axios from "axios";
-var querystring = require('querystring');
+import AuthService from '../utils/AuthService'
 
-export function loginUser(user) {
+export function loginUser() {
   return function (dispatch) {
     dispatch({ type: "LOGIN_REQUEST" });
+    const auth = new AuthService(process.env.CLIENT_ID, process.env.DOMAIN);
     
-    axios.post(_API_HOST+"/api/authenticate",
-      querystring.stringify({
-        username: user.username,
-        password: user.password
-      }))
-      .then((response) => {
-        if (response.data.message == 'fail') {
-          dispatch({ type: "LOGIN_FAILURE", payload: "Bad user or password" });
-        } else {
-          localStorage.setItem('id_token', response.data.token);
-          dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
-        }
-      })
-      .catch((err) => {
-        dispatch({ type: "LOGIN_FAILURE", payload: err })
-      })
+    auth.login();
   }
 }
 
-export function logoutUser() {  
+export function checkLogin() {
   return function (dispatch) {
-    localStorage.removeItem('id_token');
+    if (AuthService.loggedIn()) {
+      dispatch({ type: "LOGIN_SUCCESS", payload: "Ok" });
+    } else {
+      dispatch({ type: "LOGIN_FAILURE", payload: "No token" });
+    }
+  }
+}
+
+export function logoutUser() {
+  return function (dispatch) {
+    AuthService.logout();
     dispatch({ type: "LOGOUT_SUCCESS" });
   }
 }
