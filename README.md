@@ -11,7 +11,7 @@ de repeticiones y peso usado en cada una de ellas.
 
 Los usuarios tienen la posibilidad de consultar antiguas sesiones de entrenamiento para poder ver la evolución que han tenido.
 
-Para la realización de este proyecto se usará la pila MEAN.
+Para la realización de este proyecto se usará la pila MERN.
 ___
 ###### Universidad de Granada (UGR)
 ___
