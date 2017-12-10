@@ -18,11 +18,18 @@
 
 ## Ejecución
  ```
- 1. npm install
- 2. Ejecutar mongodb
+ 1. npm install o npm install --only=dev
+ 2. Ejecutar mongodb (Manjaro sudo mongod --config /etc/mongodb.conf)
  3. node server.js
  ```
- 
+
+### Util
+ ```
+ 1. nodemon
+ 2. npm-check-updates
+
+ ```
+
  > [Más información sobre la ejecución](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-2)
 
  
