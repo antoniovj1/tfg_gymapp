@@ -12,6 +12,7 @@ injectTapEventPlugin();
 
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import validate from './validateNewSession'
 
@@ -109,10 +110,6 @@ class SessionNewForm extends React.Component {
 
   constructor() {
     super(...arguments);
-
-    this.constructor.childContextTypes = {
-      muiTheme: React.PropTypes.object.isRequired,
-    };
   }
 
   componentWillMount() {
@@ -137,23 +134,22 @@ class SessionNewForm extends React.Component {
     }
 
     return (
-      <form onSubmit={handleSubmit}>
-        <Field name="date" type="text" component={renderField} label="Date" />
-        <Field name="time" type="text" component={renderField} label="Time" />
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <form onSubmit={handleSubmit}>
+          <Field name="date" type="text" component={renderField} label="Date" />
+          <Field name="time" type="text" component={renderField} label="Time" />
 
-        <FieldArray name="exercises" component={renderExercise} />
-        <div>
-          <RaisedButton label="Submit" primary={true} style={style} disabled={submitting} type="submit" />
-          <RaisedButton label="Reset" style={style} disabled={pristine || submitting} onClick={reset} />
-        </div>
-      </form>
+          <FieldArray name="exercises" component={renderExercise} />
+          <div>
+            <RaisedButton label="Submit" primary={true} style={style} disabled={submitting} type="submit" />
+            <RaisedButton label="Reset" style={style} disabled={pristine || submitting} onClick={reset} />
+          </div>
+        </form>
+      </MuiThemeProvider>
+
     )
   }
 }
-
-SessionNewForm.childContextTypes = {
-  muiTheme: React.PropTypes.object.isRequired,
-};
 
 export default reduxForm({
   form: 'newSessionForm',     // a unique identifier for this form
