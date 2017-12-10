@@ -12,7 +12,7 @@ module.exports = {
   devtool: env === 'production' ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
   entry: __dirname + "/public/js/client.js",
   resolve: {
-    extensions: ["", ".tsx", ".ts", ".jsx", ".js"]
+    extensions: [".tsx", ".ts", ".jsx", ".js"]
   },
 
   module: {
