@@ -5,6 +5,8 @@ import { secondsToHms, dateFormat } from "../utils/time"
 import { fetchCompleteSession } from "../actions/sessionsActions"
 import { Tabs, Tab } from 'material-ui/Tabs';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import { ResponsiveContainer, PieChart, Pie, Sector, Cell, Legend } from 'recharts';
 
@@ -57,14 +59,8 @@ export default class SessionDetail extends React.Component {
     this.state = {
       value: 'a',
     };
-    this.constructor.childContextTypes = {
-      muiTheme: React.PropTypes.object.isRequired,
-    };
   }
 
-  getChildContext() {
-    return { muiTheme: getMuiTheme(baseTheme) };
-  }
 
   handleChange = (value) => {
     this.setState({
@@ -137,7 +133,8 @@ export default class SessionDetail extends React.Component {
 
     if (exercises) {
       return (
-
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+        
         <Tabs value={this.state.value} onChange={this.handleChange} >
           <Tab label="Resumen" value="a" >
 
@@ -222,6 +219,8 @@ export default class SessionDetail extends React.Component {
             </div>
           </Tab>
         </Tabs>
+
+        </MuiThemeProvider>
       );
 
     } else {

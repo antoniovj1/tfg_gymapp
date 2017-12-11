@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const styles = {
   propContainer: {
@@ -33,14 +34,6 @@ export default class Exercise extends React.Component {
       deselectOnClickaway: true,
       showCheckboxes: false,
     };
-
-    this.constructor.childContextTypes = {
-      muiTheme: React.PropTypes.object.isRequired,
-    };
-  }
-
-  getChildContext() {
-    return { muiTheme: getMuiTheme(baseTheme) };
   }
 
   handleToggle = (event, toggled) => {
@@ -54,13 +47,14 @@ export default class Exercise extends React.Component {
   };
 
 
-
   render() {
     const {exercise} = this.props;
     const {movement, sets} = exercise;
 
     if (sets) {
       return (
+        <MuiThemeProvider muiTheme={getMuiTheme()}>        
+        
         <div class="row text-center" key={movement._id} style={{ marginBottom: 3+'em' }}>
           <div>
             <Table
@@ -111,6 +105,8 @@ export default class Exercise extends React.Component {
 
           </div>
         </div>
+        </MuiThemeProvider>        
+
       );
     } else {
       return null;

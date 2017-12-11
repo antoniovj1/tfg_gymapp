@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { List, ListItem } from 'material-ui/List';
 import CommunicationCall from 'material-ui/svg-icons/communication/call';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
@@ -40,14 +41,6 @@ const style = {
 export default class Session extends React.Component {
   constructor() {
     super(...arguments);
-
-    this.constructor.childContextTypes = {
-      muiTheme: React.PropTypes.object.isRequired,
-    };
-  }
-
-  getChildContext() {
-    return { muiTheme: getMuiTheme(baseTheme) };
   }
 
   render() {
@@ -62,7 +55,10 @@ export default class Session extends React.Component {
         created_at = created_at.substring(0, 10);
       }
 
-      jsx = (<div>
+      jsx = (
+        
+    <MuiThemeProvider muiTheme={getMuiTheme()}>        
+      <div>
         <div>
           <Paper style={style.paper}>
             <div>
@@ -108,10 +104,16 @@ export default class Session extends React.Component {
             </List>
           </Paper>
         </div>
-      </div>);
+      </div>
+      </MuiThemeProvider>
+      );
 
     } else {
-      jsx = (<h1> Cargando </h1>)
+      jsx = (
+        <MuiThemeProvider muiTheme={getMuiTheme()}>        
+         <h1> Cargando </h1>
+        </MuiThemeProvider>
+    )
     }
 
     return (jsx);

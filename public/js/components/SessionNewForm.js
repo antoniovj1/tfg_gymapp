@@ -116,10 +116,6 @@ class SessionNewForm extends React.Component {
     this.props.dispatch(fetchMovements());
   }
 
-  getChildContext() {
-    return { muiTheme: getMuiTheme(baseTheme) };
-  }
-
 
   render() {
     const {handleSubmit, pristine, reset, submitting } = this.props
