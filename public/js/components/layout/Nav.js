@@ -1,66 +1,71 @@
 import React from "react";
 import { IndexLink, Link } from "react-router";
 import { connect } from "react-redux"
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import Menu from 'material-ui/Menu';
+import IconMenu from 'material-ui/IconMenu';
+
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+import Toggle from 'material-ui/Toggle';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import { logoutUser } from "../../actions/loginActions"
 
-const styles = {
- backgroundColor: '#00BCD4',
- borderColor: '#00BCD4',
-}
+
+const Login = (props) => (
+  <FlatButton {...props} label="Login" containerElement={<Link to="/"/>} />  
+);
+
+Login.muiName = 'FlatButton';
+
+const Logged = (props) => (
+  <IconMenu
+    {...props}
+    iconButtonElement={
+      <IconButton><MoreVertIcon /></IconButton>
+    }
+    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+  >
+    <MenuItem primaryText="Home" containerElement={<Link to="/"/>}/>
+    <MenuItem primaryText="Profile" containerElement={<Link to="/profile"/>}/>
+    <MenuItem primaryText="Sign out" onClick={() => props.dispatch.dispatch(logoutUser())}/>
+  </IconMenu>
+);
+
+Logged.muiName = 'IconMenu';
 
 
 @connect((store) => {
-  return {
-    login: store.login,
-  };
+  return { login: store.login, };
 })
 
 export default class Nav extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = { collapsed: true };
   }
 
-  toggleCollapse() {
-    const collapsed = !this.state.collapsed;
-    this.setState({ collapsed });
-  }
+  handleChange = (event, logged) => {
+    this.setState({logged: logged});
+  };
 
   render() {
-    const { location } = this.props;
-    const { collapsed } = this.state;
-
-    const navClass = collapsed ? "collapse" : "";
-    const {login} = this.props;
-
+    const {dispatch,login} = this.props;
     return (
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style={styles} >
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">IV UGR</a>
-            <button type="button" class="navbar-toggle" onClick={this.toggleCollapse.bind(this)} >
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div class={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li>
-                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Home</IndexLink>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <IndexLink to="/profile" onClick={this.toggleCollapse.bind(this)}>Perfil</IndexLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <MuiThemeProvider muiTheme={getMuiTheme()}>        
+  
+      <AppBar
+        title="Training App"
+        iconElementLeft={<IconButton><NavigationMenu /></IconButton>}
+        iconElementRight={login.isAuthenticated ? <Logged dispatch ={{dispatch}}/> : <Login />}        
+         />
+      </MuiThemeProvider>        
     );
   }
 }

@@ -1,18 +1,17 @@
 import React from "react";
 
+var divStyle = {
+  margin: '20px 0 20px 0'  
+};
+
 
 export default class Footer extends React.Component {
   render() {
     return (
       <div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <footer class="navbar navbar-fixed-bottom">
+        <footer style={divStyle}>
           <div class="container">
-            <span>IV UGR - Antonio de la Vega</span>
+            IV UGR - Antonio de la Vega
           </div>
         </footer>
       </div>
