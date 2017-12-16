@@ -1,70 +1,94 @@
-import Auth0Lock from 'auth0-lock'
-import { browserHistory } from 'react-router'
+import Auth0Lock from 'auth0-lock';
+import jwtDecode from 'jwt-decode';
 
-import { loginUser, logoutUser } from "../actions/loginActions"
-
-import store from "../store";
+import config from './config';
 
 export default class AuthService {
-    constructor(clientId, domain) {
-        this.lock = new Auth0Lock(clientId, domain, {
-            auth: {
-                redirectUrl: _API_HOST + '/login',
-                responseType: 'token'
-            },
-            theme: {
-                logo: 'http://www.freeiconspng.com/uploads/fitness-fitness-room-gym-gymnastic-health-healthcare-healthy--13.png',
-                primaryColor: '#00BCD4',
-            },
-            languageDictionary: {
-                title: "IV - UGR"
-            },
-            avatar: null
-        })
-        this.lock.on('authenticated', this._doAuthentication.bind(this))
-        this.login = this.login.bind(this)
+  constructor() {
+    // Configure Auth0 lock
+    this.lock = new Auth0Lock(config.AUTH0_CLIENT_ID, config.AUTH0_DOMAIN, {
+      auth: {
+        redirectUrl: config.REDIRECT_URL,
+        responseType: 'token',
+      },
+       theme: {
+          logo: 'http://www.freeiconspng.com/uploads/fitness-fitness-room-gym-gymnastic-health-healthcare-healthy--13.png',
+          primaryColor: '#00BCD4',
+       },
+      languageDictionary: {
+          title: "IV - UGR"
+      },
+      avatar: null
+    });
+    // Binds login functions to keep this context
+    this.login = this.login.bind(this);
+  }
+
+  // ======================================================
+  // Public methods
+  // ======================================================
+  login() {
+    // Call the show method to display the widget.
+    this.lock.show();
+  }
+
+  // ======================================================
+  // Static methods
+  // ======================================================
+  static loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = AuthService.getToken();
+    return !!token && !AuthService.isTokenExpired(token);
+  }
+
+  static logout() {
+    // Clear user token and profile data from window.localStorage
+    window.localStorage.removeItem('id_token');
+    window.localStorage.removeItem('profile');
+  }
+
+  static getProfile() {
+    // Retrieves the profile data from window.localStorage
+    const profile = window.localStorage.getItem('profile');
+    return profile ? JSON.parse(window.localStorage.profile) : {};
+  }
+
+  static setProfile(profile) {
+    // Saves profile data to window.localStorage
+    window.localStorage.setItem('profile', JSON.stringify(profile));
+    // Triggers profile_updated event to update the UI
+  }
+
+  static setToken(idToken) {
+    // Saves user token to window.localStorage
+    window.localStorage.setItem('id_token', idToken);
+  }
+
+  static getToken() {
+    // Retrieves the user token from window.localStorage
+    return window.localStorage.getItem('id_token');
+  }
+
+  static getTokenExpirationDate() {
+    const token = AuthService.getToken();
+    const decoded = jwtDecode(token);
+    if (!decoded.exp) {
+      return null;
     }
 
-    _doAuthentication(authResult) {
-        this.setToken(authResult.idToken)
-        this.setProfile(authResult.idToken)
+    const date = new Date(0); // The 0 here is the key, which sets the date to the epoch
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
 
-        browserHistory.replace('/')
+  static isTokenExpired() {
+    const token = AuthService.getToken();
+    if (!token) return true;
+    const date = AuthService.getTokenExpirationDate();
+    const offsetSeconds = 0;
+    if (date === null) {
+      return false;
     }
-
-    login() {
-        this.lock.show()
-    }
-
-    static loggedIn() {
-        return !!this.getToken()
-    }
-
-    setToken(idToken) {
-        localStorage.setItem('id_token', idToken)
-    }
-
-    setProfile(idToken) {
-        this.lock.getProfile(idToken, function (err, profile) {
-            if (err) {
-                console.log("Error loading the Profile", err);
-                return;
-            }
-            localStorage.setItem('profile', JSON.stringify(profile))
-
-        });
-    }
-
-    static getToken() {
-        return localStorage.getItem('id_token')
-    }
-
-    static getProfile() {
-        return localStorage.getItem('profile')
-    }
-
-    static logout() {
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('profile');
-    }
+    return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
+  }
 }

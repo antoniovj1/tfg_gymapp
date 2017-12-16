@@ -1,59 +1,52 @@
 import React from "react";
-import { IndexLink, Link } from "react-router";
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import Menu from 'material-ui/Menu';
-import IconMenu from 'material-ui/IconMenu';
 
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import { logoutUser } from "../../actions/loginActions"
+import AuthService from '../../utils/AuthService';
+import {logoutUser} from "../../actions/loginActions"
+import LoginButton from "../LoginButton"
+import PropTypes from 'prop-types';
 
+import {authActions} from '../../reducers/auth';
 
-const Login = (props) => (
-  <FlatButton {...props} label="Login" containerElement={<Link to="/"/>} />  
-);
+const mapDispatchToProps = dispatch => ({
+    loginSuccess: profile => dispatch(authActions.loginSuccess(profile)),
+    loginError: error => dispatch(authActions.loginError(error)),
+});
 
-Login.muiName = 'FlatButton';
-
-const Logged = (props) => (
-  <IconMenu
-    {...props}
-    iconButtonElement={
-      <IconButton><MoreVertIcon /></IconButton>
-    }
-    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-  >
-    <MenuItem primaryText="Home" containerElement={<Link to="/"/>}/>
-    <MenuItem primaryText="Profile" containerElement={<Link to="/profile"/>}/>
-    <MenuItem primaryText="Sign out" onClick={() => props.dispatch.dispatch(logoutUser())}/>
-  </IconMenu>
-);
-
-Logged.muiName = 'IconMenu';
-
-
-@connect((store) => {
+/*@connect((store) => {
   return { login: store.login, };
-})
+})*/
 
-export default class Nav extends React.Component {
+class Nav extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    this.authService = new AuthService();    
   }
 
-  handleChange = (event, logged) => {
-    this.setState({logged: logged});
-  };
+    componentWillMount() {
+        // Add callback for lock's `authenticated` event
+        this.authService.lock.on('authenticated', (authResult) => {
+            this.authService.lock.getProfile(authResult.idToken, (error, profile) => {
+                if (error) { return this.props.loginError(error); }
+                AuthService.setToken(authResult.idToken); // static method
+                AuthService.setProfile(profile); // static method
+                this.props.loginSuccess(profile);
+                return this.props.history.push({ pathname: '/' });
+            });
+        });
+        // Add callback for lock's `authorization_error` event
+        this.authService.lock.on('authorization_error', (error) => {
+            this.props.loginError(error);
+            return this.props.history.push({ pathname: '/' });
+        });
+    }
 
   render() {
     const {dispatch,login} = this.props;
@@ -63,9 +56,21 @@ export default class Nav extends React.Component {
       <AppBar
         title="Training App"
         iconElementLeft={<IconButton><NavigationMenu /></IconButton>}
-        iconElementRight={login.isAuthenticated ? <Logged dispatch ={{dispatch}}/> : <Login />}        
+        iconElementRight={<LoginButton authService={this.authService} />}
          />
       </MuiThemeProvider>        
     );
   }
 }
+
+Nav.propTypes = {
+
+    loginSuccess: PropTypes.func.isRequired,
+    loginError: PropTypes.func.isRequired,
+};
+
+
+export default connect(
+    null, // no mapStateToProps
+    mapDispatchToProps,
+)(Nav);
