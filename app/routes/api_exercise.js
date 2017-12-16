@@ -1,15 +1,15 @@
-var bodyParser = require('body-parser');
-var Exercise = require('../models/exercise');
-var Session = require('../models/training_session');
-var Movement = require('../models/movement');
-var config = require('../../config');
+const bodyParser = require('body-parser');
+const Exercise = require('../models/exercise');
+const Session = require('../models/training_session');
+const Movement = require('../models/movement');
+const config = require('../../config');
 
 
 module.exports = function (app, express) {
 
-  var apiRouter = express.Router();
+    const apiRouter = express.Router();
 
-  // /training/exercise/
+    // /training/exercise/
   //----------
   apiRouter.route('/training/sessions/:id_session/exercise/')
 
@@ -21,14 +21,14 @@ module.exports = function (app, express) {
           message: 'fail'
         });
       } else {
-        var exercise = new Exercise();
+          const exercise = new Exercise();
 
-        Movement.findOne({ name: req.body.movement }).exec()
+          Movement.findOne({ name: req.body.movement }).exec()
           .then(function (movement) {
-            
-            var result = [];
 
-            if (!movement)
+              const result = [];
+
+              if (!movement)
               throw { message: 'fail', detail: 'no movement' };
 
             return Session.findById(req.params.id_session).exec()
@@ -61,7 +61,7 @@ module.exports = function (app, express) {
             res.send(err);
           })
       }
-    })
+    });
 
 
   // /training/exercise/:id_exercise

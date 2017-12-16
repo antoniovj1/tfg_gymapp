@@ -1,11 +1,11 @@
-var bodyParser = require('body-parser');
-var Movement = require('../models/movement');
-var config = require('../../config');
+const bodyParser = require('body-parser');
+const Movement = require('../models/movement');
+const config = require('../../config');
 
 
 module.exports = function (app, express) {
 
-    var apiRouter = express.Router();
+    const apiRouter = express.Router();
 
     // /training/movements
     // -------------------
@@ -22,7 +22,7 @@ module.exports = function (app, express) {
                          {"name":"abdominales","percentage":10}]
                 }*/
 
-            var movement = new Movement(req.body);
+            const movement = new Movement(req.body);
 
             movement.save()
                 .then(function (movement) {

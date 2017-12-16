@@ -1,28 +1,28 @@
-var bodyParser = require('body-parser');
-var Session = require('../models/training_session');
-var Exercise = require('../models/exercise');
-var Movement = require('../models/movement');
-var User = require('../models/user');
-var jwt = require('jsonwebtoken');
-var config = require('../../config');
+const bodyParser = require('body-parser');
+const Session = require('../models/training_session');
+const Exercise = require('../models/exercise');
+const Movement = require('../models/movement');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 
 module.exports = function (app, express) {
 
-    var apiRouter = express.Router();
+    const apiRouter = express.Router();
     // /training/sessions/
     // -------------------
     apiRouter.route('/training/sessions/')
         // ===== POST =======
         .post(function (req, res) {
-            var profile = req.body.profile || req.query.profile || req.headers['profile'];
+            let profile = req.body.profile || req.query.profile || req.headers['profile'];
             profile = JSON.parse(profile);
-            var id = profile.user_id;
+            const id = profile.user_id;
 
             User.findOne({ auth0id: id }, '_id').exec()
                 .then(function (user) {
 
-                    var session = new Session();
+                    const session = new Session();
 
                     if (req.body.time)
                         session.time = req.body.time;
@@ -49,11 +49,11 @@ module.exports = function (app, express) {
 
         // ===== GET =======
         .get(function (req, res) {
-            var profile = req.body.profile || req.query.profile || req.headers['profile'];
-            profile = JSON.parse(profile)
+            let profile = req.body.profile || req.query.profile || req.headers['profile'];
+            profile = JSON.parse(profile);
 
             if (profile != null) {
-                var id = profile.user_id;
+                const id = profile.user_id;
                 User.findOne({ auth0id: id }, '_id').exec()
                     .then(function (user) {
                         return Session.find({ user: user._id });
@@ -67,7 +67,7 @@ module.exports = function (app, express) {
             } else {
                 res.json({});
             }
-        })
+        });
 
     // /training/sessions/:id_session
     // -------------------

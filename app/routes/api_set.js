@@ -1,14 +1,13 @@
-var bodyParser = require('body-parser');
-var Exercise = require('../models/exercise');
-var Session = require('../models/training_session');
-var Movement = require('../models/movement');
-var config = require('../../config');
-
+const bodyParser = require('body-parser');
+const Exercise = require('../models/exercise');
+const Session = require('../models/training_session');
+const Movement = require('../models/movement');
+const config = require('../../config');
 
 
 module.exports = function (app, express) {
 
-    var apiRouter = express.Router();
+    const apiRouter = express.Router();
     // /training/exercise/:id_exercise/set
     // -------------------
     apiRouter.route('/training/exercise/:id_exercise/set')
@@ -17,7 +16,7 @@ module.exports = function (app, express) {
         .post(function (req, res) {
             Exercise.findById(req.params.id_exercise).exec()
                 .then(function (exercise) {
-                    var s = { 'repetitions': req.body.repetitions, 'weight': req.body.weight, 'rest': req.body.rest };
+                    const s = {'repetitions': req.body.repetitions, 'weight': req.body.weight, 'rest': req.body.rest};
                     exercise.sets.push(s);
 
                     return exercise.save();
@@ -39,7 +38,7 @@ module.exports = function (app, express) {
                 .catch(function (err) {
                     res.send(err);
                 })
-        })
+        });
 
     // /training/exercise/:id_exercise/set/:num
     // -------------------
@@ -62,11 +61,11 @@ module.exports = function (app, express) {
 
         // ===== PUT =======
         .put(function (req, res) {
-            var rep = "sets." + req.params.num + ".repetitions";
-            var weight = "sets." + req.params.num + ".weight";
-            var rest = "sets." + req.params.num + ".rest";
+            const rep = "sets." + req.params.num + ".repetitions";
+            const weight = "sets." + req.params.num + ".weight";
+            const rest = "sets." + req.params.num + ".rest";
 
-            var query = {};
+            const query = {};
 
             if (req.body.weight)
                 query[weight] = parseFloat(req.body.weight);
@@ -87,9 +86,9 @@ module.exports = function (app, express) {
 
         // ===== DELETE =======
         .delete(function (req, res) {
-            var set = 'sets.' + req.params.num;
+            const set = 'sets.' + req.params.num;
 
-            var query = {};
+            const query = {};
             query[set] = 1;
 
             Exercise.update({ _id: req.params.id_exercise }, { $unset: query }).exec()

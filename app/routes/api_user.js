@@ -1,12 +1,12 @@
-var bodyParser = require('body-parser');
-var User = require('../models/user');
-var config = require('../../config');
+const bodyParser = require('body-parser');
+const User = require('../models/user');
+const config = require('../../config');
 
-var superSecret = config.secret;
+const superSecret = config.secret;
 
 module.exports = function (app, express) {
 
-    var apiRouter = express.Router();
+    const apiRouter = express.Router();
 
     // /users
     // ------
@@ -29,9 +29,9 @@ module.exports = function (app, express) {
 
         // ===== GET =======
         .get(function (req, res) {
-            var profile = req.body.profile || req.query.profile || req.headers['profile'];
+            let profile = req.body.profile || req.query.profile || req.headers['profile'];
             profile = JSON.parse(profile);
-            var id = profile.user_id;
+            const id = profile.user_id;
 
 
             User.findOne({ auth0id: id }).exec()
@@ -41,7 +41,7 @@ module.exports = function (app, express) {
                 .catch(function (err) {
                     res.send(err);
                 });
-        })
+        });
 
 
     return apiRouter;

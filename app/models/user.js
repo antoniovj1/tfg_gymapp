@@ -1,28 +1,28 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var Session = require('./training_session');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const Session = require('./training_session');
 
 // user schema
-var UserSchema = new Schema({
-	auth0id: { type: String, required: true, index: { unique: true } },
-	name: String,
-	birthday: Date,
-	height: Number,
-	weight: Number,
+const UserSchema = new Schema({
+    auth0id: {type: String, required: true, index: {unique: true}},
+    name: String,
+    birthday: Date,
+    height: Number,
+    weight: Number,
 
-	sessions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Session' }],
-	role: {
-		type: String,
-		enum: ['Admin', 'Basic'],
-		default: 'Basic'
-	}
+    sessions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Session'}],
+    role: {
+        type: String,
+        enum: ['Admin', 'Basic'],
+        default: 'Basic'
+    }
 });
 
 
 UserSchema.pre('delete', function (next) {
-	var user = this;
+    const user = this;
 
-	user.sessions.forEach(function (session) {
+    user.sessions.forEach(function (session) {
 		Session.findById(session).exec()
 		.then(function(session){
 			session.remove();
@@ -30,7 +30,7 @@ UserSchema.pre('delete', function (next) {
 		.catch(function(err){
 			return err;
 		})
-	})
+	});
 	next();
 });
 
