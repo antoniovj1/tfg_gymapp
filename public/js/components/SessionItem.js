@@ -1,6 +1,28 @@
 import React from "react";
-import { Link } from 'react-router'
-import {secondsToHms, dateFormat} from "../utils/time"
+import {Link} from 'react-router'
+import {dateFormat, secondsToHms} from "../utils/time"
+import Paper from 'material-ui/Paper';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Date from 'material-ui/svg-icons/action/date-range';
+import Clock from 'material-ui/svg-icons/device/access-time'
+
+const style = {
+    height: '100%',
+    width: 100 + '%',
+    textAlign: 'center',
+    display: 'inline-block',
+};
+
+const text = {
+    marginTop:'20px',
+    WebkitTransformStyle: 'preserve-3d',
+    MozTransformSyle: 'preserve-3d',
+    transformStyle: 'preserve-3d',
+    position: 'relative',
+    top: '50%',
+    transform: 'translateY(-50%)',
+}
 
 export default class SessionItem extends React.Component {
 
@@ -8,14 +30,14 @@ export default class SessionItem extends React.Component {
     const {session} = this.props;
 
     return (
-      <div>
-      <Link to={`/session/${session._id}`}>
-      <div class="row well text-center">
-        <div class="col-lg-6">Fecha: {dateFormat(session.date)} </div>
-        <div class="col-lg-6">Duración: {secondsToHms(session.time)} </div>
-      </div>
-      </Link>
-     </div>
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+            <Link to={`/session/${session._id}`}>
+                <Paper style={style} zDepth={2} >
+                  <div style={text}  class="col-lg-6"> <Date/> Fecha: {dateFormat(session.date)} </div>
+                  <div style={text} class="col-lg-6"> <Clock/> Duración: {secondsToHms(session.time)} </div>
+              </Paper>
+            </Link>
+        </MuiThemeProvider>
     );
   }
 }

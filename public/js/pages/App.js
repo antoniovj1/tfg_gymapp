@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LoginButton from '../../components/LoginButton';
-import AuthService from '../../utils/AuthService';
+import AuthService from '../utils/AuthService';
 import {connect} from 'react-redux';
 
-import {authActions} from '../../reducers/auth';
-import Footer from "../../components/layout/Footer";
-import Nav from "../../components/layout/Nav";
+import {authActions} from '../redux/reducers/authReducer';
+import Footer from "../components/layout/Footer";
+import Nav from "../components/layout/Nav";
 
 const mapDispatchToProps = dispatch => ({
   loginSuccess: profile => dispatch(authActions.loginSuccess(profile)),

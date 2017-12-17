@@ -1,15 +1,15 @@
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import {connect} from 'react-redux';
 
-import {authActions} from '../reducers/auth/index';
+import {authActions} from '../redux/reducers/authReducer';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import AuthService from '../utils/AuthService';
-import { IndexLink, Link } from "react-router";
+import { Link } from "react-router";
 
 
 const mapStateToProps = state => ({
@@ -26,8 +26,8 @@ const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) =>(
   {auth.isAuthenticated ?
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Link to="/login">
-      <FlatButton
-        onClick={() => {
+      <RaisedButton
+          onClick={() => {
           logoutSuccess();
           AuthService.logout(); // careful, this is a static method
         }}
@@ -40,7 +40,7 @@ const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) =>(
     :
 
     <MuiThemeProvider muiTheme={getMuiTheme()}>        
-    <FlatButton
+    <RaisedButton
         onClick={() => {
         authService.login();
         loginRequest();
