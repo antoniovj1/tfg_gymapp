@@ -1,27 +1,26 @@
 import React from 'react'
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import {Field, FieldArray, reduxForm} from 'redux-form'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import validate from './validateNewSession'
+import {fetchMovements} from "../redux/actions/movementsActions"
+import {connect} from "react-redux"
+
+injectTapEventPlugin();
 
 const style = {
   margin: 12,
 };
 
 
-var movementsArray = [];
+const movementsArray = [];
 
 const renderField = ({ input, label, meta: { touched, error }}) => (
   <TextField hintText={label}
@@ -29,7 +28,7 @@ const renderField = ({ input, label, meta: { touched, error }}) => (
     errorText={touched && error}
     {...input}
     />
-)
+);
 
 
 const renderExercise = ({ fields, meta: { touched, error } }) => (
@@ -58,7 +57,7 @@ const renderExercise = ({ fields, meta: { touched, error } }) => (
 
     <FlatButton label="Add Exercise" primary={true} onClick={() => fields.push({})} />
   </ul>
-)
+);
 
 const renderSet = ({ fields, meta: { touched, error } }) => (
   <ul>
@@ -91,12 +90,7 @@ const renderSet = ({ fields, meta: { touched, error } }) => (
 
     {error && <li className="error">{error}</li>}
   </ul>
-)
-
-
-import { fetchMovements } from "../actions/movementsActions"
-import { connect } from "react-redux"
-
+);
 
 
 @connect((store) => {
@@ -118,12 +112,12 @@ class SessionNewForm extends React.Component {
 
 
   render() {
-    const {handleSubmit, pristine, reset, submitting } = this.props
+    const {handleSubmit, pristine, reset, submitting } = this.props;
 
     const {movements} = this.props;
 
 
-    if (movementsArray.length != movements.length) {
+    if (movementsArray.length !== movements.length) {
       movements.map(function (session) {
         movementsArray.push(session.name);
       })

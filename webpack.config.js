@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
+
 var env = process.env.NODE_ENV
 var client_id = process.env.CLIENT_ID
 var domain = process.env.DOMAIN
@@ -42,12 +43,11 @@ function getPlugins() {
   if (env === 'production') {
     console.log('WebPack for PRODUCTION');
 
-    plugins.push(new webpack.optimize.DedupePlugin());
-    plugins.push(new webpack.optimize.OccurenceOrderPlugin());
-    plugins.push(new webpack.optimize.UglifyJsPlugin());
+    plugins.push(new webpack.optimize.UglifyJsPlugin()); //Minify with UglifyJS
+    plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); //Scope Hoisting
 
     plugins.push(new webpack.DefinePlugin({
-      _API_HOST: JSON.stringify("http://146.148.24.77"),
+      _API_HOST: JSON.stringify("http://localhost:8080"),
     }));
 
   } else {

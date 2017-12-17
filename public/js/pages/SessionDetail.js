@@ -1,14 +1,12 @@
 import React from "react";
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 import Exercise from "../components/Exercise"
-import { secondsToHms, dateFormat } from "../utils/time"
-import { fetchCompleteSession } from "../actions/sessionsActions"
-import { Tabs, Tab } from 'material-ui/Tabs';
+import {dateFormat, secondsToHms} from "../utils/time"
+import {fetchCompleteSession} from "../redux/actions/sessionsActions"
+import {Tab, Tabs} from 'material-ui/Tabs';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import { ResponsiveContainer, PieChart, Pie, Sector, Cell, Legend } from 'recharts';
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer} from 'recharts';
 
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#B0171F", "#7FFF00", "#FFB90F", "#FF0000",];
@@ -42,7 +40,7 @@ const styles = {
   container: {
     "padding": "2px 16px"
   },
-}
+};
 
 
 
@@ -69,14 +67,19 @@ export default class SessionDetail extends React.Component {
   };
 
   componentDidMount() {
-    var url = this.props.location.pathname;
-    var id = url.substring(url.lastIndexOf("/") + 1);
-    this.props.dispatch(fetchCompleteSession(id));
+      const url = this.props.location.pathname;
+      const id = url.substring(url.lastIndexOf("/") + 1);
+      this.props.dispatch(fetchCompleteSession(id));
   }
 
 
   render() {
     const {completeSession} = this.props;
+    let pesoTot = 0;
+    let nSets = 0;
+    const muscleStats = {};
+    let norm = 0;
+    const muscleStatsNorm = [];
 
     if (completeSession) {
       var {session} = completeSession;
@@ -90,15 +93,10 @@ export default class SessionDetail extends React.Component {
           date = dateFormat(date);
       }
 
-
-      var muscleStats = {}
-      var norm = 0;
-      var muscleStatsNorm = []
-
-      if (exercises) {
+        if (exercises) {
         exercises.forEach(function (exercise) {
-          var muscles = exercise.movement.muscles;
-          muscles.forEach(function (muscle) {
+            const muscles = exercise.movement.muscles;
+            muscles.forEach(function (muscle) {
 
             if (muscle.name in muscleStats) {
               muscleStats[muscle.name] += muscle.percentage;
@@ -111,19 +109,16 @@ export default class SessionDetail extends React.Component {
           });
         });
 
-        for (var muscleStat in muscleStats) {
-          var val = Math.round((muscleStats[muscleStat] / norm) * 100);
-          muscleStatsNorm.push({ name: muscleStat, value: val })
+        for (let muscleStat in muscleStats) {
+            const val = Math.round((muscleStats[muscleStat] / norm) * 100);
+            muscleStatsNorm.push({ name: muscleStat, value: val })
         }
       }
 
-      var pesoTot = 0;
-      var nSets = 0;
-
-      if (exercises) {
+        if (exercises) {
         exercises.forEach(function (exercise) {
-          var sets = exercise.sets;
-          sets.forEach(function (set) {
+            const sets = exercise.sets;
+            sets.forEach(function (set) {
             pesoTot += set.weight * set.repetitions;
             nSets++;
           });

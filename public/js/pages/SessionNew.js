@@ -1,11 +1,9 @@
 import React from "react";
 
 import SessionNewForm from "../components/SessionNewForm";
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 
-import { pushSession } from "../actions/sessionsActions"
-
-import { browserHistory } from 'react-router';
+import {pushSession} from "../redux/actions/sessionsActions"
 
 @connect((store) => {
   return {
@@ -16,7 +14,7 @@ import { browserHistory } from 'react-router';
 export default class SessionNew extends React.Component {
   handleSubmit = (values) => {
     this.props.dispatch(pushSession(values));
-  }
+  };
 
   render() {
     if (this.props.sessions.pushed) {

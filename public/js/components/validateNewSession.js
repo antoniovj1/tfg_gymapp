@@ -1,5 +1,5 @@
 const validate = values => {
-    const errors = {}
+    const errors = {};
 
     if (!values.date) {
         errors.date = 'Required'
@@ -23,15 +23,15 @@ const validate = values => {
     if (!values.exercises || !values.exercises.length) {
         errors.exercises = { _error: 'At least one exercise must be entered' }
     } else {
-        const exercisesArrayErrors = []
+        const exercisesArrayErrors = [];
         
         values.exercises.forEach((exercise, exerciseIndex) => {
 
-            const exerciseErrors = {}
+            const exerciseErrors = {};
 
             //Si hay errror en el ejercicio
             if (!exercise || !exercise.exerciseName) {
-                exerciseErrors.exerciseName = 'Required'
+                exerciseErrors.exerciseName = 'Required';
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
                 //Si no se han añadido series
             } 
@@ -39,16 +39,16 @@ const validate = values => {
                 if (!exerciseErrors.set) {
                     exerciseErrors.set = []
                 }
-                exerciseErrors.set._error = 'At least one set must be entered'
+                exerciseErrors.set._error = 'At least one set must be entered';
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
                 //Si hay ejercicio y series
             } 
                 
-            const setArrayErrors = []
+            const setArrayErrors = [];
             
             if (exercise.sets) {
                 exercise.sets.forEach((s, sIndex) => {
-                    setArrayErrors[sIndex] = {}
+                    setArrayErrors[sIndex] = {};
 
                     if (!s.repetitions) {
                         setArrayErrors[sIndex].repetitions = 'Required'
@@ -77,16 +77,16 @@ const validate = values => {
             }
             
             if (setArrayErrors.length) {
-                exerciseErrors.sets = setArrayErrors
+                exerciseErrors.sets = setArrayErrors;
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
             }
 
-        })
+        });
         if (exercisesArrayErrors.length) {
             errors.exercises = exercisesArrayErrors
         }
     }
     return errors
-}
+};
 
 export default validate

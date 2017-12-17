@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import SessionDetail from "./pages/SessionDetail";
 import SessionNew from "./pages/SessionNew";
-import App from "./pages/App/App"
+import App from "./pages/App"
 import AuthService from './utils/AuthService';
 
 

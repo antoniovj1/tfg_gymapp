@@ -1,9 +1,9 @@
 import React from "react";
 import UserLeft from "../components/profile/UserLeft";
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 
 
-import { fetchActualUser } from "../actions/userActions"
+import {fetchActualUser} from "../redux/actions/userActions"
 
 @connect((store) => {
   return {

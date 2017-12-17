@@ -1,7 +1,7 @@
 import React from "react";
 
-var divStyle = {
-  margin: '20px 0 20px 0'  
+const divStyle = {
+    margin: '20px 0 20px 0'
 };
 
 
