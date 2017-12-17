@@ -1,3 +1,5 @@
+import * as types from "../types";
+
 export default function reducer(state = {
   sessions: [],
   completeSession: null,
@@ -9,13 +11,13 @@ export default function reducer(state = {
 }, action) {
 
   switch (action.type) {
-    case "FETCH_SESSION_PENDING": {
+    case types.FETCH_SESSION_PENDING: {
       return {...state, fetching: true }
     }
-    case "FETCH_SESSION_REJECTED": {
+    case types.FETCH_SESSION_REJECTED: {
       return {...state, fetching: false, error: action.payload }
     }
-    case "FETCH_SESSION_FULFILLED": {
+    case types.FETCH_SESSION_FULFILLED: {
       return {
         ...state,
         fetching: false,
@@ -24,13 +26,13 @@ export default function reducer(state = {
       }
     }
     ////////////////////////////////////////
-    case "FETCH_COMPELTESESSION_PENDING": {
+    case types.FETCH_COMPELTESESSION_PENDING: {
       return {...state, fetching: true }
     }
-    case "FETCH_COMPELTESESSION_REJECTED": {
+    case types.FETCH_COMPELTESESSION_REJECTED: {
       return {...state, fetching: false, error: action.payload }
     }
-    case "FETCH_COMPLETESESSION_FULFILLED": {
+    case types.FETCH_COMPLETESESSION_FULFILLED: {
       return {
         ...state,
         fetching: false,
@@ -39,13 +41,13 @@ export default function reducer(state = {
       }
     }
     ////////////////////////////////////////
-    case "PUSH_SESSION_PENDING": {
+    case types.PUSH_SESSION_PENDING: {
       return {...state, pushing: true }
     }
-    case "PUSH_SESSION_REJECTED": {
+    case types.PUSH_SESSION_REJECTED: {
       return {...state, pushing: false, error: action.payload }
     }
-    case "PUSH_SESSION_FULFILLED": {
+    case types.PUSH_SESSION_FULFILLED: {
       return {...state, pushing: false, pushed: true }
     }
   }

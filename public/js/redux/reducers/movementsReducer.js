@@ -1,3 +1,5 @@
+import * as types from '../types';
+
 export default function reducer(state = {
   movements: [],
   fetching: false,
@@ -6,13 +8,13 @@ export default function reducer(state = {
 }, action) {
 
   switch (action.type) {
-    case "FETCH_MOVEMENTS_PENDING": {
+    case types.FETCH_MOVEMENTS_PENDING: {
       return {...state, fetching: true }
     }
-    case "FETCH_MOVEMENTS_REJECTED": {
+    case types.FETCH_MOVEMENTS_REJECTED: {
       return {...state, fetching: false, error: action.payload }
     }
-    case "FETCH_MOVEMENTS_FULFILLED": {
+    case types.FETCH_MOVEMENTS_FULFILLED: {
       return {
         ...state,
         fetching: false,

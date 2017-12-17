@@ -1,5 +1,12 @@
-import * as types from './types';
+import * as types from '../types';
 import AuthService from '../../utils/AuthService';
+import * as authTypes from '../types';
+import * as authActions from '../actions/authActions';
+
+export {
+    authTypes,
+    authActions,
+};
 
 
 export default function authReducer(state = {

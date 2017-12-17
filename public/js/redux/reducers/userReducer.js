@@ -1,3 +1,5 @@
+import * as types from "../types";
+
 export default function reducer(state={
   user: [],
   fetching: false,
@@ -6,13 +8,13 @@ export default function reducer(state={
 }, action) {
 
   switch (action.type) {
-    case "FETCH_ACTUALUSER_PENDING": {
+    case types.FETCH_ACTUALUSER_PENDING: {
       return {...state, fetching: true}
     }
-    case "FETCH_ACTUALUSER_REJECTED": {
+    case types.FETCH_ACTUALUSER_REJECTED: {
       return {...state, fetching: false, error: action.payload}
     }
-    case "FETCH_ACTUALUSER_FULFILLED": {
+    case types.FETCH_ACTUALUSER_FULFILLED: {
       return {
         ...state,
         fetching: false,
