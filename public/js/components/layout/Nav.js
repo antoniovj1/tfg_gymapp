@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from "react-redux"
 import AppBar from 'material-ui/AppBar';
+import { browserHistory }  from 'react-router';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import AuthService from '../../utils/AuthService';
+import * as AuthService from '../../utils/AuthService';
 import {logoutUser} from "../../redux/actions/loginActions"
 import LoginButton from "../LoginButton"
 import PropTypes from 'prop-types';
@@ -23,25 +24,28 @@ class Nav extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.authService = new AuthService();    
   }
 
     componentWillMount() {
-        // Add callback for lock's `authenticated` event
-        this.authService.lock.on('authenticated', (authResult) => {
-            this.authService.lock.getProfile(authResult.idToken, (error, profile) => {
-                if (error) { return this.props.loginError(error); }
-                AuthService.setToken(authResult.idToken); // static method
-                AuthService.setProfile(profile); // static method
-                this.props.loginSuccess(profile);
-                return this.props.history.push({ pathname: '/' });
-            });
+      const { loginError, loginSuccess } = this.props;
+      // Add callback for lock's `authenticated` event
+      AuthService.lock.on('authenticated', authResult => {
+        AuthService.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+          if (error) {
+            return loginError(error);
+          }
+          AuthService.setToken(authResult.idToken); // static method
+          AuthService.setProfile(profile); // static method
+          loginSuccess(profile);
+          browserHistory.push({ pathname: '/' });
+          AuthService.lock.hide();
         });
-        // Add callback for lock's `authorization_error` event
-        this.authService.lock.on('authorization_error', (error) => {
-            this.props.loginError(error);
-            return this.props.history.push({ pathname: '/' });
-        });
+      });
+      // Add callback for lock's `authorization_error` event
+      AuthService.lock.on('authorization_error', error => {
+        loginError(error);
+        browserHistory.push({ pathname: '/' });
+      });
     }
 
   render() {
@@ -65,8 +69,7 @@ Nav.propTypes = {
     loginError: PropTypes.func.isRequired,
 };
 
-
 export default connect(
-    null, // no mapStateToProps
+    null,
     mapDispatchToProps,
 )(Nav);

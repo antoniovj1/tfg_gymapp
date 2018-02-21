@@ -8,7 +8,7 @@ import {authActions} from '../redux/reducers/authReducer';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AuthService from '../utils/AuthService';
+import * as AuthService from '../utils/AuthService';
 import { Link } from "react-router";
 
 
@@ -24,49 +24,34 @@ const mapDispatchToProps = dispatch => ({
 const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) =>(
 <div>
   {auth.isAuthenticated ?
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      (<MuiThemeProvider muiTheme={getMuiTheme()}>
       <Link to="/login">
       <RaisedButton
           onClick={() => {
           logoutSuccess();
           AuthService.logout(); // careful, this is a static method
         }}
-      
         label='Logout'
       />
       </Link>
-      </MuiThemeProvider>        
-
+      </MuiThemeProvider>)        
     :
-
-    <MuiThemeProvider muiTheme={getMuiTheme()}>        
+    (<MuiThemeProvider muiTheme={getMuiTheme()}>        
     <RaisedButton
         onClick={() => {
-        authService.login();
+        AuthService.login();
         loginRequest();
       }}
     
       label='Login'
     />
-   </MuiThemeProvider>        
+    </MuiThemeProvider>)     
 
   }
   {auth.error &&
     <p>{auth.error}</p>
   }
 </div>);
-
-LoginButton.propTypes = {
-authService: PropTypes.object.isRequired, // eslint-disable-line
-auth: PropTypes.shape({
-  isAuthenticated: PropTypes.bool.isRequired,
-  profile: PropTypes.object,
-  error: PropTypes.string,
-}).isRequired,
-loginRequest: PropTypes.func.isRequired,
-logoutSuccess: PropTypes.func.isRequired,
-};
-
 
 
 export default connect(

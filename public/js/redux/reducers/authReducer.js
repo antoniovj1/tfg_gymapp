@@ -1,5 +1,5 @@
 import * as types from '../types';
-import AuthService from '../../utils/AuthService';
+import * as AuthService from '../../utils/AuthService';
 import * as authTypes from '../types';
 import * as authActions from '../actions/authActions';
 
@@ -8,13 +8,13 @@ export {
     authActions,
 };
 
-
-export default function authReducer(state = {
-  isAuthenticated: !AuthService.isTokenExpired(),
-  isFetching: false,
-  profile: AuthService.getProfile(),
-  error: null,
-}, action) {
+const authReducer = (
+    state = {
+     isAuthenticated: !AuthService.isTokenExpired(),
+     isFetching: false,
+     profile: AuthService.getProfile(),
+     error: null,
+}, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return {
@@ -46,4 +46,6 @@ export default function authReducer(state = {
     default:
       return state;
   }
-}
+};
+
+export default authReducer;

@@ -5,14 +5,13 @@ import {browserHistory, IndexRoute, Route, Router} from "react-router";
 import {Provider} from "react-redux"
 import store from "./store"
 
-
 import SessionList from "./pages/SessionList";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import SessionDetail from "./pages/SessionDetail";
 import SessionNew from "./pages/SessionNew";
 import App from "./pages/App"
-import AuthService from './utils/AuthService';
+import * as AuthService from './utils/AuthService';
 
 
 const requireAuth = (nextState, replace) => {  
