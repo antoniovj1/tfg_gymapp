@@ -11,7 +11,7 @@
     "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
   },
   "scripts": {
-    "test": "export SECRET='secret' && mocha --timeout 10000",
+    "test": "export SECRET='secret' && mocha --timeout 10000 --exit",
     "start": "node server.js",
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"
   },
@@ -46,7 +46,7 @@
     "jsonwebtoken": "^8.1.0",
     "jwt-decode": "^2.1.0",
     "material-ui": "^0.20.0",
-    "mocha": "^4.0.1",
+    "mocha": "^5.0.1",
     "mongoose": "^4.2.5",
     "morgan": "^1.6.1",
     "react": "^16.2.0",
