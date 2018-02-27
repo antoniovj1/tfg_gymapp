@@ -49,6 +49,7 @@
     "mocha": "^5.0.1",
     "mongoose": "^4.2.5",
     "morgan": "^1.6.1",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
@@ -67,5 +68,14 @@
   },
   "devDependencies": {
     "eslint-config-google": "^0.9.1"
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-react": "^7.7.0",
+    "prettier": "^1.11.0"
   }
 }
