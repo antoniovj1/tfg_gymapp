@@ -4,7 +4,7 @@
   "description": "Proyecto infraestructura virtual",
   "main": "server.js",
   "engines": {
-    "node": "7.4.0"
+    "node": "9.7.1"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,6 @@
   "dependencies": {
     "auth0-lock": "^11.2.3",
     "axios": "^0.18.0",
-    "babel-core": "^6.22.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.22.0",
@@ -39,6 +38,7 @@
     "body-parser": "^1.14.1",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "classnames": "^2.2.5",
     "cors": "^2.8.1",
     "express": "^4.13.3",
     "express-jwt": "^5.1.0",
@@ -47,9 +47,11 @@
     "ip": "^1.1.4",
     "jsonwebtoken": "^8.1.0",
     "jwt-decode": "^2.1.0",
-    "material-ui": "^0.20.0",
+    "material-ui": "^1.0.0-beta.34",
+    "material-ui-icons": "^1.0.0-beta.17",
     "mongoose": "^4.2.5",
     "morgan": "^1.6.1",
+    "nodemon": "^1.17.1",
     "npm": "^5.7.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -62,6 +64,7 @@
     "recharts": "^1.0.0-beta.6",
     "redux": "^3.6.0",
     "redux-form": "^7.2.0",
+    "redux-form-material-ui": "^5.0.0-beta.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
     "webpack": "^4.0.1",
@@ -69,7 +72,6 @@
     "winston-papertrail": "^1.0.4"
   },
   "devDependencies": {
-    "eslint-config-google": "^0.9.1"
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
@@ -82,10 +84,10 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jest": "^21.12.3",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0"
     "eslint-plugin-react": "^7.7.0",
-    "prettier": "^1.11.0"
     "jest": "^22.4.2",
+    "prettier": "^1.11.0",
+    "regenerator-runtime": "^0.11.1",
     "superagent": "^3.8.2",
     "supertest": "^3.0.0",
     "webpack-cli": "^2.0.9"
