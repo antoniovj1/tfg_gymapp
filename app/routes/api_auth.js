@@ -8,9 +8,9 @@ const superSecret = config.secret;
 
 module.exports = function (app, express) {
 
-    const apiRouter = express.Router();
+	const apiRouter = express.Router();
 
-    apiRouter.route('/test')
+	apiRouter.route('/test')
 		.get(function (req, res) {
 			res.send({ message: 'TEST API - Ok' });
 		});
@@ -19,10 +19,10 @@ module.exports = function (app, express) {
 	//MIDDLEWARE
 	//----------
 	apiRouter.use(function (req, res, next) {
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];
-        let profile = req.body.profile || req.query.profile || req.headers['profile'];
+		const token = req.body.token || req.query.token || req.headers['x-access-token'];
+		let profile = req.body.profile || req.query.profile || req.headers['profile'];
 
-        if (token) {
+		if (token) {
 			jwt.verify(token, config.secret, function (err, decoded) {
 				/*if (err) {
 					return res.status(403).send({
@@ -30,30 +30,30 @@ module.exports = function (app, express) {
 						message: 'Failed to authenticate token.'
 					});
 				} else {*/
-					if (profile != 'null') {
+				if (profile != 'null') {
 
-						try { profile = JSON.parse(profile)}
-						catch (err) {console.log('Null profile\n');}
+					try { profile = JSON.parse(profile) }
+					catch (err) {/*console.log('Null profile\n');*/ }
 
-						if (profile != null && "user_id" in profile) {
-							User.find({ auth0id: profile.user_id }).exec()
-								.then(function (user) {
-									if (user.length == 0) {
-                                        const userNew = new User();
-                                        userNew.auth0id = profile.user_id;
-										userNew.save().then(function () {
+					if (profile != null && "user_id" in profile) {
+						User.find({ auth0id: profile.user_id }).exec()
+							.then(function (user) {
+								if (user.length == 0) {
+									const userNew = new User();
+									userNew.auth0id = profile.user_id;
+									userNew.save().then(function () {
+									})
+										.catch(function (err) {
+											console.log(err);
 										})
-											.catch(function (err) {
-												console.log(err);
-											})
-									}
-								})
-								.catch(function (err) {
-									console.log(err);
-								})
-						}
+								}
+							})
+							.catch(function (err) {
+								console.log(err);
+							})
 					}
-					next();
+				}
+				next();
 				//}
 			});
 

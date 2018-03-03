@@ -1,13 +1,13 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var mongoose = require('mongoose');
-var config = require('./config');
-var path = require('path');
-var cors = require('cors')
-var ip = require('ip');
+const express = require('express');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./config');
+const path = require('path');
+const cors = require('cors')
+const ip = require('ip');
 
+const app = express();
 
 // APP CONFIGURATION
 //-------------------
@@ -18,19 +18,18 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-//log API PaperTrail - Console
-var winston = require('winston');
-
+// log API PaperTrail - Console
+const winston = require('winston');
 require('winston-papertrail').Papertrail;
 
-var winstonPapertrail = new winston.transports.Papertrail({
+const winstonPapertrail = new winston.transports.Papertrail({
     host: 'logs4.papertrailapp.com',
     port: 31389
 })
 
-winstonPapertrail.on('error', function (err) { });
+winstonPapertrail.on('error', () => { });
 
-var logger = new winston.Logger({
+const logger = new winston.Logger({
     transports: [
         winstonPapertrail,
         new winston.transports.Console({
@@ -44,36 +43,36 @@ var logger = new winston.Logger({
 });
 
 logger.stream = {
-    write: function (message, encoding) {
+    write: (message, encoding) => {
         if (message.includes('api'))
             logger.info(message);
     }
 };
 
-//LOG
-app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
+// LOG
+ app.use(morgan('{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}', { stream: logger.stream }));
 
 // connect to our database
 mongoose.Promise = require('bluebird');
 
 
-var connectWithRetry = function () {
-    return mongoose.connect(config.database3, { useMongoClient: true })
-        .then(function () {
+const connectWithRetry = () => {
+     mongoose.connect(config.database3, { useMongoClient: true })
+        .then(() => {
             console.log("DB CONNECTED (LOCAL)")
         })
-        .catch(function (err) {
+        .catch(() => {
             console.log("RETRY DB CONNECT in 5 seg")
             setTimeout(connectWithRetry, 5000);
         });
 };
 
-var connectRemote = function () {
+const connectRemote = () => {
     mongoose.connect(config.database2, { useMongoClient: true })
-        .then(function () {
+        .then(() => {
             console.log("DB CONNECTED (REMOTE)")
         })
-        .catch(function (err) {
+        .catch(() => {
             console.log("RETRY DB CONNECT in 5 seg")
             setTimeout(connectRemote, 5000);
         });
@@ -87,12 +86,12 @@ if (config.database2) {
 
 // API ROUTES
 //------------------------
-var apiRoutesAuth = require('./app/routes/api_auth')(app, express);
-var apiRoutesUser = require('./app/routes/api_user')(app, express);
-var apiRoutesMovement = require('./app/routes/api_movement')(app, express);
-var apiRoutesSet = require('./app/routes/api_set')(app, express);
-var apiRoutesExercise = require('./app/routes/api_exercise')(app, express);
-var apiRoutesSession = require('./app/routes/api_session')(app, express);
+const apiRoutesAuth = require('./app/routes/api_auth')(app, express);
+const apiRoutesUser = require('./app/routes/api_user')(app, express);
+const apiRoutesMovement = require('./app/routes/api_movement')(app, express);
+const apiRoutesSet = require('./app/routes/api_set')(app, express);
+const apiRoutesExercise = require('./app/routes/api_exercise')(app, express);
+const apiRoutesSession = require('./app/routes/api_session')(app, express);
 
 
 app.use('/api', apiRoutesAuth);
@@ -105,16 +104,20 @@ app.use('/api', apiRoutesSession);
 
 // MAIN CATCHALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname , '/public')));
 
-app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+app.get('*',  (req, res) => {
+    res.sendFile(path.join(__dirname , '/public/index.html'));
 });
 
 // START THE SERVER
 //------------------
-app.listen(config.port, function () {
-    console.log('Express server ' + ip.address() + ' listening on port ' + config.port);
+let server = app.listen(config.port, () => {
+    console.log(`Express server ${ip.address()} listening on port ${config.port}`);
 });
 
-module.exports = app; // for testing
+
+server = require('http-shutdown')(server);
+
+
+module.exports = server; // for testing

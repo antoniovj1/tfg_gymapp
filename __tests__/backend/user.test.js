@@ -1,49 +1,53 @@
-var config = require('../config');
+const config = require('../../config');
+const mongoose = require("mongoose");
+mongoose.Promise = require('bluebird');
 
-let mongoose = require("mongoose");
+const User = require('../../app/models/user');
 
-let User = require('../app/models/user');
-
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../server');
-let should = chai.should();
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-var user = new User({ name: 'Antonio' });
-User.remove({ _id: user._id });
-user.save();
 
-var token = config.token;
+const { token } = config;
 
 describe('Users (/api/users/)', () => {
-  beforeEach((done) => {
-    User.remove({}, (err) => {
-      done();
-    });
-  });
+  let server;
 
-  after((done) => {
-    User.remove({ _id: user._id });
-    done();
+  beforeAll(async () => {
+    server = require('../../server');
+    await User.remove({});
+
+  });
+mongoose.Promise = require('bluebird');
+
+  afterAll(async () => {
+    try {
+      await User.remove({});
+      await mongoose.disconnect();
+      await server.shutdown();
+    } catch (error) {
+      console.log(` ${error} `);
+      throw error;
+    }
   });
 
   describe('/GET', () => {
-    it('GET all the users', (done) => {
+    test('GET all the users', (done) => {
       chai.request(server)
         .get('/api/users')
         .set('x-access-token', token)
         .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('array');
-          res.body.length.should.be.eql(0);
+          expect(res.status).toBe(200);
+          expect(Array.isArray(res.body)).toBe(true);
+          expect(res.body).toHaveLength(0);
           done();
         });
     });
   });
 
-  //TODO -> Modificar para AUHT0
+  // TODO -> Modificar para AUHT0
 
   // describe('/GET/:user_id', () => {
   //   it('should GET a user by the given id', (done) => {
@@ -57,7 +61,7 @@ describe('Users (/api/users/)', () => {
   //         .set('x-access-token', token)
   //         .send(user)
   //         .end((err, res) => {
-  //           res.should.have.status(200);
+  //           res.shoul.status).toBe(200);
   //           res.body.should.be.a('object');
   //           res.body.should.have.property('name').eql(user.name);;
   //           done();
@@ -79,7 +83,7 @@ describe('Users (/api/users/)', () => {
   //         .set('x-access-token', token)
   //         .send({ name: "TEST" })
   //         .end((err, res) => {
-  //           res.should.have.status(200);
+  //           res.shoul.status).toBe(200);
   //           res.body.should.be.a('object');
   //           res.body.should.have.property('message').eql('ok');
   //           res.body.user.should.have.property('name').eql('TEST');
@@ -103,7 +107,7 @@ describe('Users (/api/users/)', () => {
   //         .delete('/api/users/' + user._id)
   //         .set('x-access-token', token)
   //         .end((err, res) => {
-  //           res.should.have.status(200);
+  //           res.shoul.status).toBe(200);
   //           res.body.should.be.a('object');
   //           res.body.should.have.property('message').eql('ok');
   //           done();
