@@ -1,7 +1,5 @@
 import React from "react";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const styles = {
   propContainer: {
@@ -47,9 +45,7 @@ export default class Exercise extends React.Component {
     const {movement, sets} = exercise;
 
     if (sets) {
-      return (
-        <MuiThemeProvider muiTheme={getMuiTheme()}>        
-        
+      return (        
         <div class="row text-center" key={movement._id} style={{ marginBottom: 3+'em' }}>
           <div>
             <Table
@@ -100,8 +96,6 @@ export default class Exercise extends React.Component {
 
           </div>
         </div>
-        </MuiThemeProvider>        
-
       );
     } else {
       return null;

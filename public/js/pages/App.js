@@ -1,39 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from 'material-ui/Grid';
+import { withStyles } from 'material-ui/styles';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import Footer from "../components/layout/Footer";
-import Nav from "../components/layout/Nav";
+import Footer from '../components/layout/Footer';
+import Nav from '../components/layout/Nav';
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  container: {
+    paddingTop: 20
+  }
+});
 
 class AppView extends React.Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
   }
 
   render() {
-      const { location } = this.props;
-      const containerStyle = {
-          marginTop: "60px"
-      };
+    const { location, classes } = this.props;
+
     return (
-        <div>
-            <Nav location={location} />
-            <div class="container" style={containerStyle}>
-              <div class="row">
-                <div class="col-lg-12">
-                  {this.props.children}
-                </div>
-              </div>
-            </div>
-            <Footer/>
-        </div>
+      <div className={classes.root}>
+        <Grid item xs={12}>
+          <Nav location={location} />
+        </Grid>
+        <Grid className={classes.container} container spacing={24}>
+          <Grid item xs={12}>
+            {this.props.children}
+          </Grid>
+        </Grid>
+        <Footer />
+      </div>
     );
   }
 }
 
-export default connect(
-  null,
-  null,
-)(AppView);
+AppView.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default connect(null, null)(withStyles(styles)(AppView));

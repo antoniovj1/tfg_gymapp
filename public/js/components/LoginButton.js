@@ -1,7 +1,4 @@
-import RaisedButton from 'material-ui/RaisedButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+import Button from 'material-ui/Button';
 import {connect} from 'react-redux';
 
 import {authActions} from '../redux/reducers/authReducer';
@@ -24,29 +21,25 @@ const mapDispatchToProps = dispatch => ({
 const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) =>(
 <div>
   {auth.isAuthenticated ?
-      (<MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Link to="/login">
-      <RaisedButton
+      (<Link to="/login">
+      <Button variant="raised" 
           onClick={() => {
           logoutSuccess();
           AuthService.logout(); // careful, this is a static method
         }}
-        label='Logout'
-      />
-      </Link>
-      </MuiThemeProvider>)        
+      >
+      Logout
+      </Button>
+      </Link>)
     :
-    (<MuiThemeProvider muiTheme={getMuiTheme()}>        
-    <RaisedButton
+    (<Button variant="raised" 
         onClick={() => {
         AuthService.login();
         loginRequest();
-      }}
-    
-      label='Login'
-    />
-    </MuiThemeProvider>)     
-
+      }} >
+    Login
+    </Button>
+    )     
   }
   {auth.error &&
     <p>{auth.error}</p>

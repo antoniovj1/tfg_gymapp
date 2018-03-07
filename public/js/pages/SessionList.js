@@ -1,61 +1,69 @@
-import React from "react";
-import {connect} from "react-redux"
-import {Link} from 'react-router'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import ContentAdd from 'material-ui-icons/Add';
+import Grid from 'material-ui/Grid';
 
-import SessionItem from "../components/SessionItem"
+import SessionItem from '../components/SessionItem';
 
-import {fetchSessions} from "../redux/actions/sessionsActions"
+import { fetchSessions } from '../redux/actions/sessionsActions';
 
-//import injectTapEventPlugin from 'react-tap-event-plugin';
-//injectTapEventPlugin();
+// import injectTapEventPlugin from 'react-tap-event-plugin';
+// injectTapEventPlugin();
 
-
-@connect((store) => {
-  return {
-    sessions: store.sessions.sessions,
-  };
-})
-
-export default class Session extends React.Component {
-  constructor() {
-    super(...arguments);
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary
   }
+});
 
+const mapStateToProps = store => ({ sessions: store.sessions.sessions });
+class Session extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchSessions());
   }
-
   render() {
-
-    const {sessions} = this.props;    
-
-    if (sessions.length > 0) {
-      return (        
-        <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <div>
-            <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
-            <div> {sessions.map(function (session) {
-              return <SessionItem key={session._id} session={session} />; })}
+    const { classes, sessions } = this.props;
+    return (
+      <div className={classes.root}>
+        <Grid container spacing={24} justify="center">
+          <Grid item xs={6}>
+            <Link to="/session/new">
+              <Button variant="fab">
+                {' '}
+                <ContentAdd />{' '}
+              </Button>{' '}
+            </Link>
+            <div>
+              {' '}
+              {typeof sessions !== 'undefined' &&
+              sessions !== null &&
+              sessions.length !== null &&
+              sessions.length > 0 ? (
+                sessions.map(session => (
+                  <SessionItem key={session._id} session={session} />
+                ))
+              ) : (
+                <h1> No sessions found </h1>
+              )}
             </div>
-          </div >
-        </MuiThemeProvider>
-
-      );
-    }
-    else {
-      return (
-        <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <div>
-            <Link to={`/session/new`}><FloatingActionButton> <ContentAdd /> </FloatingActionButton> </Link>
-            <div> <h1>Añade una nueva session</h1> </div>
-          </div >
-        </MuiThemeProvider>
-      );
-    }
+          </Grid>
+        </Grid>
+      </div>
+    );
   }
-
 }
+
+Session.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Session));

@@ -1,44 +1,70 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
-import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import { MenuItem } from 'material-ui/Menu';
+import MenuIcon from 'material-ui-icons/Menu';
 import IconButton from 'material-ui/IconButton';
-import { Link } from "react-router";
-import AppBar from 'material-ui/AppBar';
+import { Link } from 'react-router';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import classNames from 'classnames';
 
+const styles = {
+  list: {
+    width: 250
+  },
+  listFull: {
+    width: 'auto'
+  }
+};
 
-export default class MenuLateral extends React.Component {
+class MenuLateral extends React.Component {
+  componentWillMount() {
+    this.setState({ open: false });
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {open: false};
-    }
+  toggleDrawer = isOpen => () => this.setState({ open: isOpen });
 
-    handleToggle = () => this.setState({open: !this.state.open});
+  render() {
+    const { classes } = this.props;
 
-    handleClose = () => this.setState({open: false});
-
-    render() {
-        return (
-            <div>
-                <IconButton>
-                <NavigationMenu
-                    onClick={this.handleToggle}
-                />
-                </IconButton>
-                <Drawer
-                    docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}
-                >
-                    <AppBar title="Navigation" onClick={this.handleClose}/>
-
-                    <Link to='/'>  <MenuItem onClick={this.handleClose}>Home</MenuItem> </Link>
-                    <Link to='/profile'> <MenuItem onClick={this.handleClose}>Profile</MenuItem> </Link>
-                </Drawer>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <IconButton
+          onClick={this.toggleDrawer(true)}
+          color="inherit"
+          aria-label="open drawer"
+          className={classNames(
+            classes.menuButton,
+            this.state.open && classes.hide
+          )}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Drawer open={this.state.open} onClose={this.toggleDrawer(false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer(false)}
+            onKeyDown={this.toggleDrawer(false)}
+          >
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              {' '}
+              <MenuItem onClick={this.handleClose}>Home</MenuItem>{' '}
+            </Link>
+            <Link to="/profile" style={{ textDecoration: 'none' }}>
+              {' '}
+              <MenuItem onClick={this.handleClose}>Profile</MenuItem>{' '}
+            </Link>
+          </div>
+        </Drawer>
+      </div>
+    );
+  }
 }
+
+/* eslint react/forbid-prop-types: 0 */
+MenuLateral.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(MenuLateral);
