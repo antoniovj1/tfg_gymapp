@@ -30,6 +30,8 @@ public/client.min.js
 logs/
 build/
 
+*.hot-update.js
+*.hot-update.json
 public/client\.min\.js\.map
 
 #vagrant

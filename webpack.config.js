@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const env = process.env.NODE_ENV;
 const client_id = process.env.CLIENT_ID;

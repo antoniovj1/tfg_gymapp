@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # TODO: Añadir datos con sentido
  
 from pymongo import MongoClient
