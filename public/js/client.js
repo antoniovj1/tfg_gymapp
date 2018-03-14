@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {browserHistory, IndexRoute, Route, Router} from "react-router";
 
+import { hot } from 'react-hot-loader';
+
 import {Provider} from "react-redux"
 import store from "./store"
 
@@ -13,7 +15,6 @@ import SessionNew from "./pages/SessionNew";
 import App from "./pages/App"
 import * as AuthService from './utils/AuthService';
 
-
 const requireAuth = (nextState, replace) => {  
   if (!AuthService.loggedIn()) {
     replace({ pathname: '/login' })
@@ -22,6 +23,7 @@ const requireAuth = (nextState, replace) => {
 
 const app = document.getElementById('app');
 
+export default hot(module)(
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -34,4 +36,4 @@ ReactDOM.render(
       </Route>
     </Router>
   </Provider>,
-  app);
+  app));

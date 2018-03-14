@@ -13,16 +13,12 @@
   "scripts": {
     "test": "export SECRET='secret' && jest --verbose --forceExit --silent",
     "start": "node server.js",
-    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors"
+    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
+    "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
+    "dev-server": "nodemon --config nodemon.json server.js"
   },
   "author": "Antonio de la Vega",
   "license": "",
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
-  },
   "dependencies": {
     "auth0-lock": "^11.2.3",
     "axios": "^0.18.0",
@@ -87,9 +83,12 @@
     "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.2",
     "prettier": "^1.11.1",
+    "react-hot-loader": "^4.0.0",
     "regenerator-runtime": "^0.11.1",
     "superagent": "^3.8.2",
     "supertest": "^3.0.0",
-    "webpack-cli": "^2.0.9"
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-middleware": "^3.0.1",
+    "webpack-hot-middleware": "^2.21.2"
   }
 }
