@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {browserHistory, IndexRoute, Route, Router} from "react-router";
+import {browserHistory, IndexRoute, Route, Router} from "react-router-dom";
 
 import { hot } from 'react-hot-loader';
 
