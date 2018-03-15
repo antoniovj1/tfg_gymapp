@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
-
+import {Route, Switch} from "react-router-dom";
 import { connect } from 'react-redux';
-
+import SessionList from "./SessionList";
+import Login from "./Login";
+import Profile from "./Profile";
+import SessionDetail from "./SessionDetail";
+import SessionNew from "./SessionNew";
 import Footer from '../components/layout/Footer';
 import Nav from '../components/layout/Nav';
 
@@ -32,7 +36,13 @@ class AppView extends React.Component {
         </Grid>
         <Grid className={classes.container} container spacing={24}>
           <Grid item xs={12}>
-            {this.props.children}
+          <Switch>
+            <Route exact path="/profile" component={Profile} onEnter={requireAuth}/>
+            <Route exact path="/session/new" component={SessionNew} onEnter={requireAuth} />
+            <Route exact path="/session/:id" component={SessionDetail} onEnter={requireAuth} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={SessionList} />
+          </Switch>
           </Grid>
         </Grid>
         <Footer />
