@@ -1,12 +1,12 @@
+# Proyecto Infraestructra Virtual
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/antoniovj1/infraestructura_virtual_ugr.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr.svg?branch=master)](https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr)
 
 [![google-cloud-platform](https://s20.postimg.org/z79sumogt/google_cloud_platform_5643dc63.png)](http://146.148.24.77/)
-
-# Proyecto Infraestructra Virtual
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/antoniovj1/infraestructura_virtual_ugr.svg)](https://greenkeeper.io/)
 
 [Descripción del proyecto](https://antoniovj1.github.io/infraestructura_virtual_ugr/)
 
