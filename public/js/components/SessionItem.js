@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Date from 'material-ui-icons/DateRange';
 import Paper from 'material-ui/Paper';
 import Clock from 'material-ui-icons/AccessTime';
