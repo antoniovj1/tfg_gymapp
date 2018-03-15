@@ -83,7 +83,7 @@ mongoose.Promise = require('bluebird');
 
 const connectWithRetry = () => {
   mongoose
-    .connect(config.database3, { useMongoClient: true })
+    .connect(config.database3)
     .then(() => {
       console.log('DB CONNECTED (LOCAL)');
     })
@@ -95,7 +95,7 @@ const connectWithRetry = () => {
 
 const connectRemote = () => {
   mongoose
-    .connect(config.database2, { useMongoClient: true })
+    .connect(config.database2)
     .then(() => {
       console.log('DB CONNECTED (REMOTE)');
     })
