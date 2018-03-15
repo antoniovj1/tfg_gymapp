@@ -10,7 +10,6 @@ function getPlugins() {
 
   if (env === 'production') {
     console.log('WebPack for PRODUCTION');
-
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); // Scope Hoisting
 
     plugins.push(
@@ -29,6 +28,8 @@ function getPlugins() {
   }
 
   plugins.push(
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
       'process.env.CLIENT_ID': "'" + client_id + "'",
@@ -43,11 +44,13 @@ module.exports = {
   context: path.join(__dirname, 'src'),
   mode: env === 'production' ? 'production' : 'development',
   devtool: env === 'production' ? 'source-map' : 'eval-source-map',
-  entry: path.join(__dirname, '/public/js/client.js'),
+  entry: [
+    'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000',
+    path.join(__dirname, '/public/js/client.js')
+  ],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js']
   },
-
   module: {
     rules: [
       {
@@ -59,15 +62,20 @@ module.exports = {
           plugins: [
             'react-html-attrs',
             'transform-class-properties',
-            'transform-decorators-legacy',
+            'transform-decorators-legacy'
           ]
-        } 
+        }
       }
     ]
   },
   output: {
     path: path.join(__dirname, '/public/'),
+    publicPath: '/',
     filename: 'client.min.js'
   },
-  plugins: getPlugins()
+  plugins: getPlugins(),
+
+  optimization: {
+    noEmitOnErrors: true
+  }
 };
