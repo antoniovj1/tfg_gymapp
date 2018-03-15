@@ -11,6 +11,7 @@ import SessionDetail from "./SessionDetail";
 import SessionNew from "./SessionNew";
 import Footer from '../components/layout/Footer';
 import Nav from '../components/layout/Nav';
+import Restricted from '../utils/restricted';
 
 const styles = theme => ({
   root: {
@@ -37,9 +38,9 @@ class AppView extends React.Component {
         <Grid className={classes.container} container spacing={24}>
           <Grid item xs={12}>
           <Switch>
-            <Route exact path="/profile" component={Profile} onEnter={requireAuth}/>
-            <Route exact path="/session/new" component={SessionNew} onEnter={requireAuth} />
-            <Route exact path="/session/:id" component={SessionDetail} onEnter={requireAuth} />
+            <Route exact path="/profile" component={Restricted(Profile)}/>
+            <Route exact path="/session/new" component={Restricted(SessionNew)}/>
+            <Route exact path="/session/:id" component={Restricted(SessionDetail)}/>
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={SessionList} />
           </Switch>

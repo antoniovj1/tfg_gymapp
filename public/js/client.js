@@ -6,13 +6,6 @@ import {Provider} from "react-redux"
 import createBrowserHistory from 'history/createBrowserHistory';
 import store from "./store"
 import App from "./pages/App"
-import * as AuthService from './utils/AuthService';
-
-const requireAuth = (nextState, replace) => {  
-  if (!AuthService.loggedIn()) {
-    replace({ pathname: '/login' })
-  }
-};
 
 const app = document.getElementById('app');
 const bHistory = createBrowserHistory();
