@@ -9,28 +9,30 @@ const ip = require('ip');
 
 const app = express();
 
-//HMR
+// HMR
 //---
 
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
+if (process.env.NODE_ENV !== 'test') {
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config');
 
-const compiler = webpack(webpackConfig);
+  const compiler = webpack(webpackConfig);
 
-app.use(
-  require('webpack-dev-middleware')(compiler, {
-    logLevel: 'debug',
-    publicPath: webpackConfig.output.publicPath
-  })
-);
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      logLevel: 'debug',
+      publicPath: webpackConfig.output.publicPath
+    })
+  );
 
-app.use(
-  require('webpack-hot-middleware')(compiler, {
-    log: console.log,
-    path: '/__webpack_hmr',
-    heartbeat: 10 * 1000
-  })
-);
+  app.use(
+    require('webpack-hot-middleware')(compiler, {
+      log: console.log,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000
+    })
+  );
+}
 
 // APP CONFIGURATION
 //-------------------

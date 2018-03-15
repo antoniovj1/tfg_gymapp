@@ -1,0 +1,4 @@
+{
+  "testEnvironment": "node",
+  "scriptPreprocessor": "<rootDir>/node_modules/babel-jest"
+}
