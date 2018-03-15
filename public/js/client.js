@@ -5,6 +5,8 @@ import {browserHistory, IndexRoute, Route, Router} from "react-router-dom";
 import { hot } from 'react-hot-loader';
 
 import {Provider} from "react-redux"
+import createBrowserHistory from 'history/createBrowserHistory';
+
 import store from "./store"
 
 import SessionList from "./pages/SessionList";
@@ -22,11 +24,12 @@ const requireAuth = (nextState, replace) => {
 };
 
 const app = document.getElementById('app');
+const bHistory = createBrowserHistory();
 
 export default hot(module)(
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={bHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={SessionList} />
         <Route path="/profile" component={Profile} onEnter={requireAuth}/>
