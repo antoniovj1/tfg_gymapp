@@ -13,12 +13,12 @@ module.exports = function (app, express) {
     apiRouter.route('/users')
 
         // ===== GET =======
-        .get(function (req, res) {
+        .get((req, res) => {
             User.find({}).exec()
-                .then(function (users) {
+                .then((users) => {
                     res.json(users);
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 })
         });
@@ -28,17 +28,17 @@ module.exports = function (app, express) {
     apiRouter.route('/user')
 
         // ===== GET =======
-        .get(function (req, res) {
-            let profile = req.body.profile || req.query.profile || req.headers['profile'];
+        .get((req, res) => {
+            let profile = req.body.profile || req.query.profile || req.headers.profile;
             profile = JSON.parse(profile);
             const id = profile.user_id;
 
 
             User.findOne({ auth0id: id }).exec()
-                .then(function (user) {
+                .then((user) => {
                     res.json(user);
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 });
         });

@@ -11,50 +11,50 @@ module.exports = function (app, express) {
 	const apiRouter = express.Router();
 
 	apiRouter.route('/test')
-		.get(function (req, res) {
+		.get((req, res) => {
 			res.send({ message: 'TEST API - Ok' });
 		});
 
 
-	//MIDDLEWARE
+	// MIDDLEWARE
 	//----------
-	apiRouter.use(function (req, res, next) {
+	apiRouter.use((req, res, next) => {
 		const token = req.body.token || req.query.token || req.headers['x-access-token'];
-		let profile = req.body.profile || req.query.profile || req.headers['profile'];
+		let profile = req.body.profile || req.query.profile || req.headers.profile;
 
 		if (token) {
-			jwt.verify(token, config.secret, function (err, decoded) {
-				/*if (err) {
+			jwt.verify(token, config.secret, (err, decoded) => {
+				/* if (err) {
 					return res.status(403).send({
 						success: false,
 						message: 'Failed to authenticate token.'
 					});
-				} else {*/
+				} else { */
 				if (profile != 'null') {
 
 					try { profile = JSON.parse(profile) }
-					catch (err) {/*console.log('Null profile\n');*/ }
+					catch (err) {/* console.log('Null profile\n'); */ }
 
 					if (profile != null && "user_id" in profile) {
 						User.find({ auth0id: profile.user_id }).exec()
-							.then(function (user) {
+							.then((user) => {
 								if (user.length == 0) {
 									const userNew = new User();
 									userNew.auth0id = profile.user_id;
-									userNew.save().then(function () {
+									userNew.save().then(() => {
 									})
-										.catch(function (err) {
+										.catch((err) => {
 											console.log(err);
 										})
 								}
 							})
-							.catch(function (err) {
+							.catch((err) => {
 								console.log(err);
 							})
 					}
 				}
 				next();
-				//}
+				// }
 			});
 
 		} else {

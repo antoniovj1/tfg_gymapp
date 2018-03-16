@@ -29,11 +29,11 @@ const validate = values => {
 
             const exerciseErrors = {};
 
-            //Si hay errror en el ejercicio
+            // Si hay errror en el ejercicio
             if (!exercise || !exercise.exerciseName) {
                 exerciseErrors.exerciseName = 'Required';
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
-                //Si no se han añadido series
+                // Si no se han añadido series
             } 
             if (!exercise.set) {
                 if (!exerciseErrors.set) {
@@ -41,7 +41,7 @@ const validate = values => {
                 }
                 exerciseErrors.set._error = 'At least one set must be entered';
                 exercisesArrayErrors[exerciseIndex] = exerciseErrors
-                //Si hay ejercicio y series
+                // Si hay ejercicio y series
             } 
                 
             const setArrayErrors = [];

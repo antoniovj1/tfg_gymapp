@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 const Session = require('./training_session');
 
@@ -22,14 +23,12 @@ const UserSchema = new Schema({
 UserSchema.pre('delete', function (next) {
     const user = this;
 
-    user.sessions.forEach(function (session) {
+    user.sessions.forEach((session) => {
 		Session.findById(session).exec()
-		.then(function(session){
+		.then((session) => {
 			session.remove();
 		})
-		.catch(function(err){
-			return err;
-		})
+		.catch((err) => err)
 	});
 	next();
 });

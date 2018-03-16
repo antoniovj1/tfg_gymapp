@@ -4,11 +4,9 @@ import { connect } from 'react-redux';
 
 import { fetchActualUser } from '../redux/actions/userActions';
 
-@connect(store => {
-  return {
+@connect(store => ({
     user: store.user.user
-  };
-})
+  }))
 export default class Session extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchActualUser());
@@ -18,12 +16,12 @@ export default class Session extends React.Component {
     const { user } = this.props;
 
     return (
-      <div class="container">
-        <div class="row  text-center">
-          <div class="col-md-3">
+      <div className="container">
+        <div className="row  text-center">
+          <div className="col-md-3">
             <UserLeft user={this.props.user} />
           </div>
-          <div class="col-md-9" />
+          <div className="col-md-9" />
         </div>
       </div>
     );

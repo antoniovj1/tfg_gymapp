@@ -5,11 +5,9 @@ import {connect} from "react-redux"
 
 import {pushSession} from "../redux/actions/sessionsActions"
 
-@connect((store) => {
-  return {
+@connect((store) => ({
     sessions: store.sessions,
-  };
-})
+  }))
 
 export default class SessionNew extends React.Component {
   handleSubmit = (values) => {

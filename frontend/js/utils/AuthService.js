@@ -47,9 +47,7 @@ export const setToken = idToken => {
   window.localStorage.setItem('id_token', idToken);
 };
 
-export const getToken = () => {
-  return window.localStorage.getItem('id_token');
-};
+export const getToken = () => window.localStorage.getItem('id_token');
 
 export const getTokenExpirationDate = () => {
   const token = getToken();

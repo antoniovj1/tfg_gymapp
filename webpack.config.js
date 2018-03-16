@@ -6,7 +6,7 @@ const client_id = process.env.CLIENT_ID;
 const domain = process.env.DOMAIN;
 
 function getPlugins() {
-  let plugins = [];
+  const plugins = [];
 
   if (env === 'production') {
     console.log('WebPack for PRODUCTION');
@@ -32,8 +32,8 @@ function getPlugins() {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
-      'process.env.CLIENT_ID': "'" + client_id + "'",
-      'process.env.DOMAIN': "'" + domain + "'"
+      'process.env.CLIENT_ID': `'${  client_id  }'`,
+      'process.env.DOMAIN': `'${  domain  }'`
     })
   );
 

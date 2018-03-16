@@ -11,7 +11,7 @@ export function fetchSessions() {
       };
       dispatch({ type: types.FETCH_SESSION_PENDING });
 
-    axios.get(_API_HOST + "/api/training/sessions", config)
+    axios.get(`${_API_HOST  }/api/training/sessions`, config)
       .then((response) => {
         dispatch({ type: types.FETCH_SESSION_FULFILLED, payload: response.data })
       })
@@ -31,7 +31,7 @@ export function fetchCompleteSession(id) {
           }
       };
       dispatch({ type: types.FETCH_COMPELTESESSION_PENDING});
-      const url = _API_HOST + "/api/training/sessions/" + id;
+      const url = `${_API_HOST  }/api/training/sessions/${  id}`;
       axios.get(url, config)
       .then((response) => {
         dispatch({ type: types.FETCH_COMPLETESESSION_FULFILLED, payload: response.data })
@@ -59,14 +59,14 @@ export function pushSession(session) {
 
       dispatch({ type: types.PUSH_SESSION_PENDING});
 
-    axios.post(_API_HOST + "/api/training/sessions", dataSession, config)
+    axios.post(`${_API_HOST  }/api/training/sessions`, dataSession, config)
       .then((responseSession) => {
-          const url = _API_HOST + "/api/training/sessions/" + responseSession.data.session + "/exercise";
+          const url = `${_API_HOST  }/api/training/sessions/${  responseSession.data.session  }/exercise`;
 
           const promises = [];
           const responsesExercise = {};
 
-          dataExerises.forEach(function (exercise) {
+          dataExerises.forEach((exercise) => {
             const parsedEx = {
                 session: responseSession.data.session,
                 movement: exercise.exerciseName,
@@ -75,8 +75,8 @@ export function pushSession(session) {
             promises.push(axios.post(url, parsedEx, config))
         });
 
-        return [axios.all(promises).then(function (results) {
-          results.forEach(function (response) {
+        return [axios.all(promises).then((results) => {
+          results.forEach((response) => {
             responsesExercise[response.identifier] = response.value;
           })
         }),

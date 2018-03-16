@@ -207,9 +207,7 @@ class SessionDetail extends React.Component {
 
             <Tab label="Detalles" value="b">
               <div className="row" style={styles.divStyle}>
-                {exercises.map(exercise => {
-                  return <Exercise key={exercise._id} exercise={exercise} />;
-                })}
+                {exercises.map(exercise => <Exercise key={exercise._id} exercise={exercise} />)}
               </div>
             </Tab>
           </Tabs>

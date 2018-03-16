@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 const Session = require('./training_session');
 
@@ -23,7 +24,7 @@ ExerciseSchema.pre('remove', function (next) {
     const exercise = this;
     const Session = require('./training_session');
     Session.findOneAndUpdate({ _id: exercise.session }, { $pull: { exercises: exercise._id }}).exec()
-	.then(function(session){
+	.then((session) => {
 		
 	
 	});

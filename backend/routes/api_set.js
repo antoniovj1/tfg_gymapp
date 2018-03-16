@@ -13,29 +13,29 @@ module.exports = function (app, express) {
     apiRouter.route('/training/exercise/:id_exercise/set')
 
         // ===== POST =======
-        .post(function (req, res) {
+        .post((req, res) => {
             Exercise.findById(req.params.id_exercise).exec()
-                .then(function (exercise) {
+                .then((exercise) => {
                     const s = {'repetitions': req.body.repetitions, 'weight': req.body.weight, 'rest': req.body.rest};
                     exercise.sets.push(s);
 
                     return exercise.save();
                 })
-                .then(function () {
+                .then(() => {
                     res.json({ message: 'ok' });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 })
         })
 
         // ===== GET =======
-        .get(function (req, res) {
+        .get((req, res) => {
             Exercise.findById(req.params.id_exercise).select('sets').exec()
-                .then(function (sets) {
+                .then((sets) => {
                     res.json({ message: 'ok', sets });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 })
         });
@@ -45,25 +45,25 @@ module.exports = function (app, express) {
     apiRouter.route('/training/exercise/:id_exercise/set/:num')
 
         // ===== GET =======
-        .get(function (req, res) {
+        .get((req, res) => {
             Exercise.findById(req.params.id_exercise)
                 .slice('sets', [parseInt(req.params.num), 1])
                 .exec()
-                .then(function (set) {
-                    set = set['sets'][0];
+                .then((set) => {
+                    set = set.sets[0];
 
                     res.json({ message: 'ok', set });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 })
         })
 
         // ===== PUT =======
-        .put(function (req, res) {
-            const rep = "sets." + req.params.num + ".repetitions";
-            const weight = "sets." + req.params.num + ".weight";
-            const rest = "sets." + req.params.num + ".rest";
+        .put((req, res) => {
+            const rep = `sets.${  req.params.num  }.repetitions`;
+            const weight = `sets.${  req.params.num  }.weight`;
+            const rest = `sets.${  req.params.num  }.rest`;
 
             const query = {};
 
@@ -76,29 +76,27 @@ module.exports = function (app, express) {
 
 
             Exercise.update({ _id: req.params.id_exercise }, { $set: query }).exec()
-                .then(function () {
+                .then(() => {
                     res.json({ message: 'ok' });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 })
         })
 
         // ===== DELETE =======
-        .delete(function (req, res) {
-            const set = 'sets.' + req.params.num;
+        .delete((req, res) => {
+            const set = `sets.${  req.params.num}`;
 
             const query = {};
             query[set] = 1;
 
             Exercise.update({ _id: req.params.id_exercise }, { $unset: query }).exec()
-                .then(function () {
-                    return Exercise.update({ _id: req.params.id_exercise }, { $pull: { sets: null } }).exec();
-                })
-                .then(function () {
+                .then(() => Exercise.update({ _id: req.params.id_exercise }, { $pull: { sets: null } }).exec())
+                .then(() => {
                     res.json({ message: 'ok' });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 })
         });

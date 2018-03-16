@@ -10,7 +10,7 @@ export default class Footer extends React.Component {
     return (
       <div>
         <footer style={divStyle}>
-          <div class="container">
+          <div className="container">
             IV UGR - Antonio de la Vega
           </div>
         </footer>

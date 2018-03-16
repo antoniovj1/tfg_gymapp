@@ -14,13 +14,13 @@ module.exports = function (app, express) {
     // -------------------
     apiRouter.route('/training/sessions/')
         // ===== POST =======
-        .post(function (req, res) {
-            let profile = req.body.profile || req.query.profile || req.headers['profile'];
+        .post((req, res) => {
+            let profile = req.body.profile || req.query.profile || req.headers.profile;
             profile = JSON.parse(profile);
             const id = profile.user_id;
 
             User.findOne({ auth0id: id }, '_id').exec()
-                .then(function (user) {
+                .then((user) => {
 
                     const session = new Session();
 
@@ -34,34 +34,30 @@ module.exports = function (app, express) {
 
                     return session.save();
                 })
-                .then(function (session) {
-                    return [User
+                .then((session) => [User
                         .findOneAndUpdate({ auth0id: id },
-                        { $push: { sessions: session._id } }), session];
-                })
-                .then(function (values) {
+                        { $push: { sessions: session._id } }), session])
+                .then((values) => {
                     res.json({ message: 'ok', session: values[1]._id });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 });
         })
 
         // ===== GET =======
-        .get(function (req, res) {
-            let profile = req.body.profile || req.query.profile || req.headers['profile'];
+        .get((req, res) => {
+            let profile = req.body.profile || req.query.profile || req.headers.profile;
             profile = JSON.parse(profile);
 
             if (profile != null) {
                 const id = profile.user_id;
                 User.findOne({ auth0id: id }, '_id').exec()
-                    .then(function (user) {
-                        return Session.find({ user: user._id });
-                    })
-                    .then(function (sessions) {
+                    .then((user) => Session.find({ user: user._id }))
+                    .then((sessions) => {
                         res.json(sessions);
                     })
-                    .catch(function (err) {
+                    .catch((err) => {
                         res.send(err);
                     });
             } else {
@@ -73,39 +69,35 @@ module.exports = function (app, express) {
     // -------------------
     apiRouter.route('/training/sessions/:id_session')
         // ===== GET =======
-        .get(function (req, res) {
+        .get((req, res) => {
             Session.findById(req.params.id_session)
                 .populate('exercises')
                 .exec()
-                .then(function (session) {
-                    return Session.populate(
+                .then((session) => Session.populate(
                         session,
                         { path: 'exercises.movement', model: 'Movement' },
-                        function (err, session) {
+                        (err, session) => {
                             if (err) throw err;
                             return session;
                         }
-                    )
-                })
-                .then(function (session) {
+                    ))
+                .then((session) => {
                     res.json({ message: 'ok', session });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 });
         })
 
 
         // ===== DELETE =======
-        .delete(function (req, res) {
+        .delete((req, res) => {
             Session.findById(req.params.id_session).exec()
-                .then(function (session) {
-                    return session.remove();
-                })
-                .then(function (session) {
+                .then((session) => session.remove())
+                .then((session) => {
                     res.json({ message: 'ok' });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     res.send(err);
                 });
         });

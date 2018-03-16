@@ -46,7 +46,7 @@ export default class Exercise extends React.Component {
 
     if (sets) {
       return (        
-        <div class="row text-center" key={movement._id} style={{ marginBottom: 3+'em' }}>
+        <div className="row text-center" key={movement._id} style={{ marginBottom: `${3}em` }}>
           <div>
             <Table
               height={this.state.height}
@@ -97,8 +97,8 @@ export default class Exercise extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } 
       return null;
-    }
+    
   }
 }

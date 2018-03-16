@@ -6,7 +6,7 @@ export function fetchMovements() {
       const config = {headers: {'x-access-token': localStorage.getItem("id_token")}};
       dispatch({ type: types.FETCH_MOVEMENTS_PENDING });
     
-    axios.get(_API_HOST+"/api/training/movementsname", config)
+    axios.get(`${_API_HOST}/api/training/movementsname`, config)
       .then((response) => {
         dispatch({ type: types.FETCH_MOVEMENTS_FULFILLED, payload: response.data })
       })
