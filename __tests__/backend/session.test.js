@@ -1,26 +1,24 @@
-const config = require('../../config');
+const config = require("../../config");
 
 const mongoose = require("mongoose");
-mongoose.Promise = require('bluebird');
+mongoose.Promise = require("bluebird");
 
-const Session = require('../../app/models/training_session');
-const User = require('../../app/models/user');
+const Session = require("../../backend/models/training_session");
+const User = require("../../backend/models/user");
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
 
 chai.use(chaiHttp);
 
-
 const { token } = config;
 
-describe('Session (/api/training/session/)', () => {
+describe("Session (/api/training/session/)", () => {
   let server;
-  const user = new User({ auth0id: 'ex', name: 'Antonio' });
-
+  const user = new User({ auth0id: "ex", name: "Antonio" });
 
   beforeAll(async () => {
-    server = require('../../server');
+    server = require("../../server");
     await Session.remove({});
     await User.remove({});
     await user.save();
@@ -38,11 +36,12 @@ describe('Session (/api/training/session/)', () => {
     }
   });
 
-  describe('/GET sessions', () => {
-    test('GET all the sessions (logged user)', (done) => {
-      chai.request(server)
-        .get('/api/training/session')
-        .set('x-access-token', token)
+  describe("/GET sessions", () => {
+    test("GET all the sessions (logged user)", done => {
+      chai
+        .request(server)
+        .get("/api/training/session")
+        .set("x-access-token", token)
         .end((err, res) => {
           expect(res.status).toBe(200);
           done();
@@ -67,20 +66,21 @@ describe('Session (/api/training/session/)', () => {
   //   });
   // });
 
-  describe('/DELETE/:id_sessions', () => {
-    test('should DELETE a session given the id', (done) => {
+  describe("/DELETE/:id_sessions", () => {
+    test("should DELETE a session given the id", done => {
       const session = new Session({
         user: user._id
       });
 
       session.save((err, session) => {
-        chai.request(server)
+        chai
+          .request(server)
           .delete(`/api/training/sessions/${session._id}`)
-          .set('x-access-token', token)
+          .set("x-access-token", token)
           .end((err, res) => {
             expect(res.status).toBe(200);
-            expect(typeof res.body).toBe('object');
-            expect(res.body).toHaveProperty('message', 'ok');
+            expect(typeof res.body).toBe("object");
+            expect(res.body).toHaveProperty("message", "ok");
             done();
           });
       });
