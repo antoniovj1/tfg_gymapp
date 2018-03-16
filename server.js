@@ -73,12 +73,14 @@ logger.stream = {
 };
 
 // LOG
-app.use(
-  morgan(
-    '{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}',
-    { stream: logger.stream }
-  )
-);
+if (process.env.NODE_ENV !== 'test') {
+  app.use(
+    morgan(
+      '{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}',
+      { stream: logger.stream }
+    )
+  );
+}
 
 // connect to our database
 mongoose.Promise = require('bluebird');

@@ -17,6 +17,10 @@ describe('Movement (/api/training/movements/)', () => {
     await Movement.remove({});
   });
 
+  beforeEach(async () => {
+    server = require('../../server');
+    await Movement.remove({});
+  });
 
   afterAll(async () => {
     try {

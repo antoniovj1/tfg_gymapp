@@ -20,7 +20,7 @@ describe('Users (/api/users/)', () => {
     await User.remove({});
 
   });
-mongoose.Promise = require('bluebird');
+
 
   afterAll(async () => {
     try {
