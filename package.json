@@ -15,7 +15,15 @@
     "start": "node server.js",
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
-    "dev-server": "nodemon --config nodemon.json server.js"
+    "dev-server": "nodemon --config nodemon.json server.js",
+    "pretty-front": "prettier --write \"frontend/**/*.js\"",
+    "pretty-back": "prettier --write \"backend/**/*.js\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pretty-front",
+      "pre-commit": "npm run pretty-back"
+    }
   },
   "author": "Antonio de la Vega",
   "license": "",
@@ -81,6 +89,7 @@
     "eslint-plugin-jest": "^21.12.3",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "husky": "^0.15.0-rc.9",
     "jest": "^22.4.2",
     "prettier": "^1.11.1",
     "react-hot-loader": "^4.0.0",
