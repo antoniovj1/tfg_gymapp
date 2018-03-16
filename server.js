@@ -39,7 +39,7 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// configure our app to handle CORS requests
+// configure our backend to handle CORS requests
 app.use(cors());
 
 // log API PaperTrail - Console
@@ -117,12 +117,12 @@ if (config.database2) {
 
 // API ROUTES
 //------------------------
-const apiRoutesAuth = require('./app/routes/api_auth')(app, express);
-const apiRoutesUser = require('./app/routes/api_user')(app, express);
-const apiRoutesMovement = require('./app/routes/api_movement')(app, express);
-const apiRoutesSet = require('./app/routes/api_set')(app, express);
-const apiRoutesExercise = require('./app/routes/api_exercise')(app, express);
-const apiRoutesSession = require('./app/routes/api_session')(app, express);
+const apiRoutesAuth = require('./backend/routes/api_auth')(app, express);
+const apiRoutesUser = require('./backend/routes/api_user')(app, express);
+const apiRoutesMovement = require('./backend/routes/api_movement')(app, express);
+const apiRoutesSet = require('./backend/routes/api_set')(app, express);
+const apiRoutesExercise = require('./backend/routes/api_exercise')(app, express);
+const apiRoutesSession = require('./backend/routes/api_session')(app, express);
 
 app.use('/api', apiRoutesAuth);
 app.use('/api', apiRoutesUser);
@@ -133,10 +133,10 @@ app.use('/api', apiRoutesSession);
 
 // MAIN CATCHALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/frontend')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+  res.sendFile(path.join(__dirname, '/frontend/index.html'));
 });
 
 // START THE SERVER

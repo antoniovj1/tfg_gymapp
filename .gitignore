@@ -12,7 +12,7 @@ bower_components/
 node_modules/
 
 # Compiled files
-public/client.min.js
+frontend/client.min.js
 
 # General
 # =======
@@ -32,7 +32,7 @@ build/
 
 *.hot-update.js
 *.hot-update.json
-public/client\.min\.js\.map
+frontend/client\.min\.js\.map
 
 #vagrant
 .vagrant/

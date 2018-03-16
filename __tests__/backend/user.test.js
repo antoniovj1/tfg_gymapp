@@ -2,7 +2,7 @@ const config = require('../../config');
 const mongoose = require("mongoose");
 mongoose.Promise = require('bluebird');
 
-const User = require('../../app/models/user');
+const User = require('../../backend/models/user');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');

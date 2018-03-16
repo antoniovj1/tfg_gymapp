@@ -1,7 +1,7 @@
 const config = require('../../config');
 const mongoose = require("mongoose");
 mongoose.Promise = require('bluebird');
-const Movement = require('../../app/models/movement');
+const Movement = require('../../backend/models/movement');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 

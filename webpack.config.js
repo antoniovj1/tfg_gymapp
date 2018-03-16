@@ -46,7 +46,7 @@ module.exports = {
   devtool: env === 'production' ? 'source-map' : 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000',
-    path.join(__dirname, '/public/js/client.js')
+    path.join(__dirname, '/frontend/js/client.js')
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js']
@@ -69,7 +69,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, '/public/'),
+    path: path.join(__dirname, '/frontend/'),
     publicPath: '/',
     filename: 'client.min.js'
   },

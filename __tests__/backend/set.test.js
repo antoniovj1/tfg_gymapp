@@ -3,8 +3,8 @@ const config = require('../../config');
 const mongoose = require("mongoose");
 mongoose.Promise = require('bluebird');
 
-const Exercise = require('../../app/models/exercise');
-const User = require('../../app/models/user');
+const Exercise = require('../../backend/models/exercise');
+const User = require('../../backend/models/user');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');

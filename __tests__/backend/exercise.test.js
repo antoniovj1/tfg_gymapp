@@ -3,10 +3,10 @@ const config = require('../../config');
 const mongoose = require("mongoose");
 mongoose.Promise = require('bluebird');
 
-const Session = require('../../app/models/training_session');
-const Movement = require('../../app/models/movement');
-const Exercise = require('../../app/models/exercise');
-const User = require('../../app/models/user');
+const Session = require('../../backend/models/training_session');
+const Movement = require('../../backend/models/movement');
+const Exercise = require('../../backend/models/exercise');
+const User = require('../../backend/models/user');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
