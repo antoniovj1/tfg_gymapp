@@ -1,12 +1,12 @@
-import React from 'react';
-import UserLeft from '../components/profile/UserLeft';
-import { connect } from 'react-redux';
+import React from "react";
+import UserLeft from "../components/profile/UserLeft";
+import { connect } from "react-redux";
 
-import { fetchActualUser } from '../redux/actions/userActions';
+import { fetchActualUser } from "../redux/actions/userActions";
 
 @connect(store => ({
-    user: store.user.user
-  }))
+  user: store.user.user
+}))
 export default class Session extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchActualUser());

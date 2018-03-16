@@ -1,15 +1,15 @@
-import React from 'react';
-import Paper from 'material-ui/Paper';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import AccountCircle from 'material-ui-icons/AccountCircle';
-import FitnessCenter from 'material-ui-icons/FitnessCenter';
-import CommunicationEmail from 'material-ui-icons/Email';
-import Schedule from 'material-ui-icons/Schedule';
-import Straighten from 'material-ui-icons/Straighten';
+import React from "react";
+import Paper from "material-ui/Paper";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { withStyles } from "material-ui/styles";
+import List, { ListItem, ListItemText } from "material-ui/List";
+import Avatar from "material-ui/Avatar";
+import AccountCircle from "material-ui-icons/AccountCircle";
+import FitnessCenter from "material-ui-icons/FitnessCenter";
+import CommunicationEmail from "material-ui-icons/Email";
+import Schedule from "material-ui-icons/Schedule";
+import Straighten from "material-ui-icons/Straighten";
 
 const styles = theme => ({
   root: theme.mixins.gutters({

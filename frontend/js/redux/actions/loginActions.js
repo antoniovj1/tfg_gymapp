@@ -1,29 +1,28 @@
 import * as types from "../types";
 
-
 export function loginRequest() {
-  console.log('Log_REQ');
+  console.log("Log_REQ");
   return {
-    type: types.LOGIN_REQUEST,
+    type: types.LOGIN_REQUEST
   };
 }
 
 export function loginSuccess(profile) {
   return {
     type: types.LOGIN_SUCCESS,
-    profile,
+    profile
   };
 }
 
 export function loginError(error) {
   return {
     type: types.LOGIN_ERROR,
-    error,
+    error
   };
 }
 
 export function logoutSuccess() {
   return {
-    type: types.LOGOUT_SUCCESS,
+    type: types.LOGOUT_SUCCESS
   };
 }

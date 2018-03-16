@@ -1,26 +1,23 @@
-const config = require('../../config');
+const config = require("../../config");
 const mongoose = require("mongoose");
-mongoose.Promise = require('bluebird');
+mongoose.Promise = require("bluebird");
 
-const User = require('../../backend/models/user');
+const User = require("../../backend/models/user");
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
 
 chai.use(chaiHttp);
 
-
 const { token } = config;
 
-describe('Users (/api/users/)', () => {
+describe("Users (/api/users/)", () => {
   let server;
 
   beforeAll(async () => {
-    server = require('../../server');
+    server = require("../../server");
     await User.remove({});
-
   });
-
 
   afterAll(async () => {
     try {
@@ -33,11 +30,12 @@ describe('Users (/api/users/)', () => {
     }
   });
 
-  describe('/GET', () => {
-    test('GET all the users', (done) => {
-      chai.request(server)
-        .get('/api/users')
-        .set('x-access-token', token)
+  describe("/GET", () => {
+    test("GET all the users", done => {
+      chai
+        .request(server)
+        .get("/api/users")
+        .set("x-access-token", token)
         .end((err, res) => {
           expect(res.status).toBe(200);
           expect(Array.isArray(res.body)).toBe(true);
@@ -92,7 +90,6 @@ describe('Users (/api/users/)', () => {
   //     });
   //   });
   // });
-
 
   // describe('/DELETE/:user_id', () => {
   //   it('should DELETE a user given the id', (done) => {

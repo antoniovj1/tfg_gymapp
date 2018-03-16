@@ -1,23 +1,23 @@
-import Auth0Lock from 'auth0-lock';
-import jwtDecode from 'jwt-decode';
+import Auth0Lock from "auth0-lock";
+import jwtDecode from "jwt-decode";
 
-import config from './config';
+import config from "./config";
 
 export const lock = new Auth0Lock(config.AUTH0_CLIENT_ID, config.AUTH0_DOMAIN, {
   auth: {
     redirectUrl: config.REDIRECT_URL,
-    responseType: 'token'
+    responseType: "token"
   },
   theme: {
     logo:
-      'http://www.freeiconspng.com/uploads/fitness-fitness-room-gym-gymnastic-health-healthcare-healthy--13.png',
-    primaryColor: '#00BCD4'
+      "http://www.freeiconspng.com/uploads/fitness-fitness-room-gym-gymnastic-health-healthcare-healthy--13.png",
+    primaryColor: "#00BCD4"
   },
   languageDictionary: {
-    title: 'IV - UGR'
+    title: "IV - UGR"
   },
-  avatar: null
-  ,autoclose: true
+  avatar: null,
+  autoclose: true
 });
 
 export const login = () => {
@@ -30,24 +30,24 @@ export const loggedIn = () => {
 };
 
 export const logout = () => {
-  window.localStorage.removeItem('id_token');
-  window.localStorage.removeItem('profile');
+  window.localStorage.removeItem("id_token");
+  window.localStorage.removeItem("profile");
 };
 
 export const getProfile = () => {
-  const profile = window.localStorage.getItem('profile');
+  const profile = window.localStorage.getItem("profile");
   return profile ? JSON.parse(window.localStorage.profile) : {};
 };
 
 export const setProfile = profile => {
-  window.localStorage.setItem('profile', JSON.stringify(profile));
+  window.localStorage.setItem("profile", JSON.stringify(profile));
 };
 
 export const setToken = idToken => {
-  window.localStorage.setItem('id_token', idToken);
+  window.localStorage.setItem("id_token", idToken);
 };
 
-export const getToken = () => window.localStorage.getItem('id_token');
+export const getToken = () => window.localStorage.getItem("id_token");
 
 export const getTokenExpirationDate = () => {
   const token = getToken();

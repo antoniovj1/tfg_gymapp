@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import { browserHistory } from 'react-router-dom';
-import { withStyles } from 'material-ui/styles';
-import * as AuthService from '../../utils/AuthService';
-import LoginButton from '../LoginButton';
-import { authActions } from '../../redux/reducers/authReducer';
-import MenuLateral from './MenuLateral';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import { browserHistory } from "react-router-dom";
+import { withStyles } from "material-ui/styles";
+import * as AuthService from "../../utils/AuthService";
+import LoginButton from "../LoginButton";
+import { authActions } from "../../redux/reducers/authReducer";
+import MenuLateral from "./MenuLateral";
 
 const mapDispatchToProps = dispatch => ({
   loginSuccess: profile => dispatch(authActions.loginSuccess(profile)),
@@ -29,7 +29,7 @@ class Nav extends React.Component {
   componentWillMount() {
     const { loginError, loginSuccess } = this.props;
     // Add callback for lock's `authenticated` event
-    AuthService.lock.on('authenticated', authResult => {
+    AuthService.lock.on("authenticated", authResult => {
       AuthService.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
           return loginError(error);
@@ -37,14 +37,14 @@ class Nav extends React.Component {
         AuthService.setToken(authResult.idToken); // static method
         AuthService.setProfile(profile); // static method
         loginSuccess(profile);
-        browserHistory.push({ pathname: '/' });
+        browserHistory.push({ pathname: "/" });
         AuthService.lock.hide();
       });
     });
     // Add callback for lock's `authorization_error` event
-    AuthService.lock.on('authorization_error', error => {
+    AuthService.lock.on("authorization_error", error => {
       loginError(error);
-      browserHistory.push({ pathname: '/' });
+      browserHistory.push({ pathname: "/" });
     });
   }
 

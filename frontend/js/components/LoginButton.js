@@ -1,54 +1,49 @@
-import Button from 'material-ui/Button';
-import {connect} from 'react-redux';
+import Button from "material-ui/Button";
+import { connect } from "react-redux";
 
-import {authActions} from '../redux/reducers/authReducer';
-import React from 'react';
-import PropTypes from 'prop-types';
+import { authActions } from "../redux/reducers/authReducer";
+import React from "react";
+import PropTypes from "prop-types";
 
-import * as AuthService from '../utils/AuthService';
+import * as AuthService from "../utils/AuthService";
 import { Link } from "react-router-dom";
 
-
 const mapStateToProps = state => ({
-  auth: state.login,
+  auth: state.login
 });
 
 const mapDispatchToProps = dispatch => ({
   loginRequest: () => dispatch(authActions.loginRequest()),
-  logoutSuccess: () => dispatch(authActions.logoutSuccess()),
+  logoutSuccess: () => dispatch(authActions.logoutSuccess())
 });
 
-const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) =>(
-<div>
-  {auth.isAuthenticated ?
-      (<Link to="/login">
-      <Button variant="raised" 
+const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) => (
+  <div>
+    {auth.isAuthenticated ? (
+      <Link to="/login">
+        <Button
+          variant="raised"
           onClick={() => {
-          logoutSuccess();
-          AuthService.logout(); // careful, this is a static method
+            logoutSuccess();
+            AuthService.logout(); // careful, this is a static method
+          }}
+        >
+          Logout
+        </Button>
+      </Link>
+    ) : (
+      <Button
+        variant="raised"
+        onClick={() => {
+          AuthService.login();
+          loginRequest();
         }}
       >
-      Logout
+        Login
       </Button>
-      </Link>)
-    :
-    (<Button variant="raised" 
-        onClick={() => {
-        AuthService.login();
-        loginRequest();
-      }} >
-    Login
-    </Button>
-    )     
-  }
-  {auth.error &&
-    <p>{auth.error}</p>
-  }
-</div>);
+    )}
+    {auth.error && <p>{auth.error}</p>}
+  </div>
+);
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginButton);
-
+export default connect(mapStateToProps, mapDispatchToProps)(LoginButton);

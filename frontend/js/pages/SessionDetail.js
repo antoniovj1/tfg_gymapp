@@ -1,22 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
-import Exercise from '../components/Exercise';
-import { dateFormat, secondsToHms } from '../utils/time';
-import { fetchCompleteSession } from '../redux/actions/sessionsActions';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
+import React from "react";
+import { connect } from "react-redux";
+import Tabs, { Tab } from "material-ui/Tabs";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
+import Exercise from "../components/Exercise";
+import { dateFormat, secondsToHms } from "../utils/time";
+import { fetchCompleteSession } from "../redux/actions/sessionsActions";
+import { withStyles } from "material-ui/styles";
+import Grid from "material-ui/Grid";
 
 const COLORS = [
-  '#0088FE',
-  '#00C49F',
-  '#FFBB28',
-  '#FF8042',
-  '#B0171F',
-  '#7FFF00',
-  '#FFB90F',
-  '#FF0000'
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#B0171F",
+  "#7FFF00",
+  "#FFB90F",
+  "#FF0000"
 ];
 
 const styles = theme => ({
@@ -34,13 +34,13 @@ class SessionDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'a'
+      selectedTab: "a"
     };
   }
 
   componentDidMount() {
     const url = this.props.location.pathname;
-    const id = url.substring(url.lastIndexOf('/') + 1);
+    const id = url.substring(url.lastIndexOf("/") + 1);
     this.props.dispatch(fetchCompleteSession(id));
   }
 
@@ -67,9 +67,9 @@ class SessionDetail extends React.Component {
       ({ exercises, date, time } = session);
 
       if (session) {
-        if (time !== 'undefinded') time = secondsToHms(time);
+        if (time !== "undefinded") time = secondsToHms(time);
 
-        if (date !== 'undefinded') date = dateFormat(date);
+        if (date !== "undefinded") date = dateFormat(date);
       }
 
       if (exercises) {
@@ -109,7 +109,6 @@ class SessionDetail extends React.Component {
         <div>
           <Tabs value={this.state.selectedTab} onChange={this.handleChange}>
             <Tab label="Resumen" value="a">
-            
               <div className="row">
                 <div className="col-sm-1" />
 
@@ -168,9 +167,9 @@ class SessionDetail extends React.Component {
               <div
                 className="col-sm-6"
                 style={{
-                  paddingTop: '3em',
-                  width: '100%',
-                  height: '25em'
+                  paddingTop: "3em",
+                  width: "100%",
+                  height: "25em"
                 }}
               >
                 <ResponsiveContainer>
@@ -207,7 +206,9 @@ class SessionDetail extends React.Component {
 
             <Tab label="Detalles" value="b">
               <div className="row" style={styles.divStyle}>
-                {exercises.map(exercise => <Exercise key={exercise._id} exercise={exercise} />)}
+                {exercises.map(exercise => (
+                  <Exercise key={exercise._id} exercise={exercise} />
+                ))}
               </div>
             </Tab>
           </Tabs>
