@@ -16,8 +16,8 @@
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
-    "pretty-front": "prettier --write \"frontend/**/*.js\"",
-    "pretty-back": "prettier --write \"backend/**/*.js\""
+    "pretty-front": "prettier --printWidth=110 --write \"frontend/**/*.js\"",
+    "pretty-back": "prettier --printWidth=110 --write \"backend/**/*.js\""
   },
   "husky": {
     "hooks": {
