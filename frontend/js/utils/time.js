@@ -12,7 +12,7 @@ export function dateFormat(dat) {
   const d = new Date(dat);
   const date = d.getDate();
   let month = d.getMonth();
-  month++;
+  month+=1;
   const year = d.getFullYear();
   const hour = d.getHours();
   const minute = d.getMinutes();

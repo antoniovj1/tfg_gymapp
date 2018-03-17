@@ -1,4 +1,4 @@
-export function fetchActualUser() {
+export default function fetchActualUser() {
   return function(dispatch) {
     dispatch({ type: "FETCH_ACTUALUSER_PENDING" });
 

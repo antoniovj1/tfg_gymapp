@@ -1,23 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Field, FieldArray, reduxForm } from "redux-form";
-import {
-  Checkbox,
-  RadioGroup,
-  Select,
-  TextField,
-  Switch
-} from "redux-form-material-ui";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Checkbox, RadioGroup, Select, TextField, Switch } from 'redux-form-material-ui';
 
-import PropTypes from "prop-types";
-import Button from "material-ui/Button";
-import { withStyles } from "material-ui/styles";
-import Grid from "material-ui/Grid";
+import PropTypes from 'prop-types';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
 
-import injectTapEventPlugin from "react-tap-event-plugin";
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import validate from "./validateNewSession";
-import { fetchMovements } from "../redux/actions/movementsActions";
+import validate from './validateNewSession';
+import { fetchMovements } from '../redux/actions/movementsActions';
 
 injectTapEventPlugin();
 
@@ -27,7 +21,7 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.secondary
   }
 });
@@ -46,18 +40,8 @@ const renderSet = ({ fields, meta: { touched, error } }) => (
             component={TextField}
             label={`Repeticiones #${index + 1}`}
           />
-          <Field
-            name={`${set}.weight`}
-            type="text"
-            component={TextField}
-            label={`Peso #${index + 1}`}
-          />
-          <Field
-            name={`${set}.rest`}
-            type="text"
-            component={TextField}
-            label={`Descanso #${index + 1}`}
-          />
+          <Field name={`${set}.weight`} type="text" component={TextField} label={`Peso #${index + 1}`} />
+          <Field name={`${set}.rest`} type="text" component={TextField} label={`Descanso #${index + 1}`} />
           <Button
             variant="flat"
             color="secondary"
@@ -90,11 +74,7 @@ const renderExercise = ({ fields, meta: { touched, error } }) => (
     {fields.map((exercise, index) => (
       <div key={exercise.index}>
         <h4>exercise #{index + 1}</h4>
-        <Field
-          name={`${exercise}.exerciseName`}
-          component="select"
-          label="Name"
-        >
+        <Field name={`${exercise}.exerciseName`} component="select" label="Name">
           <option value="" key="movOpt">
             Select an exercise...
           </option>
@@ -112,7 +92,7 @@ const renderExercise = ({ fields, meta: { touched, error } }) => (
         >
           Remove Exercise
         </Button>
-        <FieldArray name={`${exercise}.sets`} component={renderSet} />{" "}
+        <FieldArray name={`${exercise}.sets`} component={renderSet} />{' '}
       </div>
     ))}
 
@@ -134,14 +114,7 @@ class SessionNewForm extends React.Component {
   }
 
   render() {
-    const {
-      handleSubmit,
-      pristine,
-      reset,
-      submitting,
-      movements,
-      classes
-    } = this.props;
+    const { handleSubmit, pristine, reset, submitting, movements, classes } = this.props;
 
     if (movementsArray.length !== movements.length) {
       movements.forEach(session => {
@@ -156,20 +129,10 @@ class SessionNewForm extends React.Component {
             <form onSubmit={handleSubmit}>
               <Grid container justify="center" spacing={40}>
                 <Grid item>
-                  <Field
-                    name="date"
-                    type="text"
-                    component={TextField}
-                    label="Date"
-                  />
+                  <Field name="date" type="text" component={TextField} label="Date" />
                 </Grid>
                 <Grid item>
-                  <Field
-                    name="time"
-                    type="text"
-                    component={TextField}
-                    label="Time"
-                  />
+                  <Field name="time" type="text" component={TextField} label="Time" />
                 </Grid>
               </Grid>
               <Grid container justify="center" spacing={40}>
@@ -207,11 +170,12 @@ class SessionNewForm extends React.Component {
   }
 }
 
+/* eslint react/forbid-prop-types: 0 */
 SessionNewForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 export default reduxForm({
-  form: "newSessionForm", // a unique identifier for this form
+  form: 'newSessionForm', // a unique identifier for this form
   validate
 })(connect(mapStateToProps, null)(withStyles(styles)(SessionNewForm)));

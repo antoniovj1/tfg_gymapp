@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
-import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
+import Card, { CardContent, CardMedia } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 
 const styles = {
@@ -33,9 +32,5 @@ const Login = ({ classes } = props) => (
     </Card>
   </div>
 );
-
-Login.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(Login);

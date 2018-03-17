@@ -1,6 +1,6 @@
 import React from "react";
-import UserLeft from "../components/profile/UserLeft";
 import { connect } from "react-redux";
+import UserLeft from "../components/profile/UserLeft";
 
 import { fetchActualUser } from "../redux/actions/userActions";
 
@@ -13,8 +13,6 @@ export default class Session extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
-
     return (
       <div className="container">
         <div className="row  text-center">
