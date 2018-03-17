@@ -1,9 +1,8 @@
 import React from "react";
-
-import SessionNewForm from "../components/SessionNewForm";
 import { connect } from "react-redux";
-
+import SessionNewForm from "../components/SessionNewForm";
 import { pushSession } from "../redux/actions/sessionsActions";
+import { browserHistory } from "react-router-dom";
 
 @connect(store => ({
   sessions: store.sessions
@@ -15,7 +14,7 @@ export default class SessionNew extends React.Component {
 
   render() {
     if (this.props.sessions.pushed) {
-      window.location.replace("/");
+      browserHistory.push("/");
     } else {
       return <SessionNewForm onSubmit={this.handleSubmit} />;
     }

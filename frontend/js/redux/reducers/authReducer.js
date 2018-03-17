@@ -1,9 +1,8 @@
 import * as types from "../types";
 import * as AuthService from "../../utils/AuthService";
-import * as authTypes from "../types";
 import * as authActions from "../actions/authActions";
 
-export { authTypes, authActions };
+export { types as authTypes, authActions };
 
 const authReducer = (
   state = {

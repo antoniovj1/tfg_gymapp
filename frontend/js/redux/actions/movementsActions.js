@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as types from "../types";
 
-export function fetchMovements() {
+export default function fetchMovements() {
   return function(dispatch) {
     const config = {
       headers: { "x-access-token": localStorage.getItem("id_token") }

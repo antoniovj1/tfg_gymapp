@@ -1,7 +1,6 @@
 import * as types from "../types";
 
 export function loginRequest() {
-  console.log("Log_REQ");
   return {
     type: types.LOGIN_REQUEST
   };
