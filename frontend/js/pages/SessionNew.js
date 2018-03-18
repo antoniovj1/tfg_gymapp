@@ -1,22 +1,27 @@
-import React from "react";
-import { connect } from "react-redux";
-import SessionNewForm from "../components/SessionNewForm";
-import { pushSession } from "../redux/actions/sessionsActions";
-import { browserHistory } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import SessionNewForm from '../components/SessionNewForm';
+import { pushSession } from '../redux/actions/sessionsActions';
 
 @connect(store => ({
   sessions: store.sessions
 }))
-export default class SessionNew extends React.Component {
+class SessionNew extends React.Component {
   handleSubmit = values => {
     this.props.dispatch(pushSession(values));
   };
 
-  render() {
+  componentWillReceiveProps() {
     if (this.props.sessions.pushed) {
-      browserHistory.push("/");
-    } else {
-      return <SessionNewForm onSubmit={this.handleSubmit} />;
+      this.props.pushed = false;
+      this.props.history.push('/');
     }
   }
+
+  render() {
+    return <SessionNewForm onSubmit={this.handleSubmit} />;
+  }
 }
+
+export default withRouter(SessionNew);
