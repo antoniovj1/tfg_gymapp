@@ -9,6 +9,8 @@ chai.use(chaiHttp);
 
 const { token } = config;
 
+jest.setTimeout(30000);
+
 describe("Movement (/api/training/movements/)", () => {
   let server;
 

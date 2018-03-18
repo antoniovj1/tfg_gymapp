@@ -11,7 +11,7 @@
     "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
   },
   "scripts": {
-    "test": "export SECRET='secret' && jest --verbose --forceExit --silent",
+    "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
     "start": "node server.js",
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",

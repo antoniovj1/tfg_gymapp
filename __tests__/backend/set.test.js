@@ -13,6 +13,8 @@ chai.use(chaiHttp);
 
 const { token } = config;
 
+jest.setTimeout(30000);
+
 describe("Set (/api/training/set/)", () => {
   let server;
   const user = new User({ auth0id: "set" });

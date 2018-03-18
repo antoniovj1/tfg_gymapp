@@ -1,15 +1,14 @@
 const config = require("../../config");
 const mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
-
 const User = require("../../backend/models/user");
-
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
 chai.use(chaiHttp);
-
 const { token } = config;
+
+jest.setTimeout(30000);
 
 describe("Users (/api/users/)", () => {
   let server;
