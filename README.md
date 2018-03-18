@@ -3,8 +3,8 @@
 <p align="center">
 <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/antoniovj1/infraestructura_virtual_ugr.svg"></a>
 <a href="https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr"><img src="https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr.svg?branch=master" alt="Build Status"></a>
-<a href="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr"><img src="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr.svg" alt="Dependency Status"></a>
-<a href="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr/?type=dev"><img src="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr/dev-status.svg" alt="devDependency Status"></a>
+<a href="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr"><img src="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr.svg" alt="Dependency Status"></a>
+<a href="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr/?type=dev"><img src="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr/dev-status.svg" alt="devDependency Status"></a>
 <a href="https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr"><img src="https://www.herokucdn.com/deploy/button.png" alt="Heroku Deploy"></a>
 </p>
 
