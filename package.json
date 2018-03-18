@@ -2,31 +2,22 @@
   "name": "proyecto",
   "version": "1.0.0",
   "description": "Proyecto infraestructura virtual",
+  "license": "",
+  "author": "Antonio de la Vega",
   "main": "server.js",
-  "engines": {
-    "node": "9.7.1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
   },
   "scripts": {
-    "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
-    "start": "node server.js",
-    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
-    "pretty-front": "prettier --print-width=110 --write \"frontend/**/*.js\"",
-    "pretty-back": "prettier --print-width=110 --write \"backend/**/*.js\""
+    "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
+    "start": "node server.js",
+    "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
+    "pretty-back": "prettier --print-width=110 --write \"backend/**/*.js\"",
+    "pretty-front": "prettier --print-width=110 --write \"frontend/**/*.js\""
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run pretty-back && npm run pretty-front",
-      "pre-push": "npm run pretty-back && npm run pretty-front"
-    }
-  },
-  "author": "Antonio de la Vega",
-  "license": "",
   "dependencies": {
     "auth0-lock": "^11.4.0",
     "axios": "^0.18.0",
@@ -61,6 +52,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "",
@@ -71,11 +63,11 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
     "webpack": "^4.0.1",
-    "winston": "^2.4.1",
-    "winston-papertrail": "^1.0.4",
     "webpack-cli": "^2.0.12",
     "webpack-dev-middleware": "^3.0.1",
-    "webpack-hot-middleware": "^2.21.2"
+    "webpack-hot-middleware": "^2.21.2",
+    "winston": "^2.4.1",
+    "winston-papertrail": "^1.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -94,7 +86,15 @@
     "husky": "^0.14.0",
     "jest": "^22.4.2",
     "prettier": "^1.11.1",
-    "react-hot-loader": "^4.0.0",
     "regenerator-runtime": "^0.11.1"
+  },
+  "engines": {
+    "node": "9.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pretty-back && npm run pretty-front",
+      "pre-push": "npm run pretty-back && npm run pretty-front"
+    }
   }
 }
