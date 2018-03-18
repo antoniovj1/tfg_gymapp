@@ -55,11 +55,7 @@ class Nav extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <MenuLateral />
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.flex}
-            >
+            <Typography variant="title" color="inherit" className={classes.flex}>
               Training App
             </Typography>
             <LoginButton authService={this.authService} />

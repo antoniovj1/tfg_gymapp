@@ -31,8 +31,7 @@ module.exports = function(app, express) {
 
     // ===== GET =======
     .get((req, res) => {
-      let profile =
-        req.body.profile || req.query.profile || req.headers.profile;
+      let profile = req.body.profile || req.query.profile || req.headers.profile;
       profile = JSON.parse(profile);
       const id = profile.user_id;
 

@@ -50,8 +50,7 @@ const validate = values => {
             setArrayErrors[sIndex].repetitions = "Required";
           } else {
             var reg = /^\d+$/;
-            if (!reg.test(s.repetitions))
-              setArrayErrors[sIndex].repetitions = "Integer";
+            if (!reg.test(s.repetitions)) setArrayErrors[sIndex].repetitions = "Integer";
           }
 
           if (!s.weight) {

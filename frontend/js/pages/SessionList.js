@@ -48,9 +48,7 @@ class Session extends React.Component {
               sessions !== null &&
               sessions.length !== null &&
               sessions.length > 0 ? (
-                sessions.map(session => (
-                  <SessionItem key={session._id} session={session} />
-                ))
+                sessions.map(session => <SessionItem key={session._id} session={session} />)
               ) : (
                 <h1> No sessions found </h1>
               )}

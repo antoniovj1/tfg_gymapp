@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Grid from 'material-ui/Grid';
-import { withStyles } from 'material-ui/styles';
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import SessionList from './SessionList';
-import Login from './Login';
-import Profile from './Profile';
-import SessionDetail from './SessionDetail';
-import SessionNew from './SessionNew';
-import Footer from '../components/layout/Footer';
-import Nav from '../components/layout/Nav';
-import Restricted from '../utils/restricted';
+import React from "react";
+import PropTypes from "prop-types";
+import Grid from "material-ui/Grid";
+import { withStyles } from "material-ui/styles";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import SessionList from "./SessionList";
+import Login from "./Login";
+import Profile from "./Profile";
+import SessionDetail from "./SessionDetail";
+import SessionNew from "./SessionNew";
+import Footer from "../components/layout/Footer";
+import Nav from "../components/layout/Nav";
+import Restricted from "../utils/restricted";
 
 const styles = theme => ({
   root: {

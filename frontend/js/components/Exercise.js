@@ -51,11 +51,7 @@ export default class Exercise extends React.Component {
 
     if (sets) {
       return (
-        <div
-          className="row text-center"
-          key={movement._id}
-          style={{ marginBottom: `${3}em` }}
-        >
+        <div className="row text-center" key={movement._id} style={{ marginBottom: `${3}em` }}>
           <div>
             <Table
               height={this.state.height}
@@ -70,11 +66,7 @@ export default class Exercise extends React.Component {
                 enableSelectAll={this.state.enableSelectAll}
               >
                 <TableRow>
-                  <TableHeaderColumn
-                    colSpan="4"
-                    tooltip="Super Header"
-                    style={{ textAlign: "center" }}
-                  >
+                  <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: "center" }}>
                     <h4>
                       {" "}
                       <strong> {movement.name} </strong>{" "}
@@ -84,9 +76,7 @@ export default class Exercise extends React.Component {
 
                 <TableRow>
                   <TableHeaderColumn tooltip="Set number">#</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Number of repetitions">
-                    Reps
-                  </TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Number of repetitions">Reps</TableHeaderColumn>
                   <TableHeaderColumn tooltip="Peso">Peso</TableHeaderColumn>
                   <TableHeaderColumn tooltip="Descanso">Rest</TableHeaderColumn>
                 </TableRow>

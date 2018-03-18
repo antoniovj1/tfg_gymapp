@@ -97,12 +97,7 @@ module.exports = function(app, express) {
 
       Exercise.update({ _id: req.params.id_exercise }, { $unset: query })
         .exec()
-        .then(() =>
-          Exercise.update(
-            { _id: req.params.id_exercise },
-            { $pull: { sets: null } }
-          ).exec()
-        )
+        .then(() => Exercise.update({ _id: req.params.id_exercise }, { $pull: { sets: null } }).exec())
         .then(() => {
           res.json({ message: "ok" });
         })

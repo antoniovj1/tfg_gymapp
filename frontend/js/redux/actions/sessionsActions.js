@@ -69,9 +69,7 @@ export function pushSession(session) {
     axios
       .post(`${_API_HOST}/api/training/sessions`, dataSession, config)
       .then(responseSession => {
-        const url = `${_API_HOST}/api/training/sessions/${
-          responseSession.data.session
-        }/exercise`;
+        const url = `${_API_HOST}/api/training/sessions/${responseSession.data.session}/exercise`;
 
         const promises = [];
         const responsesExercise = {};

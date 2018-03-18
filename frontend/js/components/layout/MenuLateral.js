@@ -33,10 +33,7 @@ class MenuLateral extends React.Component {
           onClick={this.toggleDrawer(true)}
           color="inherit"
           aria-label="open drawer"
-          className={classNames(
-            classes.menuButton,
-            this.state.open && classes.hide
-          )}
+          className={classNames(classes.menuButton, this.state.open && classes.hide)}
         >
           <MenuIcon />
         </IconButton>

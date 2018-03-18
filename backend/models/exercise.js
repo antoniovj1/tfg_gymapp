@@ -23,10 +23,7 @@ const ExerciseSchema = new Schema({
 ExerciseSchema.pre("remove", function(next) {
   const exercise = this;
   const Session = require("./training_session");
-  Session.findOneAndUpdate(
-    { _id: exercise.session },
-    { $pull: { exercises: exercise._id } }
-  )
+  Session.findOneAndUpdate({ _id: exercise.session }, { $pull: { exercises: exercise._id } })
     .exec()
     .then(session => {});
 

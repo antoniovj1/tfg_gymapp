@@ -18,8 +18,7 @@ const styles = theme => ({
   })
 });
 
-
-const Session = (props) => {
+const Session = props => {
   const { classes, user } = props;
   let { created_at: createdAt } = user;
 
@@ -30,13 +29,7 @@ const Session = (props) => {
   return (
     <Paper className={classes.root} elevation={4}>
       <div>
-        <img
-          src={user.picture}
-          width="100"
-          height="100"
-          className="img-circle"
-          alt=""
-        />
+        <img src={user.picture} width="100" height="100" className="img-circle" alt="" />
       </div>
 
       <List>
@@ -73,7 +66,7 @@ const Session = (props) => {
       </List>
     </Paper>
   );
-}
+};
 
 /* eslint react/forbid-prop-types: 0 */
 Session.propTypes = {

@@ -25,9 +25,7 @@ const Login = ({ classes } = props) => (
         <Typography variant="headline" component="h2">
           Please Login
         </Typography>
-        <Typography component="p">
-          If you want to continue using the App, please Login
-        </Typography>
+        <Typography component="p">If you want to continue using the App, please Login</Typography>
       </CardContent>
     </Card>
   </div>

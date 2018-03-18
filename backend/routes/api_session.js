@@ -14,8 +14,7 @@ module.exports = function(app, express) {
     .route("/training/sessions/")
     // ===== POST =======
     .post((req, res) => {
-      let profile =
-        req.body.profile || req.query.profile || req.headers.profile;
+      let profile = req.body.profile || req.query.profile || req.headers.profile;
       profile = JSON.parse(profile);
       const id = profile.user_id;
 
@@ -33,10 +32,7 @@ module.exports = function(app, express) {
           return session.save();
         })
         .then(session => [
-          User.findOneAndUpdate(
-            { auth0id: id },
-            { $push: { sessions: session._id } }
-          ),
+          User.findOneAndUpdate({ auth0id: id }, { $push: { sessions: session._id } }),
           session
         ])
         .then(values => {
@@ -49,8 +45,7 @@ module.exports = function(app, express) {
 
     // ===== GET =======
     .get((req, res) => {
-      let profile =
-        req.body.profile || req.query.profile || req.headers.profile;
+      let profile = req.body.profile || req.query.profile || req.headers.profile;
       profile = JSON.parse(profile);
 
       if (profile != null) {
@@ -79,14 +74,10 @@ module.exports = function(app, express) {
         .populate("exercises")
         .exec()
         .then(session =>
-          Session.populate(
-            session,
-            { path: "exercises.movement", model: "Movement" },
-            (err, session) => {
-              if (err) throw err;
-              return session;
-            }
-          )
+          Session.populate(session, { path: "exercises.movement", model: "Movement" }, (err, session) => {
+            if (err) throw err;
+            return session;
+          })
         )
         .then(session => {
           res.json({ message: "ok", session });

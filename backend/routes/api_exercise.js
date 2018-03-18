@@ -49,10 +49,7 @@ module.exports = function(app, express) {
             return exercise.save();
           })
           .then(exercise =>
-            Session.findOneAndUpdate(
-              { _id: req.params.id_session },
-              { $push: { exercises: exercise._id } }
-            )
+            Session.findOneAndUpdate({ _id: req.params.id_session }, { $push: { exercises: exercise._id } })
           )
           .then(session => {
             res.json({ message: "ok" });

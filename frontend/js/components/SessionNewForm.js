@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Field, FieldArray, reduxForm } from 'redux-form';
-import { Checkbox, RadioGroup, Select, TextField, Switch } from 'redux-form-material-ui';
+import React from "react";
+import { connect } from "react-redux";
+import { Field, FieldArray, reduxForm } from "redux-form";
+import { Checkbox, RadioGroup, Select, TextField, Switch } from "redux-form-material-ui";
 
-import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
+import PropTypes from "prop-types";
+import Button from "material-ui/Button";
+import { withStyles } from "material-ui/styles";
+import Grid from "material-ui/Grid";
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from "react-tap-event-plugin";
 
-import validate from './validateNewSession';
-import { fetchMovements } from '../redux/actions/movementsActions';
+import validate from "./validateNewSession";
+import { fetchMovements } from "../redux/actions/movementsActions";
 
 injectTapEventPlugin();
 
@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary
   }
 });
@@ -92,7 +92,7 @@ const renderExercise = ({ fields, meta: { touched, error } }) => (
         >
           Remove Exercise
         </Button>
-        <FieldArray name={`${exercise}.sets`} component={renderSet} />{' '}
+        <FieldArray name={`${exercise}.sets`} component={renderSet} />{" "}
       </div>
     ))}
 
@@ -176,6 +176,6 @@ SessionNewForm.propTypes = {
 };
 
 export default reduxForm({
-  form: 'newSessionForm', // a unique identifier for this form
+  form: "newSessionForm", // a unique identifier for this form
   validate
 })(connect(mapStateToProps, null)(withStyles(styles)(SessionNewForm)));

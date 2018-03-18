@@ -16,8 +16,7 @@ module.exports = function(app, express) {
   // MIDDLEWARE
   //----------
   apiRouter.use((req, res, next) => {
-    const token =
-      req.body.token || req.query.token || req.headers["x-access-token"];
+    const token = req.body.token || req.query.token || req.headers["x-access-token"];
     let profile = req.body.profile || req.query.profile || req.headers.profile;
 
     if (token) {
