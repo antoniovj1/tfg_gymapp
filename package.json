@@ -21,7 +21,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run pretty-back && npm run pretty-front "
+      "pre-commit": "npm run pretty-back && npm run pretty-front",
+      "pre-push": "npm run pretty-back && npm run pretty-front"
     }
   },
   "author": "Antonio de la Vega",
@@ -72,7 +73,9 @@
     "webpack": "^4.0.1",
     "winston": "^2.4.1",
     "winston-papertrail": "^1.0.4",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-middleware": "^3.0.1",
+    "webpack-hot-middleware": "^2.21.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -88,12 +91,10 @@
     "eslint-plugin-jest": "^21.12.3",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "husky": "^0.15.0-rc.11",
+    "husky": "^0.14.0",
     "jest": "^22.4.2",
     "prettier": "^1.11.1",
     "react-hot-loader": "^4.0.0",
-    "regenerator-runtime": "^0.11.1",
-    "webpack-dev-middleware": "^3.0.1",
-    "webpack-hot-middleware": "^2.21.2"
+    "regenerator-runtime": "^0.11.1"
   }
 }
