@@ -1,10 +1,13 @@
 # Proyecto Infraestructra Virtual
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/antoniovj1/infraestructura_virtual_ugr.svg)](https://greenkeeper.io/)
+<p align="center">
+<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/antoniovj1/infraestructura_virtual_ugr.svg"></a>
+<a href="https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr"><img src="https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr.svg?branch=master" alt="Build Status"></a>
+<a href="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr"><img src="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr.svg" alt="Dependency Status"></a>
+<a href="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr/?type=dev"><img src="https://david-dm.org/antoniovj1/infraestructura_virutal_ugr/dev-status.svg" alt="devDependency Status"></a>
+<a href="https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr"><img src="https://www.herokucdn.com/deploy/button.png" alt="Heroku Deploy"></a>
+</p>
 
-[![Build Status](https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr.svg?branch=master)](https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr)
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr)
 
 [![google-cloud-platform](https://s20.postimg.org/z79sumogt/google_cloud_platform_5643dc63.png)](http://146.148.24.77/)
 

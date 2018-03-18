@@ -16,13 +16,12 @@
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
-    "pretty-front": "prettier --printWidth=110 --write \"frontend/**/*.js\"",
-    "pretty-back": "prettier --printWidth=110 --write \"backend/**/*.js\""
+    "pretty-front": "prettier --print-width=110 --write \"frontend/**/*.js\"",
+    "pretty-back": "prettier --print-width=110 --write \"backend/**/*.js\""
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run pretty-front",
-      "pre-commit": "npm run pretty-back"
+      "pre-commit": "npm run pretty-back && npm run pretty-front "
     }
   },
   "author": "Antonio de la Vega",
@@ -52,7 +51,7 @@
     "ip": "^1.1.4",
     "jsonwebtoken": "^8.2.0",
     "jwt-decode": "^2.1.0",
-    "material-ui": "^1.0.0-beta.34",
+    "material-ui": "^1.0.0-beta.38",
     "material-ui-icons": "^1.0.0-beta.17",
     "mongoose": "^5.0.10",
     "morgan": "^1.6.1",
@@ -60,7 +59,6 @@
     "npm": "^5.7.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
@@ -73,7 +71,8 @@
     "redux-thunk": "^2.1.0",
     "webpack": "^4.0.1",
     "winston": "^2.4.1",
-    "winston-papertrail": "^1.0.4"
+    "winston-papertrail": "^1.0.4",
+    "webpack-cli": "^2.0.12"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -89,14 +88,11 @@
     "eslint-plugin-jest": "^21.12.3",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "husky": "^0.15.0-rc.9",
+    "husky": "^0.15.0-rc.11",
     "jest": "^22.4.2",
     "prettier": "^1.11.1",
     "react-hot-loader": "^4.0.0",
     "regenerator-runtime": "^0.11.1",
-    "superagent": "^3.8.2",
-    "supertest": "^3.0.0",
-    "webpack-cli": "^2.0.9",
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2"
   }
