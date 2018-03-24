@@ -38,10 +38,10 @@ export function fetchCompleteSession(id) {
     axios
       .get(url, config)
       .then(response => {
-        if (response.data.message != 'Error - No data') {
+        if (response.data.message !== 'Error - No data') {
           dispatch({
             type: types.FETCH_COMPLETESESSION_FULFILLED,
-            payload: response.data
+            payload: response.data.sessionComplete
           });
         } else {
           dispatch({ type: types.FETCH_COMPELTESESSION_REJECTED, payload: response.data });
