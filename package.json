@@ -15,8 +15,8 @@
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "start": "node server.js",
     "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
-    "pretty-back": "prettier --print-width=110 --write \"backend/**/*.js\"",
-    "pretty-front": "prettier --print-width=110 --write \"frontend/**/*.js\""
+    "pretty-back": "prettier --print-width=110 --single-quote --write \"backend/**/*.js\"",
+    "pretty-front": "prettier --print-width=110 --single-quote --write \"frontend/**/*.js\""
   },
   "dependencies": {
     "auth0-lock": "^11.4.0",
