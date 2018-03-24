@@ -15,8 +15,7 @@
     "postinstall": "webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "start": "node server.js",
     "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
-    "pretty-back": "prettier --print-width=110 --single-quote --write \"backend/**/*.js\"",
-    "pretty-front": "prettier --print-width=110 --single-quote --write \"frontend/**/*.js\""
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "auth0-lock": "^11.4.0",
@@ -85,16 +84,16 @@
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.15.0-rc.12",
     "jest": "^22.4.2",
+    "lint-staged": "^7.0.0",
     "prettier": "^1.11.1",
     "regenerator-runtime": "^0.11.1"
   },
   "engines": {
     "node": "9.7.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run pretty-back && npm run pretty-front",
-      "pre-push": "npm run pretty-back && npm run pretty-front"
-    }
+  "lint-staged": {
+    "*.js": [
+      "prettier --print-width=110 --single-quote --write"
+    ]
   }
 }
