@@ -69,26 +69,24 @@ module.exports = function(app, express) {
   apiRouter
     .route('/training/sessions/:id_session')
     // ===== GET =======
-    .get((req, res) => {
-      Session.findById(req.params.id_session)
-        .populate('exercises')
-        .exec()
-        .then(session =>
-          Session.populate(session, { path: 'exercises.movement', model: 'Movement' }, (err, session) => {
-            if (err) throw err;
-            return session;
-          })
-        )
-        .then(session => {
-          if (session) {
-            res.json({ message: 'ok', session });
-          } else {
-            res.json({ message: 'Error - No data' });
-          }
-        })
-        .catch(err => {
-          res.send(err);
+    .get(async (req, res) => {
+      try {
+        const session = await Session.findById(req.params.id_session)
+          .populate('exercises')
+          .exec();
+        const sessionComplete = await Session.populate(session, {
+          path: 'exercises.movement',
+          model: 'Movement'
         });
+
+        if (sessionComplete) {
+          res.json({ message: 'ok', sessionComplete });
+        } else {
+          res.json({ message: 'Error - No data' });
+        }
+      } catch (err) {
+        res.send(err);
+      }
     })
 
     // ===== DELETE =======
