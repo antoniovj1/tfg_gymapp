@@ -1,6 +1,6 @@
-import * as types from "../types";
-import * as AuthService from "../../utils/AuthService";
-import * as authActions from "../actions/authActions";
+import * as types from '../types';
+import * as AuthService from '../../utils/AuthService';
+import * as authActions from '../actions/authActions';
 
 export { types as authTypes, authActions };
 

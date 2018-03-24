@@ -1,15 +1,15 @@
-const bodyParser = require("body-parser");
-const Exercise = require("../models/exercise");
-const Session = require("../models/training_session");
-const Movement = require("../models/movement");
-const config = require("../../config");
+const bodyParser = require('body-parser');
+const Exercise = require('../models/exercise');
+const Session = require('../models/training_session');
+const Movement = require('../models/movement');
+const config = require('../../config');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
   // /training/exercise/:id_exercise/set
   // -------------------
   apiRouter
-    .route("/training/exercise/:id_exercise/set")
+    .route('/training/exercise/:id_exercise/set')
 
     // ===== POST =======
     .post((req, res) => {
@@ -26,7 +26,7 @@ module.exports = function(app, express) {
           return exercise.save();
         })
         .then(() => {
-          res.json({ message: "ok" });
+          res.json({ message: 'ok' });
         })
         .catch(err => {
           res.send(err);
@@ -36,10 +36,10 @@ module.exports = function(app, express) {
     // ===== GET =======
     .get((req, res) => {
       Exercise.findById(req.params.id_exercise)
-        .select("sets")
+        .select('sets')
         .exec()
         .then(sets => {
-          res.json({ message: "ok", sets });
+          res.json({ message: 'ok', sets });
         })
         .catch(err => {
           res.send(err);
@@ -49,17 +49,17 @@ module.exports = function(app, express) {
   // /training/exercise/:id_exercise/set/:num
   // -------------------
   apiRouter
-    .route("/training/exercise/:id_exercise/set/:num")
+    .route('/training/exercise/:id_exercise/set/:num')
 
     // ===== GET =======
     .get((req, res) => {
       Exercise.findById(req.params.id_exercise)
-        .slice("sets", [parseInt(req.params.num), 1])
+        .slice('sets', [parseInt(req.params.num), 1])
         .exec()
         .then(set => {
           set = set.sets[0];
 
-          res.json({ message: "ok", set });
+          res.json({ message: 'ok', set });
         })
         .catch(err => {
           res.send(err);
@@ -81,7 +81,7 @@ module.exports = function(app, express) {
       Exercise.update({ _id: req.params.id_exercise }, { $set: query })
         .exec()
         .then(() => {
-          res.json({ message: "ok" });
+          res.json({ message: 'ok' });
         })
         .catch(err => {
           res.send(err);
@@ -99,7 +99,7 @@ module.exports = function(app, express) {
         .exec()
         .then(() => Exercise.update({ _id: req.params.id_exercise }, { $pull: { sets: null } }).exec())
         .then(() => {
-          res.json({ message: "ok" });
+          res.json({ message: 'ok' });
         })
         .catch(err => {
           res.send(err);

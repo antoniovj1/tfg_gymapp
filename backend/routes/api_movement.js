@@ -1,6 +1,6 @@
-const bodyParser = require("body-parser");
-const Movement = require("../models/movement");
-const config = require("../../config");
+const bodyParser = require('body-parser');
+const Movement = require('../models/movement');
+const config = require('../../config');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
@@ -8,7 +8,7 @@ module.exports = function(app, express) {
   // /training/movements
   // -------------------
   apiRouter
-    .route("/training/movements")
+    .route('/training/movements')
 
     // ===== POST =======
     .post((req, res) => {
@@ -26,13 +26,13 @@ module.exports = function(app, express) {
       movement
         .save()
         .then(movement => {
-          res.json({ message: "ok", movement });
+          res.json({ message: 'ok', movement });
         })
         .catch(err => {
           if (err.code == 11000)
             return res.json({
               success: false,
-              message: "A movement with that name already exists. "
+              message: 'A movement with that name already exists. '
             });
           return res.send(err);
         });
@@ -53,11 +53,11 @@ module.exports = function(app, express) {
   // /training/movementsname
   // -------------------
   apiRouter
-    .route("/training/movementsname")
+    .route('/training/movementsname')
     // ===== GET =======
     .get((req, res) => {
       Movement.find({})
-        .select("name -_id")
+        .select('name -_id')
         .exec()
         .then(movements => {
           res.json(movements);
@@ -70,14 +70,14 @@ module.exports = function(app, express) {
   // /training/movements/:name
   // -------------------
   apiRouter
-    .route("/training/movements/:name")
+    .route('/training/movements/:name')
     // ===== GET =======
     .get((req, res) => {
       Movement.findOne({ name: req.params.name })
         .exec()
         .then(movement => {
-          if (movement) res.json({ message: "ok", movement });
-          else res.json({ message: "fail", detail: "no exercise" });
+          if (movement) res.json({ message: 'ok', movement });
+          else res.json({ message: 'fail', detail: 'no exercise' });
         })
         .catch(err => {
           res.send(err);
@@ -96,7 +96,7 @@ module.exports = function(app, express) {
           return movement.save();
         })
         .then(movement => {
-          res.json({ message: "ok", movement });
+          res.json({ message: 'ok', movement });
         })
         .catch(err => {
           res.send(err);
@@ -108,7 +108,7 @@ module.exports = function(app, express) {
       Movement.remove({ name: req.params.name })
         .exec()
         .then(() => {
-          res.json({ message: "ok" });
+          res.json({ message: 'ok' });
         })
         .catch(err => {
           res.send(err);

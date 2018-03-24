@@ -1,10 +1,10 @@
-import React from "react";
-import Button from "material-ui/Button";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Button from 'material-ui/Button';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { authActions } from "../redux/reducers/authReducer";
-import * as AuthService from "../utils/AuthService";
+import { authActions } from '../redux/reducers/authReducer';
+import * as AuthService from '../utils/AuthService';
 
 const mapStateToProps = state => ({
   auth: state.login

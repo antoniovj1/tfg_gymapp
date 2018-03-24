@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 const style = {
-  width: "350px",
-  marginLeft: "20px",
-  marginTop: "20px",
-  display: "inline-block"
+  width: '350px',
+  marginLeft: '20px',
+  marginTop: '20px',
+  display: 'inline-block'
 };
 
 class ErrorBoundary extends Component {

@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const Session = require("./training_session");
+const Session = require('./training_session');
 
 const ExerciseSchema = new Schema({
-  session: { type: mongoose.Schema.Types.ObjectId, ref: "Session" },
-  movement: { type: mongoose.Schema.Types.ObjectId, ref: "Movement" },
+  session: { type: mongoose.Schema.Types.ObjectId, ref: 'Session' },
+  movement: { type: mongoose.Schema.Types.ObjectId, ref: 'Movement' },
   timestamp: {
     type: Date,
     default: Date.now
@@ -20,9 +20,9 @@ const ExerciseSchema = new Schema({
   ]
 });
 
-ExerciseSchema.pre("remove", function(next) {
+ExerciseSchema.pre('remove', function(next) {
   const exercise = this;
-  const Session = require("./training_session");
+  const Session = require('./training_session');
   Session.findOneAndUpdate({ _id: exercise.session }, { $pull: { exercises: exercise._id } })
     .exec()
     .then(session => {});
@@ -30,4 +30,4 @@ ExerciseSchema.pre("remove", function(next) {
   next();
 });
 
-module.exports = mongoose.model("Exercise", ExerciseSchema);
+module.exports = mongoose.model('Exercise', ExerciseSchema);

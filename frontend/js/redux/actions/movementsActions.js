@@ -1,10 +1,10 @@
-import axios from "axios";
-import * as types from "../types";
+import axios from 'axios';
+import * as types from '../types';
 
 export function fetchMovements() {
   return function(dispatch) {
     const config = {
-      headers: { "x-access-token": localStorage.getItem("id_token") }
+      headers: { 'x-access-token': localStorage.getItem('id_token') }
     };
     dispatch({ type: types.FETCH_MOVEMENTS_PENDING });
 

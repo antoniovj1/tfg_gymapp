@@ -1,12 +1,12 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import Card, { CardContent, CardMedia } from "material-ui/Card";
-import Typography from "material-ui/Typography";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import Card, { CardContent, CardMedia } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
 
 const styles = {
   card: {
-    margin: "0 auto",
-    maxWidth: "80%"
+    margin: '0 auto',
+    maxWidth: '80%'
   },
   media: {
     height: 200

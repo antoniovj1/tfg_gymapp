@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { withStyles } from "material-ui/styles";
-import Button from "material-ui/Button";
-import ContentAdd from "material-ui-icons/Add";
-import Grid from "material-ui/Grid";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import ContentAdd from 'material-ui-icons/Add';
+import Grid from 'material-ui/Grid';
 
-import SessionItem from "../components/SessionItem";
+import SessionItem from '../components/SessionItem';
 
-import { fetchSessions } from "../redux/actions/sessionsActions";
+import { fetchSessions } from '../redux/actions/sessionsActions';
 
 // import injectTapEventPlugin from 'react-tap-event-plugin';
 // injectTapEventPlugin();
@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.secondary
   }
 });
@@ -38,13 +38,13 @@ class Session extends React.Component {
           <Grid item xs={6}>
             <Link to="/session/new">
               <Button variant="fab">
-                {" "}
-                <ContentAdd />{" "}
-              </Button>{" "}
+                {' '}
+                <ContentAdd />{' '}
+              </Button>{' '}
             </Link>
             <div>
-              {" "}
-              {typeof sessions !== "undefined" &&
+              {' '}
+              {typeof sessions !== 'undefined' &&
               sessions !== null &&
               sessions.length !== null &&
               sessions.length > 0 ? (

@@ -1,19 +1,19 @@
-import React from "react";
-import Drawer from "material-ui/Drawer";
-import { MenuItem } from "material-ui/Menu";
-import MenuIcon from "material-ui-icons/Menu";
-import IconButton from "material-ui/IconButton";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { withStyles } from "material-ui/styles";
-import classNames from "classnames";
+import React from 'react';
+import Drawer from 'material-ui/Drawer';
+import { MenuItem } from 'material-ui/Menu';
+import MenuIcon from 'material-ui-icons/Menu';
+import IconButton from 'material-ui/IconButton';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import classNames from 'classnames';
 
 const styles = {
   list: {
     width: 250
   },
   listFull: {
-    width: "auto"
+    width: 'auto'
   }
 };
 
@@ -44,13 +44,13 @@ class MenuLateral extends React.Component {
             onClick={this.toggleDrawer(false)}
             onKeyDown={this.toggleDrawer(false)}
           >
-            <Link to="/" style={{ textDecoration: "none" }}>
-              {" "}
-              <MenuItem onClick={this.handleClose}>Home</MenuItem>{" "}
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              {' '}
+              <MenuItem onClick={this.handleClose}>Home</MenuItem>{' '}
             </Link>
-            <Link to="/profile" style={{ textDecoration: "none" }}>
-              {" "}
-              <MenuItem onClick={this.handleClose}>Profile</MenuItem>{" "}
+            <Link to="/profile" style={{ textDecoration: 'none' }}>
+              {' '}
+              <MenuItem onClick={this.handleClose}>Profile</MenuItem>{' '}
             </Link>
           </div>
         </Drawer>

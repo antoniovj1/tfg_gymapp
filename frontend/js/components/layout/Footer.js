@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const divStyle = {
-  margin: "20px 0 20px 0"
+  margin: '20px 0 20px 0'
 };
 
 const Footer = () => (

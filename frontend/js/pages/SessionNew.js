@@ -8,16 +8,16 @@ import { pushSession } from '../redux/actions/sessionsActions';
   sessions: store.sessions
 }))
 class SessionNew extends React.Component {
-  handleSubmit = values => {
-    this.props.dispatch(pushSession(values));
-  };
-
   componentWillReceiveProps() {
     if (this.props.sessions.pushed) {
       this.props.pushed = false;
       this.props.history.push('/');
     }
   }
+
+  handleSubmit = values => {
+    this.props.dispatch(pushSession(values));
+  };
 
   render() {
     return <SessionNewForm onSubmit={this.handleSubmit} />;

@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const Session = require("./training_session");
+const Session = require('./training_session');
 
 // user schema
 const UserSchema = new Schema({
@@ -11,15 +11,15 @@ const UserSchema = new Schema({
   height: Number,
   weight: Number,
 
-  sessions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Session" }],
+  sessions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Session' }],
   role: {
     type: String,
-    enum: ["Admin", "Basic"],
-    default: "Basic"
+    enum: ['Admin', 'Basic'],
+    default: 'Basic'
   }
 });
 
-UserSchema.pre("delete", function(next) {
+UserSchema.pre('delete', function(next) {
   const user = this;
 
   user.sessions.forEach(session => {
@@ -33,4 +33,4 @@ UserSchema.pre("delete", function(next) {
   next();
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

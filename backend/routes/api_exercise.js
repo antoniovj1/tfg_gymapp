@@ -1,8 +1,8 @@
-const bodyParser = require("body-parser");
-const Exercise = require("../models/exercise");
-const Session = require("../models/training_session");
-const Movement = require("../models/movement");
-const config = require("../../config");
+const bodyParser = require('body-parser');
+const Exercise = require('../models/exercise');
+const Session = require('../models/training_session');
+const Movement = require('../models/movement');
+const config = require('../../config');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
@@ -10,14 +10,14 @@ module.exports = function(app, express) {
   // /training/exercise/
   //----------
   apiRouter
-    .route("/training/sessions/:id_session/exercise/")
+    .route('/training/sessions/:id_session/exercise/')
 
     // ===== POST =======
     .post((req, res) => {
       if (!req.body.movement || !req.params.id_session) {
         res.json({
           success: false,
-          message: "fail"
+          message: 'fail'
         });
       } else {
         const exercise = new Exercise();
@@ -27,12 +27,12 @@ module.exports = function(app, express) {
           .then(movement => {
             const result = [];
 
-            if (!movement) throw { message: "fail", detail: "no movement" };
+            if (!movement) throw { message: 'fail', detail: 'no movement' };
 
             return Session.findById(req.params.id_session)
               .exec()
               .then(session => {
-                if (!session) throw { message: "fail", detail: "no session" };
+                if (!session) throw { message: 'fail', detail: 'no session' };
                 return [movement, session];
               });
           })
@@ -52,7 +52,7 @@ module.exports = function(app, express) {
             Session.findOneAndUpdate({ _id: req.params.id_session }, { $push: { exercises: exercise._id } })
           )
           .then(session => {
-            res.json({ message: "ok" });
+            res.json({ message: 'ok' });
           })
           .catch(err => {
             res.send(err);
@@ -63,7 +63,7 @@ module.exports = function(app, express) {
   // /training/exercise/:id_exercise
   //----------
   apiRouter
-    .route("/training/exercise/:id_exercise")
+    .route('/training/exercise/:id_exercise')
     // ===== GET =======
     .get((req, res) => {
       Exercise.findById(req.params.id_exercise)
@@ -72,7 +72,7 @@ module.exports = function(app, express) {
           res.json(exercise);
         })
         .catch(err => {
-          res.send({ err, message: "fail" });
+          res.send({ err, message: 'fail' });
         });
     })
 
@@ -82,10 +82,10 @@ module.exports = function(app, express) {
         .exec()
         .then(exercise => exercise.remove())
         .then(() => {
-          res.json({ message: "ok" });
+          res.json({ message: 'ok' });
         })
         .catch(err => {
-          res.send({ err, message: "fail" });
+          res.send({ err, message: 'fail' });
         });
     });
 

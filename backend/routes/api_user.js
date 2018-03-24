@@ -1,6 +1,6 @@
-const bodyParser = require("body-parser");
-const User = require("../models/user");
-const config = require("../../config");
+const bodyParser = require('body-parser');
+const User = require('../models/user');
+const config = require('../../config');
 
 const superSecret = config.secret;
 
@@ -10,7 +10,7 @@ module.exports = function(app, express) {
   // /users
   // ------
   apiRouter
-    .route("/users")
+    .route('/users')
 
     // ===== GET =======
     .get((req, res) => {
@@ -27,7 +27,7 @@ module.exports = function(app, express) {
   //  /user
   // -----------------
   apiRouter
-    .route("/user")
+    .route('/user')
 
     // ===== GET =======
     .get((req, res) => {

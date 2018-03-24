@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -13,4 +13,4 @@ const MovementSchema = new Schema({
   ]
 });
 
-module.exports = mongoose.model("Movement", MovementSchema);
+module.exports = mongoose.model('Movement', MovementSchema);

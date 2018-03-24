@@ -3,7 +3,7 @@ import * as types from '../types';
 
 export function fetchSessions() {
   return function(dispatch) {
-    const config = { 
+    const config = {
       headers: {
         'x-access-token': localStorage.getItem('id_token'),
         profile: localStorage.getItem('profile')

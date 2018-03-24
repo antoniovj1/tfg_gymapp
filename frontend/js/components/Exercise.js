@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -6,16 +6,16 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn
-} from "material-ui/Table";
+} from 'material-ui/Table';
 
 const styles = {
   propContainer: {
     width: 200,
-    overflow: "hidden",
-    margin: "20px auto 0"
+    overflow: 'hidden',
+    margin: '20px auto 0'
   },
   propToggleHeader: {
-    margin: "20px auto 10px"
+    margin: '20px auto 10px'
   }
 };
 
@@ -66,10 +66,10 @@ export default class Exercise extends React.Component {
                 enableSelectAll={this.state.enableSelectAll}
               >
                 <TableRow>
-                  <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: "center" }}>
+                  <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: 'center' }}>
                     <h4>
-                      {" "}
-                      <strong> {movement.name} </strong>{" "}
+                      {' '}
+                      <strong> {movement.name} </strong>{' '}
                     </h4>
                   </TableHeaderColumn>
                 </TableRow>

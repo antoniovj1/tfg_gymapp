@@ -1,15 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import UserLeft from "../components/profile/UserLeft";
+import React from 'react';
+import { connect } from 'react-redux';
+import UserLeft from '../components/profile/UserLeft';
+import { fetchActualUser } from '../redux/actions/userActions';
 
-import { fetchActualUser } from "../redux/actions/userActions";
-
-@connect(store => ({
-  user: store.user.user
-}))
-export default class Session extends React.Component {
+const mapStateToProps = store => ({ user: store.user.user });
+const mapDispatchToProps = dispatch => ({
+  fetchActualUser: () => {
+    dispatch(fetchActualUser());
+  }
+});
+class Session extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchActualUser());
+    this.props.fetchActualUser();
   }
 
   render() {
@@ -25,3 +27,5 @@ export default class Session extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Session);
