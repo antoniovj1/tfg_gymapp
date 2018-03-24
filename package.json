@@ -32,7 +32,7 @@
     "bluebird": "^3.4.6",
     "body-parser": "^1.14.1",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "classnames": "^2.2.5",
     "cors": "^2.8.1",
     "express": "^4.16.3",
