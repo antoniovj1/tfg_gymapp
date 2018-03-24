@@ -1,12 +1,12 @@
-import axios from "axios";
-import * as types from "../types";
+import axios from 'axios';
+import * as types from '../types';
 
 export function fetchSessions() {
   return function(dispatch) {
-    const config = {
+    const config = { 
       headers: {
-        "x-access-token": localStorage.getItem("id_token"),
-        profile: localStorage.getItem("profile")
+        'x-access-token': localStorage.getItem('id_token'),
+        profile: localStorage.getItem('profile')
       }
     };
     dispatch({ type: types.FETCH_SESSION_PENDING });
@@ -29,8 +29,8 @@ export function fetchCompleteSession(id) {
   return function(dispatch) {
     const config = {
       headers: {
-        "x-access-token": localStorage.getItem("id_token"),
-        profile: localStorage.getItem("profile")
+        'x-access-token': localStorage.getItem('id_token'),
+        profile: localStorage.getItem('profile')
       }
     };
     dispatch({ type: types.FETCH_COMPELTESESSION_PENDING });
@@ -38,10 +38,14 @@ export function fetchCompleteSession(id) {
     axios
       .get(url, config)
       .then(response => {
-        dispatch({
-          type: types.FETCH_COMPLETESESSION_FULFILLED,
-          payload: response.data
-        });
+        if (response.data.message != 'Error - No data') {
+          dispatch({
+            type: types.FETCH_COMPLETESESSION_FULFILLED,
+            payload: response.data
+          });
+        } else {
+          dispatch({ type: types.FETCH_COMPELTESESSION_REJECTED, payload: response.data });
+        }
       })
       .catch(err => {
         dispatch({ type: types.FETCH_COMPELTESESSION_REJECTED, payload: err });
@@ -53,8 +57,8 @@ export function pushSession(session) {
   return function(dispatch) {
     const config = {
       headers: {
-        "x-access-token": localStorage.getItem("id_token"),
-        profile: localStorage.getItem("profile")
+        'x-access-token': localStorage.getItem('id_token'),
+        profile: localStorage.getItem('profile')
       }
     };
 
