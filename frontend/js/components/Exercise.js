@@ -1,107 +1,68 @@
 import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
 
-const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0'
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: '#00C49F',
+    color: theme.palette.common.white
   },
-  propToggleHeader: {
-    margin: '20px auto 10px'
+  body: {
+    fontSize: 14
   }
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto'
+  },
+  table: {
+    minWidth: 700
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default
+    }
+  }
+});
+
+const CustomizedTable = props => {
+  const { classes } = props;
+  const { sets } = props.exercise;
+  const { movement } = props.exercise;
+
+  return (
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <CustomTableCell>{`#${movement.name}`}</CustomTableCell>
+            <CustomTableCell numeric>Reps</CustomTableCell>
+            <CustomTableCell numeric>Weight</CustomTableCell>
+            <CustomTableCell numeric>Rest</CustomTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sets.map((set, index) => (
+            <TableRow className={classes.row} key={index}>
+              <CustomTableCell>{`Serie número ${index + 1}`}</CustomTableCell>
+              <CustomTableCell numeric>{set.repetitions}</CustomTableCell>
+              <CustomTableCell numeric>{set.weight}</CustomTableCell>
+              <CustomTableCell numeric>{set.rest}</CustomTableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
+  );
 };
 
-export default class Exercise extends React.Component {
-  constructor(props) {
-    super(props);
+CustomizedTable.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
-    this.state = {
-      fixedHeader: true,
-      stripedRows: true,
-      showRowHover: false,
-      selectable: true,
-      multiSelectable: false,
-      enableSelectAll: false,
-      deselectOnClickaway: true,
-      showCheckboxes: false
-    };
-  }
-
-  handleToggle = (event, toggled) => {
-    this.setState({
-      [event.target.name]: toggled
-    });
-  };
-
-  handleChange = event => {
-    this.setState({ height: event.target.value });
-  };
-
-  render() {
-    const { exercise } = this.props;
-    const { movement, sets } = exercise;
-
-    if (sets) {
-      return (
-        <div className="row text-center" key={movement._id} style={{ marginBottom: `${3}em` }}>
-          <div>
-            <Table
-              height={this.state.height}
-              fixedHeader={this.state.fixedHeader}
-              fixedFooter={this.state.fixedFooter}
-              selectable={this.state.selectable}
-              multiSelectable={this.state.multiSelectable}
-            >
-              <TableHeader
-                displaySelectAll={this.state.showCheckboxes}
-                adjustForCheckbox={this.state.showCheckboxes}
-                enableSelectAll={this.state.enableSelectAll}
-              >
-                <TableRow>
-                  <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{ textAlign: 'center' }}>
-                    <h4>
-                      {' '}
-                      <strong> {movement.name} </strong>{' '}
-                    </h4>
-                  </TableHeaderColumn>
-                </TableRow>
-
-                <TableRow>
-                  <TableHeaderColumn tooltip="Set number">#</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Number of repetitions">Reps</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Peso">Peso</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Descanso">Rest</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-
-              <TableBody
-                displayRowCheckbox={false}
-                deselectOnClickaway={this.state.deselectOnClickaway}
-                showRowHover={this.state.showRowHover}
-                stripedRows={this.state.stripedRows}
-              >
-                {sets.map((set, index) => (
-                  <TableRow key={index}>
-                    <TableRowColumn>{index + 1}</TableRowColumn>
-                    <TableRowColumn>{set.repetitions}</TableRowColumn>
-                    <TableRowColumn>{set.weight}</TableRowColumn>
-                    <TableRowColumn>{set.rest}</TableRowColumn>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  }
-}
+export default withStyles(styles)(CustomizedTable);

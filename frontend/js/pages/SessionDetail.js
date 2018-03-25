@@ -4,19 +4,37 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import AppBar from 'material-ui/AppBar';
+import Typography from 'material-ui/Typography';
 import Exercise from '../components/Exercise';
 import { dateFormat, secondsToHms } from '../utils/time';
 import { fetchCompleteSession } from '../redux/actions/sessionsActions';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#B0171F', '#7FFF00', '#FFB90F', '#FF0000'];
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit - 25,
     backgroundColor: theme.palette.background.paper
   }
 });
+
+const TabContainer = props => (
+  <Typography component="div" style={{ padding: 8 * 3 }}>
+    {props.children}
+  </Typography>
+);
+
+const InfoCard = props => (
+  <div style={styles.card}>
+    <div style={styles.container}>
+      <h4>
+        <b>{props.cardText}</b>
+      </h4>
+      <p>{props.cardValue}</p>
+    </div>
+  </div>
+);
 
 const mapStateToProps = store => ({ completeSession: store.sessions.completeSession });
 
@@ -30,7 +48,7 @@ class SessionDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'a'
+      selectedTab: 0
     };
   }
 
@@ -47,7 +65,6 @@ class SessionDetail extends React.Component {
 
   render() {
     let completeSession;
-    console.log(this.props.completeSession);
     if (this.props.completeSession) {
       completeSession = this.props.completeSession;
     }
@@ -84,9 +101,7 @@ class SessionDetail extends React.Component {
           const val = Math.round(muscleStats[muscleStat] / norm * 100);
           muscleStatsNorm.push({ name: muscleStat, value: val });
         }
-      }
 
-      if (exercises) {
         exercises.forEach(exercise => {
           const { sets } = exercise;
           sets.forEach(set => {
@@ -94,63 +109,37 @@ class SessionDetail extends React.Component {
             nSets += 1;
           });
         });
-      }
 
-      if (exercises) {
+        const { selectedTab: value } = this.state;
+        const { classes } = this.props;
+
         return (
-          <div>
-            <Tabs value={this.state.selectedTab} onChange={this.handleChange}>
-              <Tab label="Resumen" value="a">
+          <div className={classes.root}>
+            <AppBar position="static">
+              <Tabs value={value} onChange={this.handleChange}>
+                <Tab label="Resumen" />
+                <Tab label="Detalles" />
+              </Tabs>
+            </AppBar>
+            {value === 0 && (
+              <TabContainer>
                 <div className="row">
                   <div className="col-sm-1" />
-
                   <div className="col-sm-5">
-                    <div style={styles.card}>
-                      <div style={styles.container}>
-                        <h4>
-                          <b>Fecha</b>
-                        </h4>
-                        <p>{date}</p>
-                      </div>
-                    </div>
+                    <InfoCard cardText="Fecha" cardValue={date} />
                   </div>
-
                   <div className="col-sm-5">
-                    <div style={styles.card}>
-                      <div style={styles.container}>
-                        <h4>
-                          <b>Tiempo</b>
-                        </h4>
-                        <p>{time}</p>
-                      </div>
-                    </div>
+                    <InfoCard cardText="Tiempo" cardValue={time} />
                     <div className="col-sm-1" />
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="col-sm-1" />
-
                   <div className="col-sm-5">
-                    <div style={styles.card}>
-                      <div style={styles.container}>
-                        <h4>
-                          <b>Total Series</b>
-                        </h4>
-                        <p>{nSets}</p>
-                      </div>
-                    </div>
+                    <InfoCard cardText="Total Series" cardValue={nSets} />
                   </div>
-
                   <div className="col-sm-5">
-                    <div style={styles.card}>
-                      <div style={styles.container}>
-                        <h4>
-                          <b>Peso Total</b>
-                        </h4>
-                        <p>{pesoTot} KG</p>
-                      </div>
-                    </div>
+                    <InfoCard cardText="Peso Total" cardValue={`${pesoTot}KG`} />
                     <div className="col-sm-1" />
                   </div>
                 </div>
@@ -161,7 +150,7 @@ class SessionDetail extends React.Component {
                   style={{
                     paddingTop: '3em',
                     width: '100%',
-                    height: '25em'
+                    height: '35em'
                   }}
                 >
                   <ResponsiveContainer>
@@ -172,31 +161,27 @@ class SessionDetail extends React.Component {
                         outerRadius={80}
                         dataKey="value"
                         nameKey="name"
-                        fill="#8884d8"
                         paddingAngle={5}
                         label
                       >
                         {muscleStatsNorm.map((entry, index) => (
-                          <Cell
-                            name={entry.name.toUpperCase()}
-                            key={`cell-${entry.index}`}
-                            fill={COLORS[index % COLORS.length]}
-                          />
+                          <Cell fill={COLORS[index % COLORS.length]} key={entry} />
                         ))}
                       </Pie>
-                      <Legend align="center" layout="horizontal" verticalAlign="top" height={100} />
+                      <Legend align="center" layout="horizontal" verticalAlign="top" />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
                 <div className="col-sm-3" />
-              </Tab>
-
-              <Tab label="Detalles" value="b">
+              </TabContainer>
+            )}
+            {value === 1 && (
+              <TabContainer>
                 <div className="row" style={styles.divStyle}>
                   {exercises.map(exercise => <Exercise key={exercise._id} exercise={exercise} />)}
                 </div>
-              </Tab>
-            </Tabs>
+              </TabContainer>
+            )}
           </div>
         );
       }
