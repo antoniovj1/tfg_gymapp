@@ -1,28 +1,38 @@
-const webpack = require("webpack");
-const path = require("path");
+const webpack = require('webpack');
+const path = require('path');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const env = process.env.NODE_ENV;
+const isProd = env === 'production';
 const client_id = process.env.CLIENT_ID;
 const domain = process.env.DOMAIN;
 
 function getPlugins() {
   const plugins = [];
 
-  if (env === "production") {
-    console.log("WebPack for PRODUCTION");
+  if (isProd) {
+    console.log('WebPack for PRODUCTION');
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); // Scope Hoisting
 
     plugins.push(
       new webpack.DefinePlugin({
-        _API_HOST: JSON.stringify("http://localhost:8080")
+        _API_HOST: JSON.stringify('http://localhost:8080')
+      }),
+      new CompressionPlugin({
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
       })
     );
   } else {
-    console.log("WebPack for DEVELOPMENT");
+    console.log('WebPack for DEVELOPMENT');
 
     plugins.push(
       new webpack.DefinePlugin({
-        _API_HOST: JSON.stringify("http://localhost:8080")
+        _API_HOST: JSON.stringify('http://localhost:8080')
       })
     );
   }
@@ -30,10 +40,18 @@ function getPlugins() {
   plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(), // Merge chunks
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(env),
-      "process.env.CLIENT_ID": `'${client_id}'`,
-      "process.env.DOMAIN": `'${domain}'`
+      'process.env': {
+        NODE_ENV: JSON.stringify(env),
+        CLIENT_ID: `'${client_id}'`,
+        DOMAIN: `'${domain}'`
+      }
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: isProd ? 'static' : 'disabled',
+      openAnalyzer: false,
+      generateStatsFile: isProd
     })
   );
 
@@ -41,41 +59,48 @@ function getPlugins() {
 }
 
 module.exports = {
-  context: path.join(__dirname, "src"),
-  mode: env === "production" ? "production" : "development",
-  devtool: env === "production" ? "source-map" : "cheap-module-source-map",
+  context: path.join(__dirname, 'src'),
+  mode: isProd ? 'production' : 'development',
+  devtool: isProd ? 'source-map' : 'cheap-module-source-map',
   entry: [
-    "webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000",
-    path.join(__dirname, "/frontend/js/client.js")
+    'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000',
+    path.join(__dirname, '/frontend/js/client.js'),
   ],
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js"]
+    extensions: ['.tsx', '.ts', '.jsx', '.js']
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         query: {
-          presets: ["react", "es2015", "stage-0"],
-          plugins: [
-            "react-html-attrs",
-            "transform-class-properties",
-            "transform-decorators-legacy"
-          ]
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy']
         }
       }
     ]
   },
   output: {
-    path: path.join(__dirname, "/frontend/"),
-    publicPath: "/",
-    filename: "client.min.js"
+    path: path.join(__dirname, '/frontend/'),
+    publicPath: '/',
+    filename: 'client.min.js'
   },
   plugins: getPlugins(),
+  profile: isProd,
 
   optimization: {
-    noEmitOnErrors: true
+    noEmitOnErrors: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          name: 'vendor',
+          chunks: 'initial',
+          enforce: true
+        }
+      }
+    }
   }
 };
