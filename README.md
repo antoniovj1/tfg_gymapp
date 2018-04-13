@@ -147,7 +147,7 @@ RUN npm install -g nodemon
 RUN npm install -g webpack
 RUN webpack
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["nodemon", "server.js"] 
 ```
@@ -279,7 +279,7 @@ En este archivo se especifican las configuraciones que deben realizarse a la má
   vars:
     - homeDir: /home/ubuntu
     - appDir : infraestructura_virtual_ugr
-    - default: server {  listen 80; server_name YOUR_SERVERS_IP_ADDRESS;  location / { proxy_pass "http://127.0.0.1:8080"; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_cache_bypass $http_upgrade; }}
+    - default: server {  listen 80; server_name YOUR_SERVERS_IP_ADDRESS;  location / { proxy_pass "http://127.0.0.1:80"; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_cache_bypass $http_upgrade; }}
 
   tasks:
   - name: Node.js + NPM
