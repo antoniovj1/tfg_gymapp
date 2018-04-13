@@ -15,6 +15,9 @@ class Session extends React.Component {
   }
 
   render() {
+    if (Array.isArray(this.props.user)) {
+      return null;
+    }
     return (
       <div className="container">
         <div className="row  text-center">
