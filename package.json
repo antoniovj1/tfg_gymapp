@@ -1,13 +1,13 @@
 {
   "name": "proyecto",
   "version": "1.0.0",
-  "description": "Proyecto infraestructura virtual",
+  "description": "TFG UGR - App registro entrenamiento",
   "license": "",
   "author": "Antonio de la Vega",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
+    "url": "https://github.com/antoniovj1/tfg_gymapp/"
   },
   "scripts": {
     "build": "webpack --config ./webpack.config.js --display-error-details --progress --colors",

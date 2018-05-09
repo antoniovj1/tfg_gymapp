@@ -13,15 +13,15 @@ def info_servidor():
 def install_app():
     """Clona el repositorio e instala las dependencias"""
     with shell_env(NODE_ENV='production'):
-        run('rm -rf infraestructura_virtual_ugr')
-        run('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
-        run('cd infraestructura_virtual_ugr && npm install')
+        run('rm -rf tfg_gymapp')
+        run('git clone https://github.com/antoniovj1/tfg_gymapp.git')
+        run('cd tfg_gymapp && npm install')
 
 
 def start_app():
     """Inicia la aplicación (node,mongo y nginx)"""
     run('sudo service mongod start')
-    run('sleep 7 && cd infraestructura_virtual_ugr && sudo pm2 start server.js')
+    run('sleep 7 && cd tfg_gymapp && sudo pm2 start server.js')
     run('sudo service nginx restart')
 
 

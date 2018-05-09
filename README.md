@@ -1,19 +1,19 @@
-# Proyecto Infraestructra Virtual
+# TFG UGR - App Registro de entrenamiento
 
 <p align="center">
-<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/antoniovj1/infraestructura_virtual_ugr.svg"></a>
-<a href="https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr"><img src="https://travis-ci.org/antoniovj1/infraestructura_virtual_ugr.svg?branch=master" alt="Build Status"></a>
-<a href="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr"><img src="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr.svg" alt="Dependency Status"></a>
-<a href="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr/?type=dev"><img src="https://david-dm.org/antoniovj1/infraestructura_virtual_ugr/dev-status.svg" alt="devDependency Status"></a>
-<a href="https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr"><img src="https://www.herokucdn.com/deploy/button.png" alt="Heroku Deploy"></a>
+<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/antoniovj1/tfg_gymapp.svg"></a>
+<a href="https://travis-ci.org/antoniovj1/tfg_gymapp"><img src="https://travis-ci.org/antoniovj1/tfg_gymapp.svg?branch=master" alt="Build Status"></a>
+<a href="https://david-dm.org/antoniovj1/tfg_gymapp"><img src="https://david-dm.org/antoniovj1/tfg_gymapp.svg" alt="Dependency Status"></a>
+<a href="https://david-dm.org/antoniovj1/tfg_gymapp/?type=dev"><img src="https://david-dm.org/antoniovj1/tfg_gymapp/dev-status.svg" alt="devDependency Status"></a>
+<a href="https://heroku.com/deploy?template=https://github.com/antoniovj1/tfg_gymapp"><img src="https://www.herokucdn.com/deploy/button.png" alt="Heroku Deploy"></a>
 </p>
 
 
 [![google-cloud-platform](https://s20.postimg.org/z79sumogt/google_cloud_platform_5643dc63.png)](http://146.148.24.77/)
 
-[Descripción del proyecto](https://antoniovj1.github.io/infraestructura_virtual_ugr/)
+[Descripción del proyecto](https://antoniovj1.github.io/tfg_gymapp/)
 
-[Documentación API RESTful](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/API)
+[Documentación API RESTful](https://github.com/antoniovj1/tfg_gymapp/wiki/API)
 
 
 ## Requisitos
@@ -35,19 +35,19 @@
 
  ```
 
- > [Más información sobre la ejecución](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-2)
+ > [Más información sobre la ejecución](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-2)
 
  
 ## Despliegue
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/antoniovj1/infraestructura_virtual_ugr)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/antoniovj1/tfg_gymapp)
 
 https://infraestructuravirtual.herokuapp.com/
 
 >> Es necesario tener instalado Heroku Toolbelt
 
 ```
-git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git 
-cd infraestructura_virtual_ugr
+git clone https://github.com/antoniovj1/tfg_gymapp.git 
+cd tfg_gymapp
 
 heroku create 
 
@@ -69,14 +69,14 @@ debe ejecutar el proyecto ( en el apartado scripts), en este caso el servidor se
 {
   "name": "proyecto",
   "version": "1.0.0",
-  "description": "Proyecto infraestructura virtual",
+  "description": "TFG UGR - App registro entrenamiento",
   "main": "server.js",
   "engines": {
     "node": "7.4.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antoniovj1/infraestructura_virtual_ugr/"
+    "url": "https://github.com/antoniovj1/tfg_gymapp/"
   },
   "scripts": {
     "test": "mocha --timeout 10000",
@@ -90,10 +90,10 @@ los add-ons necesarios para el despliegue.
 
 ```
 {
-  "name": "Infraestructura virtual UGR",
-  "description": "Hito 3",
+  "name": "TFG UGR - GymApp",
+  "description": "TFG",
   "website": "https://github.com/heroku/node-articles-nlp",
-  "repository": "https://github.com/antoniovj1/infraestructura_virtual_ugr",
+  "repository": "https://github.com/antoniovj1/tfg_gymapp",
   "logo": "https://node-js-sample.herokuapp.com/node.svg",
   "success_url": "/",
   "keywords": [
@@ -105,7 +105,7 @@ los add-ons necesarios para el despliegue.
   ]
 }
 ```
-> [Más información sobre el despliege / Despliegue en GitHub](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-3)
+> [Más información sobre el despliege / Despliegue en GitHub](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-3)
 
 ## Contenedores: Docker
 
@@ -114,7 +114,7 @@ MongoDB y otro para el servidor Node.js (lo cual permite gran escalabilidad
 a la aplicación). Ambos contenedores se enlazan con la opccion `--link`
 y usando las variables de entrono que encontramos en el archivo `config.js`
 
-[DockerHub - Proyecto](https://hub.docker.com/r/antoniovj1/infraestructura_virtual_ugr/)
+[DockerHub - Proyecto](https://hub.docker.com/r/antoniovj1/tfg_gymapp/)
 
 #### 1. Local
 ```
@@ -124,14 +124,14 @@ sh docker_build.sh
 #### 2. DockerHub
 ```
 docker run -d --name mongoDB mongo
-docker pull antoniovj1/infraestructura_virtual_ugr
-docker run --link=mongoDB:mongodb -it antoniovj1/infraestructura_virtual_ugr
+docker pull antoniovj1/tfg_gymapp
+docker run --link=mongoDB:mongodb -it antoniovj1/tfg_gymapp
 ```
 
 ### 3. Dockerfile
 En este archivo encontramos la configuración de docker
 
-##### [Dockerfile](https://github.com/antoniovj1/infraestructura_virtual_ugr/blob/master/Dockerfile)
+##### [Dockerfile](https://github.com/antoniovj1/tfg_gymapp/blob/master/Dockerfile)
 
 En el archivo se indica que se usa node oficial y que se instalan
 los paquetes indicados en `package.json` haciendo uso de NPM
@@ -151,7 +151,7 @@ EXPOSE 80
 
 CMD ["nodemon", "server.js"] 
 ```
-[Más información sobre Docker](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-4)
+[Más información sobre Docker](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-4)
 
 
 
@@ -168,14 +168,14 @@ haciendo uso de [`Vagrant`](https://www.vagrantup.com/), [`Ansible`](https://www
 Antes de poder llevar a cabo el desplique necesitamos realizar los siguientes pasos.
 
 1. Obtener una cuenta el GCE y crear un proyecto
-2. Añadir clave SSH a GCE como se indica en [Clave SSH](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-5#1-ssh)
+2. Añadir clave SSH a GCE como se indica en [Clave SSH](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-5#1-ssh)
 2. Obtener los sigueintes datos:
     
     - project_id
     - client_email
     - json_key_location
 
-    Los pasos para obtenerlos se detallan en [Obtener credenciales](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-5#2-credenciales)
+    Los pasos para obtenerlos se detallan en [Obtener credenciales](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-5#2-credenciales)
 
 3. Instalación de las dependencias 
     
@@ -200,7 +200,7 @@ Antes de poder llevar a cabo el desplique necesitamos realizar los siguientes pa
 
 Una vez que tenemos instaladas las dependencias y configuradas las variables realizar el despliegue es muy sencillo.
 
->En GCE nos encontramos con un problema, no se pueden abrir los puertos desde vagrant, por ello debemos realizarlo a mano, como se indica en [Abrir puerto HTTP](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-5#4-puerto-http)
+>En GCE nos encontramos con un problema, no se pueden abrir los puertos desde vagrant, por ello debemos realizarlo a mano, como se indica en [Abrir puerto HTTP](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-5#4-puerto-http)
 
 #### Creacion máquina virtual y provisionamiento (Vagrant + Ansible)
 Tan solo debemos ejecutar: 
@@ -210,7 +210,7 @@ vagrant up --provider=google
 
 #### Administración de la aplicación (Fabric)
 
-Haciendo uso de la conexión SSH y los comandos disponibles ([Comandos Fabric](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-5#3-fabric))
+Haciendo uso de la conexión SSH y los comandos disponibles ([Comandos Fabric](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-5#3-fabric))
 podemos administrar nuestro proyecto con comandos de la siguiente forma:
 
 ```bash
@@ -278,7 +278,7 @@ En este archivo se especifican las configuraciones que deben realizarse a la má
 
   vars:
     - homeDir: /home/ubuntu
-    - appDir : infraestructura_virtual_ugr
+    - appDir : tfg_gymapp
     - default: server {  listen 80; server_name YOUR_SERVERS_IP_ADDRESS;  location / { proxy_pass "http://127.0.0.1:80"; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_cache_bypass $http_upgrade; }}
 
   tasks:
@@ -325,7 +325,7 @@ En este caso se lleva a cabo la instalación de `git, mongo, nginx node , build-
 #### fabfile.py
 
 En este archivo hay escritas una serie de funciones que nos permiten desplegar y administrar nuestro proyecto.
-La explicación de todas las funciones se puede consultar en [Comandos Fabric](https://github.com/antoniovj1/infraestructura_virtual_ugr/wiki/Hito-5#3-fabric)
+La explicación de todas las funciones se puede consultar en [Comandos Fabric](https://github.com/antoniovj1/tfg_gymapp/wiki/Hito-5#3-fabric)
 A continuación se muestra la estructura que siguen las funciones:
 
 ```python
@@ -339,15 +339,15 @@ def info_servidor():
 def install_app():
     """Clona el repositorio e instala las dependencias"""
     with shell_env(NODE_ENV='production'):
-        run ('rm -rf infraestructura_virtual_ugr')
-        run ('git clone https://github.com/antoniovj1/infraestructura_virtual_ugr.git')
-        run ('cd infraestructura_virtual_ugr && npm install')
+        run ('rm -rf tfg_gymapp')
+        run ('git clone https://github.com/antoniovj1/tfg_gymapp.git')
+        run ('cd tfg_gymapp && npm install')
 
 
 def start_app():
     """Inicia la aplicación (node,mongo y nginx)"""
     run ('sudo service mongod start')
-    run ('sleep 7 && cd infraestructura_virtual_ugr && sudo pm2 start server.js')
+    run ('sleep 7 && cd tfg_gymapp && sudo pm2 start server.js')
     run ('sudo service nginx restart')
 
     .
