@@ -89,7 +89,7 @@
     "regenerator-runtime": "^0.11.1"
   },
   "engines": {
-    "node": "9.7.1"
+    "node": "10"
   },
   "lint-staged": {
     "*.js": [
