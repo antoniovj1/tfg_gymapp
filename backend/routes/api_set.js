@@ -1,8 +1,4 @@
-const bodyParser = require('body-parser');
 const Exercise = require('../models/exercise');
-const Session = require('../models/training_session');
-const Movement = require('../models/movement');
-const config = require('../../config');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();

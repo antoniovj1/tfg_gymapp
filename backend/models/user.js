@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 const Session = require('./training_session');
 
 // user schema
@@ -25,8 +25,8 @@ UserSchema.pre('delete', function(next) {
   user.sessions.forEach(session => {
     Session.findById(session)
       .exec()
-      .then(session => {
-        session.remove();
+      .then(sessionRetreived => {
+        sessionRetreived.remove();
       })
       .catch(err => err);
   });

@@ -1,6 +1,4 @@
-const bodyParser = require('body-parser');
 const User = require('../models/user');
-const Movement = require('../models/movement');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
@@ -20,37 +18,37 @@ module.exports = function(app, express) {
     let profile = req.body.profile || req.query.profile || req.headers.profile;
 
     if (token) {
-      jwt.verify(token, config.secret, (err, decoded) => {
+      jwt.verify(token, superSecret, err => {
         /* if (err) {
 					return res.status(403).send({
 						success: false,
 						message: 'Failed to authenticate token.'
 					});
 				} else { */
-        if (profile != 'null') {
+        if (profile !== 'null') {
           try {
             profile = JSON.parse(profile);
-          } catch (err) {
-            /* console.log('Null profile\n'); */
+          } catch (error) {
+            console.log('Null profile\n');
           }
 
           if (profile != null && 'user_id' in profile) {
             User.find({ auth0id: profile.user_id })
               .exec()
               .then(user => {
-                if (user.length == 0) {
+                if (user.length === 0) {
                   const userNew = new User();
                   userNew.auth0id = profile.user_id;
                   userNew
                     .save()
                     .then(() => {})
-                    .catch(err => {
-                      console.log(err);
+                    .catch(error => {
+                      console.log(error);
                     });
                 }
               })
-              .catch(err => {
-                console.log(err);
+              .catch(error => {
+                console.log(error);
               });
           }
         }

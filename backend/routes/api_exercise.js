@@ -1,8 +1,6 @@
-const bodyParser = require('body-parser');
 const Exercise = require('../models/exercise');
 const Session = require('../models/training_session');
 const Movement = require('../models/movement');
-const config = require('../../config');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
@@ -25,8 +23,6 @@ module.exports = function(app, express) {
         Movement.findOne({ name: req.body.movement })
           .exec()
           .then(movement => {
-            const result = [];
-
             if (!movement) throw { message: 'fail', detail: 'no movement' };
 
             return Session.findById(req.params.id_session)
@@ -48,10 +44,10 @@ module.exports = function(app, express) {
 
             return exercise.save();
           })
-          .then(exercise =>
+          .then(() =>
             Session.findOneAndUpdate({ _id: req.params.id_session }, { $push: { exercises: exercise._id } })
           )
-          .then(session => {
+          .then(() => {
             res.json({ message: 'ok' });
           })
           .catch(err => {

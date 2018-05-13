@@ -1,10 +1,5 @@
-const bodyParser = require('body-parser');
 const Session = require('../models/training_session');
-const Exercise = require('../models/exercise');
-const Movement = require('../models/movement');
 const User = require('../models/user');
-const jwt = require('jsonwebtoken');
-const config = require('../../config');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
