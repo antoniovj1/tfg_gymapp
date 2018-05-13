@@ -27,6 +27,9 @@ frontend/client.min.js
 *.swp
 *.pyc
 *.retry
+*~
+*.pdf
+*.aux
 logs/
 build/
 
