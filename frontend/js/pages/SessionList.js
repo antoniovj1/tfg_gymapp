@@ -60,6 +60,7 @@ class Session extends React.Component {
   }
 }
 
+/* eslint react/forbid-prop-types: 0 */
 Session.propTypes = {
   classes: PropTypes.object.isRequired
 };

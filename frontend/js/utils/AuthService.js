@@ -24,16 +24,6 @@ export const login = () => {
   lock.show();
 };
 
-export const loggedIn = () => {
-  const token = getToken();
-  return !!token && !isTokenExpired(token);
-};
-
-export const logout = () => {
-  window.localStorage.removeItem('id_token');
-  window.localStorage.removeItem('profile');
-};
-
 export const getProfile = () => {
   const profile = window.localStorage.getItem('profile');
   return profile ? JSON.parse(window.localStorage.profile) : {};
@@ -70,4 +60,14 @@ export const isTokenExpired = () => {
     return false;
   }
   return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
+};
+
+export const loggedIn = () => {
+  const token = getToken();
+  return !!token && !isTokenExpired();
+};
+
+export const logout = () => {
+  window.localStorage.removeItem('id_token');
+  window.localStorage.removeItem('profile');
 };

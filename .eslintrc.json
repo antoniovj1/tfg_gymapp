@@ -16,10 +16,11 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-     "no-underscore-dangle": "off",
+     "no-underscore-dangle": "off"
   },
   "plugins": ["jest"],
   "env": {
+    "browser": true,
     "jest/globals": true
   }
 }

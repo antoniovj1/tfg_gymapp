@@ -13,10 +13,10 @@ export default function reducer(
   action
 ) {
   switch (action.type) {
-    case types.FETCH_SESSION_PENDING: {
+    case types.FETCH_SESSION_PENDING || types.FETCH_COMPELTESESSION_PENDING: {
       return { ...state, fetching: true };
     }
-    case types.FETCH_SESSION_REJECTED: {
+    case types.FETCH_SESSION_REJECTED || types.FETCH_COMPELTESESSION_REJECTED: {
       return { ...state, fetching: false, error: action.payload };
     }
     case types.FETCH_SESSION_FULFILLED: {
@@ -28,12 +28,6 @@ export default function reducer(
       };
     }
     // //////////////////////////////////////
-    case types.FETCH_COMPELTESESSION_PENDING: {
-      return { ...state, fetching: true };
-    }
-    case types.FETCH_COMPELTESESSION_REJECTED: {
-      return { ...state, fetching: false, error: action.payload };
-    }
     case types.FETCH_COMPLETESESSION_FULFILLED: {
       return {
         ...state,
