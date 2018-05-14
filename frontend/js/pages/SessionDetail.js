@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import AppBar from 'material-ui/AppBar';
 import Typography from 'material-ui/Typography';
+import { Doughnut } from 'react-chartjs-2';
 import Exercise from '../components/Exercise';
 import { dateFormat, secondsToHms } from '../utils/time';
 import { fetchCompleteSession } from '../redux/actions/sessionsActions';
@@ -72,7 +71,6 @@ class SessionDetail extends React.Component {
     if (completeSession) {
       const { exercises } = completeSession;
       const muscleStats = {};
-      const muscleStatsNorm = [];
       let { time } = completeSession;
       let { date } = completeSession;
       let pesoTot = 0;
@@ -96,11 +94,22 @@ class SessionDetail extends React.Component {
           });
         });
 
-        let muscleStat;
-        for (muscleStat in muscleStats) {
-          const val = Math.round(muscleStats[muscleStat] / norm * 100);
-          muscleStatsNorm.push({ name: muscleStat, value: val });
-        }
+        const values = [];
+        const labels = [];
+        Object.keys(muscleStats).forEach(item => {
+          values.push(Math.round(muscleStats[item] / norm * 100));
+          labels.push(item.charAt(0).toUpperCase() + item.slice(1));
+        });
+
+        const data = {
+          datasets: [
+            {
+              data: values,
+              backgroundColor: COLORS
+            }
+          ],
+          labels
+        };
 
         exercises.forEach(exercise => {
           const { sets } = exercise;
@@ -153,24 +162,7 @@ class SessionDetail extends React.Component {
                     height: '35em'
                   }}
                 >
-                  <ResponsiveContainer>
-                    <PieChart>
-                      <Pie
-                        data={muscleStatsNorm}
-                        innerRadius={40}
-                        outerRadius={80}
-                        dataKey="value"
-                        nameKey="name"
-                        paddingAngle={5}
-                        label
-                      >
-                        {muscleStatsNorm.map((entry, index) => (
-                          <Cell fill={COLORS[index % COLORS.length]} key={entry} />
-                        ))}
-                      </Pie>
-                      <Legend align="center" layout="horizontal" verticalAlign="top" />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <Doughnut data={data} width={100} height={20} />
                 </div>
                 <div className="col-sm-3" />
               </TabContainer>
