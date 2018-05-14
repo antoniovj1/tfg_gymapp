@@ -11,7 +11,7 @@ import Grid from 'material-ui/Grid';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import validate from './validateNewSession';
-import { fetchMovements } from '../redux/actions/movementsActions';
+import fetchMovements from '../redux/actions/movementsActions';
 
 injectTapEventPlugin();
 
