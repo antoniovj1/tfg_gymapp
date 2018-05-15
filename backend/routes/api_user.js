@@ -1,7 +1,4 @@
 const User = require('../models/user');
-const config = require('../../config');
-
-const superSecret = config.secret;
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
