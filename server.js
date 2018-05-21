@@ -129,6 +129,7 @@ const apiRoutesExercise = require("./backend/routes/api_exercise")(
   express
 );
 const apiRoutesSession = require("./backend/routes/api_session")(app, express);
+const apiRoutesStats = require("./backend/routes/api_stats")(app, express);
 
 app.use("/api", apiRoutesAuth);
 app.use("/api", apiRoutesUser);
@@ -136,6 +137,7 @@ app.use("/api", apiRoutesMovement);
 app.use("/api", apiRoutesSet);
 app.use("/api", apiRoutesExercise);
 app.use("/api", apiRoutesSession);
+app.use("/api", apiRoutesStats);
 
 // MAIN CATCHALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
