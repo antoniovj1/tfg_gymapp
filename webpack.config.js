@@ -14,7 +14,7 @@ function getPlugins() {
 
     plugins.push(
       new webpack.DefinePlugin({
-        _API_HOST: JSON.stringify('http://localhost:80')
+        _API_HOST: JSON.stringify('http://localhost:8080')
       })
     );
   } else {
@@ -22,7 +22,7 @@ function getPlugins() {
 
     plugins.push(
       new webpack.DefinePlugin({
-        _API_HOST: JSON.stringify('http://localhost:80')
+        _API_HOST: JSON.stringify('http://localhost:8080')
       })
     );
   }
@@ -45,7 +45,7 @@ module.exports = {
   mode: env === 'production' ? 'production' : 'development',
   devtool: env === 'production' ? 'source-map' : 'cheap-module-source-map',
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:80/__webpack_hmr&timeout=20000',
+    'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000',
     path.join(__dirname, '/frontend/js/client.js')
   ],
   resolve: {

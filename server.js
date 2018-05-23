@@ -44,7 +44,7 @@ app.use(cors());
 
 // log API PaperTrail - Console
 const winston = require('winston');
-// require('winston-papertrail').Papertrail;
+require('winston-papertrail').Papertrail;
 
 const winstonPapertrail = new winston.transports.Papertrail({
   host: 'logs4.papertrailapp.com',
