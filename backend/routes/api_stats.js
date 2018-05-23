@@ -1,4 +1,6 @@
 const subDays = require('date-fns/sub_days');
+const _ = require('lodash');
+
 const User = require('../models/user');
 const Session = require('../models/training_session');
 const Set = require('../models/exercise');
@@ -9,15 +11,42 @@ module.exports = function(app, express) {
   // /training/stats/
   // -------------------
   apiRouter
-    .route('/training/topfive/')
+    .route('/training/topn/')
     // ===== GET =======
-    .get((req, res) => {
-      let profile = req.body.profile || req.query.profile || req.headers.profile;
-      profile = JSON.parse(profile);
+    .get(async (req, res) => {
+      try {
+        const sessions = await Session.find()
+          .populate('exercises')
+          .exec();
 
-      if (profile != null) {
-      } else {
-        res.json({});
+        const exercises = [];
+
+        await Promise.all(
+          sessions.map(async session => {
+            const sessionComplete = await Session.populate(session, {
+              path: 'exercises.movement',
+              model: 'Movement'
+            });
+            await Promise.all(
+              sessionComplete.exercises.map(async exercise => {
+                exercises.push(exercise);
+              })
+            );
+          })
+        );
+
+        const summary = {};
+        exercises.forEach(i => {
+          if (i.movement.name in summary) {
+            summary[i.movement.name] += 1;
+          } else {
+            summary[i.movement.name] = 1;
+          }
+        });
+
+        res.json(summary);
+      } catch (err) {
+        res.send(err);
       }
     });
 
@@ -44,32 +73,70 @@ module.exports = function(app, express) {
                 const { sets } = exercise;
                 const totalReps = sets.reduce((prevVal, elem) => prevVal + elem.repetitions, 0);
                 const { muscles } = exercise.movement;
-                summaryItem.push({ totalReps, muscles });
+                for (let i = 0; i < muscles.length; i += 1) {
+                  muscles[i].percentage *= totalReps;
+                  summaryItem.push(muscles[i]);
+                }
               })
             );
           })
         );
 
-        const summary = [];
+        const summary = {};
+        summaryItem.forEach(i => {
+          if (i.name in summary) {
+            summary[i.name] += Number(i.percentage);
+          } else {
+            summary[i.name] = Number(i.percentage);
+          }
+        });
 
-        summaryItem.forEach();
-
-        res.send(summaryItem);
+        res.json(summary);
       } catch (err) {
         res.send(err);
       }
     });
 
   apiRouter
-    .route('/training/totals/')
+    .route('/training/totals')
     // ===== GET =======
-    .get((req, res) => {
-      let profile = req.body.profile || req.query.profile || req.headers.profile;
-      profile = JSON.parse(profile);
+    .get(async (req, res) => {
+      try {
+        const sessions = await Session.find()
+          .populate('exercises')
+          .exec();
 
-      if (profile != null) {
-      } else {
-        res.json({});
+        const totals = {
+          time: 0,
+          repetitions: 0,
+          weight: 0
+        };
+
+        let reps = 0;
+        let weight = 0;
+
+        await Promise.all(
+          sessions.map(async session => {
+            const sessionComplete = await Session.populate(session, {
+              path: 'exercises.movement',
+              model: 'Movement'
+            });
+            await Promise.all(
+              sessionComplete.exercises.map(async exercise => {
+                const { sets } = exercise;
+                reps = sets.reduce((prevVal, elem) => prevVal + elem.repetitions, 0);
+                weight = sets.reduce((prevVal, elem) => prevVal + elem.repetitions * elem.weight, 0);
+              })
+            );
+            totals.time += session.time;
+            totals.repetitions += reps;
+            totals.weight += weight;
+          })
+        );
+
+        res.json(totals);
+      } catch (err) {
+        res.send(err);
       }
     });
 
