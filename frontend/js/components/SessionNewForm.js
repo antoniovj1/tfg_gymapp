@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import { Checkbox, RadioGroup, Select, TextField, Switch } from 'redux-form-material-ui';
+import { TextField } from 'redux-form-material-ui';
 
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -28,6 +32,48 @@ const styles = theme => ({
 
 const movementsArray = [];
 
+const ExampleCustomInput = () => ({
+  render() {
+    console.log(this.props.value);
+    return (
+      <button
+        style={{
+          borderLeftWidth: '0px',
+          borderTopWidth: '0px',
+          borderRightWidth: '0px',
+          borderBottomWidth: '1px',
+          width: '127px',
+          height: '11px',
+          paddingTop: '6px',
+          paddingBottom: '7px'
+        }}
+        onClick={this.props.onClick}
+      >
+        {this.props.value.substring(0, 10)}
+      </button>
+    );
+  }
+});
+
+ExampleCustomInput.propTypes = {
+  onClick: PropTypes.func,
+  value: PropTypes.string
+};
+
+const renderDatePicker = ({ input, placeholder, defaultValue, meta: { touched, error } }) => (
+  <div style={{ marginTop: '15px' }}>
+    <DatePicker
+      customInput={<ExampleCustomInput />}
+      {...input}
+      dateForm="DD/MM/YYYY"
+      selected={input.value ? moment(input.value) : null}
+      todayButton="Today"
+      placeholderText="Click to select a date"
+    />
+    {touched && error && <span>{error}</span>}
+  </div>
+);
+
 const renderSet = ({ fields, meta: { touched, error } }) => (
   <ul>
     {touched && error && <span>{error}</span>}
@@ -42,12 +88,7 @@ const renderSet = ({ fields, meta: { touched, error } }) => (
           />
           <Field name={`${set}.weight`} type="text" component={TextField} label={`Peso #${index + 1}`} />
           <Field name={`${set}.rest`} type="text" component={TextField} label={`Descanso #${index + 1}`} />
-          <Button
-            variant="flat"
-            color="secondary"
-            // className={classes.button}
-            onClick={() => fields.remove(index)}
-          >
+          <Button variant="flat" color="secondary" onClick={() => fields.remove(index)}>
             Remove Set
           </Button>
         </div>
@@ -84,24 +125,14 @@ const renderExercise = ({ fields, meta: { touched, error } }) => (
             </option>
           ))}
         </Field>
-        <Button
-          variant="flat"
-          // className={classes.button}
-          color="secondary"
-          onClick={() => fields.remove(index)}
-        >
+        <Button variant="flat" color="secondary" onClick={() => fields.remove(index)}>
           Remove Exercise
         </Button>
         <FieldArray name={`${exercise}.sets`} component={renderSet} />{' '}
       </div>
     ))}
 
-    <Button
-      variant="flat"
-      // className={classes.button}
-      color="primary"
-      onClick={() => fields.push({})}
-    >
+    <Button variant="flat" color="primary" onClick={() => fields.push({})}>
       Add Exercise
     </Button>
   </ul>
@@ -129,7 +160,7 @@ class SessionNewForm extends React.Component {
             <form onSubmit={handleSubmit}>
               <Grid container justify="center" spacing={40}>
                 <Grid item>
-                  <Field name="date" type="text" component={TextField} label="Date" />
+                  <Field name="date" type="text" component={renderDatePicker} label="Date" />
                 </Grid>
                 <Grid item>
                   <Field name="time" type="text" component={TextField} label="Time" />
@@ -177,5 +208,6 @@ SessionNewForm.propTypes = {
 
 export default reduxForm({
   form: 'newSessionForm', // a unique identifier for this form
-  validate
+  validate,
+  touchOnBlur: false
 })(connect(mapStateToProps, null)(withStyles(styles)(SessionNewForm)));
