@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
+import CssBaseline from 'material-ui/CssBaseline';
 import { withStyles } from 'material-ui/styles';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -26,23 +27,26 @@ const AppView = props => {
   const { location, classes } = props;
 
   return (
-    <div className={classes.root}>
-      <Grid item xs={12}>
-        <Nav location={location} />
-      </Grid>
-      <Grid className={classes.container} container spacing={24}>
+    <React.Fragment>
+      <CssBaseline />
+      <div className={classes.root}>
         <Grid item xs={12}>
-          <Switch>
-            <Route exact path="/profile" component={Restricted(Profile)} />
-            <Route exact path="/session/new" component={Restricted(SessionNew)} />
-            <Route exact path="/session/:sessionid" component={Restricted(SessionDetail)} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={SessionList} />
-          </Switch>
+          <Nav location={location} />
         </Grid>
-      </Grid>
-      <Footer />
-    </div>
+        <Grid className={classes.container} container spacing={24}>
+          <Grid item xs={12}>
+            <Switch>
+              <Route exact path="/profile" component={Restricted(Profile)} />
+              <Route exact path="/session/new" component={Restricted(SessionNew)} />
+              <Route exact path="/session/:sessionid" component={Restricted(SessionDetail)} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={SessionList} />
+            </Switch>
+          </Grid>
+        </Grid>
+        <Footer />
+      </div>
+    </React.Fragment>
   );
 };
 
