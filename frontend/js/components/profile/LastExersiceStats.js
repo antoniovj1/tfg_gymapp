@@ -55,9 +55,20 @@ const LastExersiceStats = props => {
       datasets
     };
 
+    const options = {
+      legend: {
+        display: true,
+        labels: {
+          usePointStyle: true,
+          fontSize: 10,
+          padding: 6
+        }
+      }
+    };
+
     return (
       <Paper className={classes.root} elevation={4}>
-        <Line data={data} />
+        <Line data={data} height={80} options={options} />
       </Paper>
     );
   }

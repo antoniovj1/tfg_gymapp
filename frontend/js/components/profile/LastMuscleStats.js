@@ -42,10 +42,22 @@ const LastMuscleStats = props => {
       ],
       labels: label
     };
+
+    const options = {
+      legend: {
+        display: true,
+        labels: {
+          usePointStyle: true,
+          fontSize: 10,
+          padding: 6
+        }
+      }
+    };
+
     return (
       <Paper className={`${classes.root} ${classes.center}`} elevation={4}>
         <h4> Stats from last {range} days </h4>
-        <Doughnut data={pie} />
+        <Doughnut data={pie} height={100} options={options} />
       </Paper>
     );
   }
