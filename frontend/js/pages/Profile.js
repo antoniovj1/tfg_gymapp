@@ -14,7 +14,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit,
     textAlign: 'center',
     color: theme.palette.text.secondary
   }
@@ -37,8 +37,7 @@ class Profile extends React.Component {
   render() {
     const { classes } = this.props;
     const { user } = this.props;
-    const { totals } = this.props.stats;
-    const { musclestats: muscleStats } = this.props.stats;
+    const { totals, musclestats: muscleStats, topn } = this.props.stats;
 
     if (Array.isArray(user)) {
       return null;
@@ -72,7 +71,7 @@ class Profile extends React.Component {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <LastExersiceStats />
+                <LastExersiceStats topn={topn} />
               </Grid>
             </Grid>
           </Grid>

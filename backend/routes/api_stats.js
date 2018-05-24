@@ -3,8 +3,6 @@ const _ = require('lodash');
 
 const User = require('../models/user');
 const Session = require('../models/training_session');
-const Set = require('../models/exercise');
-const Movement = require('../models/movement');
 
 module.exports = function(app, express) {
   const apiRouter = express.Router();
@@ -27,24 +25,38 @@ module.exports = function(app, express) {
               path: 'exercises.movement',
               model: 'Movement'
             });
-            await Promise.all(
-              sessionComplete.exercises.map(async exercise => {
-                exercises.push(exercise);
-              })
-            );
+            sessionComplete.exercises.map(async exercise => {
+              exercises.push(exercise);
+            });
           })
         );
 
-        const summary = {};
+        const summary = [];
         exercises.forEach(i => {
-          if (i.movement.name in summary) {
-            summary[i.movement.name] += 1;
-          } else {
-            summary[i.movement.name] = 1;
-          }
+          const summaryItem = {};
+
+          summaryItem.timestamp = i.timestamp;
+          summaryItem.name = i.movement.name;
+          let maxWeight = 0;
+          i.sets.forEach(j => {
+            if (j.weight > maxWeight) {
+              maxWeight = j.weight;
+            }
+          });
+          summaryItem.maxWeight = maxWeight;
+          summary.push(summaryItem);
         });
 
-        res.json(summary);
+        const groups = _(summary)
+          .groupBy(x => x.name)
+          .map((value, key) => ({ name: key, values: value }))
+          .value();
+
+        groups.forEach(group => {
+          group.values = group.values.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        });
+
+        res.json(groups);
       } catch (err) {
         res.send(err);
       }

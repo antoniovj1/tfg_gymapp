@@ -8,9 +8,9 @@ import Capitalize from 'capitalize';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
-    paddingTop: 16,
+    paddingTop: 8,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit / 2.5
   }),
   center: {
     textAlign: 'center'
