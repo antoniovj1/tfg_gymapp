@@ -68,17 +68,15 @@ module.exports = function(app, express) {
               path: 'exercises.movement',
               model: 'Movement'
             });
-            await Promise.all(
-              sessionComplete.exercises.map(async exercise => {
-                const { sets } = exercise;
-                const totalReps = sets.reduce((prevVal, elem) => prevVal + elem.repetitions, 0);
-                const { muscles } = exercise.movement;
-                for (let i = 0; i < muscles.length; i += 1) {
-                  muscles[i].percentage *= totalReps;
-                  summaryItem.push(muscles[i]);
-                }
-              })
-            );
+            sessionComplete.exercises.map(async exercise => {
+              const { sets } = exercise;
+              const totalReps = sets.reduce((prevVal, elem) => prevVal + elem.repetitions, 0);
+              const { muscles } = exercise.movement;
+              for (let i = 0; i < muscles.length; i += 1) {
+                muscles[i].percentage *= totalReps;
+                summaryItem.push(muscles[i]);
+              }
+            });
           })
         );
 
@@ -121,13 +119,11 @@ module.exports = function(app, express) {
               path: 'exercises.movement',
               model: 'Movement'
             });
-            await Promise.all(
-              sessionComplete.exercises.map(async exercise => {
-                const { sets } = exercise;
-                reps = sets.reduce((prevVal, elem) => prevVal + elem.repetitions, 0);
-                weight = sets.reduce((prevVal, elem) => prevVal + elem.repetitions * elem.weight, 0);
-              })
-            );
+            sessionComplete.exercises.map(async exercise => {
+              const { sets } = exercise;
+              reps = sets.reduce((prevVal, elem) => prevVal + elem.repetitions, 0);
+              weight = sets.reduce((prevVal, elem) => prevVal + elem.repetitions * elem.weight, 0);
+            });
             totals.time += session.time;
             totals.repetitions += reps;
             totals.weight += weight;
