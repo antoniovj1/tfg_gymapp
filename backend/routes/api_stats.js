@@ -26,7 +26,7 @@ module.exports = function(app, express) {
               model: 'Movement'
             });
             sessionComplete.exercises.map(async exercise => {
-              exercises.push(exercise);
+              exercises.push({ date: session.date, exercise });
             });
           })
         );
@@ -35,10 +35,10 @@ module.exports = function(app, express) {
         exercises.forEach(i => {
           const summaryItem = {};
 
-          summaryItem.timestamp = i.timestamp;
-          summaryItem.name = i.movement.name;
+          summaryItem.timestamp = i.date;
+          summaryItem.name = i.exercise.movement.name;
           let maxWeight = 0;
-          i.sets.forEach(j => {
+          i.exercise.sets.forEach(j => {
             if (j.weight > maxWeight) {
               maxWeight = j.weight;
             }
