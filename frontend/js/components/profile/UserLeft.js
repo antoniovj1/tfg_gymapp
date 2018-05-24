@@ -14,7 +14,8 @@ const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
+    height: '96%'
   })
 });
 
@@ -28,7 +29,7 @@ const Session = props => {
 
   return (
     <Paper className={classes.root} elevation={4}>
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <img src={user.picture} width="100" height="100" className="img-circle" alt="" />
       </div>
 

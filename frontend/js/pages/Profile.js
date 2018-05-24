@@ -39,7 +39,7 @@ class Profile extends React.Component {
     const { user } = this.props;
     const { totals, musclestats: muscleStats, topn } = this.props.stats;
 
-    if (Array.isArray(user)) {
+    if (Array.isArray(user) || !topn) {
       return null;
     }
 
@@ -84,7 +84,7 @@ class Profile extends React.Component {
 /* eslint react/forbid-prop-types: 0 */
 Profile.propTypes = {
   classes: PropTypes.object.isRequired,
-  user: PropTypes.array.isRequired,
+  user: PropTypes.any.isRequired,
   stats: PropTypes.object.isRequired,
   fetchActualUser: PropTypes.func.isRequired,
   fetchStats: PropTypes.func.isRequired

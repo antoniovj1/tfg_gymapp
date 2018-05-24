@@ -3,7 +3,22 @@ import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { Line } from 'react-chartjs-2';
+import * as zoom from 'chartjs-plugin-zoom';
 import { format } from 'date-fns';
+
+function removeDuplicates(arr, prop) {
+  const obj = {};
+  return Object.keys(
+    arr.reduce((prev, next) => {
+      if (!obj[next[prop]]) {
+        obj[next[prop]] = next;
+      } else if (obj[next[prop]].y < next.y) {
+        obj[next[prop]] = next;
+      }
+      return obj;
+    }, obj)
+  ).map(i => obj[i]);
+}
 
 const colors = [
   { solid: '#1823f2', trans: '#bcbffb' },
@@ -34,7 +49,8 @@ const LastExersiceStats = props => {
       element.values.forEach(value => {
         const date = format(new Date(value.timestamp), 'DD-MM-YY');
         const obj2 = {};
-        obj2.t = date;
+
+        if (!(date in obj2)) obj2.t = date;
         obj2.y = value.maxWeight;
 
         if (!(date in labels)) {
@@ -42,9 +58,11 @@ const LastExersiceStats = props => {
         }
         data.push(obj2);
       });
-      obj.data = data;
+
+      obj.data = removeDuplicates(data, 't');
       obj.backgroundColor = colors[index % 5].trans;
       obj.borderColor = colors[index % 5].solid;
+
       datasets.push(obj);
     });
 
@@ -63,12 +81,40 @@ const LastExersiceStats = props => {
           fontSize: 10,
           padding: 6
         }
-      }
+      },
+      pan: {
+        enabled: true,
+        mode: 'x'
+      },
+      zoom: {
+        enabled: true,
+        mode: 'x'
+      },
+      scales: {
+        xAxes: [
+          {
+            type: 'time',
+            time: {
+              displayFormats: {
+                quarter: 'DD MM YY'
+              },
+              tooltipFormat: "MMMM D 'YY"
+            },
+            position: 'bottom'
+          }
+        ]
+      },
+      hover: {
+        mode: 'nearest', // only hovers items under the mouse
+        intersect: false
+      },
+      responsive: true,
+      maintainAspectRatio: false
     };
 
     return (
       <Paper className={classes.root} elevation={4}>
-        <Line data={data} height={80} options={options} />
+        <Line data={data} height={200} options={options} />
       </Paper>
     );
   }
@@ -78,7 +124,7 @@ const LastExersiceStats = props => {
 /* eslint react/forbid-prop-types: 0 */
 LastExersiceStats.propTypes = {
   classes: PropTypes.object.isRequired,
-  topn: PropTypes.object.isRequired
+  topn: PropTypes.any.isRequired
 };
 
 export default withStyles(styles)(LastExersiceStats);
