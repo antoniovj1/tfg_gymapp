@@ -12,7 +12,6 @@
   "scripts": {
     "build": "export NODE_ENV='production' && webpack --optimize-minimize --config ./webpack.config.js --display-error-details --progress --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
-    "postinstall": "export NODE_ENV='production' && webpack --optimize-minimize --config ./webpack.config.js --display-error-details --progress --colors",
     "start": "node server.js",
     "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
     "precommit": "lint-staged"
