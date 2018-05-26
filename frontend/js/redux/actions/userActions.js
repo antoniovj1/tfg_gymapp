@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as types from '../types';
-import { addDays } from 'date-fns';
 
 export function fetchActualUser() {
   return function(dispatch) {
