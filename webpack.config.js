@@ -40,10 +40,11 @@ module.exports = {
   context: path.join(__dirname, 'src'),
   mode: env === 'production' ? 'production' : 'development',
   devtool: env === 'production' ? 'source-map' : 'cheap-module-source-map',
-  entry: [
-    'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000',
-    path.join(__dirname, '/frontend/js/client.js')
-  ],
+
+  entry:
+    env === 'production'
+      ? [path.join(__dirname, '/frontend/js/client.js')]
+      : ['webpack-hot-middleware/client', path.join(__dirname, '/frontend/js/client.js')],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js']
   },
