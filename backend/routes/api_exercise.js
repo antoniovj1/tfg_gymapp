@@ -76,7 +76,9 @@ module.exports = function(app, express) {
     .delete((req, res) => {
       Exercise.findById(req.params.id_exercise)
         .exec()
-        .then(exercise => exercise.remove())
+        .then(exercise => {
+          exercise.remove();
+        })
         .then(() => {
           res.json({ message: 'ok' });
         })

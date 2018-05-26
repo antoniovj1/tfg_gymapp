@@ -12,7 +12,7 @@ const app = express();
 // HMR
 //---
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config');
 
