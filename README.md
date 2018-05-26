@@ -41,7 +41,7 @@
 ## Despliegue
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/antoniovj1/tfg_gymapp)
 
-https://infraestructuravirtual.herokuapp.com/
+https://tfg-gymapp.herokuapp.com/
 
 >> Es necesario tener instalado Heroku Toolbelt
 
