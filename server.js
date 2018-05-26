@@ -12,7 +12,7 @@ const app = express();
 // HMR
 //---
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config');
 
@@ -67,13 +67,13 @@ const logger = new winston.Logger({
 });
 
 logger.stream = {
-  write: (message, encoding) => {
+  write: message => {
     if (message.includes('api')) logger.info(message);
   }
 };
 
 // LOG
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV === 'production') {
   app.use(
     morgan(
       '{"remote_addr": ":remote-addr", "date": ":date[clf]", "method": ":method", "url": ":url",  "status": ":status", "result_length": ":res[content-length]", "user_agent": ":user-agent", "response_time": ":response-time"}',
