@@ -53,6 +53,12 @@ export function fetchCompleteSession(id) {
   };
 }
 
+export function pushSessionCompleted() {
+  return function(dispatch) {
+    dispatch({ type: types.PUSH_SESSION_COMPLETED });
+  };
+}
+
 export function pushSession(session) {
   return function(dispatch) {
     const config = {
@@ -64,8 +70,10 @@ export function pushSession(session) {
 
     const regex = session.time.match(/([01]\d|2[0-3]):([0-5]\d)/);
     const seconds = regex[1] * 3600 + regex[2] * 60;
+    const dateArr = session.date.split('/');
+    const date = `${dateArr[1]}/${dateArr[0]}/${dateArr[2]}`;
 
-    const dataSession = { time: seconds, date: session.date };
+    const dataSession = { time: seconds, date };
     const dataExerises = session.exercises;
 
     dispatch({ type: types.PUSH_SESSION_PENDING });

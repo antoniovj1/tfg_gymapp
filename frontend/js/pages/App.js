@@ -10,7 +10,6 @@ import Login from './Login';
 import Profile from './Profile';
 import SessionDetail from './SessionDetail';
 import SessionNew from './SessionNew';
-import Footer from '../components/layout/Footer';
 import Nav from '../components/layout/Nav';
 import Restricted from '../utils/restricted';
 
@@ -44,7 +43,6 @@ const AppView = props => {
             </Switch>
           </Grid>
         </Grid>
-        <Footer />
       </div>
     </React.Fragment>
   );

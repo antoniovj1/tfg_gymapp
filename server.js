@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -12,7 +14,7 @@ const app = express();
 // HMR
 //---
 
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test') {
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config');
 
@@ -80,6 +82,12 @@ if (process.env.NODE_ENV === 'production') {
       { stream: logger.stream }
     )
   );
+} else {
+  app.use(
+    morgan('{method: ":method", url: ":url",  status: ":status", response_time: ":response-time"}', {
+      stream: logger.stream
+    })
+  );
 }
 
 // connect to our database
@@ -87,9 +95,9 @@ mongoose.Promise = require('bluebird');
 
 const connectWithRetry = () => {
   mongoose
-    .connect(config.database3)
+    .connect(process.env.MONGODB_URI)
     .then(() => {
-      console.log('DB CONNECTED (LOCAL)');
+      console.log(`DB CONNECTED (${process.env.MONGODB_URI}) `);
     })
     .catch(() => {
       console.log('RETRY DB CONNECT in 5 seg');
@@ -97,23 +105,7 @@ const connectWithRetry = () => {
     });
 };
 
-const connectRemote = () => {
-  mongoose
-    .connect(config.database2)
-    .then(() => {
-      console.log('DB CONNECTED (REMOTE)');
-    })
-    .catch(() => {
-      console.log('RETRY DB CONNECT in 5 seg');
-      setTimeout(connectRemote, 5000);
-    });
-};
-
-if (config.database2) {
-  connectRemote();
-} else {
-  connectWithRetry();
-}
+connectWithRetry();
 
 // API ROUTES
 //------------------------
@@ -144,7 +136,7 @@ app.get('*', (req, res) => {
 // START THE SERVER
 //------------------
 let server = app.listen(config.port, () => {
-  console.log(`Express server ${ip.address()} listening on port ${config.port}`);
+  console.log(`Express server ${ip.address()} listening on port ${process.env.PORT}`);
 });
 
 server = require('http-shutdown')(server);

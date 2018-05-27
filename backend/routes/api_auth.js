@@ -19,12 +19,12 @@ module.exports = function(app, express) {
 
     if (token) {
       jwt.verify(token, superSecret, err => {
-        /* if (err) {
-					return res.status(403).send({
-						success: false,
-						message: 'Failed to authenticate token.'
-					});
-				} else { */
+        if (err) {
+          return res.status(403).send({
+            success: false,
+            message: 'Failed to authenticate token.'
+          });
+        }
         if (profile !== 'null') {
           try {
             profile = JSON.parse(profile);
@@ -53,7 +53,7 @@ module.exports = function(app, express) {
           }
         }
         next();
-        // }
+        return 0;
       });
     } else {
       return res.status(403).send({
@@ -61,6 +61,7 @@ module.exports = function(app, express) {
         message: 'No token provided.'
       });
     }
+    return 0;
   });
 
   return apiRouter;

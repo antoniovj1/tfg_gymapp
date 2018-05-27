@@ -1,5 +1,6 @@
 // CONFIG
-//-------
+// -------
+
 module.exports = {
   port: process.env.PORT || 8080,
   database3: 'mongodb://localhost:27017/iv',
@@ -7,7 +8,7 @@ module.exports = {
   database: `mongodb://${process.env.MONGODB_PORT_27017_TCP_ADDR}:${
     process.env.MONGODB_PORT_27017_TCP_PORT
   }/mydb`, // process.env.MONGODB_URI,
-  secret: process.env.SECRET,
+  secret: process.env.SECRET || 'oyXTuxlyNIxWBCU6s4rAG9WXhVq1fy7FH7cQ7p1MeJc8IaJiEOJf1TKpoe2cAewc',
 
   // For testing
   token:

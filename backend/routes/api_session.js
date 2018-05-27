@@ -19,11 +19,8 @@ module.exports = function(app, express) {
           const session = new Session();
 
           if (req.body.time) session.time = req.body.time;
-
           if (req.body.date) session.date = new Date(req.body.date);
-
           session.user = user._id;
-
           return session.save();
         })
         .then(session => [
@@ -34,6 +31,8 @@ module.exports = function(app, express) {
           res.json({ message: 'ok', session: values[1]._id });
         })
         .catch(err => {
+          console.log(`AAAAAAA${err}`);
+
           res.send(err);
         });
     })
@@ -89,8 +88,40 @@ module.exports = function(app, express) {
       Session.findById(req.params.id_session)
         .exec()
         .then(session => session.remove())
-        .then(session => {
+        .then(() => {
           res.json({ message: 'ok' });
+        })
+        .catch(err => {
+          res.send(err);
+        });
+    });
+
+  apiRouter
+    .route('/training/sessioncomplete/')
+    // ===== POST =======
+    .post((req, res) => {
+      let profile = req.body.profile || req.query.profile || req.headers.profile;
+      profile = JSON.parse(profile);
+      const id = profile.user_id;
+
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAA');
+
+      User.findOne({ auth0id: id }, '_id')
+        .exec()
+        .then(user => {
+          const session = new Session();
+
+          if (req.body.time) session.time = req.body.time;
+          if (req.body.date) session.date = new Date(req.body.date);
+          session.user = user._id;
+          return session.save();
+        })
+        .then(session => [
+          User.findOneAndUpdate({ auth0id: id }, { $push: { sessions: session._id } }),
+          session
+        ])
+        .then(values => {
+          res.json({ message: 'ok', session: values[1]._id });
         })
         .catch(err => {
           res.send(err);

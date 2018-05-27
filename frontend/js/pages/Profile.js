@@ -44,12 +44,12 @@ class Profile extends React.Component {
     }
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={{ width: '95%', margin: '0 auto' }}>
         <Grid container spacing={24}>
           <Grid item xs={3}>
             <UserLeft user={user} />
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Grid container spacing={24}>
               <Grid item xs={4}>
                 <Total title="Total weight (Kg)" value={totals && totals.weight} />

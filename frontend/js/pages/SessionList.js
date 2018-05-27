@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import ContentAdd from 'material-ui-icons/Add';
@@ -16,7 +16,8 @@ import { fetchSessions } from '../redux/actions/sessionsActions';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    width: '100%'
   },
   paper: {
     padding: theme.spacing.unit * 2,
@@ -36,14 +37,10 @@ class Session extends React.Component {
       <div className={classes.root}>
         <Grid container spacing={24} justify="center">
           <Grid item xs={6}>
-            <Link to="/session/new">
-              <Button variant="fab">
-                {' '}
-                <ContentAdd />{' '}
-              </Button>{' '}
-            </Link>
+            <Button onClick={() => this.props.history.push('/session/new')} variant="fab">
+              <ContentAdd />
+            </Button>
             <div>
-              {' '}
               {typeof sessions !== 'undefined' &&
               sessions !== null &&
               sessions.length !== null &&
@@ -65,4 +62,4 @@ Session.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Session));
+export default connect(mapStateToProps)(withStyles(styles)(withRouter(Session)));

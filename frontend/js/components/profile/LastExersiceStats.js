@@ -40,6 +40,7 @@ const LastExersiceStats = props => {
   const { classes, topn } = props;
   const datasets = [];
   let labels = [];
+  let maxAbs = 0;
 
   if (topn) {
     topn.forEach((element, index) => {
@@ -47,11 +48,13 @@ const LastExersiceStats = props => {
       obj.label = element.name;
       const data = [];
       element.values.forEach(value => {
-        const date = format(new Date(value.timestamp), 'DD-MM-YY');
+        const date = new Date(value.timestamp);
         const obj2 = {};
 
         if (!(date in obj2)) obj2.t = date;
         obj2.y = value.maxWeight;
+
+        if (value.maxWeight > maxAbs) maxAbs = value.maxWeight;
 
         if (!(date in labels)) {
           labels.push(date);
@@ -60,7 +63,7 @@ const LastExersiceStats = props => {
       });
 
       obj.data = removeDuplicates(data, 't');
-      obj.backgroundColor = colors[index % 5].trans;
+      obj.fill = false;
       obj.borderColor = colors[index % 5].solid;
 
       datasets.push(obj);
@@ -96,11 +99,27 @@ const LastExersiceStats = props => {
             type: 'time',
             time: {
               displayFormats: {
-                quarter: 'DD MM YY'
+                millisecond: "MMM DD 'YY",
+                second: "MMM DD 'YY",
+                minute: "MMM DD 'YY",
+                hour: "MMM DD 'YY",
+                day: "MMM DD 'YY",
+                week: "MMM DD 'YY",
+                month: "MMM DD 'YY",
+                quarter: "MMM DD 'YY",
+                year: "MMM DD 'YY"
               },
               tooltipFormat: "MMMM D 'YY"
             },
             position: 'bottom'
+          }
+        ],
+        yAxes: [
+          {
+            ticks: {
+              max: maxAbs + 5,
+              min: 0
+            }
           }
         ]
       },

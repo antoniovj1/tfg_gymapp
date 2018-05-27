@@ -8,8 +8,6 @@ function getPlugins() {
   const plugins = [];
   if (env === 'production') {
     console.log('WebPack for PRODUCTION');
-    plugins.push(new webpack.optimize.ModuleConcatenationPlugin()); // Scope Hoisting
-
     plugins.push(
       new webpack.DefinePlugin({
         _API_HOST: `'${domain}'`
@@ -20,13 +18,12 @@ function getPlugins() {
 
     plugins.push(
       new webpack.DefinePlugin({
-        _API_HOST: JSON.stringify('http://localhost:8080')
+        _API_HOST: JSON.stringify('http://192.168.1.44:8080')
       })
     );
   }
 
   plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env)
@@ -41,10 +38,7 @@ module.exports = {
   mode: env === 'production' ? 'production' : 'development',
   devtool: env === 'production' ? 'source-map' : 'cheap-module-source-map',
 
-  entry:
-    env === 'production'
-      ? [path.join(__dirname, '/frontend/js/client.js')]
-      : ['webpack-hot-middleware/client', path.join(__dirname, '/frontend/js/client.js')],
+  entry: ['webpack-hot-middleware/client', path.join(__dirname, '/frontend/js/client.js')],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js']
   },

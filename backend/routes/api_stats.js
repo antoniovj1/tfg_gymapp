@@ -1,4 +1,4 @@
-const subDays = require('date-fns/sub_days');
+const subDays = require('date-fns/subDays');
 const _ = require('lodash');
 
 const User = require('../models/user');

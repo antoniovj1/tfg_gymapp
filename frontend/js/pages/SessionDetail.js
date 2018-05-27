@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
+import { Grid, Paper } from 'material-ui';
 import Typography from 'material-ui/Typography';
 import { Doughnut } from 'react-chartjs-2';
 import Exercise from '../components/Exercise';
@@ -13,8 +14,12 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#B0171F', '#7FFF00'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: theme.spacing.unit - 25,
-    backgroundColor: theme.palette.background.paper
+    marginTop: theme.spacing.unit - 26
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary
   }
 });
 
@@ -25,14 +30,20 @@ const TabContainer = props => (
 );
 
 const InfoCard = props => (
-  <div style={styles.card}>
-    <div style={styles.container}>
-      <h4>
-        <b>{props.cardText}</b>
-      </h4>
-      <p>{props.cardValue}</p>
-    </div>
-  </div>
+  <Paper
+    style={{
+      textAlign: 'center',
+      paddingTop: 5,
+      paddingBottom: 5
+    }}
+  >
+    <h4>
+      <b>{props.cardText}</b>{' '}
+    </h4>
+    <h5>
+      <b>{props.cardValue}</b>
+    </h5>
+  </Paper>
 );
 
 const mapStateToProps = store => ({ completeSession: store.sessions.completeSession });
@@ -132,44 +143,30 @@ class SessionDetail extends React.Component {
             </AppBar>
             {value === 0 && (
               <TabContainer>
-                <div className="row">
-                  <div className="col-sm-1" />
-                  <div className="col-sm-5">
+                <Grid container spacing={24} style={{ width: '70%', margin: '0 auto' }}>
+                  <Grid item xs={12} sm={6}>
                     <InfoCard cardText="Fecha" cardValue={date} />
-                  </div>
-                  <div className="col-sm-5">
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
                     <InfoCard cardText="Tiempo" cardValue={time} />
-                    <div className="col-sm-1" />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-1" />
-                  <div className="col-sm-5">
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
                     <InfoCard cardText="Total Series" cardValue={nSets} />
-                  </div>
-                  <div className="col-sm-5">
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
                     <InfoCard cardText="Peso Total" cardValue={`${pesoTot}KG`} />
-                    <div className="col-sm-1" />
-                  </div>
-                </div>
-
-                <div className="col-sm-3" />
-                <div
-                  className="col-sm-6"
-                  style={{
-                    paddingTop: '3em',
-                    width: '100%',
-                    height: '35em'
-                  }}
-                >
-                  <Doughnut data={data} width={100} height={20} />
-                </div>
-                <div className="col-sm-3" />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <Paper className={classes.paper}>
+                      <Doughnut data={data} width={100} height={20} />
+                    </Paper>
+                  </Grid>
+                </Grid>
               </TabContainer>
             )}
             {value === 1 && (
               <TabContainer>
-                <div className="row" style={styles.divStyle}>
+                <div style={{ width: '70%', margin: '0 auto' }}>
                   {exercises.map(exercise => <Exercise key={exercise._id} exercise={exercise} />)}
                 </div>
               </TabContainer>

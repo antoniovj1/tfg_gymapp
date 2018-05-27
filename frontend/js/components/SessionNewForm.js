@@ -1,16 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { reset, connect } from 'react-redux';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-material-ui';
+import { Checkbox, RadioGroup, Select, TextField, Switch } from 'redux-form-material-ui';
 
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -32,53 +28,11 @@ const styles = theme => ({
 
 const movementsArray = [];
 
-const ExampleCustomInput = () => ({
-  render() {
-    console.log(this.props.value);
-    return (
-      <button
-        style={{
-          borderLeftWidth: '0px',
-          borderTopWidth: '0px',
-          borderRightWidth: '0px',
-          borderBottomWidth: '1px',
-          width: '127px',
-          height: '11px',
-          paddingTop: '6px',
-          paddingBottom: '7px'
-        }}
-        onClick={this.props.onClick}
-      >
-        {this.props.value.substring(0, 10)}
-      </button>
-    );
-  }
-});
-
-ExampleCustomInput.propTypes = {
-  onClick: PropTypes.func,
-  value: PropTypes.string
-};
-
-const renderDatePicker = ({ input, placeholder, defaultValue, meta: { touched, error } }) => (
-  <div style={{ marginTop: '15px' }}>
-    <DatePicker
-      customInput={<ExampleCustomInput />}
-      {...input}
-      dateForm="DD/MM/YYYY"
-      selected={input.value ? moment(input.value) : null}
-      todayButton="Today"
-      placeholderText="Click to select a date"
-    />
-    {touched && error && <span>{error}</span>}
-  </div>
-);
-
 const renderSet = ({ fields, meta: { touched, error } }) => (
   <ul>
     {touched && error && <span>{error}</span>}
     {fields.map((set, index) => (
-      <div>
+      <div key={set}>
         <div className="form-group">
           <Field
             name={`${set}.repetitions`}
@@ -94,13 +48,7 @@ const renderSet = ({ fields, meta: { touched, error } }) => (
         </div>
       </div>
     ))}
-    <Button
-      variant="raised"
-      color="primary"
-      // className={classes.button}
-      onClick={() => fields.push({})}
-      type="submit"
-    >
+    <Button variant="raised" color="primary" onClick={() => fields.push({})} type="submit">
       Add Set
     </Button>
 
@@ -113,14 +61,14 @@ const renderExercise = ({ fields, meta: { touched, error } }) => (
     {touched && error && <span>{error}</span>}
 
     {fields.map((exercise, index) => (
-      <div key={exercise.index}>
+      <div key={exercise}>
         <h4>exercise #{index + 1}</h4>
         <Field name={`${exercise}.exerciseName`} component="select" label="Name">
           <option value="" key="movOpt">
             Select an exercise...
           </option>
-          {movementsArray.map((movement, index2) => (
-            <option value={movement} key={movement.index2}>
+          {movementsArray.map(movement => (
+            <option value={movement} key={movement}>
               {movement}
             </option>
           ))}
@@ -160,7 +108,7 @@ class SessionNewForm extends React.Component {
             <form onSubmit={handleSubmit}>
               <Grid container justify="center" spacing={40}>
                 <Grid item>
-                  <Field name="date" type="text" component={renderDatePicker} label="Date" />
+                  <Field name="date" type="text" component={TextField} label="Date" />
                 </Grid>
                 <Grid item>
                   <Field name="time" type="text" component={TextField} label="Time" />
@@ -208,6 +156,5 @@ SessionNewForm.propTypes = {
 
 export default reduxForm({
   form: 'newSessionForm', // a unique identifier for this form
-  validate,
-  touchOnBlur: false
+  validate
 })(connect(mapStateToProps, null)(withStyles(styles)(SessionNewForm)));

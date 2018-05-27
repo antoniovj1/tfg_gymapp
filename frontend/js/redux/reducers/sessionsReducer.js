@@ -46,6 +46,9 @@ export default function reducer(
     case types.PUSH_SESSION_FULFILLED: {
       return { ...state, pushing: false, pushed: true };
     }
+    case types.PUSH_SESSION_COMPLETED: {
+      return { ...state, pushing: false, pushed: false };
+    }
     default: {
       return state;
     }
