@@ -10,9 +10,9 @@
     "url": "https://github.com/antoniovj1/tfg_gymapp/"
   },
   "scripts": {
-    "build": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --progress --colors",
+    "build": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
-    "heroku-postinstall": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --progress --colors",
+    "heroku-postinstall": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --colors",
     "start": "export NODE_ENV='production' && node server.js",
     "test": "export NODE_ENV='test' && export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
     "precommit": "lint-staged"
