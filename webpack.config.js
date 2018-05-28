@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const env = process.env.NODE_ENV;
 const domain = process.env.DOMAIN || 'http://localhost:8080';
@@ -27,7 +28,13 @@ function getPlugins() {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env)
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '/frontend/index.html'),
+        to: path.join(__dirname, '/dist/')
+      }
+    ])
   );
 
   return plugins;
