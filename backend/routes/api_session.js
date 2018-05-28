@@ -31,8 +31,6 @@ module.exports = function(app, express) {
           res.json({ message: 'ok', session: values[1]._id });
         })
         .catch(err => {
-          console.log(`AAAAAAA${err}`);
-
           res.send(err);
         });
     })
@@ -40,9 +38,9 @@ module.exports = function(app, express) {
     // ===== GET =======
     .get((req, res) => {
       let profile = req.body.profile || req.query.profile || req.headers.profile;
-      profile = JSON.parse(profile);
+      if (profile) profile = JSON.parse(profile);
 
-      if (profile != null) {
+      if (profile !== null && profile !== undefined) {
         const id = profile.user_id;
         User.findOne({ auth0id: id }, '_id')
           .exec()
@@ -54,7 +52,7 @@ module.exports = function(app, express) {
             res.send(err);
           });
       } else {
-        res.json({});
+        res.json({ error: 'No profile found' });
       }
     });
 
@@ -103,8 +101,6 @@ module.exports = function(app, express) {
       let profile = req.body.profile || req.query.profile || req.headers.profile;
       profile = JSON.parse(profile);
       const id = profile.user_id;
-
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAA');
 
       User.findOne({ auth0id: id }, '_id')
         .exec()

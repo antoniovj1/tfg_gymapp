@@ -13,8 +13,8 @@
     "build": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --progress --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
     "heroku-postinstall": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --progress --colors",
-    "start": "node server.js",
-    "test": "export NODE_ENV='test' && export SECRET='secret' && jest --verbose --forceExit --runInBand",
+    "start": "export NODE_ENV='production' && node server.js",
+    "test": "export NODE_ENV='test' && export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
     "precommit": "lint-staged"
   },
   "dependencies": {

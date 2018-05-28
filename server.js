@@ -14,7 +14,7 @@ const app = express();
 // HMR
 //---
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config');
 
@@ -127,10 +127,10 @@ app.use('/api', apiRoutesStats);
 
 // MAIN CATCHALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
-app.use(express.static(path.join(__dirname, '/frontend')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/frontend/index.html'));
+  res.sendFile(path.join(__dirname, '/dist/index.html'));
 });
 
 // START THE SERVER

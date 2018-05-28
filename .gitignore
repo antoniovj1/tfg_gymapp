@@ -48,3 +48,5 @@ frontend/client\.min\.js\.map
 \.scannerwork/
 
 \.env
+
+dist/

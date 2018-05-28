@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const env = process.env.NODE_ENV;
-const domain = process.env.DOMAIN;
+const domain = process.env.DOMAIN || 'http://localhost:8080';
 
 function getPlugins() {
   const plugins = [];
@@ -18,7 +18,7 @@ function getPlugins() {
 
     plugins.push(
       new webpack.DefinePlugin({
-        _API_HOST: JSON.stringify('http://192.168.1.44:8080')
+        _API_HOST: `'${domain}'`
       })
     );
   }
@@ -38,7 +38,10 @@ module.exports = {
   mode: env === 'production' ? 'production' : 'development',
   devtool: env === 'production' ? 'source-map' : 'cheap-module-source-map',
 
-  entry: ['webpack-hot-middleware/client', path.join(__dirname, '/frontend/js/client.js')],
+  entry:
+    env === 'production'
+      ? path.join(__dirname, '/frontend/js/client.js')
+      : ['webpack-hot-middleware/client', path.join(__dirname, '/frontend/js/client.js')],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js']
   },
@@ -60,7 +63,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, '/frontend/'),
+    path: path.join(__dirname, '/dist/'),
     publicPath: '/',
     filename: 'client.min.js'
   },
