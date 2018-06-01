@@ -1,1 +1,29 @@
-\chapter{Especificación Requisitos}
+\chapter{Objetivos}
+
+En este capítulo especificaremos los principales objetivos. El objetivo principal del proyecto,
+es crear un sistema fácilmente extensible, implementable, con la capacidad de almacenar y visualizar sesiones de entrenamiento, de forma que se muestren algunas
+estadísticas simples para los usuarios. 
+
+\subsection{Objetivos}
+Este objetivo principal del proyecto, se puede desgranar en cuatro objetivos:
+
+\begin{itemize}
+  \item \textbf{OBJ-1:} Proporcionar una web sencilla desde la que los usuarios puedan interactuar con sus datos.
+  \item \textbf{OBJ-2:} Crear un backend con una API simple para que pueda ser reutilizado y ampliado.
+  \item \textbf{OBJ-3:} Proporcionar una forma sencilla de realizar un despliegue local o en la nube del sistema.
+  \item \textbf{OBJ-4:} Llevar a cabo una serie de tareas y realizar el uso de ciertas herramientas para garantizar un código de calidad y un desarrollo ágil.
+\end{itemize}
+
+\subsubsection{Alcance}
+El alcance de este proyecto es desarrollar tanto frontend como un backend funcional con algunas de las últimas tecnologías disponibles,
+así como mostrar el uso y la utilidad del desarrollo basado en integración y despliegue continuo, además de mostrar algunas de 
+las tecnologías relacionadas con la administración de la infraestructura más usadas actualmente. Cabe destacar que el proyecto se centra
+en mostrar un desarrollo con tecnologías modernas y que existen muchas formas de seguir extendiendo el proyecto, como se discutirá en el 
+último capítulo.
+
+
+\subsubsection{Interdependencia de objetivos}
+Los tres primeros objetivos pueden ser implementados de forma independiente entre ellos, aunque están fuertemente relacionados, por un lado, tenemos el backend (OBJ2) que es independiente y no tiene conocimiento del frontend (OBJ1), pero será la fuente que nutrirá de datos a la web, así mismo la web (OBJ1) podría hacer uso de una fuente diferente de datos, pero en este caso será nuestro backend. El tercer objetivo aunque podría adaptarse para desplegar otra aplicación en este caso será nuestro código el usado. Por último el objetivo cuarto es prácticamente independiente, ya que no se trata de una implementación, sino más bien de una metodología y el uso de ciertas herramientas, lo cual podría ser usado en cualquier otro proyectos con tecnologías similares.
+
+
+
