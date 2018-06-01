@@ -27,7 +27,7 @@ module.exports = function(app, express) {
           res.json({ message: 'ok', movement });
         })
         .catch(err => {
-          if (err.code == 11000)
+          if (err.code === 11000)
             return res.json({
               success: false,
               message: 'A movement with that name already exists. '
@@ -75,7 +75,7 @@ module.exports = function(app, express) {
         .exec()
         .then(movement => {
           if (movement) res.json({ message: 'ok', movement });
-          else res.json({ message: 'fail', detail: 'no exercise' });
+          else throw { message: 'fail', detail: 'no movement' };
         })
         .catch(err => {
           res.send(err);
@@ -105,7 +105,8 @@ module.exports = function(app, express) {
     .delete((req, res) => {
       Movement.remove({ name: req.params.name })
         .exec()
-        .then(() => {
+        .then(del => {
+          if (del.n === 0) throw { message: 'fail', detail: 'no movement deleted' };
           res.json({ message: 'ok' });
         })
         .catch(err => {

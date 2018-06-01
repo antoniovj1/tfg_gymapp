@@ -38,36 +38,40 @@ describe('Session (/api/training/sessions/)', () => {
     }
   });
 
-  describe('/GET sessions (without profile)', () => {
-    test('GET all the sessions (without profile) - Should fail', done => {
+  describe('/GET sessions', () => {
+    test('GET session by ID', async () => {
+      const session = new Session({ user: user._id });
+      await session.save();
+
+      const res = await chai
+        .request(server)
+        .get(`/api/training/sessions/${session._id}`)
+        .set('x-access-token', token);
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('message', 'ok');
+    });
+  });
+
+  describe('/POST ', () => {
+    const profile = {
+      user_id: 'ex'
+    };
+
+    test('should POST a session (logged user) ', done => {
       chai
         .request(server)
-        .get('/api/training/sessions')
+        .post('/api/training/sessions/')
         .set('x-access-token', token)
+        .send({ time: 3600, date: '12/12/1995', profile })
         .end((err, res) => {
           expect(res.status).toBe(200);
-          expect(res.body).toHaveProperty('error', 'No profile found');
+          expect(typeof res.body).toBe('object');
+          expect(res.body).toHaveProperty('message', 'ok');
           done();
         });
     });
   });
-
-  // TODO -> Modificar para AUTH0
-  // describe('/POST ', () => {
-  //   it('should POST a session (logged user) ', (done) => {
-
-  //     chai.request(server)
-  //       .post('/api/training/sessions/')
-  //       .set('x-access-token', token)
-  //       .send({ time: 3600, date: "12/12/1995" })
-  //       .end((err, res) => {
-  //         res.should.have.status(200);
-  //         res.body.should.be.a('object');
-  //         res.body.should.have.property('message').eql('ok');
-  //         done();
-  //       });
-  //   });
-  // });
 
   describe('/DELETE/:id_sessions', () => {
     test('should DELETE a session given the id', done => {

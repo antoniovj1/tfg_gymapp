@@ -23,13 +23,11 @@ module.exports = function(app, express) {
   //  /user
   // -----------------
   apiRouter
-    .route('/user')
+    .route('/user/:id')
 
     // ===== GET =======
     .get((req, res) => {
-      let profile = req.body.profile || req.query.profile || req.headers.profile;
-      profile = JSON.parse(profile);
-      const id = profile.user_id;
+      const id = req.params.id;
 
       User.findOne({ auth0id: id })
         .exec()

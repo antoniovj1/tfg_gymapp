@@ -12,6 +12,7 @@ module.exports = function(app, express) {
       Exercise.findById(req.params.id_exercise)
         .exec()
         .then(exercise => {
+          if (!exercise) throw { message: 'fail', detail: 'no exercise' };
           const s = {
             repetitions: req.body.repetitions,
             weight: req.body.weight,
