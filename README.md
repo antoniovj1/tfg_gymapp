@@ -9,7 +9,8 @@
 </p>
 
 <img src="https://cloud.google.com/_static/be157a52c2/images/cloud/cloud-logo.svg" width="180">
-[Google Cloud](http://146.148.24.77/)
+
+[Google Cloud](https://antoniovj1.github.io/tfg_gymapp/)
 
 [Descripción del proyecto](https://antoniovj1.github.io/tfg_gymapp/)
 
@@ -157,7 +158,9 @@ CMD ["nodemon", "server.js"]
 
 ## Despliegue IaaS
 <img src="https://cloud.google.com/_static/be157a52c2/images/cloud/cloud-logo.svg" width="180">
-[Google Cloud](http://146.148.24.77/)
+
+[Google Cloud](https://antoniovj1.github.io/tfg_gymapp/)
+
 
 Para este último Hito, vamos a llevar a cabo un despliege de nuestro proyecto 
 haciendo uso de [`Vagrant`](https://www.vagrantup.com/), [`Ansible`](https://www.ansible.com/) y
