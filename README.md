@@ -8,8 +8,8 @@
 <a href="https://heroku.com/deploy?template=https://github.com/antoniovj1/tfg_gymapp"><img src="https://www.herokucdn.com/deploy/button.png" alt="Heroku Deploy"></a>
 </p>
 
-
-[![google-cloud-platform](https://s20.postimg.org/z79sumogt/google_cloud_platform_5643dc63.png)](http://146.148.24.77/)
+<img src="https://cloud.google.com/_static/be157a52c2/images/cloud/cloud-logo.svg" width="180">
+[Google Cloud](http://146.148.24.77/)
 
 [Descripción del proyecto](https://antoniovj1.github.io/tfg_gymapp/)
 
@@ -156,7 +156,8 @@ CMD ["nodemon", "server.js"]
 
 
 ## Despliegue IaaS
-[![google-cloud-platform](https://s20.postimg.org/z79sumogt/google_cloud_platform_5643dc63.png)](http://146.148.24.77/)
+<img src="https://cloud.google.com/_static/be157a52c2/images/cloud/cloud-logo.svg" width="180">
+[Google Cloud](http://146.148.24.77/)
 
 Para este último Hito, vamos a llevar a cabo un despliege de nuestro proyecto 
 haciendo uso de [`Vagrant`](https://www.vagrantup.com/), [`Ansible`](https://www.ansible.com/) y
