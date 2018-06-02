@@ -1,10 +1,25 @@
 \chapter{Pruebas}
 
+En el capítulo anterior, se proporcionaba una visión sobre la implementación realizada, en este capítulo procederemos a mostrar que todo lo implementado se encuentra en funcionamiento.
+
 \section {Pruebas unitarias}
+Para la realización de las pruebas unitarias hemos hecho uso de Jest, una suite de test que integra numerosas herramientas. Para llevar a cabo la ejecución de los test usaremos la orden npm test, que ejecutará todos los archivos *.test.js. Dentro de estos archivos encontramos una líneas que indican los nombres de los tests (describe) y una serie de líneas que empiezan con la función test, dentro de las cuales se ejecutan y se evalúan las pruebas definidas.
+
+Una vez ejecutamos los test obtendremos una serie de salidas, en las cuales se indica el éxito o el fallo de los test, y además en caso de fallo, se incluye una descripción de cuál ha sido la causa de este.
+
+[IMAGEN]
 \section {Pruebas de cobertura}
-\section {Integracion continua}
-\section {Despliegue automatico}
+Para las pruebas de cobertura también se ha hecho uso de Jest. Para la ejecución de estas pruebas hacemos uso de la orden npm run test-cov, esta ejecución consiste en realizar los test anteriores y comprobar que líneas ha sido cubiertas por ellos. Una vez finalizada la ejecución, se proporciona un resumen por pantalla y además se genera un informe mucho más detallado en formato HTML , en el cual podremos ver con todo lujo de detalles cuáles líneas han sido testeadas y cuáles de ellas no.
+
+[IMAGEN][IMAGEN2]
+
+\section {Integración continua}
+Una vez que disponemos de los test unitarios y nuestro archivo NPM tiene las órdenes indicadas para ejecutarlos, la integración con Travis CI es muy sencilla. Para comprobar que todo funciona como debe, nos dirigimos a la web de Travis, y hacemos un push al repositorio, tras lo que podremos observar que los test empiezan a ejecutarse, confirmando con ello la correcta configuración.
+[IMAGEN][IMAGEN2]
+
+\section {Despliegue automático}
+Para el despliegue automático hemos hecho uso de Heroku, y con el objetivo de comprobar que todo está configurado de la forma correcta, nos dirigimos a la correspondiente web. Una vez ahí, hacemos un push a nuestro repositorio, y tras esperar a que Travis CI verifique los test, comenzamos a ver cómo se produce un nuevo build y seguidamente un nuevo despliegue, confirmando así que todo funciona de manera adecuada.
 \section {Provisionamiento}
 \section {Despliegue Cloud}
-\section {Test de Carga}
 \section {Acceso web y autenticación}
+
