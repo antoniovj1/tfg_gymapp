@@ -1,1 +1,117 @@
 \chapter{Análisis}
+
+\section{Especificación de requisitos}
+
+En esta sescion se detallan los requisitos que debe cumplimentar el software desarrollado para garantizar que cumple su proposito y con ello que cubre la necesidad para la que ha sido creado.
+
+\subsection{Requisitos Funcionales}
+
+\begin{itemize}
+  \item \textbf{RF-1.} Gestión de usuarios.
+  \begin{itemize}
+    \item \textbf{RF-1.1.} Alta de usuarios.
+    \item \textbf{RF-1.2.} Autenticación usuarios.
+    \begin{itemize}
+      \item \textbf{RF-1.2.1.} Acceso social (Google, Facebook...)
+      \item \textbf{RF-1.2.2.} Recordatorio contraseña.
+      \item \textbf{RF-1.2.3.} Verificación de email.
+    \end{itemize}
+    \item \textbf{RF-1.3.} Baja usuarios.
+    \item \textbf{RF-1.4.} Edición perfil usuarios
+  \end{itemize}
+  \item \textbf{RF-2.} Gestión de entrenamientos.
+  \begin{itemize}
+    \item \textbf{RF-2.1.} Introcuccíon nuevo entranmiento.
+    \item \textbf{RF-2.2.} Lista de entrenamientos
+    \item \textbf{RF-2.3.} Detalle sesion de entrenamiento
+    \item \textbf{RF-2.4.} Estadisticas sesión de entrenamiento.
+    \item \textbf{RF-2.5.} Estadisiticas globales.
+    \begin{itemize}
+      \item \textbf{RF-2.5.1} Peso total.
+      \item \textbf{RF-2.5.2} Tiempo total.
+      \item \textbf{RF-2.5.3} Repeticiones totales.
+      \item \textbf{RF-2.5.4} Grafica evolución ejercicio.
+      \item \textbf{RF-2.5.5} Grafica distribucion musculos.
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{RF-3.} Pruebas de sofware
+  \begin{itemize}
+    \item \textbf{RF-3.1.} Test unitarios.
+    \item \textbf{RF-3.2.} Test de cobertura.
+    \item \textbf{RF-3.3.} Integración continua.
+    \item \textbf{RF-3.4.} Despliegue continuo.
+  \end{itemize}
+  \item \textbf{RF-4.} Configruación automatica.
+  \begin{itemize}
+    \item \textbf{RF-4.1.} Despliegue cloud automatico.
+    \item \textbf{RF-4.2.} Provisionamiento.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Requisitos no funcionales}
+
+  De usabilidad:
+\begin{itemize}
+  \item \textbf{RNF-1.} El sistema debe ser sencillo e intuitivo para los usuarios sin conocimientos. 
+  \item \textbf{RNF-2.} Mostrar información acerca del significado de los campos.
+\end{itemize}
+ De rendimiento:
+\begin{itemize}
+  \item \textbf{RNF-3.} El tiempo de carga de la web debe mantenerse en un tiempoaceptable.
+  \item \textbf{RNF-4.} El tiempo de mostrar información debe ser reducido.
+  \item \textbf{RNF-5.} El tiempo para la validación y envio de formularios debe ser reducido.
+\end{itemize}
+ De fiabilidad:
+\begin{itemize}
+  \item \textbf{RNF-6.} Los datos sensibles de usuario, como contraseñas, deben guardarse garantizando la seguridad y privacidad.
+\end{itemize}
+ De implementación: 
+\begin{itemize}
+  \item \textbf{RNF-7.} Todo el codigo será JavaScript.
+  \item \textbf{RNF-8.} Debe ser una palicación de una sola página.
+  \item \textbf{RNF-9.} Todos los paquetes deben ser instalables desde NPM.
+  \item \textbf{RNF-10.} Se usará NPM para la gestion tanto del cliente como el servidor.
+  \item \textbf{RNF-11.} Se proporcionaran script para gestion Cloud.
+\end{itemize}
+De interfaz:
+\begin{itemize}
+  \item \textbf{RNF-12.} Se usarán colores coherentes para toda la interfaz.
+  \item \textbf{RNF-13.} La interfaz hara uso de "material design"
+  \item \textbf{RNF-14.} Los colores deben ser facilmente reconocibles.
+  \item \textbf{RNF-15.} Se proporcionaran iconos informativos.
+\end{itemize}
+
+\subsection{Requisitos de información}
+\begin{itemize}
+  \item \textbf{RI-1.} Usuario:
+  \begin{itemize}
+    \item \textbf{Descripción:} Información acerca de un usuario de la aplicación.
+    
+    \item \textbf{Contenido:} Nombre, Contraseña, Fecha de alta, Peso, Altura, Sexo.
+  \end{itemize}
+  \item \textbf{RI-2.} Sesion de entrenamiento:
+    \begin{itemize}
+    \item \textbf{Descripción:} Sesion de entrenamiento individual.
+    \item \textbf{Contenido:} Usuario asociado, Duración, Fecha.
+  \end{itemize}
+  \item \textbf{RI-3.} Ejercicio:
+    \begin{itemize}
+    \item \textbf{Descripción:}  Conjunto de series, indicando el movimiento.
+    \item \textbf{Contenido:}  Sesion asociada, Conjunto de series y Movimiento.
+  \end{itemize}
+  \item \textbf{RI-4.} Serie:
+    \begin{itemize}
+    \item \textbf{Descripción:} Serie de entrenamiento individual.
+    \item \textbf{Contenido:} Tiempo descando, Peso y  Repeticiones.
+  \end{itemize}
+  \item \textbf{RI-5.} Movimiento:
+    \begin{itemize}
+    \item \textbf{Descripción:}  Movimiento, como por ejemplo flexiones.
+    \item \textbf{Contenido:}  Nombre, Conjunto de musculos usados y sus porcentajes.
+  \end{itemize}
+\end{itemize}
+
+
+
+
+  
