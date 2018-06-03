@@ -271,8 +271,369 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \end{table}
   \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-4. Cargar pagina principal.
+  \begin{itemize}
+    \item \textbf{Actores:} Usuario.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} El usuario accede a la pagina principal.
+    \item \textbf{Postcondición:} El usuario ve una lista con sus entrenamientos.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Cargar pagina principal aplicación.
+    \item \textbf{Resumen:} El usuario accede a la pagina principal donde puede ver una lista de sus entrenamientos.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El usuario introduce sus datos de autenticación o hace click en Home.                        &                            &                         \\ \hline
+                                  &                         & 2                          & Se redirigue al usuario a la pagina principal.                      \\ \hline
+        3                         &   Se muestra cargando                      &                           &                    \\ \hline
+                                  &                         & 4                          & El servidor envia los datos.                        \\ \hline
+        5a                        & El usuario ve la lista de entrenamientos.      &                          &                        \\ \hline
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|}
+       \hline
+       \rowcolor[HTML]{C0C0C0} 
+       \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+       \rowcolor[HTML]{FFFFFF} 
+              5b                      & No hay entrenamientos y se muestra un mensaje informando de ello.                           \\ \hline
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-5. Detalles Entrenamiento.
+  \begin{itemize}
+    \item \textbf{Actores:} Usuario.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} El uauario ha clicado sobre uno de los entrenamientos de la lista.
+    \item \textbf{Postcondición:} El usuario puede ver los detalles del entrenamiento.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Mostrar los detalles de una sesión de entrenamiento.
+    \item \textbf{Resumen:} El usuario accede a un entrenamiento y luego visualiza los detalles de este.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El usuario hace click sobre un entrenamiento                       &                            &                         \\ \hline
+                                  &                         & 2                          & El servidor envia los datos                     \\ \hline
+        3                        & El usuario hace click sobre la pestaña de detalles      &                          &                        \\ \hline
+        4                        & El usuario ve los detalles.      &                          &                        \\ \hline
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-6. Vision general entrenamiento.
+  \begin{itemize}
+    \item \textbf{Actores:} Usuario.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} El uauario ha clicado sobre uno de los entrenamientos de la lista.
+    \item \textbf{Postcondición:} El usuario puede ver la visión general del entrenamiento.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Mostrar el resumen de una sesión de entrenamiento.
+    \item \textbf{Resumen:} El usuario accede a un entrenamiento y luego visualiza el resumen de este.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El usuario hace click sobre un entrenamiento                       &                            &                         \\ \hline
+                                  &                         & 2                          & El servidor envia los datos                     \\ \hline
+        3a                         & El usuario ve el resumen.      &                          &                        \\ \hline
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|}
+       \hline
+       \rowcolor[HTML]{C0C0C0} 
+       \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+       \rowcolor[HTML]{FFFFFF} 
+              3b                      & El usuario hace click sobre la pestaña de resumen.                            \\ \hline
+              4                     & El usuario ve el resumen.                            \\ \hline
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-7. Añadir sesion de entrenamiento.
+  \begin{itemize}
+    \item \textbf{Actores:} Usuario.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} El usuario ha accedido al formulario para la intruduccion de un entrenamiento.
+    \item \textbf{Postcondición:} Se guarda el entrenamiento para el usuario.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Registrar un usuario en la app.
+    \item \textbf{Resumen:} El usuario rellena un formulario con los datos de su entrenamiento y estos queda guardados una vez que han sido validados.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El usuario introduce sus datos de su entrenamiento.                        &                            &                         \\ \hline
+                                  &                         & 2                          & El servidor verifica que los datos son válidos.                       \\ \hline
+                                  &                         & 3a                         & Si los datos son válidos, se guardan.                        \\ \hline
+                                  &                         & 4                          & Se redirige al usuario a la página principal.                        \\ \hline                                        &                         & 
+        5                        & El usuario ve la pagina principal con su nueva sesion de entrenamiento guardada.      &                          &                        \\ \hline
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|}
+       \hline
+       \rowcolor[HTML]{C0C0C0} 
+       \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+       \rowcolor[HTML]{FFFFFF} 
+              3b                      & Se comunica al usuario que datos debe revisar.                            \\ \hline
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-8. Ver perfil.
+  \begin{itemize}
+    \item \textbf{Actores:} Usuario.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} El uauario ha clicado sobre la pestaña perfil.
+    \item \textbf{Postcondición:} El usuario puede ver su perfil.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Mostrar perfil del usuario.
+    \item \textbf{Resumen:} El usuario accede a su perfil y visualiza los detalles de este.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El usuario hace click sobre la pestaña perfil                     &                            &                         \\ \hline
+                                  &                         & 2                          & El servidor envia los datos                     \\ \hline
+        3                         & El usuario ve su perfil.      &                          &                        \\ \hline
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-9. Realizar test unitarios.
+  \begin{itemize}
+    \item \textbf{Actores:} Desarrollador.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} Existen tests unitarios.
+    \item \textbf{Postcondición:} Se muestra el resultado de los tests.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Realizar test unitarios.
+    \item \textbf{Resumen:} Cada vez que se modifica el backend, se verifica que todo sigue funcionando correctamente.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El Desarrollador lanza la orden para ejecutar los tests unitarios.                        &                            &                         \\ \hline
+                                  &                         & 2a                          & Se comprueba si hay tests unitarios y se ejecutan.                       \\ \hline
 
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|}
+       \hline
+       \rowcolor[HTML]{C0C0C0} 
+       \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+       \rowcolor[HTML]{FFFFFF} 
+              2b                      & Si no hay tests unitarios, no se ejecuta nada.                            \\ \hline
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-10. Realizar test de cobertura.
+  \begin{itemize}
+    \item \textbf{Actores:} Desarrollador.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} Existen tests de cobertura.
+    \item \textbf{Postcondición:} Se muestra el resultado de los tests.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Realizar test de cobertura.
+    \item \textbf{Resumen:} Cada vez que se modifica el backend, se verifica que todo sigue funcionando correctamente.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El Desarrollador lanza la orden para ejecutar los tests de cobertura.                        &                            &                         \\ \hline
+                                  &                         & 2a                          & Se comprueba si hay tests de cobertura y se ejecutan.                       \\ \hline
+
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|}
+       \hline
+       \rowcolor[HTML]{C0C0C0} 
+       \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+       \rowcolor[HTML]{FFFFFF} 
+              2b                      & Si no hay tests de cobertura, no se ejecuta nada.                            \\ \hline
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-11. Realizar integración continua.
+  \begin{itemize}
+    \item \textbf{Actores:} Desarrollador.
+    \item \textbf{Tipo:} Primario, esencial.
+    \item \textbf{Referencias:}
+    \item \textbf{Precondición:} Existen tests unitarios.
+    \item \textbf{Postcondición:} Se muestra el resultado de los tests.
+    \item \textbf{Autor:} Antonio de la Vega Jiménez.
+    \item \textbf{Versión:} 1.0
+    \item \textbf{Propósito:} Comprobar si los nuevos cambios provocan errores en el repositorio.
+    \item \textbf{Resumen:} Cada vez que se hace un push, se comprueba si las nuevas modificaciones provocan errores.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|l|X|}
+        \hline
+        \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+        \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+        1                         & El Desarrollador hace un push al repositorio.                        &                            &                         \\ \hline
+                                  &                         & 2a                          & Se comprueba si hay tests unitarios y se ejecutan.                       \\ \hline
+
+                                  
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{table}[H]
+      \centering
+      \begin{tabularx}{\textwidth}{|l|X|}
+       \hline
+       \rowcolor[HTML]{C0C0C0} 
+       \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+       \rowcolor[HTML]{FFFFFF} 
+              2b                      & Si no hay tests unitarios, no se ejecuta nada.                            \\ \hline
+      \end{tabularx}
+      \caption{My caption}
+      \label{my-label}
+    \end{table}
+  \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item CU-12. Realizar despliegue continuo.
+\begin{itemize}
+  \item \textbf{Actores:} Desarrollador.
+  \item \textbf{Tipo:} Primario, esencial.
+  \item \textbf{Referencias:}
+  \item \textbf{Precondición:} Los tests unitarios han sido exitosos.
+  \item \textbf{Postcondición:} Se despliega la nueva version de la app.
+  \item \textbf{Autor:} Antonio de la Vega Jiménez.
+  \item \textbf{Versión:} 1.0
+  \item \textbf{Propósito:} Desplegar los nuevos cambios.
+  \item \textbf{Resumen:} Cada vez que se hace un push, se comprueba si las nuevas modificaciones provocan errores y luego se despliega.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|l|X|}
+      \hline
+      \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Curso Normal}                                                 \\ \hline
+      \multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}Actor} & \multicolumn{2}{l|}{\cellcolor[HTML]{EFEFEF}Sistema} \\ \hline
+      1                         & El Desarrollador hace un push al repositorio.                        &                            &                         \\ \hline
+                                &                         & 2a                          & Se comprueba si hay tests  y se ejecutan.                       \\ \hline
+                                &                         & 3a                           & Se crea un nuevo build de la app.                       \\ \hline
+                                &                         & 4                           & Se realiza el despliegue.                       \\ \hline
+
+                                
+    \end{tabularx}
+    \caption{My caption}
+    \label{my-label}
+  \end{table}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+     \hline
+     \rowcolor[HTML]{C0C0C0} 
+     \multicolumn{2}{|l|}{\cellcolor[HTML]{C0C0C0}Curso Alterno} \\ \hline
+     \rowcolor[HTML]{FFFFFF} 
+            2b                      & Si los test fallan, no se continua.                           \\ \hline
+            3b                      & Si el build falla, no se hace nada.                           \\ \hline
+    \end{tabularx}
+    \caption{My caption}
+    \label{my-label}
+  \end{table}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{itemize}
 
 
 
@@ -281,10 +642,35 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
 \section {Otros diagramas}
 \subsection {Diagrama  bases de datos}
 \subsection {Diagrama conceptual}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{imagenes/diagrama_conceptual.png}
+    \caption{}
+    \label{fig:}
+  \end{center}
+\end{figure}
+
+
 \subsection {Diagrama de clases}
 \subsection {Ciclo de vida componente}
-\subsection {Redux}
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{imagenes/ReactDOM_edureka.png}
+    \caption{}
+    \label{fig:}
+  \end{center}
+\end{figure}
+
+\subsection {React - Redux}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{imagenes/react_redux.png}
+    \caption{}
+    \label{fig:}
+  \end{center}
+\end{figure}
 
 
   
