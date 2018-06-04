@@ -2,4 +2,6 @@
 
 ## Compilación
 
+``` sh makePDF.sh ```
+
 ## Estructura
