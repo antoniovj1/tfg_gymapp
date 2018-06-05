@@ -214,6 +214,8 @@ pdfproducer = {pdflatex}
 
 \usepackage[table,xcdraw]{xcolor} 
 \usepackage{graphicx}
+\usepackage[toc,title,page]{appendix}
+
 
 \begin{document}
 \input{portada/portada}
@@ -246,17 +248,27 @@ pdfproducer = {pdflatex}
 %%\chapter{Conclusiones y Trabajos Futuros}
 %
 %
-%%\nocite{*}
+\nocite{*}
 %\bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
 %\bibliographystyle{miunsrturl}
 %
-%\appendix
-%\input{apendices/manual_usuario/manual_usuario}
+\appendix
+\clearpage
+\addappheadtotoc
+\appendixpage
+\renewcommand{\appendixname}{Anexos}
+\renewcommand{\appendixtocname}{Anexos}
+\renewcommand{\appendixpagename}{Anexos}
+\renewcommand{\thesection}{\Alph{section}.\arabic{section}}
+
+\begin{appendices}
+\input{apendices/licencia}
+\end{appendices}
 %\input{apendices/paper/paper}
-\input{glosario/entradas_glosario}
+%\input{glosario/entradas_glosario}
 \addcontentsline{toc}{chapter}{Glosario}
 %\printglossary
-%\chapter*{}
+\chapter*{}
 \thispagestyle{empty}
 
 \end{document}

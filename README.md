@@ -364,7 +364,7 @@ Para realizar la administración del servidor `NodeJS` se hace uso de [`PM2`](ht
 ##### Recursos interesante:
  - [Nginx Reverse Proxy](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04)
 
-
+![CC](doc/imagenes/CC-SA-logo.png)
 ___
 ###### Universidad de Granada (UGR)
 ___
