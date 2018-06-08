@@ -11,8 +11,11 @@ El proyecto consistente en una aplicación para la gestión de entrenamientos se
 En este Apartado vamos a comentar las tecnologías usadas para el desarrollo, centrándonos en la pila MERN, y destacando alguno de los paquetes más relevantes. La pila anteriormente mencionada se compone de MongoDB, ExpressJS, React JS y Node JS.
 \begin{itemize}
   \item \textbf{MongoDB:} Mongo es un sistema de base de datos de código abierto, es un sistema No-SQL orientado a documentos, dichos documentos tienen un formato llamado BSON, muy similar a JSON, lo cual hace su integración con javascript muy sencilla. Además se puede usar JS como lenguaje de consultas, haciendo que todo el proyecto tenga un código homogéneo.
+  
   \item \textbf{Express JS:} Express es una capa que corre sobre Node, para facilitar la creación APIs, siendo el framework más usado para este propósito, y de hecho considerado el estándar de facto para la creación de APIs con Node.
+  
   \item \textbf{ReactJS:} React es una biblioteca de Javascript diseñado para el desarrollo de aplicaciones de solo una pagina. El desarrollo con esta tecnología, se basa en la creación de pequeños componentes reutilizables, que mediante su combinación haciendo uso del lenguaje JSX, crean componentes mayores.
+  
   \item \textbf{NodeJS:} Node es un servidor para la ejecución de javascript basado en el motor V8 de chrome. 
 \end{itemize}
 
@@ -20,61 +23,69 @@ Alguno de los paquetes más relevantes son:
 \begin{itemize}
   \item \textbf{React-Router:} React-Router es el paquete que se encarga del mapeo de las URL a los componentes de React, además tiene la característica de que es capaz, con la implementación correcta, de crear una navegación entre diferentes partes de la aplicación web sin necesidad de recarga, pro
 porcionando una sensación más similar a una aplicación de escritorio.
+
   \item \textbf{Redux:} Redux, quizá sea el paquete más relevante a la hora de trabajar con React, proporcionando una forma para centralizar el estado de todos los componentes, de forma que es una "fuente de verdad", de la que todos los componentes leen su estado, con lo cual se crea una fácil comunicación entre los diferentes componentes, evitando problemas de sincronización entre ellos. El funcionamiento será detallado en los anexos.
+  
   \item \textbf{Material UI:} Material UI es un paquete que nos proporciona una serie de estilos y componentes ayudándonos con la creación de web con un estilo consistente.
+  
   \item \textbf{Mongoose:} Mongoose es un ODM que nos permite tratar las consultas y las colecciones de MongoDB como objetos, dando la posibilidad de crear complejas consultas de una forma sencilla.
+  
   \item \textbf{Auth0-Lock:} Este paquete, nos ayuda con la integración con Auth0, que es un servicio para la administración de identidades y autenticación.
+  
 \end{itemize}
 \subsection {Herramientas}
 En esta subsección haremos una breve descripción de algunas de la herramientas usadas para la compilación, despliegue y verificación de la calidad del código.
 \begin{itemize}
   \item \textbf{Docker:} Es una tecnología para la creación, administración y uso de contenedores de Linux. Dichos contenedores nos proporcionan la ventaja de evitar tener ciertas redundancias que se crean con el uso de máquinas virtuales.
+  
   \item \textbf{Ansible:} Ansible es una plataforma para configurar y administrar computadoras, este tipo de software, se conoce como software de orquestación, y en nuestro caso lo usamos para provisionar y configurar las máquinas virtuales creadas en la nube de Google.
+  
   \item \textbf{Webpack:} Webpack es un empaquetador de módulos, usado para crear el "bundle" con la aplicación web, aunque dispone de múltiples funciones avanzadas, que se mostrarán en el anexo, su objetivo principal es agrupar los archivos de JavaScript para su uso en un navegador, pero también es capaz de transformar, agrupar o empacar casi cualquier recurso.
+  
   \item \textbf{ESlint:} ESLint es un "linter" para javascript, que nos ayuda a mantener la calidad del código durante el desarrollo.
+  
   \item \textbf{SonarQube:} SonarQube es una herramienta online, que es capaz de analizar nuestro código en busca de bugs, código de baja calidad, código repetido...
+  
   \item \textbf{Travis CI:} Travis CI es un sistema de integración continua, durante el desarrollo, nos apoyaremos en él para los despliegues automáticos y la fusión de nuevas ramas en el repositorio de Git.
+  
   \item \textbf{Heroku:} Heroku es un PaaS (Platform as service), en el cual se llevará a cabo un despliegue continuo, de forma que seremos capaces de desplegar nuevas características de la App de una forma rápida, sencilla y sin tiempos de caída.
+  
   \item \textbf{Husky:} Husky es una herramienta que nos permite configurar hooks para Git, en nuestro caso está configurada para garantizar que todo el código subido al repositorio se ajusta al mismo estilo, mediante el uso de Prettier y la guía de estilos de AirBnB.
+  
   \item \textbf{Prettier:} Prettier es un formateador de código, para mantener un formato coherente en toda la app. 
+  
   \item \textbf{mLab:} mLab es un servidor de bases de datos Mongo en la nube, en el cual guardaremos los datos de la app.
+  
   \item \textbf{PaperTrail:} PaperTrail es un sistema para administrar datos de logs de nuestra app de forma sencilla, mediante los cuales podremos obtener información útil como los endpoints más usados y los tiempos de respuesta del servidor.
+  
   \item \textbf{Git/GitHub:} Git es un sistema de control de versiones que nos permite desarrollar el código de una forma fiable y con posibilidad de revertir cambios si es necesario.
-  \item \textbf{GitKraken:} GUI de escritorio para Git.
+
   \item \textbf{Jest:} Jest es el paquete que usaremos para la implementación de los test unitarios y los test de cobertura.
+  
   \item \textbf{NPM:} NPM es el gestor de paquetes de Node, desde el cual obtendremos y administramos todas las dependencias de nuestro proyecto.
+  
   \item \textbf{Auth0:} Auth0 es una solución para la gestión de la autenticación y los usuarios de un servicio web, el cual nos permite una integración sencilla con la autenticación de otros proveedores como Google o Facebook.
+  
   \item \textbf{GreenKeeper:} Greenkeeper es una herramienta que monitoriza el archivo package.json, que es donde se encuentran todas las dependencias de proyecto, de forma que es capaz de crear nuevas ramas y solicitar merges cuando aparecen nuevas versiones de las dependencias, proporcionando información sobre si se pasan los test y los cambios y nuevas características de la versión.
+  
   \item \textbf{David-dm:} Es otro sistema para mantenernos al tanto de actualizaciones en las dependencias del proyecto.
+  
   \item \textbf{Vagrant:} Vagrant es una herramienta para la creación y configuración de entornos de desarrollo virtualizados.
+  
   \item \textbf{Fabric: }Fabric es una biblioteca de python para la ejecución de comandos en remoto, dándonos la posibilidad de administrar nuestros servidores en la nube de una forma sencilla.
+  
   \item \textbf{PM2:} PM2 es un gestor avanzado de procesos de Node, que nos permitirá, iniciar y parar procesos, reiniciar, mantenerlos siempre activos evitando caídas, reinicios sin tiempo de caída, balanceo de carga...
+  
   \item \textbf{NGINX:} En esta aplicación y solo para el despliegue en Google Cloud, usaremos Nginx en modo reverse proxy.
+  
   \item \textbf{Nodemon:} Nodemon es un servicio que monitoriza los cambios en los archivos y reinicia el servidor de node automáticamente, lo cual es muy útil durante el desarrollo.
 
 \end{itemize}
 \section {Test unitarios y de cobertura}
 \subsection {Test Unitarios}
-Para la realización de los test unitarios, hemos adaptado una metodología enfocada a la evaluación de los comportamientos deseados, para ello hemos hecho uso de la herramienta Jest, las cual nos permite describir test de forma que se evalúa el éxito o el fracaso dependiendo de si obtenemos el resultado deseado o no, un ejemplo de la implementación de estos test, se puede ver en el siguiente fragmento de código.
+Para la realización de los test unitarios, hemos adaptado una metodología enfocada a la evaluación de los comportamientos deseados, para ello hemos hecho uso de la herramienta Jest, las cual nos permite describir test de forma que se evalúa el éxito o el fracaso dependiendo de si obtenemos el resultado deseado o no, un ejemplo de la implementación de estos test, se puede ver en el siguiente fragmento de código. Se pueden encontrar más ejemplos en \url{https://github.com/antoniovj1/tfg_gymapp/tree/master/__tests__}
 \begin{lstlisting}[language=javascript,caption={Test Unitarios},label={lst:appjs}]
-const config = require('../../config');
-
-const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-
-const Session = require('../../backend/models/training_session');
-const Movement = require('../../backend/models/movement');
-const Exercise = require('../../backend/models/exercise');
-const User = require('../../backend/models/user');
-
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-
-chai.use(chaiHttp);
-
-const { token } = config;
-
-jest.setTimeout(30000);
+//.....
 
 describe('Exercise (/api/training/exercise/)', () => {
   let server;
@@ -134,12 +145,12 @@ Los comandos requeridos para ejecutar los test, están definidos en archivo pack
 }
 \begin{lstlisting}
 "scripts": {
-    "build": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --colors",
+    "build": webpack --config ./webpack.config.js --display-error-details --colors",
     "dev-server": "nodemon --config nodemon.json server.js",
-    "postinstall": "export NODE_ENV='production' && webpack --config ./webpack.config.js --display-error-details --colors",
-    "start": "export NODE_ENV='production' && node server.js",
-    "test": "export NODE_ENV='test' && export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
-    "test-cov": "export NODE_ENV='test' && export SECRET='secret' && jest --verbose --coverage --forceExit --runInBand --silent",
+    "postinstall": webpack --config ./webpack.config.js --display-error-details --colors",
+    "start": node server.js",
+    "test": "export SECRET='secret' && jest --verbose --forceExit --runInBand --silent",
+    "test-cov": "export SECRET='secret' && jest --verbose --coverage --forceExit --runInBand --silent",
     "precommit": "lint-staged"
   },
 \end{lstlisting}
@@ -189,107 +200,12 @@ Para el despliegue continuo se ha optado por el uso de Heroku, un sistema que pe
 Además de la solución anterior para el despliegue en Heroku, también se han creado otros archivos de configuración para el despliegue en la nube y para el uso de contenedores.
 
 \subsection {Provisionamiento}
-El provisionamiento consiste en añadir todos los recursos y configuraciones a una máquina, para que la aplicación que queremos correr pueda funcionar correctamente y sin intervención de un usuario, en nuestro caso hemos hecho uso de Ansible, una herramienta que permite la configuración de una forma muy descriptiva, como podemos ver a continuación.
-\begin{lstlisting}[language=javascript,caption={Test Unitarios},label={lst:appjs}]
----
-- hosts: all
-  become: true
-  remote_user: antonio
-
-  vars:
-    - homeDir: /home/ubuntu
-    - appDir : tfg_gymapp
-    - default: server {  listen 80; server_name YOUR_SERVERS_IP_ADDRESS;  location / { proxy_pass "http://127.0.0.1:80"; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_cache_bypass $http_upgrade; }}
-
-  tasks:
-
-  #Cambiar por get_curl
-  - name: Node.js + NPM
-    shell: "curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -"
-
-  - name: Add Mongo Key
-    apt_key: id=EA312927  keyserver=keyserver.ubuntu.com
-
-  - name: Add Mongo Repo
-    apt_repository: repo='deb http://repo.mongodb.org/apt/ubuntu {{ansible_distribution_release}}/mongodb-org/3.2 multiverse'                                     
-
-  - name: Update
-    become: true
-    shell: "apt-get update"
-
-  - name: Install Packages
-    apt: name={{ item }}  state=latest
-    with_items:
-      - build-essential
-      - git
-      - mongodb-org
-      - nginx  
-      - nodejs   
-
-  - name: PM2 (para mantener Node funcionando)
-    npm: name=pm2 global=yes 
-
-  - name: Node.js ln -s
-    file:
-      src: /usr/bin/nodejs
-      dest: /usr/bin/node
-      force: yes
-      state: link
-
-  - name: Nginx reverse proxy
-    copy: content="{{ default }}" dest=/etc/nginx/sites-available/default
-
-# La descarga del proyecto y la instalación de las dependencias se ha hecho con Fabric aunque se podría haber hecho aquí
-    #Realmente no es necesario, ya que vagrant ha copiado el repositorio
-    # pero lo he realizado para ver cómo funcionaba. (Desactivado rsync)
- # - name: Git Clone Repo
- #   git: repo=httptfg_gymapp.git dest={{homeDir}}/{{appDir}} 
- #   register: git_finished
-
- # - name: NPM install
- #   npm: path={{homeDir}}/{{appDir}}/
- #   when: git_finished.changed
- 
-
-\end{lstlisting}
+El provisionamiento consiste en añadir todos los recursos y configuraciones a una máquina, para que la aplicación que queremos correr pueda funcionar correctamente y sin intervención de un usuario, en nuestro caso hemos hecho uso de Ansible, una herramienta que permite la configuración de una forma muy descriptiva, como podemos ver en el archivo disponible en \url{https://github.com/antoniovj1/tfg_gymapp/blob/master/ansible.yml}.
 
 \subsection {Cloud}
-Para el despliegue en la nube de Google hemos hecho uso de vagrant, una herramienta que nos permite entre otras cosas la creación y configuración de máquinas virtuales, además vagrant se ve acompañado del script de Ansible anterior para realizar el provisionamiento, el funcionamiento de Vagrant se puede ver en el siguiente script:
+Para el despliegue en la nube de Google hemos hecho uso de vagrant, una herramienta que nos permite entre otras cosas la creación y configuración de máquinas virtuales, además vagrant se ve acompañado del script de Ansible anterior para realizar el provisionamiento, el funcionamiento de Vagrant se puede ver en el script del siguiente enlace \url{https://github.com/antoniovj1/tfg_gymapp/blob/master/vagrantfile}
 
-\begin{lstlisting}[language=javascript,caption={Test Unitarios},label={lst:appjs}]
-Vagrant.configure("2") do |config|
-  config.vm.box = "google/gce"
 
-  config.vm.provider :google do |google, override|
-    #Credenciales
-    google.google_project_id = ENV['PROJECT_ID']
-    google.google_client_email = ENV['CLIENT_EMAIL']
-    google.google_json_key_location = ENV['KEY_LOCATION']
-
-    #Configuración tipo MV
-    google.machine_type = "g1-small"
-    google.zone = "europe-west1-b"
-    google.name = "infraestructuravirtual"
-    google.image = "ubuntu-1604-xenial-v20160721"
-
-    # SSH
-    override.ssh.username = "antonio"
-    override.ssh.private_key_path = "/home/antonio/.ssh/id_rsa"
-  end
-
-  #rsync (desactivado)
-   config.vm.synced_folder ".", "/projectsrc", type: "rsync",
-    rsync__exclude: ".git/", :disabled => true
-
-  #Ansible - Provisionamiento
-  config.vm.provision "ansible" do |ansible|
-        ansible.sudo = true
-        ansible.playbook = "ansible.yml"
-        ansible.host_key_checking = false
-  end
-end
-
-\end{lstlisting}
 
 \subsubsection {Administración cloud}
 Para la administración de nuestro servidor remoto hemos optado por usar PM2 junto con Fabric, de forma que hemos generado un script que nos proporciona las opciones necesarias para la gestión de la VM mediante SSH.
@@ -306,14 +222,7 @@ def info_servidor():
     """Muestra información del servidor"""
     run('cat /proc/cpuinfo')
 
-
-def install_app():
-    """Clona el repositorio e instala las dependencias"""
-    with shell_env(NODE_ENV='production'):
-        run('rm -rf tfg_gymapp')
-        run('git clone https://github.com/antoniovj1/tfg_gymapp.git')
-        run('cd tfg_gymapp && npm install')
-
+#.....
 
 def start_app():
     """Inicia la aplicación (node,mongo y nginx)"""
@@ -321,52 +230,11 @@ def start_app():
     run('sleep 7 && cd tfg_gymapp && sudo pm2 start server.js')
     run('sudo service nginx restart')
 
+#.....    
 
-def restart_app():
-    """Reinicia la aplicación"""
-    run('sudo service nginx restart')
-    run('sudo pm2 restart server')
-
-
-def logs_app():
-    """Muestra los logs de la aplicación"""
-    run('sudo pm2 logs server')
-
-
-def stop_app():
-    """Detiene la aplicación"""
-    run('sudo pm2 stop server')
-    # run ('sudo service mongod stop')
-    # run ('sudo service nginx stop')
-
-
-def kill_app():
-    run('sudo pm2 delete server')
-    # run ('sudo service mongod stop')
-    # run ('sudo service nginx stop')
-
-
-def update_app():
-    """Actualiza la aplicación"""
-    kill_app()
-    install_app()
-    start_app()
-
-
-def monitoring_pm2():
-    """Monitorización app"""
-    run('sudo pm2 monit')
-
-
-def list_pm2():
-    """Lista de apps ejecutandose"""
-    run('sudo pm2 list')
-
-
-def drop_databas():
-    """Borra la base de datos"""
-    run('mongo iv --eval "db.dropDatabase()"')
 \end{lstlisting}
+
+Para más información sobre el script, puede acceder a \url{https://github.com/antoniovj1/tfg_gymapp/blob/master/fabfile.py}
 
 \subsection {Contenedores}
 Por último se ha proporcionado la posibilidad de ejecutar la aplicación en contenedores, para ello se hace uso de Docker. El uso de contenedores, es una forma de crear sistemas aislados, similares a las máquinas virtuales, pero que comparten ciertas partes, de forma que son más ligeros y transportables. En este caso la aplicación se corre en dos contenedores, uno con la aplicación desarrollada por nosotros y otro que actúa como servidor de bases de datos. Para ello disponemos de dos scripts diferentes, el dockerfile, que configura el contenedor y por otro lado un script que ejecuta el contenedor de la aplicación y el de mongo y los conecta entre sí, dichos scripts son mostrados a continuación.
@@ -408,7 +276,6 @@ docker run --link=mongoDB:mongodb -it tfgugr
 
 \section {Control de versiones}
 Para el control de versiones se ha hecho uso de la plataforma GitHub, que nos permite administrar el repositorio de una forma sencilla y además debido a su popularidad es fácilmente integrable con otras herramientas como son Travis y Heroku
-
 
 
 
