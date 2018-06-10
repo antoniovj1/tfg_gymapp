@@ -64,3 +64,12 @@ dist/
 *.cb
 *.cb2
 .*.lb
+*.ist
+
+*.glsdefs
+
+*.gls
+
+*.glo
+
+*.glg

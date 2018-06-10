@@ -1,12 +1,8 @@
 \documentclass[a4paper,11pt]{book}
-%\documentclass[a4paper,twoside,11pt,titlepage]{book}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 
-% \usepackage[style=list, number=none]{glossary} %
-%\usepackage{titlesec}
-%\usepackage{pailatino}
 
 \decimalpoint
 \usepackage{dcolumn}
@@ -16,9 +12,7 @@
 \makeatother
 
 
-%\usepackage[chapter]{algorithm}
 \RequirePackage{verbatim}
-%\RequirePackage[Glenn]{fncychap}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{afterpage}
@@ -37,12 +31,12 @@
 \newcommand{\myName}{Antonio de la Vega Jiménez\xspace}
 \newcommand{\myProf}{Juan Julián Merelo\xspace}
 
-%\newcommand{\mySupervisor}{Put name here\xspace}
+\newcommand{\mySupervisor}{Juan Julián Merelo\xspace}
 \newcommand{\myFaculty}{Escuela Técnica Superior de Ingenierías Informática y de
 Telecomunicación\xspace}
 \newcommand{\myFacultyShort}{E.T.S. de Ingenierías Informática y de
 Telecomunicación\xspace}
-\newcommand{\myDepartment}{Departamento de ...\xspace}
+\newcommand{\myDepartment}{Departamento de Arquitectura de Computadores\xspace}
 \newcommand{\myUni}{\protect{Universidad de Granada}\xspace}
 \newcommand{\myLocation}{Granada\xspace}
 \newcommand{\myTime}{\today\xspace}
@@ -58,23 +52,10 @@ pdfcreator = {LaTeX},
 pdfproducer = {pdflatex}
 }
 
-%\hyphenation{}
-
-
-%\usepackage{doxygen/doxygen}
-%\usepackage{pdfpages}
 \usepackage{url}
 \usepackage{colortbl,longtable}
 \usepackage[stable]{footmisc}
-%\usepackage{index}
 
-%\makeindex
-%\usepackage[style=long, cols=2,border=plain,toc=true,number=none]{glossary}
-% \makeglossary
-
-% Definición de comandos que me son tiles:
-%\renewcommand{\indexname}{Índice alfabético}
-%\renewcommand{\glossaryname}{Glosario}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -87,11 +68,6 @@ pdfproducer = {pdflatex}
 \setlength{\headheight}{1.5\headheight}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-%Definimos los tipos teorema, ejemplo y definición podremos usar estos tipos
-%simplemente poniendo \begin{teorema} \end{teorema} ...
-\newtheorem{teorema}{Teorema}[chapter]
-\newtheorem{ejemplo}{Ejemplo}[chapter]
-\newtheorem{definicion}{Definición}[chapter]
 
 \definecolor{gray97}{gray}{.97}
 \definecolor{gray75}{gray}{.75}
@@ -154,9 +130,8 @@ pdfproducer = {pdflatex}
 \newcommand{\bigrule}{\titlerule[0.5mm]}
 
 
-%Para conseguir que en las páginas en blanco no ponga cabecerass
 \makeatletter
-\def\clearpage{%
+\def\clearpage{
   \ifvmode
     \ifnum \@dbltopnum =\m@ne
       \ifdim \pagetotal <\topskip
@@ -215,6 +190,10 @@ pdfproducer = {pdflatex}
 \usepackage[table,xcdraw]{xcolor} 
 \usepackage{graphicx}
 \usepackage[toc,title,page]{appendix}
+\usepackage[toc,style=altlistgroup]{glossaries}
+
+\makeglossaries
+\input{glosario/entradas_glosario}
 
 
 \begin{document}
@@ -224,7 +203,7 @@ pdfproducer = {pdflatex}
 \tableofcontents
 \listoffigures
 \listoftables
-%
+
 \mainmatter
 \setlength{\parskip}{5pt}
 
@@ -245,28 +224,15 @@ pdfproducer = {pdflatex}
 %
 \input{capitulos/08_Conclusiones}
 %
-%%\chapter{Conclusiones y Trabajos Futuros}
-%
-%
+  
 \nocite{*}
-%\bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
-%\bibliographystyle{miunsrturl}
-%
-\clearpage
-\addappheadtotoc
 
-\renewcommand{\appendixname}{Anexos}
-\renewcommand{\appendixtocname}{Anexos}
-\renewcommand{\appendixpagename}{Anexos}
-\renewcommand{\thesection}{\Alph{section}.\arabic{section}}
+\printglossaries
 
 \begin{appendices}
 \input{apendices/licencia}
 \end{appendices}
-%\input{apendices/paper/paper}
-%\input{glosario/entradas_glosario}
-\addcontentsline{toc}{chapter}{Glosario}
-%\printglossary
+
 \chapter*{}
 \thispagestyle{empty}
 
