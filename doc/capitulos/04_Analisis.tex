@@ -53,7 +53,7 @@ En esta sección se detallan los requisitos que debe cumplimentar el software de
   \item \textbf{RF-4.} Configuración automática.
   \begin{itemize}
     \item \textbf{RF-4.1.} Despliegue cloud automático.
-    \item \textbf{RF-4.2.} Provisionamiento.
+    \item \textbf{RF-4.2.} \Gls{provisionamiento}.
   \end{itemize}
 \end{itemize}
 
@@ -78,14 +78,14 @@ En esta sección se detallan los requisitos que debe cumplimentar el software de
 \begin{itemize}
   \item \textbf{RNF-7.} Todo el código será JavaScript.
   \item \textbf{RNF-8.} Debe ser una aplicación de una sola página.
-  \item \textbf{RNF-9.} Todos los paquetes deben ser instalables desde NPM.
+  \item \textbf{RNF-9.} Todos los paquetes deben ser instalables desde \gls{NPM}.
   \item \textbf{RNF-10.} Se usará NPM para la gestión tanto del cliente como el servidor.
   \item \textbf{RNF-11.} Se proporcionarán script para gestión Cloud.
 \end{itemize}
 De interfaz:
 \begin{itemize}
   \item \textbf{RNF-12.} Se usarán colores coherentes para toda la interfaz.
-  \item \textbf{RNF-13.} La interfaz hará uso de "material design"
+  \item \textbf{RNF-13.} La interfaz hará uso de "\gls{material design}"
   \item \textbf{RNF-14.} Los colores deben ser fácilmente reconocibles.
   \item \textbf{RNF-15.} Se proporcionarán iconos informativos.
 \end{itemize}
@@ -321,7 +321,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \item \textbf{Actores:} Usuario.
     \item \textbf{Tipo:} Primario, esencial.
     \item \textbf{Referencias:}
-    \item \textbf{Precondición:} El usuario ha clicado sobre uno de los entrenamientos de la lista.
+    \item \textbf{Precondición:} El usuario ha pinchado sobre uno de los entrenamientos de la lista.
     \item \textbf{Postcondición:} El usuario puede ver los detalles del entrenamiento.
     \item \textbf{Autor:} Antonio de la Vega Jiménez.
     \item \textbf{Versión:} 1.0
@@ -351,7 +351,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \item \textbf{Actores:} Usuario.
     \item \textbf{Tipo:} Primario, esencial.
     \item \textbf{Referencias:}
-    \item \textbf{Precondición:} El usuario ha clicado sobre uno de los entrenamientos de la lista.
+    \item \textbf{Precondición:} El usuario ha pinchado sobre uno de los entrenamientos de la lista.
     \item \textbf{Postcondición:} El usuario puede ver la visión general del entrenamiento.
     \item \textbf{Autor:} Antonio de la Vega Jiménez.
     \item \textbf{Versión:} 1.0
@@ -389,7 +389,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
   \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \item CU-7. Añadir sesion de entrenamiento.
+  \item CU-7. Añadir sesión de entrenamiento.
   \begin{itemize}
     \item \textbf{Actores:} Usuario.
     \item \textbf{Tipo:} Primario, esencial.
@@ -438,7 +438,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \item \textbf{Actores:} Usuario.
     \item \textbf{Tipo:} Primario, esencial.
     \item \textbf{Referencias:}
-    \item \textbf{Precondición:} El anuario ha clicado sobre la pestaña perfil.
+    \item \textbf{Precondición:} El anuario ha pinchado sobre la pestaña perfil.
     \item \textbf{Postcondición:} El usuario puede ver su perfil.
     \item \textbf{Autor:} Antonio de la Vega Jiménez.
     \item \textbf{Versión:} 1.0
@@ -556,7 +556,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \item \textbf{Autor:} Antonio de la Vega Jiménez.
     \item \textbf{Versión:} 1.0
     \item \textbf{Propósito:} Comprobar si los nuevos cambios provocan errores en el repositorio.
-    \item \textbf{Resumen:} Cada vez que se hace un push, se comprueba si las nuevas modificaciones provocan errores.
+    \item \textbf{Resumen:} Cada vez que se hace un \gls{push}, se comprueba si las nuevas modificaciones provocan errores.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{table}[H]
       \centering
@@ -594,7 +594,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
   \item \textbf{Tipo:} Primario, esencial.
   \item \textbf{Referencias:}
   \item \textbf{Precondición:} Los tests unitarios han sido exitosos.
-  \item \textbf{Postcondición:} Se despliega la nueva version de la app.
+  \item \textbf{Postcondición:} Se despliega la nueva versión de la app.
   \item \textbf{Autor:} Antonio de la Vega Jiménez.
   \item \textbf{Versión:} 1.0
   \item \textbf{Propósito:} Desplegar los nuevos cambios.
@@ -635,9 +635,43 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
 
 
 \section {Diagramas de casos de uso}
+A continuación en esta sección se muestran los diferentes casos de uso de la aplicación.
+
+\subsection{Diagrama de casos de uso DCU-1 }
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{imagenes/DCU-1.png}
+    \caption{Diagrama de casos de uso DCU-1}
+    \label{fig:DCU-1}
+  \end{center}
+\end{figure}
+\subsection{Diagrama de casos de uso DCU-2 }
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{imagenes/DCU-2.png}
+    \caption{Diagrama de casos de uso DCU-2}
+    \label{fig:DCU-2}
+  \end{center}
+\end{figure}
+\subsection{Diagrama de casos de uso DCU-3 }
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{imagenes/DCU-3.png}
+    \caption{Diagrama de casos de uso DCU-3}
+    \label{fig:DCU-3}
+  \end{center}
+\end{figure}
+\subsection{Diagrama de casos de uso DCU-4 }
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{imagenes/DCU-4.png}
+    \caption{Diagrama de casos de uso DCU-4}
+    \label{fig:DCU-4}
+  \end{center}
+\end{figure}
+
+
 \section {Diagramas de actividad}
-
-
 
 \subsection{Diagrama de actividad para CU-1 }
 \begin{figure}[H]
@@ -703,7 +737,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \label{fig:DA-CU-9}
   \end{center}
 \end{figure}
-\subsection{Diagrama de actividad para CU-1 }
+\subsection{Diagrama de actividad para CU-10 }
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.7\textwidth]{imagenes/DA-CU-10.png}
@@ -711,7 +745,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \label{fig:DA-CU-10}
   \end{center}
 \end{figure}
-\subsection{Diagrama de actividad para CU-1 }
+\subsection{Diagrama de actividad para CU-11 }
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.7\textwidth]{imagenes/DA-CU-11.png}
@@ -719,7 +753,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
     \label{fig:DA-CU-11}
   \end{center}
 \end{figure}
-\subsection{Diagrama de actividad para CU-1 }
+\subsection{Diagrama de actividad para CU-12 }
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.7\textwidth]{imagenes/DA-CU-12.png}
@@ -731,7 +765,7 @@ En este apartado se proporciona una visión de los casos de usos esenciales, par
 
 \section {Otros diagramas}
 \subsection {Diagrama  bases de datos}
-Al hacer uso de una base de datos No-SQL, los datos están estructurados de una forma un tanto diferente a la clásica, ya que algunas tablas (documentos) están embebidas en otras. En la figura \ref{fig:db} se muestra un diagrama que da una visión aproximada de la arquitectura.
+Al hacer uso de una base de datos \gls{No-SQL}, los datos están estructurados de una forma un tanto diferente a la clásica, ya que algunas tablas (documentos) están embebidas en otras. En la figura \ref{fig:db} se muestra un diagrama que da una visión aproximada de la arquitectura.
 
 \begin{figure}
   \begin{center}
@@ -752,7 +786,6 @@ En la imagen \ref{fig:esquema_alto_nivel} se muestra un diagrama simplificado de
 \end{figure}
 
 
-\subsection {Diagrama de clases}
 \subsection {Ciclo de vida componente}
 En esta sesión se muestra un diagrama del funcionamiento de React \ref{fig:react}
 \begin{figure}
