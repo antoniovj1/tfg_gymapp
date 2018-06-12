@@ -20,8 +20,8 @@
 \usepackage{float}
 
 \usepackage{longtable}
-
-\usepackage[pdfborder={0 0 0},]{hyperref} %referencia
+\usepackage[hyphens]{url}
+\usepackage[pdfborder={0 0 0}]{hyperref} %referencia
 
 % ********************************************************************
 % Re-usable information
@@ -52,7 +52,6 @@ pdfcreator = {LaTeX},
 pdfproducer = {pdflatex}
 }
 
-\usepackage{url}
 \usepackage{colortbl,longtable}
 \usepackage[stable]{footmisc}
 
@@ -234,6 +233,10 @@ pdfproducer = {pdflatex}
 \end{appendices}
 
 \chapter*{}
-\thispagestyle{empty}
+
+
+\begin{thebibliography}{99}
+	\input{apendices/bibliografia.tex}
+\end{thebibliography}
 
 \end{document}
