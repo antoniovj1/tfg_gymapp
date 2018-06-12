@@ -52,13 +52,13 @@ class Profile extends React.Component {
           <Grid item xs={9}>
             <Grid container spacing={24}>
               <Grid item xs={4}>
-                <Total title="Total weight (Kg)" value={totals && totals.weight} />
+                <Total title="Peso Total (Kg)" value={totals && totals.weight} />
               </Grid>
               <Grid item xs={4}>
-                <Total title="Total time (s)" value={totals && totals.time} />
+                <Total title="Tiempo Total (s)" value={totals && totals.time} />
               </Grid>
               <Grid item xs={4}>
-                <Total title="Total repetitions" value={totals && totals.repetitions} />
+                <Total title="Total Repeticiones" value={totals && totals.repetitions} />
               </Grid>
               <Grid item xs={12}>
                 <Grid container spacing={24}>

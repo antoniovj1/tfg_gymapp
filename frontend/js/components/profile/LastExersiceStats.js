@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { Line } from 'react-chartjs-2';
 import * as zoom from 'chartjs-plugin-zoom';
-import { format } from 'date-fns';
 
 function removeDuplicates(arr, prop) {
   const obj = {};

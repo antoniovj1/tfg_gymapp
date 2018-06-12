@@ -14,7 +14,7 @@ export const lock = new Auth0Lock(config.AUTH0_CLIENT_ID, config.AUTH0_DOMAIN, {
     primaryColor: '#00BCD4'
   },
   languageDictionary: {
-    title: 'IV - UGR'
+    title: 'TFG - UGR'
   },
   avatar: null,
   autoclose: true

@@ -56,7 +56,7 @@ const LastMuscleStats = props => {
 
     return (
       <Paper className={`${classes.root} ${classes.center}`} elevation={4}>
-        <h4> Stats from last {range} days </h4>
+        <h4> Últimos {range} dias </h4>
         <Doughnut data={pie} height={100} options={options} />
       </Paper>
     );

@@ -7,7 +7,7 @@ import Grid from 'material-ui/Grid';
 import { dateFormat, secondsToHms } from '../utils/time';
 
 const style = {
-  height: '100%',
+  height: '50px',
   width: '100%',
   textAlign: 'center',
   display: 'inline-block',
