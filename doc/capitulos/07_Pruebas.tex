@@ -79,6 +79,36 @@ También hemos comprobado que los contenedores se ejecutan correctamente, y a co
   \end{center}
 \end{figure}
 
-\section {Provisionamiento}
-\section {Despliegue Cloud}
+\section {Provisionamiento y Despliegue Cloud}
+Para comprobar este apartado hacemos uso de las API Keys de Google Cloud, y tras correr el comando \texttt{vagrant up --provider=google}, tras lo cual solo nos quedará abrir el puerto HTTP \ref{fig:http} de forma manual dado que esta funcionalidad aun no es automatizable.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{imagenes/http.png}
+    \caption{Habilitar puerto HTTP en Google Cloud}
+    \label{fig:http}
+  \end{center}
+\end{figure}
+
+
 \section {Acceso web y autenticación}
+
+A continuación comprobamos que somos capaces de iniciar sesión en la aplicación \ref{fig:login} y posteriormente comprobamos que tenemos acceso a nuestro perfil. \ref{fig:perfil}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{imagenes/login.png}
+    \caption{Pantalla de login de la aplicación}
+    \label{fig:login}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{imagenes/perfil.png}
+    \caption{Pantalla de perfil de la aplicación}
+    \label{fig:perfil}
+  \end{center}
+\end{figure}
+
+

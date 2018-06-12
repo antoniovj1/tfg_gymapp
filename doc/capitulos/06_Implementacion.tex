@@ -329,5 +329,15 @@ En esta sección se comentaré uno de los grandes motivos por los que decidimos 
 \subsection {Ecosistema de React}
 El principal problema encontrado, no ha sido a nivel de código, si no a nivel de gestión de dependencias. React solo proporciona algunas funciones básicas para la gestión de los componentes y su estado. Conforme queremos ir realizando mas operaciones, debemos ir añadiendo paquetes de NPM que nos den esa funcionalidad, de modo que en este proyecto encontramos un total de 78 dependencias, de las cuales 21 son para el desarrollo. Para cada nueva funcionalidad existe numerosas alternativas y numerosas versiones en constante cambio, lo cual crea una gran dificultad para elegir y una gran inversión de tiempo en lectura de documentación para averiguar cual se ajusta mejor a nuestro problema, además de las posibles incompatibilidades de versiones entre unos paquetes y otros. Para ilustrar la complejidad, cabe decir que actualmente existen mas de 700000 paquetes en NPM.
 
+\subsection {Hot Module Replacement}
+Durante la fase de desarrollo es interesante poder visualizar los cambios con la mayor agilidad posible, en principio mediante el uso de webpack y su opción de monitorización era posible recompilar la aplicación completa con cada cambio realizado. Esto suponía dos problemas, en primer lugar, era lento, y en segundo lugar, en cada recarga se perdía el estado de la pantalla debido a la recarga. Para subsanar esta situación se hizo uso de una técnica llamada HMR (Hot Module Replacement), con la cual tras añadir una serie de configuraciones y solventar los conflictos que generaba con la configuración te test, fuimos capaces de recompilar solo las partes afectadas por los cambios y mostrarlas sin necesidad de recargar el navegador y aun más importante, sin perder el estado.
+
+
+
+
+
+
+
+
 
 
