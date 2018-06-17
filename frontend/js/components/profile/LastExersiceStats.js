@@ -3,6 +3,8 @@ import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { Line } from 'react-chartjs-2';
+
+// Do NOT remove zoom
 import * as zoom from 'chartjs-plugin-zoom';
 
 function removeDuplicates(arr, prop) {

@@ -13,7 +13,7 @@ import SessionNew from './SessionNew';
 import Nav from '../components/layout/Nav';
 import Restricted from '../utils/restricted';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1
   },

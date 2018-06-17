@@ -1,7 +1,7 @@
 import React from 'react';
-import { reset, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import { Checkbox, RadioGroup, Select, TextField, Switch } from 'redux-form-material-ui';
+import {TextField} from 'redux-form-material-ui';
 
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
@@ -25,6 +25,7 @@ const styles = theme => ({
     color: theme.palette.text.secondary
   }
 });
+
 
 const movementsArray = [];
 

@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
   logoutSuccess: () => dispatch(authActions.logoutSuccess())
 });
 
-const LoginButton = ({ authService, auth, loginRequest, logoutSuccess }) => (
+const LoginButton = ({ auth, loginRequest, logoutSuccess }) => (
   <div>
     {auth.isAuthenticated ? (
       <Link to="/login">

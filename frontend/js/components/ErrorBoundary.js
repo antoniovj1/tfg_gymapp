@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
 
-const style = {
-  width: '350px',
-  marginLeft: '20px',
-  marginTop: '20px',
-  display: 'inline-block'
-};
-
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +7,7 @@ class ErrorBoundary extends Component {
       hasError: false
     };
   }
-  componentDidCatch(error, info) {
+  componentDidCatch() {
     this.setState({
       hasError: true
     });
