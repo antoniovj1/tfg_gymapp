@@ -54,7 +54,7 @@ En esta subsección haremos una breve descripción de algunas de la herramientas
   
   \item \textbf{Fabric: } Fabric es una biblioteca de python para la ejecución de comandos en remoto, dándonos la posibilidad de administrar nuestros servidores en la nube de una forma sencilla.
   
-  \item \textbf{PM2:} PM2 es un gestor avanzado de procesos de Node, que nos permitirá, iniciar y parar procesos, reiniciar, mantenerlos siempre activos evitando caídas, reinicios sin tiempo de caída, balanceo de carga...
+  \item \textbf{PM2:} PM2 es un gestor avanzado de procesos de Node, que nos permitirá, iniciar y parar procesos, reiniciar, mantenerlos siempre activos evitando caídas, reinicios sin tiempo de caída, balanceo de carga... Aunque había otras alternativas como Forever, debido a su simplicidad, su gran comunidad y la posibilidad de escalar las aplicaciones, nos hizo decidirnos por PM2
   
   \item \textbf{NGINX:} En esta aplicación y solo para el despliegue en Google Cloud, usaremos Nginx en modo \gls{proxy inverso}.
   
@@ -73,7 +73,8 @@ En esta subsección haremos una breve descripción de algunas de la herramientas
   \item \textbf{Husky:} Husky es una herramienta que nos permite configurar \gls{hooks} para Git, en nuestro caso está configurada para garantizar que todo el código subido al repositorio se ajusta al mismo estilo, mediante el uso de Prettier y la guía de estilos de AirBnB.
   
   \item \textbf{Prettier:} Prettier es un formateador de código, para mantener un formato coherente en toda la app. 
-    \item \textbf{ESlint:} ESLint es un "\gls{linter}" para javascript, que nos ayuda a mantener la calidad del código durante el desarrollo.
+  
+  \item \textbf{ESlint:} ESLint es un "\gls{linter}" para javascript, que nos ayuda a mantener la calidad del código durante el desarrollo.
   
   \item \textbf{SonarQube:} SonarQube es una herramienta online, que es capaz de analizar nuestro código en busca de bugs, código de baja calidad, código repetido...
   
@@ -331,7 +332,6 @@ El principal problema encontrado, no ha sido a nivel de código, si no a nivel d
 
 \subsection {Hot Module Replacement}
 Durante la fase de desarrollo es interesante poder visualizar los cambios con la mayor agilidad posible, en principio mediante el uso de webpack y su opción de monitorización era posible recompilar la aplicación completa con cada cambio realizado. Esto suponía dos problemas, en primer lugar, era lento, y en segundo lugar, en cada recarga se perdía el estado de la pantalla debido a la recarga. Para subsanar esta situación se hizo uso de una técnica llamada HMR (Hot Module Replacement), con la cual tras añadir una serie de configuraciones y solventar los conflictos que generaba con la configuración te test, fuimos capaces de recompilar solo las partes afectadas por los cambios y mostrarlas sin necesidad de recargar el navegador y aun más importante, sin perder el estado.
-
 
 
 
