@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     #Configuración tipo MV
     google.machine_type = "g1-small"
     google.zone = "europe-west1-b"
-    google.name = "infraestructuravirtual"
+    google.name = "tfg_gymapp"
     google.image = "ubuntu-1604-xenial-v20160721"
 
     # SSH
