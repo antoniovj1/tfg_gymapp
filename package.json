@@ -74,7 +74,7 @@
     "webpack-cli": "^2.0.12",
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
-    "winston": "^2.4.1",
+    "winston": "^3.1.0",
     "winston-papertrail": "^1.0.4"
   },
   "devDependencies": {
