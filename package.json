@@ -58,7 +58,7 @@
     "npm": "^6.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-chartjs-2": "^2.7.2",
+    "react-chartjs-2": "^2.7.5",
     "react-datepicker": "^1.4.1",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
