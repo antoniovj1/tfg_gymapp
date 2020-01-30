@@ -19,7 +19,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "auth0-lock": "^11.4.0",
+    "auth0-lock": "^11.21.0",
     "axios": "^0.18.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-react-html-attrs": "^2.0.0",
